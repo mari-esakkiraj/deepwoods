@@ -105,6 +105,15 @@
     $("body").removeClass("fix");
   });
 
+  // Add product
+  $(".btn-product-add").on('click', function() {
+    $(this).animate({
+      'opacity' : 0
+    }, 400, function(){
+        $(this).html('Added').animate({'opacity': 1}, 400);
+    });
+  });
+
   
   // Hero Slider Js
     var carouselSlider = new Swiper('.default-slider-container', {
