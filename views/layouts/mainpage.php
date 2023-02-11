@@ -312,7 +312,7 @@
                                   </div>
                                 </div>
                                 <div class="product-footer">
-                                  <a class="btn-product-add" href="#/">Add to cart</a>
+                                  <a class="btn-product-add" href="#">Add to cart</a>
                                   <a class="btn-quick-view" href="javascript:;" title="Quick view">Quick view</a>
                                 </div>
                               </div>
@@ -360,8 +360,8 @@
                                   </div>
                                 </div>
                                 <div class="product-footer">
-                                  <a class="btn-product-add" href="#/">Add to cart</a>
-                                  <a class="btn-quick-view2" href="javascript:;" title="Quick view">Quick view</a>
+                                  <a class="btn-product-add" href="#">Add to cart</a>
+                                  <a class="btn-quick-view" href="javascript:;" title="Quick view">Quick view</a>
                                 </div>
                               </div>
                             </div>
@@ -408,7 +408,7 @@
                                   </div>
                                 </div>
                                 <div class="product-footer">
-                                  <a class="btn-product-add" href="#/">Add to cart</a>
+                                  <a class="btn-product-add" href="#">Add to cart</a>
                                   <a class="btn-quick-view" href="javascript:;" title="Quick view">Quick view</a>
                                 </div>
                               </div>
@@ -456,7 +456,7 @@
                                   </div>
                                 </div>
                                 <div class="product-footer">
-                                  <a class="btn-product-add" href="#/">Add to cart</a>
+                                  <a class="btn-product-add" href="#">Add to cart</a>
                                   <a class="btn-quick-view" href="javascript:;" title="Quick view">Quick view</a>
                                 </div>
                               </div>
@@ -909,7 +909,7 @@
                   <input type="text" id="quantity" title="Quantity" value="1">
                 </div>
               </div>
-              <a class="btn-product-add" href="#/">Add to cart</a>
+              <a class="btn-product-add" href="#">Add to cart</a>
             </div>
             <div class="product-wishlist-compare">
               <a href="#" class="btn-wishlist"><i class="icon-heart"></i>Add to wishlist</a>
