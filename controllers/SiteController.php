@@ -70,6 +70,18 @@ class SiteController extends Controller
         return $this->render('mainpage');
     }
 
+    public function actionProductlist()
+    {
+        $this->layout = 'product';
+        return $this->render('productlist');
+    }
+
+    public function actionProductdetails()
+    {
+        $this->layout = 'productdetails';
+        return $this->render('productlist');
+    }
+
     /**
      * Login action.
      *
