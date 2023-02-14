@@ -27,10 +27,10 @@ $absoluteBaseUrl = Url::base(true);
                       <ul class="main-menu nav">
                         <li><a href="index.php">Home</a>
                         </li>
-                        <li><a href="#/">About Us</a></li>
+                        <li><a href="javascript:void(0)">About Us</a></li>
                         <li class="has-submenu full-width"><a href="#">Product</a>
                           <ul class="submenu-nav submenu-nav-mega submenu-nav-width">
-                            <li class="mega-menu-item"><a href="#/" class="mega-title">Product List</a>
+                            <li class="mega-menu-item"><a href="javascript:void(0)" class="mega-title">Product List</a>
                               <ul>
                                 <li><a href="index.php?r=site/productlist">Kalabath - Black Rice</a></li>
                                 <li><a href="index.php?r=site/productlist">Coconut Oil - Cold Pressed</a></li>
@@ -38,27 +38,27 @@ $absoluteBaseUrl = Url::base(true);
                                 <li><a href="index.php?r=site/productlist">Pepper - Black</a></li>
                               </ul>
                             </li>
-                           <li class="mega-menu-item"><a href="#/" class="mega-title">User</a>
+                           <li class="mega-menu-item"><a href="javascript:void(0)" class="mega-title">User</a>
                               <ul>
                                 
-                                <li><a href="#/">My Account</a></li>
-                                <li><a href="#/">Login</a></li>
-                                <li><a href="#/">Register</a></li>
+                                <li><a href="javascript:void(0)">My Account</a></li>
+                                <li><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
+                                <li><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#registerModal">Register</a></li>
                               </ul>
                             </li>
-                            <li class="mega-menu-item"><a href="#/" class="mega-title">Cart</a>
+                            <li class="mega-menu-item"><a href="javascript:void(0)" class="mega-title">Cart</a>
                               <ul>
-                                <li><a href="#/">Cart</a></li>
-                                <li><a href="#/">Checkout</a></li>
-                                <li><a href="#/">Wishlist</a></li>
-                                <li><a href="#/">Compare</a></li>
+                                <li><a href="javascript:void(0)">Cart</a></li>
+                                <li><a href="javascript:void(0)">Checkout</a></li>
+                                <li><a href="javascript:void(0)">Wishlist</a></li>
+                                <li><a href="javascript:void(0)">Compare</a></li>
                               </ul>
                             </li>
                           </ul>
                         </li>
                         <li class=""><a href="#">Blog</a>
                         </li>
-                        <li><a href="#/">Contact us</a></li>
+                        <li><a href="javascript:void(0)">Contact us</a></li>
                       </ul>
                     </div>
                   
@@ -79,7 +79,7 @@ $absoluteBaseUrl = Url::base(true);
           <div class="col-4">
             <div class="header-item justify-content-center">
               <div class="header-logo-area">
-                <a href="#/">
+                <a href="javascript:void(0)">
                   <img class="logo-main" src="<?=$absoluteBaseUrl?>/theme/img/deepwoods.png" alt="Logo" />
                 </a>
               </div>
@@ -101,3 +101,81 @@ $absoluteBaseUrl = Url::base(true);
     </div>
     <!--== End Responsive Header ==-->
   </header>
+
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModalLabel">Login</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username">
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Login</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="registerModalLabel">Register</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username">
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email">
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password">
+              </div>
+              <div class="mb-3">
+                <label for="confirm-password" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="confirm-password">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Register</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<script>
+    var password = document.getElementById("password")
+    var confirm_password = document.getElementById("confirm_password");
+
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords do not match.");
+        } else {
+            confirm_password.setCustomValidity("");
+        }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>
