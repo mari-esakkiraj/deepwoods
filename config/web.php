@@ -19,6 +19,15 @@ $config = [
                 'application/json' => 'yii\web\JsonParser',
             ]
         ],
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'enableStrictParsing' => false,
+            'showScriptName' => false,
+            'rules' => [
+                'securitycheck' => 'sicattender/checkvalidation',
+                'security' => 'site/login',
+            ],
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],

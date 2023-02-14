@@ -1,3 +1,7 @@
+<?php 
+use yii\helpers\Url;
+$absoluteBaseUrl = Url::base(true);
+?>
 <header class="header-area header-default header-style4">
 
     <!--== Start Header Bottom ==-->
@@ -11,8 +15,8 @@
                   <div class="align-left">
                     <div class="header-logo-area">
                       <a href="index.html"> 
-                        <img class="logo-main" src="theme/img/deepwoods.png" alt="Logo" />
-                        <img class="logo-light d-none" src="theme/img/deepwoods.png" alt="Logo" />
+                        <img class="logo-main" src="<?=$absoluteBaseUrl?>/theme/img/deepwoods.png" alt="Logo" />
+                        <img class="logo-light d-none" src="<?=$absoluteBaseUrl?>/theme/img/deepwoods.png" alt="Logo" />
                       </a>
                     </div>
                   </div>
@@ -76,7 +80,7 @@
             <div class="header-item justify-content-center">
               <div class="header-logo-area">
                 <a href="#/">
-                  <img class="logo-main" src="theme/img/deepwoods.png" alt="Logo" />
+                  <img class="logo-main" src="<?=$absoluteBaseUrl?>/theme/img/deepwoods.png" alt="Logo" />
                 </a>
               </div>
             </div>
