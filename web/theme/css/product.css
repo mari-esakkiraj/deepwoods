@@ -812,3 +812,35 @@ p:last-child {
 .progress + .progress {
     margin-top: 1rem;
 }
+
+.title.style-3 {
+  background-image: url(../imgs/theme/wave.png);
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  padding-bottom: 25px;
+}
+
+.featured-card {
+  padding: 50px 30px;
+  border-radius: 15px;
+  border: 1px solid #ececec;
+  background: #fff;
+}
+
+.featured-card img {
+  margin-bottom: 30px;
+  width: 100px;
+}
+
+.featured-card h4 {
+  margin-bottom: 30px;
+}
+
+.featured-card a {
+  font-size: 16px;
+}
+
+.featured-card p {
+    font-size: 17px;
+    margin-bottom: 30px;
+}

@@ -82,6 +82,12 @@ class SiteController extends Controller
         return $this->render('productlist');
     }
 
+    public function actionAboutus()
+    {
+        $this->layout = 'about';
+        return $this->render('productlist');
+    }
+
     /**
      * Login action.
      *

@@ -82,74 +82,83 @@
                     <div class="product-detail accordion-detail">
                         <div class="row mb-50 mt-30">
                             <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
-                            <div class="product-thumb">
-                                <div class="swiper-container single-product-thumb-content single-product-thumb-slider">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                    <a href="#/">
-                                        <img src="theme/img/shop/product-single/rice.jpg" alt="Image-HasTech">
-                                        <span class="product-flag-new">New</span>
-                                    </a>
-                                    </div>
-                                    <div class="swiper-slide">
-                                    <a href="#/">
-                                        <img src="theme/img/shop/product-single/01.jpg" alt="Image-HasTech">
-                                        <span class="product-flag-new">New</span>
-                                    </a>
-                                    </div>
-                                </div>
-                                </div>
-                                <div class="swiper-container single-product-nav-content single-product-nav-slider">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                    <img src="theme/img/shop/product-single/rice.jpg" alt="Image-HasTech">
-                                    </div>
-                                    <div class="swiper-slide">
-                                    <img src="theme/img/shop/product-single/01.jpg" alt="Image-HasTech">
-                                    </div>
-                                </div>
-                                </div>
+                              <div class="product-thumb">
+                                  <div class="swiper-container single-product-thumb-content single-product-thumb-slider">
+                                  <div class="swiper-wrapper">
+                                      <div class="swiper-slide">
+                                      <a href="#/">
+                                          <img src="theme/img/shop/product-single/rice.jpg" alt="Image-HasTech">
+                                          <span class="product-flag-new">New</span>
+                                      </a>
+                                      </div>
+                                      <div class="swiper-slide">
+                                      <a href="#/">
+                                          <img src="theme/img/shop/product-single/01.jpg" alt="Image-HasTech">
+                                          <span class="product-flag-new">New</span>
+                                      </a>
+                                      </div>
+                                  </div>
+                                  </div>
+                                  <div class="swiper-container single-product-nav-content single-product-nav-slider">
+                                  <div class="swiper-wrapper">
+                                      <div class="swiper-slide">
+                                      <img src="theme/img/shop/product-single/rice.jpg" alt="Image-HasTech">
+                                      </div>
+                                      <div class="swiper-slide">
+                                      <img src="theme/img/shop/product-single/01.jpg" alt="Image-HasTech">
+                                      </div>
+                                  </div>
+                                  </div>
+                              </div>
                             </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12 col-xs-12">
-                                <div class="detail-info pr-30 pl-30">
-                                    <h2 class="title-detail">Kalabath - Black Rice</h2>
-                                    <div class="product-detail-rating">
-                                        <div class="product-rate-cover text-end">
-                                            <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width: 90%"></div>
-                                            </div>
-                                            <span class="font-small ml-5 text-muted"> (32 reviews)</span>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix product-price-cover">
-                                        <div class="product-price primary-color float-left">
-                                            <span class="current-price text-brand">$38</span>
-                                            <span>
-                                                <span class="save-price font-md color3 ml-15">26% Off</span>
-                                                <span class="old-price font-md ml-15">$52</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="short-desc mb-30">
-                                        <p class="font-lg">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam rem officia, corrupti reiciendis minima nisi modi, quasi, odio minus dolore impedit fuga eum eligendi.</p>
-                                    </div>
-                                    
-                                    <div class="detail-extralink mb-50">
-                                        <div class="detail-qty border radius">
-                                            <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                            <input type="text" name="quantity" class="qty-val" value="1" min="1">
-                                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                        </div>
-                                        <div class="product-extra-link2">
-                                            <button type="submit" class="button button-add-to-cart"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
-                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                                        </div>
-                                    </div>
-                                    
+                            <div class="col-md-6 col-sm-12 col-xs-12 product-single-item">
+                              <div class="product-single-info mt-sm-70">
+                                <h1 class="title">Kalabath - Black Rice</h1>
+                                <div class="product-info">
+                                  <div class="star-content">
+                                    <i class="ion-md-star"></i>
+                                    <i class="ion-md-star"></i>
+                                    <i class="ion-md-star"></i>
+                                    <i class="ion-md-star"></i>
+                                    <i class="ion-md-star icon-color-gray"></i>
+                                  </div>
+                                  <ul class="comments-advices">
+                                    <li><a href="#/" class="reviews"><i class="fa fa-commenting-o"></i>Read reviews (1)</a></li>
+                                    <li><a href="#/" class="comment"><i class="fa fa-pencil-square-o"></i>Write a review</a></li>
+                                  </ul>
                                 </div>
-                                <!-- Detail Info -->
+                                <div class="prices">
+                                  <span class="price">₹4.52</span>
+                                  <div class="tax-label">Tax included</div>
+                                </div>
+                                <div class="product-description">
+                                  <ul class="product-desc-list">
+                                    <li>Rich in antioxidants.</li>
+                                    <li>Good source of several nutrients.</li>
+                                    <li>May boost your overall health.</li>
+                                    <li>Naturally gluten-free.</li>
+                                  </ul>
+                                </div>
+                                <div class="product-quick-action">
+                                  <div class="product-quick-qty">
+                                    <div class="pro-qty">
+                                      <input type="text" id="quantity" title="Quantity" value="1">
+                                    </div>
+                                  </div>
+                                  <a class="btn-product-add" href="#">Add to cart</a>
+                                </div>
+                                <div class="product-wishlist-compare">
+                                  <a href="#" class="btn-wishlist"><i class="icon-heart"></i>Add to wishlist</a>
+                                  <a href="#" class="btn-compare"><i class="icon-shuffle"></i>Add to compare</a>
+                                </div>
+                                <div class="social-sharing">
+                                  <span>Share</span>
+                                  <div class="social-icons">
+                                    <a href="#/"><i class="la la-facebook"></i></a>
+                                    <a href="#/"><i class="la la-twitter"></i></a>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                         </div>
                         <div class="product-info">
