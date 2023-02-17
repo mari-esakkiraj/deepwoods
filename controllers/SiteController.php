@@ -17,6 +17,13 @@ class SiteController extends Controller
      */
     public function behaviors()
     {
+        /*return [
+            'authenticator' => [
+                'class' => \yii\filters\auth\HttpBearerAuth::class,
+                'except' => ['login', 'cus-login'],
+            ],
+        ];*/
+
         return [
             'access' => [
                 'class' => AccessControl::class,
@@ -82,12 +89,19 @@ class SiteController extends Controller
         return $this->render('productlist');
     }
 
+    public function actionAboutus()
+    {
+        $this->layout = 'about';
+        return $this->render('productlist');
+    }
+
     /**
      * Login action.
      *
      * @return Response|string
      */
-    public function actionLogin()
+    
+     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -95,13 +109,43 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            $username = Yii::$app->request->post('username');
+            $password = Yii::$app->request->post('password');
+
+            $user = Users::findByUsername($username);
+
+            if (!$user || !$user->validatePassword($password)) {
+                throw new \yii\web\UnauthorizedHttpException('Invalid username or password');
+            }
+
+            $user->access_token = Yii::$app->security->generateRandomString();
+            $user->save(false);
+
+            return ['access_token' => $user->access_token];
+            //return $this->goBack();
         }
 
         $model->password = '';
         return $this->render('login', [
             'model' => $model,
         ]);
+    }
+
+    public function actionCusLogin()
+    {
+        $username = Yii::$app->request->post('username');
+        $password = Yii::$app->request->post('password');
+
+        $user = Users::findByUsername($username);
+
+        if (!$user || !$user->validatePassword($password)) {
+            throw new \yii\web\UnauthorizedHttpException('Invalid username or password');
+        }
+
+        $user->access_token = Yii::$app->security->generateRandomString();
+        $user->save(false);
+
+        return ['access_token' => $user->access_token];
     }
 
     /**

@@ -27,15 +27,15 @@ $absoluteBaseUrl = Url::base(true);
                       <ul class="main-menu nav">
                         <li><a href="index.php">Home</a>
                         </li>
-                        <li><a href="javascript:void(0)">About Us</a></li>
+                        <li><a href="<?=$absoluteBaseUrl?>/site/aboutus">About Us</a></li>
                         <li class="has-submenu full-width"><a href="#">Product</a>
                           <ul class="submenu-nav submenu-nav-mega submenu-nav-width">
                             <li class="mega-menu-item"><a href="javascript:void(0)" class="mega-title">Product List</a>
                               <ul>
-                                <li><a href="index.php?r=site/productlist">Kalabath - Black Rice</a></li>
-                                <li><a href="index.php?r=site/productlist">Coconut Oil - Cold Pressed</a></li>
-                                <li><a href="index.php?r=site/productlist">Jathi Kai - Pickles</a></li>
-                                <li><a href="index.php?r=site/productlist">Pepper - Black</a></li>
+                                <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Kalabath - Black Rice</a></li>
+                                <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Coconut Oil - Cold Pressed</a></li>
+                                <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Jathi Kai - Pickles</a></li>
+                                <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Pepper - Black</a></li>
                               </ul>
                             </li>
                            <li class="mega-menu-item"><a href="javascript:void(0)" class="mega-title">User</a>

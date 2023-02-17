@@ -46,15 +46,7 @@ class Users extends ActiveRecord implements IdentityInterface
         return '{{%user}}';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-        ];
-    }
+    
 
     public function scenarios()
     {
@@ -252,12 +244,12 @@ class Users extends ActiveRecord implements IdentityInterface
      * @return \common\models\UserAddress|null
      * @author Zura Sekhniashvili <zurasekhniashvili@gmail.com>
      */
-    public function getAddress(): ?UserAddress
+    /*public function getAddress(): ?UserAddress
     {
         $address = $this->addresses[0] ?? new UserAddress();
         $address->user_id = $this->id;
         return $address;
-    }
+    }*/
 
     public function afterValidate()
     {

@@ -32,9 +32,15 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+            'identityClass' => 'app\models\Users',
+            'enableAutoLogin' => false,
+            'enableSession' => false,
+            'loginUrl' => null,
         ],
+        'authenticator' => [
+            'class' => \yii\filters\auth\HttpBearerAuth::class,
+        ],
+    
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
