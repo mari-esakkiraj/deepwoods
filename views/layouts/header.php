@@ -23,7 +23,7 @@
                       <ul class="main-menu nav">
                         <li><a href="index.php">Home</a>
                         </li>
-                        <li><a href="#/">About Us</a></li>
+                        <li><a href="index.php?r=site/aboutus">About Us</a></li>
                         <li class="has-submenu full-width"><a href="#">Product</a>
                           <ul class="submenu-nav submenu-nav-mega submenu-nav-width">
                             <li class="mega-menu-item"><a href="#/" class="mega-title">Product List</a>
