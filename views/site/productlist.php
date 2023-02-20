@@ -2,10 +2,11 @@
 use yii\helpers\Url;
 $absoluteBaseUrl = Url::base(true);
 ?>
-<div class="container pt-65 pt-lg-40">
-        <div class="row">
+<section class="product-area">
+    <div class="container pt-65 pt-lg-40">
+    <div class="row">
         <div class="col-12">
-          <div class="shop-product-fillter">
+            <div class="shop-product-fillter">
             <div class="totall-product">
                 <p>We found <strong class="text-brand">29</strong> items for you!</p>
             </div>
@@ -49,386 +50,59 @@ $absoluteBaseUrl = Url::base(true);
                     </div>
                 </div>
             </div>
-          </div>
-          <div class="row product-grid">
-            <div class="col-lg-1-5 col-md-3 col-12 col-sm-6">
-              <div class="product-cart-wrap mb-30">
-                  <div class="product-img-action-wrap">
-                      <div class="product-img product-img-zoom">
-                          <a href="<?=$absoluteBaseUrl?>/site/productdetails">
-                              <img class="default-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="">
-                              <img class="hover-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/02.jpg" alt="">
-                          </a>
-                      </div>
-                      <div class="product-action-1">
-                          <a aria-label="Add To Wishlist" class="action-btn whishlist-add" href="shop-wishlist.html"><i class='far fa-heart'></i></a>
-                          <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                          <a aria-label="Quick view" class="action-btn btn-quick-view"><i class="far fa-eye" aria-hidden="true"></i></a>
-                      </div>
-                      <div class="product-badges product-badges-position product-badges-mrg">
-                          <span class="new">New</span>
-                      </div>
-                  </div>
-                  <div class="product-content-wrap">
-                      <div class="product-category">
-                          <a href="shop-grid-right.html">Snack</a>
-                      </div>
-                      <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails">Kalabath - Black Rice</a></h2>
-                      <div class="product-rate-cover">
-                        <div class="star-content">
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                    </div>
-                          <span class="font-small ml-5 text-muted"> (4.0)</span>
-                      </div>
-                      
-                      <div class="product-card-bottom">
-                          <div class="product-price">
-                              <span><i class="fa fa-rupee"></i> 120.00</span>
-                              <span class="old-price"><i class="fa fa-rupee"></i> 150.00</span>
-                          </div>
-                          <div class="add-cart">
-                              <a class="add" href="shop-cart.html">
-                              <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add </a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
             </div>
-            <div class="col-lg-1-5 col-md-3 col-12 col-sm-6">
-              <div class="product-cart-wrap mb-30">
-                  <div class="product-img-action-wrap">
-                      <div class="product-img product-img-zoom">
-                          <a href="<?=$absoluteBaseUrl?>/site/productdetails">
-                              <img class="default-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="">
-                              <img class="hover-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/02.jpg" alt="">
-                          </a>
-                      </div>
-                      <div class="product-action-1">
-                          <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class='far fa-heart'></i></a>
-                          <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                          <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="far fa-eye" aria-hidden="true"></i></a>
-                      </div>
-                      <div class="product-badges product-badges-position product-badges-mrg">
-                          <span class="new">New</span>
-                      </div>
-                  </div>
-                  <div class="product-content-wrap">
-                      <div class="product-category">
-                          <a href="shop-grid-right.html">Snack</a>
-                      </div>
-                      <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails">Kalabath - Black Rice</a></h2>
-                      <div class="product-rate-cover">
-                        <div class="star-content">
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
+            <div class="row product-grid">
+                <?php for ($x = 0; $x <= 11; $x++) { ?>
+                    <div class="col-lg-1-5 col-md-3 col-12 col-sm-6">
+                        <div class="product-cart-wrap mb-30">
+                            <div class="product-img-action-wrap">
+                                <div class="product-img product-img-zoom">
+                                    <a href="<?=$absoluteBaseUrl?>/site/productdetails">
+                                        <img class="default-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="">
+                                        <img class="hover-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/02.jpg" alt="">
+                                    </a>
+                                </div>
+                                <div class="product-action-1">
+                                    <a aria-label="Add To Wishlist" class="action-btn whishlist-add" href="shop-wishlist.html"><i class='far fa-heart'></i></a>
+                                    <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                    <a aria-label="Quick view" class="action-btn btn-quick-view"><i class="far fa-eye" aria-hidden="true"></i></a>
+                                </div>
+                                <div class="product-badges product-badges-position product-badges-mrg">
+                                    <span class="new">New</span>
+                                </div>
+                            </div>
+                            <div class="product-content-wrap">
+                                <div class="product-category">
+                                    <a href="shop-grid-right.html">Snack</a>
+                                </div>
+                                <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails">Kalabath - Black Rice</a></h2>
+                                <div class="product-rate-cover">
+                                    <div class="star-content">
+                                                <i class="ion-md-star"></i>
+                                                <i class="ion-md-star"></i>
+                                                <i class="ion-md-star"></i>
+                                                <i class="ion-md-star"></i>
+                                                <i class="ion-md-star"></i>
+                                                </div>
+                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                </div>
+                                
+                                <div class="product-card-bottom">
+                                    <div class="product-price">
+                                        <span><i class="fa fa-rupee"></i> 120.00</span>
+                                        <span class="old-price"><i class="fa fa-rupee"></i> 150.00</span>
                                     </div>
-                          <span class="font-small ml-5 text-muted"> (4.0)</span>
-                      </div>
-                      
-                      <div class="product-card-bottom">
-                          <div class="product-price">
-                              <span><i class="fa fa-rupee"></i> 120.00</span>
-                              <span class="old-price"><i class="fa fa-rupee"></i> 150.00</span>
-                          </div>
-                          <div class="add-cart">
-                              <a class="add" href="shop-cart.html">
-                              <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add </a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-            </div>
-            <div class="col-lg-1-5 col-md-3 col-12 col-sm-6">
-              <div class="product-cart-wrap mb-30">
-                  <div class="product-img-action-wrap">
-                      <div class="product-img product-img-zoom">
-                          <a href="<?=$absoluteBaseUrl?>/site/productdetails">
-                              <img class="default-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="">
-                              <img class="hover-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/02.jpg" alt="">
-                          </a>
-                      </div>
-                      <div class="product-action-1">
-                          <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class='far fa-heart'></i></a>
-                          <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                          <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="far fa-eye" aria-hidden="true"></i></a>
-                      </div>
-                      <div class="product-badges product-badges-position product-badges-mrg">
-                          <span class="new">New</span>
-                      </div>
-                  </div>
-                  <div class="product-content-wrap">
-                      <div class="product-category">
-                          <a href="shop-grid-right.html">Snack</a>
-                      </div>
-                      <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails">Kalabath - Black Rice</a></h2>
-                      <div class="product-rate-cover">
-                        <div class="star-content">
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
+                                    <div class="add-cart">
+                                        <a class="add" href="shop-cart.html">
+                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add </a>
                                     </div>
-                          <span class="font-small ml-5 text-muted"> (4.0)</span>
-                      </div>
-                      
-                      <div class="product-card-bottom">
-                          <div class="product-price">
-                              <span><i class="fa fa-rupee"></i> 120.00</span>
-                              <span class="old-price"><i class="fa fa-rupee"></i> 150.00</span>
-                          </div>
-                          <div class="add-cart">
-                              <a class="add" href="shop-cart.html">
-                              <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add </a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
-            <div class="col-lg-1-5 col-md-3 col-12 col-sm-6">
-              <div class="product-cart-wrap mb-30">
-                  <div class="product-img-action-wrap">
-                      <div class="product-img product-img-zoom">
-                          <a href="<?=$absoluteBaseUrl?>/site/productdetails">
-                              <img class="default-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="">
-                              <img class="hover-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/02.jpg" alt="">
-                          </a>
-                      </div>
-                      <div class="product-action-1">
-                          <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class='far fa-heart'></i></a>
-                          <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                          <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="far fa-eye" aria-hidden="true"></i></a>
-                      </div>
-                      <div class="product-badges product-badges-position product-badges-mrg">
-                          <span class="new">New</span>
-                      </div>
-                  </div>
-                  <div class="product-content-wrap">
-                      <div class="product-category">
-                          <a href="shop-grid-right.html">Snack</a>
-                      </div>
-                      <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails">Kalabath - Black Rice</a></h2>
-                      <div class="product-rate-cover">
-                        <div class="star-content">
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                    </div>
-                          <span class="font-small ml-5 text-muted"> (4.0)</span>
-                      </div>
-                      
-                      <div class="product-card-bottom">
-                          <div class="product-price">
-                              <span><i class="fa fa-rupee"></i> 120.00</span>
-                              <span class="old-price"><i class="fa fa-rupee"></i> 150.00</span>
-                          </div>
-                          <div class="add-cart">
-                              <a class="add" href="shop-cart.html">
-                              <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add </a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-            </div>
-            <div class="col-lg-1-5 col-md-3 col-12 col-sm-6">
-              <div class="product-cart-wrap mb-30">
-                  <div class="product-img-action-wrap">
-                      <div class="product-img product-img-zoom">
-                          <a href="<?=$absoluteBaseUrl?>/site/productdetails">
-                              <img class="default-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="">
-                              <img class="hover-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/02.jpg" alt="">
-                          </a>
-                      </div>
-                      <div class="product-action-1">
-                          <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class='far fa-heart'></i></a>
-                          <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                          <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="far fa-eye" aria-hidden="true"></i></a>
-                      </div>
-                      <div class="product-badges product-badges-position product-badges-mrg">
-                          <span class="new">New</span>
-                      </div>
-                  </div>
-                  <div class="product-content-wrap">
-                      <div class="product-category">
-                          <a href="shop-grid-right.html">Snack</a>
-                      </div>
-                      <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails">Kalabath - Black Rice</a></h2>
-                      <div class="product-rate-cover">
-                        <div class="star-content">
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                    </div>
-                          <span class="font-small ml-5 text-muted"> (4.0)</span>
-                      </div>
-                      
-                      <div class="product-card-bottom">
-                          <div class="product-price">
-                              <span><i class="fa fa-rupee"></i> 120.00</span>
-                              <span class="old-price"><i class="fa fa-rupee"></i> 150.00</span>
-                          </div>
-                          <div class="add-cart">
-                              <a class="add" href="shop-cart.html">
-                              <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add </a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-            </div>
-            <div class="col-lg-1-5 col-md-3 col-12 col-sm-6">
-              <div class="product-cart-wrap mb-30">
-                  <div class="product-img-action-wrap">
-                      <div class="product-img product-img-zoom">
-                          <a href="<?=$absoluteBaseUrl?>/site/productdetails">
-                              <img class="default-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="">
-                              <img class="hover-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/02.jpg" alt="">
-                          </a>
-                      </div>
-                      <div class="product-action-1">
-                          <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class='far fa-heart'></i></a>
-                          <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                          <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="far fa-eye" aria-hidden="true"></i></a>
-                      </div>
-                      <div class="product-badges product-badges-position product-badges-mrg">
-                          <span class="new">New</span>
-                      </div>
-                  </div>
-                  <div class="product-content-wrap">
-                      <div class="product-category">
-                          <a href="shop-grid-right.html">Snack</a>
-                      </div>
-                      <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails">Kalabath - Black Rice</a></h2>
-                      <div class="product-rate-cover">
-                        <div class="star-content">
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                    </div>
-                          <span class="font-small ml-5 text-muted"> (4.0)</span>
-                      </div>
-                      
-                      <div class="product-card-bottom">
-                          <div class="product-price">
-                              <span><i class="fa fa-rupee"></i> 120.00</span>
-                              <span class="old-price"><i class="fa fa-rupee"></i> 150.00</span>
-                          </div>
-                          <div class="add-cart">
-                              <a class="add" href="shop-cart.html">
-                              <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add </a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-            </div>
-            <div class="col-lg-1-5 col-md-3 col-12 col-sm-6">
-              <div class="product-cart-wrap mb-30">
-                  <div class="product-img-action-wrap">
-                      <div class="product-img product-img-zoom">
-                          <a href="<?=$absoluteBaseUrl?>/site/productdetails">
-                              <img class="default-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="">
-                              <img class="hover-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/02.jpg" alt="">
-                          </a>
-                      </div>
-                      <div class="product-action-1">
-                          <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class='far fa-heart'></i></a>
-                          <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                          <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="far fa-eye" aria-hidden="true"></i></a>
-                      </div>
-                      <div class="product-badges product-badges-position product-badges-mrg">
-                          <span class="new">New</span>
-                      </div>
-                  </div>
-                  <div class="product-content-wrap">
-                      <div class="product-category">
-                          <a href="shop-grid-right.html">Snack</a>
-                      </div>
-                      <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails">Kalabath - Black Rice</a></h2>
-                      <div class="product-rate-cover">
-                        <div class="star-content">
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                    </div>
-                          <span class="font-small ml-5 text-muted"> (4.0)</span>
-                      </div>
-                      
-                      <div class="product-card-bottom">
-                          <div class="product-price">
-                              <span><i class="fa fa-rupee"></i> 120.00</span>
-                              <span class="old-price"><i class="fa fa-rupee"></i> 150.00</span>
-                          </div>
-                          <div class="add-cart">
-                              <a class="add" href="shop-cart.html">
-                              <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add </a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-            </div>
-            <div class="col-lg-1-5 col-md-3 col-12 col-sm-6">
-              <div class="product-cart-wrap mb-30">
-                  <div class="product-img-action-wrap">
-                      <div class="product-img product-img-zoom">
-                          <a href="<?=$absoluteBaseUrl?>/site/productdetails">
-                              <img class="default-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="">
-                              <img class="hover-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/02.jpg" alt="">
-                          </a>
-                      </div>
-                      <div class="product-action-1">
-                          <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class='far fa-heart'></i></a>
-                          <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                          <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="far fa-eye" aria-hidden="true"></i></a>
-                      </div>
-                      <div class="product-badges product-badges-position product-badges-mrg">
-                          <span class="new">New</span>
-                      </div>
-                  </div>
-                  <div class="product-content-wrap">
-                      <div class="product-category">
-                          <a href="shop-grid-right.html">Snack</a>
-                      </div>
-                      <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails">Kalabath - Black Rice</a></h2>
-                      <div class="product-rate-cover">
-                        <div class="star-content">
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                      <i class="ion-md-star"></i>
-                                    </div>
-                          <span class="font-small ml-5 text-muted"> (4.0)</span>
-                      </div>
-                      
-                      <div class="product-card-bottom">
-                          <div class="product-price">
-                              <span><i class="fa fa-rupee"></i> 120.00</span>
-                              <span class="old-price"><i class="fa fa-rupee"></i> 150.00</span>
-                          </div>
-                          <div class="add-cart">
-                              <a class="add" href="shop-cart.html">
-                              <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add </a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-            </div>
-          </div>
-          <div class="pagination-area mt-20 mb-20">
+            <div class="pagination-area mt-20 mb-20">
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-end">
                     <li class="page-item">
@@ -444,7 +118,8 @@ $absoluteBaseUrl = Url::base(true);
                     </li>
                 </ul>
             </nav>
+            </div>
         </div>
-        </div>
-        </div>
-      </div>
+    </div>
+    </div>
+</section>
