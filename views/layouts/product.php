@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php 
+use yii\helpers\Url;
+$absoluteBaseUrl = Url::base(true);
+?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -8,41 +12,41 @@
     <title>Deep Woods</title>
 
     <!--== Favicon ==-->
-    <link rel="shortcut icon" href="theme/img/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="<?=$absoluteBaseUrl?>/theme/img/favicon.ico" type="image/x-icon" />
 
     <!--== Bootstrap CSS ==-->
-    <link href="theme/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="<?=$absoluteBaseUrl?>/theme/css/bootstrap.min.css" rel="stylesheet" />
     <!--== Ionicon CSS ==-->
-    <link href="theme/css/ionicons.min.css" rel="stylesheet" />
+    <link href="<?=$absoluteBaseUrl?>/theme/css/ionicons.min.css" rel="stylesheet" />
     <!--== Simple Line Icon CSS ==-->
-    <link href="theme/css/simple-line-icons.css" rel="stylesheet" />
+    <link href="<?=$absoluteBaseUrl?>/theme/css/simple-line-icons.css" rel="stylesheet" />
     <!--== Line Icons CSS ==-->
-    <link href="theme/css/lineIcons.css" rel="stylesheet" />
+    <link href="<?=$absoluteBaseUrl?>/theme/css/lineIcons.css" rel="stylesheet" />
     <!--== Font Awesome Icon CSS ==-->
-    <link href="theme/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="<?=$absoluteBaseUrl?>/theme/css/font-awesome.min.css" rel="stylesheet" />
     <!--== Animate CSS ==-->
-    <link href="theme/css/animate.css" rel="stylesheet" />
+    <link href="<?=$absoluteBaseUrl?>/theme/css/animate.css" rel="stylesheet" />
     <!--== Swiper CSS ==-->
-    <link href="theme/css/swiper.min.css" rel="stylesheet" />
+    <link href="<?=$absoluteBaseUrl?>/theme/css/swiper.min.css" rel="stylesheet" />
     <!--== Range Slider CSS ==-->
-    <link href="theme/css/range-slider.css" rel="stylesheet" />
+    <link href="<?=$absoluteBaseUrl?>/theme/css/range-slider.css" rel="stylesheet" />
     <!--== Fancybox Min CSS ==-->
-    <link href="theme/css/fancybox.min.css" rel="stylesheet" />
+    <link href="<?=$absoluteBaseUrl?>/theme/css/fancybox.min.css" rel="stylesheet" />
     <!--== Slicknav Min CSS ==-->
-    <link href="theme/css/slicknav.css" rel="stylesheet" />
+    <link href="<?=$absoluteBaseUrl?>/theme/css/slicknav.css" rel="stylesheet" />
     <!--== Owl Carousel Min CSS ==-->
-    <link href="theme/css/owlcarousel.min.css" rel="stylesheet" />
+    <link href="<?=$absoluteBaseUrl?>/theme/css/owlcarousel.min.css" rel="stylesheet" />
     <!--== Owl Theme Min CSS ==-->
-    <link href="theme/css/owltheme.min.css" rel="stylesheet" />
+    <link href="<?=$absoluteBaseUrl?>/theme/css/owltheme.min.css" rel="stylesheet" />
     <!--== Spacing CSS ==-->
-    <link href="theme/css/spacing.css" rel="stylesheet" />
+    <link href="<?=$absoluteBaseUrl?>/theme/css/spacing.css" rel="stylesheet" />
 
     <!--== Theme Font CSS ==-->
-    <link href="theme/css/theme-font.css" rel="stylesheet" />
+    <link href="<?=$absoluteBaseUrl?>/theme/css/theme-font.css" rel="stylesheet" />
 
     <!--== Main Style CSS ==-->
-    <link href="theme/css/style.css" rel="stylesheet" />
-    <link href="theme/css/product.css" rel="stylesheet" />
+    <link href="<?=$absoluteBaseUrl?>/theme/css/style.css" rel="stylesheet" />
+    <link href="<?=$absoluteBaseUrl?>/theme/css/product.css" rel="stylesheet" />
 
     <!--[if lt IE 9]>
     <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -97,7 +101,7 @@
                     <div class="inner-content">
                       <div class="footer-logo">
                         <a href="#/">
-                          <img class="logo-light" src="theme/img/deepwoods.png" alt="Logo" />
+                          <img class="logo-light" src="<?=$absoluteBaseUrl?>/theme/img/deepwoods.png" alt="Logo" />
                         </a>
                       </div>
                       <p>Location: No 47 Breckỉnidge St, Fayettevill, India</p>
@@ -187,13 +191,13 @@
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
                   <a href="#/">
-                    <img src="theme/img/shop/product-single/rice.jpg" alt="Image-HasTech">
+                    <img src="<?=$absoluteBaseUrl?>/theme/img/shop/product-single/rice.jpg" alt="Image-HasTech">
                     <span class="product-flag-new">New</span>
                   </a>
                 </div>
                 <div class="swiper-slide">
                   <a href="#/">
-                    <img src="theme/img/shop/product-single/01.jpg" alt="Image-HasTech">
+                    <img src="<?=$absoluteBaseUrl?>/theme/img/shop/product-single/01.jpg" alt="Image-HasTech">
                     <span class="product-flag-new">New</span>
                   </a>
                 </div>
@@ -202,10 +206,10 @@
             <div class="swiper-container single-product-nav-content single-product-nav-slider">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                  <img src="theme/img/shop/product-single/rice.jpg" alt="Image-HasTech">
+                  <img src="<?=$absoluteBaseUrl?>/theme/img/shop/product-single/rice.jpg" alt="Image-HasTech">
                 </div>
                 <div class="swiper-slide">
-                  <img src="theme/img/shop/product-single/01.jpg" alt="Image-HasTech">
+                  <img src="<?=$absoluteBaseUrl?>/theme/img/shop/product-single/01.jpg" alt="Image-HasTech">
                 </div>
               </div>
             </div>
@@ -278,34 +282,34 @@
 <!--=======================Javascript============================-->
 
 <!--=== Modernizr Min Js ===-->
-<script src="theme/js/modernizr.js"></script>
+<script src="<?=$absoluteBaseUrl?>/theme/js/modernizr.js"></script>
 <!--=== jQuery Min Js ===-->
-<script src="theme/js/jquery-main.js"></script>
+<script src="<?=$absoluteBaseUrl?>/theme/js/jquery-main.js"></script>
 <!--=== jQuery Migration Min Js ===-->
-<script src="theme/js/jquery-migrate.js"></script>
+<script src="<?=$absoluteBaseUrl?>/theme/js/jquery-migrate.js"></script>
 <!--=== Bootstrap Min Js ===-->
-<script src="theme/js/bootstrap.min.js"></script>
+<script src="<?=$absoluteBaseUrl?>/theme/js/bootstrap.min.js"></script>
 <!--=== jQuery Appear Js ===-->
-<script src="theme/js/jquery.appear.js"></script>
+<script src="<?=$absoluteBaseUrl?>/theme/js/jquery.appear.js"></script>
 <!--=== jQuery Swiper Min Js ===-->
-<script src="theme/js/swiper.min.js"></script>
+<script src="<?=$absoluteBaseUrl?>/theme/js/swiper.min.js"></script>
 <!--=== jQuery Fancy Box Min Js ===-->
-<script src="theme/js/fancybox.min.js"></script>
+<script src="<?=$absoluteBaseUrl?>/theme/js/fancybox.min.js"></script>
 <!--=== jQuery Slick Nav Js ===-->
-<script src="theme/js/slicknav.js"></script>
+<script src="<?=$absoluteBaseUrl?>/theme/js/slicknav.js"></script>
 <!--=== jQuery Waypoints Js ===-->
-<script src="theme/js/waypoints.js"></script>
+<script src="<?=$absoluteBaseUrl?>/theme/js/waypoints.js"></script>
 <!--=== jQuery Owl Carousel Min Js ===-->
-<script src="theme/js/owlcarousel.min.js"></script>
+<script src="<?=$absoluteBaseUrl?>/theme/js/owlcarousel.min.js"></script>
 <!--=== jQuery Match Height Min Js ===-->
-<script src="theme/js/jquery-match-height.min.js"></script>
+<script src="<?=$absoluteBaseUrl?>/theme/js/jquery-match-height.min.js"></script>
 <!--=== jQuery Zoom Min Js ===-->
-<script src="theme/js/jquery-zoom.min.js"></script>
+<script src="<?=$absoluteBaseUrl?>/theme/js/jquery-zoom.min.js"></script>
 <!--=== Countdown Js ===-->
-<script src="theme/js/countdown.js"></script>
+<script src="<?=$absoluteBaseUrl?>/theme/js/countdown.js"></script>
 
 <!--=== Custom Js ===-->
-<script src="theme/js/custom.js"></script>
+<script src="<?=$absoluteBaseUrl?>/theme/js/custom.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
 </body>

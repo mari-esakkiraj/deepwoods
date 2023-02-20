@@ -1,3 +1,7 @@
+<?php 
+use yii\helpers\Url;
+$absoluteBaseUrl = Url::base(true);
+?>
 <div class="container pt-65 pt-lg-40">
         <div class="row">
         <div class="col-12">
@@ -51,9 +55,9 @@
               <div class="product-cart-wrap mb-30">
                   <div class="product-img-action-wrap">
                       <div class="product-img product-img-zoom">
-                          <a href="index.php?r=site/productdetails">
-                              <img class="default-img" src="theme/img/shop/01.jpg" alt="">
-                              <img class="hover-img" src="theme/img/shop/02.jpg" alt="">
+                          <a href="<?=$absoluteBaseUrl?>/site/productdetails">
+                              <img class="default-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="">
+                              <img class="hover-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/02.jpg" alt="">
                           </a>
                       </div>
                       <div class="product-action-1">
@@ -69,7 +73,7 @@
                       <div class="product-category">
                           <a href="shop-grid-right.html">Snack</a>
                       </div>
-                      <h2><a href="index.php?r=site/productdetails">Kalabath - Black Rice</a></h2>
+                      <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails">Kalabath - Black Rice</a></h2>
                       <div class="product-rate-cover">
                         <div class="star-content">
                                       <i class="ion-md-star"></i>
@@ -98,9 +102,9 @@
               <div class="product-cart-wrap mb-30">
                   <div class="product-img-action-wrap">
                       <div class="product-img product-img-zoom">
-                          <a href="index.php?r=site/productdetails">
-                              <img class="default-img" src="theme/img/shop/01.jpg" alt="">
-                              <img class="hover-img" src="theme/img/shop/02.jpg" alt="">
+                          <a href="<?=$absoluteBaseUrl?>/site/productdetails">
+                              <img class="default-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="">
+                              <img class="hover-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/02.jpg" alt="">
                           </a>
                       </div>
                       <div class="product-action-1">
@@ -116,7 +120,7 @@
                       <div class="product-category">
                           <a href="shop-grid-right.html">Snack</a>
                       </div>
-                      <h2><a href="index.php?r=site/productdetails">Kalabath - Black Rice</a></h2>
+                      <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails">Kalabath - Black Rice</a></h2>
                       <div class="product-rate-cover">
                         <div class="star-content">
                                       <i class="ion-md-star"></i>
@@ -145,9 +149,9 @@
               <div class="product-cart-wrap mb-30">
                   <div class="product-img-action-wrap">
                       <div class="product-img product-img-zoom">
-                          <a href="index.php?r=site/productdetails">
-                              <img class="default-img" src="theme/img/shop/01.jpg" alt="">
-                              <img class="hover-img" src="theme/img/shop/02.jpg" alt="">
+                          <a href="<?=$absoluteBaseUrl?>/site/productdetails">
+                              <img class="default-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="">
+                              <img class="hover-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/02.jpg" alt="">
                           </a>
                       </div>
                       <div class="product-action-1">
@@ -163,7 +167,7 @@
                       <div class="product-category">
                           <a href="shop-grid-right.html">Snack</a>
                       </div>
-                      <h2><a href="index.php?r=site/productdetails">Kalabath - Black Rice</a></h2>
+                      <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails">Kalabath - Black Rice</a></h2>
                       <div class="product-rate-cover">
                         <div class="star-content">
                                       <i class="ion-md-star"></i>
@@ -192,9 +196,9 @@
               <div class="product-cart-wrap mb-30">
                   <div class="product-img-action-wrap">
                       <div class="product-img product-img-zoom">
-                          <a href="index.php?r=site/productdetails">
-                              <img class="default-img" src="theme/img/shop/01.jpg" alt="">
-                              <img class="hover-img" src="theme/img/shop/02.jpg" alt="">
+                          <a href="<?=$absoluteBaseUrl?>/site/productdetails">
+                              <img class="default-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="">
+                              <img class="hover-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/02.jpg" alt="">
                           </a>
                       </div>
                       <div class="product-action-1">
@@ -210,7 +214,7 @@
                       <div class="product-category">
                           <a href="shop-grid-right.html">Snack</a>
                       </div>
-                      <h2><a href="index.php?r=site/productdetails">Kalabath - Black Rice</a></h2>
+                      <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails">Kalabath - Black Rice</a></h2>
                       <div class="product-rate-cover">
                         <div class="star-content">
                                       <i class="ion-md-star"></i>
@@ -239,9 +243,9 @@
               <div class="product-cart-wrap mb-30">
                   <div class="product-img-action-wrap">
                       <div class="product-img product-img-zoom">
-                          <a href="index.php?r=site/productdetails">
-                              <img class="default-img" src="theme/img/shop/01.jpg" alt="">
-                              <img class="hover-img" src="theme/img/shop/02.jpg" alt="">
+                          <a href="<?=$absoluteBaseUrl?>/site/productdetails">
+                              <img class="default-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="">
+                              <img class="hover-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/02.jpg" alt="">
                           </a>
                       </div>
                       <div class="product-action-1">
@@ -257,7 +261,7 @@
                       <div class="product-category">
                           <a href="shop-grid-right.html">Snack</a>
                       </div>
-                      <h2><a href="index.php?r=site/productdetails">Kalabath - Black Rice</a></h2>
+                      <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails">Kalabath - Black Rice</a></h2>
                       <div class="product-rate-cover">
                         <div class="star-content">
                                       <i class="ion-md-star"></i>
@@ -286,9 +290,9 @@
               <div class="product-cart-wrap mb-30">
                   <div class="product-img-action-wrap">
                       <div class="product-img product-img-zoom">
-                          <a href="index.php?r=site/productdetails">
-                              <img class="default-img" src="theme/img/shop/01.jpg" alt="">
-                              <img class="hover-img" src="theme/img/shop/02.jpg" alt="">
+                          <a href="<?=$absoluteBaseUrl?>/site/productdetails">
+                              <img class="default-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="">
+                              <img class="hover-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/02.jpg" alt="">
                           </a>
                       </div>
                       <div class="product-action-1">
@@ -304,7 +308,7 @@
                       <div class="product-category">
                           <a href="shop-grid-right.html">Snack</a>
                       </div>
-                      <h2><a href="index.php?r=site/productdetails">Kalabath - Black Rice</a></h2>
+                      <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails">Kalabath - Black Rice</a></h2>
                       <div class="product-rate-cover">
                         <div class="star-content">
                                       <i class="ion-md-star"></i>
@@ -333,9 +337,9 @@
               <div class="product-cart-wrap mb-30">
                   <div class="product-img-action-wrap">
                       <div class="product-img product-img-zoom">
-                          <a href="index.php?r=site/productdetails">
-                              <img class="default-img" src="theme/img/shop/01.jpg" alt="">
-                              <img class="hover-img" src="theme/img/shop/02.jpg" alt="">
+                          <a href="<?=$absoluteBaseUrl?>/site/productdetails">
+                              <img class="default-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="">
+                              <img class="hover-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/02.jpg" alt="">
                           </a>
                       </div>
                       <div class="product-action-1">
@@ -351,7 +355,7 @@
                       <div class="product-category">
                           <a href="shop-grid-right.html">Snack</a>
                       </div>
-                      <h2><a href="index.php?r=site/productdetails">Kalabath - Black Rice</a></h2>
+                      <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails">Kalabath - Black Rice</a></h2>
                       <div class="product-rate-cover">
                         <div class="star-content">
                                       <i class="ion-md-star"></i>
@@ -380,9 +384,9 @@
               <div class="product-cart-wrap mb-30">
                   <div class="product-img-action-wrap">
                       <div class="product-img product-img-zoom">
-                          <a href="index.php?r=site/productdetails">
-                              <img class="default-img" src="theme/img/shop/01.jpg" alt="">
-                              <img class="hover-img" src="theme/img/shop/02.jpg" alt="">
+                          <a href="<?=$absoluteBaseUrl?>/site/productdetails">
+                              <img class="default-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="">
+                              <img class="hover-img" src="<?=$absoluteBaseUrl?>/theme/img/shop/02.jpg" alt="">
                           </a>
                       </div>
                       <div class="product-action-1">
@@ -398,7 +402,7 @@
                       <div class="product-category">
                           <a href="shop-grid-right.html">Snack</a>
                       </div>
-                      <h2><a href="index.php?r=site/productdetails">Kalabath - Black Rice</a></h2>
+                      <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails">Kalabath - Black Rice</a></h2>
                       <div class="product-rate-cover">
                         <div class="star-content">
                                       <i class="ion-md-star"></i>
