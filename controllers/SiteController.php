@@ -79,7 +79,7 @@ class SiteController extends Controller
 
     public function actionProductlist()
     {
-        $this->layout = 'product';
+        $this->layout = 'mainpage';
         return $this->render('productlist');
     }
 
