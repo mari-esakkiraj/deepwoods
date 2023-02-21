@@ -949,7 +949,7 @@ p:last-child {
   margin-bottom: 20px;
 }
 
-button[type='submit'] {
+.product-single-info button[type='submit'] {
   font-size: 16px;
   font-weight: 500;
   padding: 15px 40px;
