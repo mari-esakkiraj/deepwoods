@@ -85,8 +85,8 @@ class SiteController extends Controller
 
     public function actionProductdetails()
     {
-        $this->layout = 'productdetails';
-        return $this->render('productlist');
+        $this->layout = 'mainpage';
+        return $this->render('productdetails');
     }
 
     public function actionAboutus()
