@@ -25,7 +25,7 @@ $absoluteBaseUrl = Url::base(true);
                   <div class="align-right position-relative">
                     <div class="header-navigation-area">
                       <ul class="main-menu nav">
-                        <li><a href="index.php">Home</a>
+                        <li><a href="<?=$absoluteBaseUrl?>">Home</a>
                         </li>
                         <li><a href="<?=$absoluteBaseUrl?>/site/aboutus">About Us</a></li>
                         <li class="has-submenu full-width"><a href="#">Product</a>
