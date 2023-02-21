@@ -213,8 +213,6 @@ $absoluteBaseUrl = Url::base(true);
 <!--=== Custom Js ===-->
 <script src="<?=$absoluteBaseUrl?>/theme/js/custom.js"></script>
 <script src='<?=$absoluteBaseUrl?>/theme/js/fontawesome.js' crossorigin='anonymous'></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
-
 </body>
 
 </html>
