@@ -89,6 +89,12 @@ class SiteController extends Controller
         return $this->render('productdetails');
     }
 
+    public function actionCart()
+    {
+        $this->layout = 'mainpage';
+        return $this->render('cart');
+    }
+
     public function actionAboutus()
     {
         $this->layout = 'about';
