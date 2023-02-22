@@ -7,12 +7,12 @@ use yii\web\JsExpression;
 use kartik\widgets\FileInput;
 use app\modules\yii2extensions\models\Image;
 use wbraganca\dynamicform\DynamicFormWidget;
-
+$absoluteBaseUrl = Url::base(true);
 ?>
 
 <div id="panel-option-values" class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title"><i class="fa fa-check-square-o"></i></h3>
+        <h3 class="panel-title"><i class="fa fa-check-square-o"></i>Product Images</h3>
     </div>
 
     <?php DynamicFormWidget::begin([
@@ -33,7 +33,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
     <table class="table table-bordered table-striped margin-b-none">
         <thead>
             <tr>
-                <th style="width: 90px; text-align: center"></th>
+                <!-- <th style="width: 90px; text-align: center"></th> -->
                 
                 <th style="width: 188px;">Image</th>
                 <th style="width: 90px; text-align: center">Actions</th>
@@ -42,23 +42,22 @@ use wbraganca\dynamicform\DynamicFormWidget;
         <tbody class="form-options-body">
             <?php foreach ($modelImages as $index => $modelImage): ?>
                 <tr class="form-options-item">
-                    <td class="sortable-handle text-center vcenter" style="cursor: move;">
+                    <!-- <td class="sortable-handle text-center vcenter" style="cursor: move;">
                         <i class="fa fa-arrows"></i>
-                    </td>
+                    </td> -->
                     
-                    <td>
+                    <td class="w-40">
                         <?php if (!$modelImage->isNewRecord): ?>
                             <?= Html::activeHiddenInput($modelImage, "[{$index}]id"); ?>
                         <?php endif; ?>
                          <?php
-                            //$modelImage = Image::findOne(['id' => $modelImage->image_id]);
                             $initialPreview = [];
                             if (!$modelImage->isNewRecord) {
-                                $pathImg = Yii::$app->fileStorage->baseUrl . '/' . $modelImage->image;
+                                $pathImg = $absoluteBaseUrl.'/uploads/' . $modelImage->image;
                                 $initialPreview[] = Html::img($pathImg, ['class' => 'file-preview-image']);
                             }
                         ?>
-                        <?= $form->field($modelImage, "[{$index}]image")->label(false)->fileInput();/*(FileInput::classname(), [
+                        <?= $form->field($modelImage, "[{$index}]image")->label(false)->widget(FileInput::classname(), [
                             'options' => [
                                 'multiple' => false,
                                 'accept' => 'image/*',
@@ -68,9 +67,9 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                 'previewFileType' => 'image',
                                 'showCaption' => false,
                                 'showUpload' => false,
-                                'browseClass' => 'btn btn-default btn-sm',
+                                'browseClass' => 'btn btn-default btn-sm btn-add-new',
                                 'browseLabel' => ' Pick image',
-                                'browseIcon' => '<i class="glyphicon glyphicon-picture"></i>',
+                                'browseIcon' => '<i class="fa-solid fa-image"></i>',
                                 'removeClass' => 'btn btn-danger btn-sm',
                                 'removeLabel' => ' Delete',
                                 'removeIcon' => '<i class="fa fa-trash"></i>',
@@ -80,7 +79,7 @@ use wbraganca\dynamicform\DynamicFormWidget;
                                 'initialPreview' => $initialPreview,
                                 'layoutTemplates' => ['footer' => '']
                             ]
-                        ])*/ ?>
+                        ]) ?>
                        
                     </td>
                     <td class="text-center vcenter">
@@ -91,8 +90,8 @@ use wbraganca\dynamicform\DynamicFormWidget;
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="2"></td>
-                <td><button type="button" class="add-item btn btn-success btn-sm"><span class="fa fa-plus"></span> New</button></td>
+                <td colspan="1"></td>
+                <td class="text-center vcenter"><button type="button" class="add-item btn btn-success btn-sm"><span class="fa fa-plus"></span>Add New</button></td>
             </tr>
         </tfoot>
     </table>
@@ -118,6 +117,8 @@ var fixHelperSortable = function(e, ui) {
     });
     return ui;
 };
+
+if(typeof widgetsOptions[i] !== 'undefined'){identifiers[i] = $elem.closest(widgetsOptions[i].widgetItem).index();}
 
 $(".form-options-body").sortable({
     items: "tr",

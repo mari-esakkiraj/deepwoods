@@ -46,8 +46,9 @@ use wbraganca\dynamicform\DynamicFormWidget;
 
     <?= $form->field($model, 'updated_by')->textInput() */ ?>
 
-    <div class="form-group">
+    <div class="form-group text-center mt-4">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Cancel', ['index'], ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

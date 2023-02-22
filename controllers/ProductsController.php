@@ -136,8 +136,8 @@ class ProductsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $modelImages = [new ProductImages];
-
+        //$modelImages = [new ProductImages];
+        $modelImages = ProductImages::find()->where(['product_id' => $id])->all();
         if ($this->request->isPost && $model->load($this->request->post())) {
             $modelImages = Model::createMultiple(OptionValue::classname());
             Model::loadMultiple($modelImages, Yii::$app->request->post());

@@ -15,11 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="products-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Products', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div class="flex-container">
+        <h1><?= Html::encode($this->title) ?></h1>
+        <?= Html::a('New Products', ['create'], ['class' => 'btn btn-success flex-container-last']) ?>
+    </div>
 
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -28,23 +27,25 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'name',
+            [
+                'class' => 'yii\grid\SerialColumn',
+                'contentOptions' => ['style' => 'width:50px;'],
+            ],
+            [
+                'attribute' => 'name',
+                'headerOptions' => ['style' => 'width:20%'],
+            ],
             'description:ntext',
-            'image',
-            'price',
-            //'status',
-            //'created_at',
-            //'updated_at',
-            //'created_by',
-            //'updated_by',
+            [
+                'attribute' => 'price',
+                'headerOptions' => ['style' => 'width:10%'],
+            ],
             [
                 'class' => ActionColumn::className(),
+                'headerOptions' => ['style' => 'width:8%'],
                 'urlCreator' => function ($action, Products $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>
