@@ -1,3 +1,7 @@
+<?php 
+use yii\helpers\Url;
+$absoluteBaseUrl = Url::base(true);
+?>
 <footer class="footer-area">
     <div class="container">
       <div class="row">
@@ -27,7 +31,7 @@
                   <div class="widget-menu-wrap">
                     <ul class="nav-menu">
                       <li><a href="#/">Delivery</a></li>
-                      <li><a href="#/">About us</a></li>
+                      <li><a href="<?=$absoluteBaseUrl?>/site/aboutus">About us</a></li>
                       <li><a href="#/">Secure payment</a></li>
                       <li><a href="#/">Contact us</a></li>
                       <li><a href="#/">Sitemap</a></li>

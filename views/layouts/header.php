@@ -14,7 +14,7 @@ $absoluteBaseUrl = Url::base(true);
                 <div class="col-md-2">
                   <div class="align-left">
                     <div class="header-logo-area">
-                      <a href="index.html"> 
+                      <a href="<?=$absoluteBaseUrl?>"> 
                         <img class="logo-main" src="<?=$absoluteBaseUrl?>/theme/img/deepwoods.png" alt="Logo" />
                         <img class="logo-light d-none" src="<?=$absoluteBaseUrl?>/theme/img/deepwoods.png" alt="Logo" />
                       </a>
@@ -48,7 +48,7 @@ $absoluteBaseUrl = Url::base(true);
                             </li>
                             <li class="mega-menu-item"><a href="javascript:void(0)" class="mega-title">Cart</a>
                               <ul>
-                                <li><a href="javascript:void(0)">Cart</a></li>
+                                <li><a href="<?=$absoluteBaseUrl?>/site/cart">Cart</a></li>
                                 <li><a href="javascript:void(0)">Checkout</a></li>
                                 <li><a href="javascript:void(0)">Wishlist</a></li>
                                 <li><a href="javascript:void(0)">Compare</a></li>
