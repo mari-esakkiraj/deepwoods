@@ -82,3 +82,30 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.flex-container{
+    display: flex;
+    align-items: center;
+}
+
+.flex-container-last{
+    margin-left: auto;
+}
+
+.btn.btn-add-new {
+    background-color: #669269;;
+    color: #fff;
+    border: 1px solid #669269;;
+}
+
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.btn-default:hover {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
