@@ -115,7 +115,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            $username = Yii::$app->request->post('username');
+            /*$username = Yii::$app->request->post('username');
             $password = Yii::$app->request->post('password');
 
             $user = Users::findByUsername($username);
@@ -126,9 +126,13 @@ class SiteController extends Controller
 
             $user->access_token = Yii::$app->security->generateRandomString();
             $user->save(false);
+            return $this->render('login', [
+                'model' => $model,
+            ]);
+            return ['access_token' => $user->access_token];*/
+            $this->redirect('/products');
+            
 
-            return ['access_token' => $user->access_token];
-            //return $this->goBack();
         }
 
         $model->password = '';
@@ -163,7 +167,7 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
 
-        return $this->goHome();
+        $this->redirect('login');
     }
 
     /**

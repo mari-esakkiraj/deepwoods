@@ -14,7 +14,7 @@ $absoluteBaseUrl = Url::base(true);
                 <div class="col-md-2">
                   <div class="align-left">
                     <div class="header-logo-area">
-                      <a href="index.html"> 
+                      <a href="<?=$absoluteBaseUrl?>"> 
                         <img class="logo-main" src="<?=$absoluteBaseUrl?>/theme/img/deepwoods.png" alt="Logo" />
                         <img class="logo-light d-none" src="<?=$absoluteBaseUrl?>/theme/img/deepwoods.png" alt="Logo" />
                       </a>
