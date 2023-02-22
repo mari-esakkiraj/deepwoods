@@ -40,7 +40,7 @@ if(!Yii::$app->user->isGuest) {
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav w-100'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Home', 'url' => ['/customer/index']],
             ['label' => 'Users', 'url' => ['/customer/index']],
             ['label' => 'Product', 'url' => ['/products/index']],
             Yii::$app->user->isGuest

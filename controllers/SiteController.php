@@ -69,6 +69,8 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        $this->layout = 'mainpage';
+        return $this->render('mainpage');
         return $this->render('index');
     }
     public function actionMainpage()
