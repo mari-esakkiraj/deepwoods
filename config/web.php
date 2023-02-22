@@ -33,13 +33,17 @@ $config = [
         ],
         'user' => [
             'identityClass' => 'app\models\Users',
+            'enableAutoLogin' => true,
+        ],
+        /*'user' => [
+            'identityClass' => 'app\models\Users',
             'enableAutoLogin' => false,
             'enableSession' => false,
             'loginUrl' => null,
         ],
         'authenticator' => [
             'class' => \yii\filters\auth\HttpBearerAuth::class,
-        ],
+        ],*/
     
         'errorHandler' => [
             'errorAction' => 'site/error',
