@@ -49,7 +49,7 @@ $absoluteBaseUrl = Url::base(true);
                             <li class="mega-menu-item"><a href="javascript:void(0)" class="mega-title">Cart</a>
                               <ul>
                                 <li><a href="<?=$absoluteBaseUrl?>/site/cart">Cart</a></li>
-                                <li><a href="javascript:void(0)">Checkout</a></li>
+                                <li><a href="<?=$absoluteBaseUrl?>/site/checkout">Checkout</a></li>
                                 <li><a href="javascript:void(0)">Wishlist</a></li>
                                 <li><a href="javascript:void(0)">Compare</a></li>
                               </ul>

@@ -197,4 +197,10 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    public function actionCheckout()
+    {
+        $this->layout = 'mainpage';
+        return $this->render('checkout');
+    }
 }
