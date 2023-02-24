@@ -69,6 +69,8 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        $this->layout = 'mainpage';
+        return $this->render('mainpage');
         return $this->render('index');
     }
     public function actionMainpage()
@@ -130,7 +132,7 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
             return ['access_token' => $user->access_token];*/
-            $this->redirect('/products');
+            $this->redirect(['products/index']);
             
 
         }
