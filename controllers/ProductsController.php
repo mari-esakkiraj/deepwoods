@@ -10,6 +10,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\base\Model;
 use yii\helpers\ArrayHelper;
+use Yii;
+use yii\filters\AccessControl;
 
 /**
  * ProductsController implements the CRUD actions for Products model.
@@ -21,6 +23,7 @@ class ProductsController extends Controller
      */
     public function behaviors()
     {
+        
         return array_merge(
             parent::behaviors(),
             [
@@ -28,6 +31,22 @@ class ProductsController extends Controller
                     'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
+                    ],
+                ],
+            ],
+            [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['@'],
+                            'matchCallback' => function ($rule, $action) {
+                                if(Yii::$app->user->identity->admin !=1) {
+                                    return false;
+                                }
+                            }
+                        ]
                     ],
                 ],
             ]

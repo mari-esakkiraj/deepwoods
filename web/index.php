@@ -1,4 +1,5 @@
 <?php
+error_reporting(0);
 
 // comment out the following two lines when deployed to production
 defined('YII_DEBUG') or define('YII_DEBUG', true);
