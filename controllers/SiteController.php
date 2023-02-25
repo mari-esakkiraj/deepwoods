@@ -48,7 +48,8 @@ class SiteController extends Controller
 
     public function beforeAction($action) 
     {
-        if($action->id === 'register') {
+        $withoutCSRF = ['cus-login','register'];
+        if(in_array($action->id,$withoutCSRF)) {
             $this->enableCsrfValidation = false; 
         }
         return parent::beforeAction($action); 
@@ -159,15 +160,33 @@ class SiteController extends Controller
         $password = Yii::$app->request->post('password');
 
         $user = Users::findByUsername($username);
-
-        if (!$user || !$user->validatePassword($password)) {
-            throw new \yii\web\UnauthorizedHttpException('Invalid username or password');
+        $data = [];
+        if (!$user) {
+            $data['success']=false;
+            $data['error']['username']="Invalid username";
+            $data['message']="Invalid username";
+            return json_encode($data,true);
+        }
+        if (!$user->validatePassword($password)) {
+            $data['success']=false;
+            $data['error']['password']="Invalid password";
+            $data['message']="Invalid password";
+            return json_encode($data,true);
         }
 
         $user->access_token = Yii::$app->security->generateRandomString();
         $user->save(false);
+        Yii::$app->user->login($user, 3600*24*30);
+        $data['success']=true;
+        return json_encode($data,true);
+        // return ['access_token' => $user->access_token];
+    }
 
-        return ['access_token' => $user->access_token];
+    public function actionCusLogout()
+    {
+        Yii::$app->user->logout();
+
+        $this->redirect('index');
     }
 
     /**
@@ -235,6 +254,7 @@ class SiteController extends Controller
         $user->mobile_number = $phoneNumber;
         $user->password = $password;
         $user->gst_number = $gstNumber;
+        $user->status = 10;
 
         if($user->validate()){
             $user->save();

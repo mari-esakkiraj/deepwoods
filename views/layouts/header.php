@@ -1,8 +1,9 @@
-<?php 
+<?php
+
+use yii\helpers\Html;
 use yii\helpers\Url;
 $absoluteBaseUrl = Url::base(true);
 ?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
 <header class="header-area header-default header-style4">
 
@@ -40,12 +41,31 @@ $absoluteBaseUrl = Url::base(true);
                                 <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Pepper - Black</a></li>
                               </ul>
                             </li>
-                           <li class="mega-menu-item"><a href="javascript:void(0)" class="mega-title">User</a>
+                            <li class="mega-menu-item"><a href="javascript:void(0)" class="mega-title">User</a>
                               <ul>
-                                
+                              <?php 
+                                if(!Yii::$app->user->isGuest) {
+                              ?>
                                 <li><a href="javascript:void(0)">My Account</a></li>
+                                <li><a href="javascript:void(0)">
+                                <?php 
+                                  echo Html::beginForm(['/site/cus-logout'])
+                                  . Html::submitButton(
+                                      'Logout (' . Yii::$app->user->identity->username . ')',
+                                      
+                                  )
+                                  . Html::endForm();
+                                ?>
+                                </a></li>
+                              <?php
+                                }
+                                else {
+                              ?>
                                 <li><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
                                 <li><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#registerModal">Register</a></li>
+                              <?php 
+                                }
+                                ?>
                               </ul>
                             </li>
                             <li class="mega-menu-item"><a href="javascript:void(0)" class="mega-title">Cart</a>
@@ -112,20 +132,22 @@ $absoluteBaseUrl = Url::base(true);
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form>
+             <form id="login-form">
               <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username">
+                <input type="text" class="form-control loginusername" name="username" id="username">
+                <span id='loginusername_error'></span>
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password">
+                <input type="password" class="form-control loginpassword" name="password" id="password">
+                <span id='loginpassword_error'></span>
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Login</button>
+            <button type="button" class="btn btn-primary" id="loginSubmitButton" >Login</button>
           </div>
         </div>
       </div>
@@ -190,8 +212,65 @@ $absoluteBaseUrl = Url::base(true);
       </div>
     </div>
 
+    <?php 
+$this->registerJs("
+  $('#loginSubmitButton').on('click', function() { 
+
+    var userName = $('#login-form #username').val();
+    var password = $('#login-form #password').val();
+    var clr = 0;
+    if(password == ''){
+      $('#loginpassword_error').html('<span style=\"color:red\">Password is Requried</span>');
+      clr =1;
+    } else {
+      $('#loginpassword_error').html('');
+    }
+    if(userName == ''){
+      $('#loginusername_error').html('<span style=\"color:red\">User Name is Requried</span>');
+      clr =1;
+    } else {
+      $('#loginusername_error').html('');
+    }
+    console.log(clr);
+    if(clr==0) 
+    {
+       $.ajax({
+          type:'post',
+          url:'".$absoluteBaseUrl."/site/cus-login',
+          dataType: 'json',
+          data:{
+              username:userName,
+              password:password,
+          },
+          success:function(response) {
+            //alert(response.success);
+            if(response.success==true)
+            {
+              window.location.reload();
+            }
+            else
+            {
+              //alert(response.message);
+              resultData = response.error;
+              $.each(resultData, function(key, value) {
+                $('#login'+key+'_error').html('<span style=\"color:red\">'+value+'</span>');
+              });
+            }
+          }
+      }); 
+    }
+  });
+  
+  $(document).on('click','.registerSubmit',function() {
+    registerForm();
+  });
+");
+
+
+?>    
+
 <script>
-  $(document).on("click",".registerSubmit",function() {
+  function registerForm(){
     var userName = $('.username').val();
     var firstname = $('.firstname').val();
     var lastname = $('.lastname').val();
@@ -281,7 +360,7 @@ $absoluteBaseUrl = Url::base(true);
             dataType: 'json',
             success: function(response) {
                 var resultData = response.data;
-                if(!resultData) {
+                if(resultData) {
                     toastr.success('User Register Successfully');
                 } else {
                   $.each(resultData, function(key, value) {
@@ -291,7 +370,7 @@ $absoluteBaseUrl = Url::base(true);
             }            
         });
     }
-});
+}
 
 // $(document).on("keyup",".phone_number",function() {
 //     var phone = $(this).val();
