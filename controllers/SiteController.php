@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Users;
 
 class SiteController extends Controller
 {
@@ -44,6 +45,15 @@ class SiteController extends Controller
             ],
         ];
     }
+
+    public function beforeAction($action) 
+    {
+        if($action->id === 'register') {
+            $this->enableCsrfValidation = false; 
+        }
+        return parent::beforeAction($action); 
+    }
+
 
     /**
      * {@inheritdoc}
@@ -204,5 +214,34 @@ class SiteController extends Controller
     {
         $this->layout = 'mainpage';
         return $this->render('checkout');
+    }
+
+    public function actionRegister()
+    {
+
+        $username = $_POST['userName'] ?? null;
+        $firstname = $_POST['firstname'] ?? null;
+        $lastname = $_POST['lastname'] ?? null;
+        $email = $_POST['email'] ?? null;
+        $phoneNumber = $_POST['phoneNumber'] ?? null;
+        $password = $_POST['password'] ?? null;
+        $gstNumber = $_POST['gstNumber'] ?? null;
+        
+        $user = new Users();
+        $user->firstname = $firstname;
+        $user->lastname = $lastname;
+        $user->username = $username;
+        $user->email = $email;
+        $user->mobile_number = $phoneNumber;
+        $user->password = $password;
+        $user->gst_number = $gstNumber;
+
+        if($user->validate()){
+            $user->save();
+            $data = ['data'=> true];
+        } else {
+            $data = ['data' => $user->getErrors()];
+        }
+        return json_encode($data);
     }
 }

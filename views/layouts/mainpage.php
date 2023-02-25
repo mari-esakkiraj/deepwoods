@@ -49,6 +49,8 @@ $absoluteBaseUrl = Url::base(true);
     <link href="<?=$absoluteBaseUrl?>/theme/css/style.css" rel="stylesheet" />
     <link href="<?=$absoluteBaseUrl?>/theme/css/product.css" rel="stylesheet" />
 
+    <link href="<?=$absoluteBaseUrl?>/theme/toastr/toaster.css" rel="stylesheet">
+  
     <!--[if lt IE 9]>
     <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -213,6 +215,7 @@ $absoluteBaseUrl = Url::base(true);
 <!--=== Custom Js ===-->
 <script src="<?=$absoluteBaseUrl?>/theme/js/custom.js"></script>
 <script src='<?=$absoluteBaseUrl?>/theme/js/fontawesome.js' crossorigin='anonymous'></script>
+<script src="<?=$absoluteBaseUrl?>/theme/toastr/toaster.js"></script>
 </body>
 
 </html>
