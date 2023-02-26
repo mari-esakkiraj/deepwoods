@@ -161,7 +161,7 @@ $absoluteBaseUrl = Url::base(true);
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form id='register_form'>
             <div class="mb-3">
                 <label for="username" class="form-label">First Name</label>
                 <input type="text" class="form-control firstname" id="firstname">
@@ -214,6 +214,13 @@ $absoluteBaseUrl = Url::base(true);
 
     <?php 
 $this->registerJs("
+  $(document).on('keyup','.phone_number',function() {
+    var phone = $(this).val();
+    // format phone number as (xxx) xxx-xxxx
+    phone = phone.replace(/[^0-9]/g, '');
+  // phone = phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+    $(this).val(phone);
+  });
   $('#loginSubmitButton').on('click', function() { 
 
     var userName = $('#login-form #username').val();
@@ -362,6 +369,8 @@ $this->registerJs("
                 var resultData = response.data;
                 if(resultData) {
                     toastr.success('User Register Successfully');
+                    $("#register_form").trigger('reset');
+                    $("#registerModal").modal('hide');
                 } else {
                   $.each(resultData, function(key, value) {
                     $('#'+key+'_error').html("<span style='color:red'>"+value[0]+"</span>");
@@ -372,12 +381,6 @@ $this->registerJs("
     }
 }
 
-// $(document).on("keyup",".phone_number",function() {
-//     var phone = $(this).val();
-//     // format phone number as (xxx) xxx-xxxx
-//     phone = phone.replace(/[^0-9]/g, '');
-//     phone = phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
-//     $(this).val(phone);
-// });
+
   
 </script>
