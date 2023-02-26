@@ -90,6 +90,11 @@
     $(".btn-search-content").toggleClass("show").focus();
   });
 
+  //wishlist
+  $(".whishlist-add").on('click', function() {
+    console.log($this);
+  });
+
   // Popup Quick View JS
   var popupProduct = $(".popup-product-quickview");
   $(".btn-quick-view").on('click', function() {
@@ -558,5 +563,7 @@
   varWindow.on('load', function() {
     stylePreloader();
   });
+
+  
 
 })(window.jQuery);

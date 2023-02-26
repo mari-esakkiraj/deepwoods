@@ -11,6 +11,12 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Users;
 
+use app\models\Products;
+use app\models\ProductImages;
+use app\models\ProductsSearch;
+use yii\data\ActiveDataProvider;
+
+
 class SiteController extends Controller
 {
     /**
@@ -93,7 +99,24 @@ class SiteController extends Controller
     public function actionProductlist()
     {
         $this->layout = 'mainpage';
-        return $this->render('productlist');
+        $productsList = Products::find()->all();
+        $query = Products::find()->joinWith(['imageslist']);
+        $provider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'created_at' => SORT_DESC,
+                ]
+            ],
+        ]);
+        
+        // returns an array of Post objects
+        $productsList = $provider->getModels();
+
+        return $this->render('productlist',["productsList" => $productsList]);
     }
 
     public function actionProductdetails()

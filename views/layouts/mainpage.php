@@ -180,9 +180,6 @@ $absoluteBaseUrl = Url::base(true);
   </aside>
   <!--== End Side Menu ==-->
   
-  <div class="popup-product-overlay"></div>
-  <button class="popup-product-close"><i class="la la-close"></i></button>
-  <!--== End Popup Product  ==-->
 
 </div>
 
