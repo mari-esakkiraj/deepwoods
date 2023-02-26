@@ -1,6 +1,7 @@
 <?php
 
 namespace app\controllers;
+use Yii;
 
 use app\models\Orders;
 use app\models\OrdersSearch;
@@ -70,6 +71,8 @@ class OrdersController extends Controller
         $model = new Orders();
 
         if ($this->request->isPost) {
+            $model->created_at = time();
+            $model->created_by = \Yii::$app->session->getId();
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -93,8 +96,12 @@ class OrdersController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost) {
+            $model->created_at = time();
+            $model->created_by = Yii::$app->session->getId();
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [
