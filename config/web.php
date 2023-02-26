@@ -72,6 +72,11 @@ $config = [
             ],
         ],
         */
+        'formatter' => [
+            'decimalSeparator' => '.',
+            'thousandSeparator' => ',',
+            'currencyCode' => '₹'
+        ]
     ],
     'params' => $params,
     'defaultRoute' => 'site/mainpage',
