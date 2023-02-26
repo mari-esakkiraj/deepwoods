@@ -1,7 +1,10 @@
-<?php 
+<?php
+
+use yii\helpers\Html;
 use yii\helpers\Url;
 $absoluteBaseUrl = Url::base(true);
 ?>
+
 <header class="header-area header-default header-style4">
 
     <!--== Start Header Bottom ==-->
@@ -38,18 +41,37 @@ $absoluteBaseUrl = Url::base(true);
                                 <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Pepper - Black</a></li>
                               </ul>
                             </li>
-                           <li class="mega-menu-item"><a href="javascript:void(0)" class="mega-title">User</a>
+                            <li class="mega-menu-item"><a href="javascript:void(0)" class="mega-title">User</a>
                               <ul>
-                                
+                              <?php 
+                                if(!Yii::$app->user->isGuest) {
+                              ?>
                                 <li><a href="javascript:void(0)">My Account</a></li>
+                                <li><a href="javascript:void(0)">
+                                <?php 
+                                  echo Html::beginForm(['/site/cus-logout'])
+                                  . Html::submitButton(
+                                      'Logout (' . Yii::$app->user->identity->username . ')',
+                                      
+                                  )
+                                  . Html::endForm();
+                                ?>
+                                </a></li>
+                              <?php
+                                }
+                                else {
+                              ?>
                                 <li><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
                                 <li><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#registerModal">Register</a></li>
+                              <?php 
+                                }
+                                ?>
                               </ul>
                             </li>
                             <li class="mega-menu-item"><a href="javascript:void(0)" class="mega-title">Cart</a>
                               <ul>
                                 <li><a href="<?=$absoluteBaseUrl?>/site/cart">Cart</a></li>
-                                <li><a href="javascript:void(0)">Checkout</a></li>
+                                <li><a href="<?=$absoluteBaseUrl?>/site/checkout">Checkout</a></li>
                                 <li><a href="javascript:void(0)">Wishlist</a></li>
                                 <li><a href="javascript:void(0)">Compare</a></li>
                               </ul>
@@ -110,20 +132,22 @@ $absoluteBaseUrl = Url::base(true);
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form>
+             <form id="login-form">
               <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username">
+                <input type="text" class="form-control loginusername" name="username" id="username">
+                <span id='loginusername_error'></span>
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password">
+                <input type="password" class="form-control loginpassword" name="password" id="password">
+                <span id='loginpassword_error'></span>
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Login</button>
+            <button type="button" class="btn btn-primary" id="loginSubmitButton" >Login</button>
           </div>
         </div>
       </div>
@@ -137,45 +161,226 @@ $absoluteBaseUrl = Url::base(true);
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form id='register_form'>
+            <div class="mb-3">
+                <label for="username" class="form-label">First Name</label>
+                <input type="text" class="form-control firstname" id="firstname">
+                <span id='firstname_error'></span>
+              </div>
               <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username">
+                <label for="username" class="form-label">Last Name</label>
+                <input type="text" class="form-control lastname" id="lastname">
+                <span id='lastname_error'></span>
+              </div>
+              <div class="mb-3">
+                <label for="username" class="form-label">User Name</label>
+                <input type="text" class="form-control username" id="username">
+                <span id='username_error'></span>
               </div>
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email">
+                <input type="email" class="form-control email" id="email">
+                <span id='email_error'></span>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Phone Number</label>
+                <input type="text" class="form-control phone_number" id="phone_number">
+                <span id='phone_number_error'></span>
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password">
+                <input type="password" class="form-control password" id="password">
+                <span id='password_error'></span>
               </div>
               <div class="mb-3">
                 <label for="confirm-password" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="confirm-password">
+                <input type="password" class="form-control confirm_password" id="confirm_password">
+                <span id='confirm_password_error'></span>
+              </div>
+              <div class="mb-3">
+                <label for="confirm-password" class="form-label">GST Number</label>
+                <input type="text" class="form-control gst_number" id="gst_number">
+                <span id='gst_number_error'></span>
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Register</button>
+            <button type="button" class="btn btn-primary registerSubmit">Register</button>
           </div>
         </div>
       </div>
     </div>
 
-<script>
-    var password = document.getElementById("password")
-    var confirm_password = document.getElementById("confirm_password");
+    <?php 
+$this->registerJs("
+  $(document).on('keyup','.phone_number',function() {
+    var phone = $(this).val();
+    // format phone number as (xxx) xxx-xxxx
+    phone = phone.replace(/[^0-9]/g, '');
+  // phone = phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+    $(this).val(phone);
+  });
+  $('#loginSubmitButton').on('click', function() { 
 
-    function validatePassword() {
-        if (password.value != confirm_password.value) {
-            confirm_password.setCustomValidity("Passwords do not match.");
-        } else {
-            confirm_password.setCustomValidity("");
-        }
+    var userName = $('#login-form #username').val();
+    var password = $('#login-form #password').val();
+    var clr = 0;
+    if(password == ''){
+      $('#loginpassword_error').html('<span style=\"color:red\">Password is Requried</span>');
+      clr =1;
+    } else {
+      $('#loginpassword_error').html('');
+    }
+    if(userName == ''){
+      $('#loginusername_error').html('<span style=\"color:red\">User Name is Requried</span>');
+      clr =1;
+    } else {
+      $('#loginusername_error').html('');
+    }
+    console.log(clr);
+    if(clr==0) 
+    {
+       $.ajax({
+          type:'post',
+          url:'".$absoluteBaseUrl."/site/cus-login',
+          dataType: 'json',
+          data:{
+              username:userName,
+              password:password,
+          },
+          success:function(response) {
+            //alert(response.success);
+            if(response.success==true)
+            {
+              window.location.reload();
+            }
+            else
+            {
+              //alert(response.message);
+              resultData = response.error;
+              $.each(resultData, function(key, value) {
+                $('#login'+key+'_error').html('<span style=\"color:red\">'+value+'</span>');
+              });
+            }
+          }
+      }); 
+    }
+  });
+  
+  $(document).on('click','.registerSubmit',function() {
+    registerForm();
+  });
+");
+
+
+?>    
+
+<script>
+  function registerForm(){
+    var userName = $('.username').val();
+    var firstname = $('.firstname').val();
+    var lastname = $('.lastname').val();
+    var email = $('.email').val();
+    var phoneNumber = $('.phone_number').val();
+    var password = $('.password').val();
+    var confirmPassword = $('.confirm_password').val();
+    var gstNumber = $('.gst_number').val();
+    var clr = 0;
+    if(firstname == ''){
+      $("#firstname_error").html("<span style='color:red'>First Name is Requried</span>");
+      clr =1;
+    } else {
+      $("#firstname_error").html("");
+    }
+    if(lastname == ''){
+      $("#lastname_error").html("<span style='color:red'>Last Name is Requried</span>");
+      clr =1;
+    } else {
+      $("#lastname_error").html("");
+    }
+    if(userName == ''){
+      $("#username_error").html("<span style='color:red'>User Name is Requried</span>");
+      clr =1;
+    } else {
+      $("#username_error").html("");
+    }
+    if(email == ''){
+      $("#email_error").html("<span style='color:red'>Email is Requried</span>");
+      clr =1;
+    } else {
+      $("#email_error").html("");
+    }
+    if(phoneNumber == ''){
+      $("#phone_number_error").html("<span style='color:red'>Phone Number is Requried</span>");
+      clr =1;
+    } else {
+      $("#phone_number_error").html("");
+    }
+    if(password == ''){
+      $("#password_error").html("<span style='color:red'>Password is Requried</span>");
+      clr =1;
+    } else {
+      $("#password_error").html("");
+    }
+    if(confirmPassword == ''){
+      $("#confirm_password_error").html("<span style='color:red'>Confirm Password is Requried</span>");
+      clr =1;
+    } else {
+      $("#confirm_password_error").html("");
+    }
+    // if(gstNumber == ''){
+    //   $("#gst_number_error").html("<span style='color:red'>GST Number is Requried</span>");
+    //   clr =1;
+    // } else {
+    //   $("#gst_number_error").html("");
+    // }
+
+    if (password != confirmPassword) {
+        clr =1;
+        $("#confirm_password_error").html("<span style='color:red'>Passwords do not match</span>");
+        
+    }
+    var emailRegex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if (!emailRegex.test(email)) {
+        $('#email_error').html("<span style='color:red'>Invalid email address.</span>");
+        clr =1;
     }
 
-    password.onchange = validatePassword;
-    confirm_password.onkeyup = validatePassword;
+    var filter = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;    
+    if (filter.test(phoneNumber)) {
+        $('#phone_number_error').html("<span style='color:red'>Invalid phone number.</span>");
+        clr =1;
+    }
+
+    if(clr==0) {
+        $.ajax({
+            url: '<?=$absoluteBaseUrl?>/site/register',
+            method: 'POST',
+            data: {
+                    "userName": userName,"firstname": firstname,
+                    "lastname": lastname,"email": email,
+                    "phoneNumber": phoneNumber,"password": password,
+                    "confirmPassword": confirmPassword,"gstNumber": gstNumber
+
+                },
+            dataType: 'json',
+            success: function(response) {
+                var resultData = response.data;
+                if(resultData) {
+                    toastr.success('User Register Successfully');
+                    $("#register_form").trigger('reset');
+                    $("#registerModal").modal('hide');
+                } else {
+                  $.each(resultData, function(key, value) {
+                    $('#'+key+'_error').html("<span style='color:red'>"+value[0]+"</span>");
+                  });
+                }
+            }            
+        });
+    }
+}
+
+
+  
 </script>

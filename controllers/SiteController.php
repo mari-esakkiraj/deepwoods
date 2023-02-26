@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Users;
 
 use app\models\Products;
 use app\models\ProductImages;
@@ -50,6 +51,16 @@ class SiteController extends Controller
             ],
         ];
     }
+
+    public function beforeAction($action) 
+    {
+        $withoutCSRF = ['cus-login','register'];
+        if(in_array($action->id,$withoutCSRF)) {
+            $this->enableCsrfValidation = false; 
+        }
+        return parent::beforeAction($action); 
+    }
+
 
     /**
      * {@inheritdoc}
@@ -172,15 +183,33 @@ class SiteController extends Controller
         $password = Yii::$app->request->post('password');
 
         $user = Users::findByUsername($username);
-
-        if (!$user || !$user->validatePassword($password)) {
-            throw new \yii\web\UnauthorizedHttpException('Invalid username or password');
+        $data = [];
+        if (!$user) {
+            $data['success']=false;
+            $data['error']['username']="Invalid username";
+            $data['message']="Invalid username";
+            return json_encode($data,true);
+        }
+        if (!$user->validatePassword($password)) {
+            $data['success']=false;
+            $data['error']['password']="Invalid password";
+            $data['message']="Invalid password";
+            return json_encode($data,true);
         }
 
         $user->access_token = Yii::$app->security->generateRandomString();
         $user->save(false);
+        Yii::$app->user->login($user, 3600*24*30);
+        $data['success']=true;
+        return json_encode($data,true);
+        // return ['access_token' => $user->access_token];
+    }
 
-        return ['access_token' => $user->access_token];
+    public function actionCusLogout()
+    {
+        Yii::$app->user->logout();
+
+        $this->redirect('index');
     }
 
     /**
@@ -221,5 +250,41 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionCheckout()
+    {
+        $this->layout = 'mainpage';
+        return $this->render('checkout');
+    }
+
+    public function actionRegister()
+    {
+
+        $username = $_POST['userName'] ?? null;
+        $firstname = $_POST['firstname'] ?? null;
+        $lastname = $_POST['lastname'] ?? null;
+        $email = $_POST['email'] ?? null;
+        $phoneNumber = $_POST['phoneNumber'] ?? null;
+        $password = $_POST['password'] ?? null;
+        $gstNumber = $_POST['gstNumber'] ?? null;
+        
+        $user = new Users();
+        $user->firstname = $firstname;
+        $user->lastname = $lastname;
+        $user->username = $username;
+        $user->email = $email;
+        $user->mobile_number = $phoneNumber;
+        $user->password = $password;
+        $user->gst_number = $gstNumber;
+        $user->status = 10;
+
+        if($user->validate()){
+            $user->save();
+            $data = ['data'=> true];
+        } else {
+            $data = ['data' => $user->getErrors()];
+        }
+        return json_encode($data);
     }
 }
