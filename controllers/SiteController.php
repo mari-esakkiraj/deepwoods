@@ -119,10 +119,11 @@ class SiteController extends Controller
         return $this->render('productlist',["productsList" => $productsList]);
     }
 
-    public function actionProductdetails()
+    public function actionProductdetails($id)
     {
         $this->layout = 'mainpage';
-        return $this->render('productdetails');
+        $model = Products::find()->where(['products.id' => $id])->joinWith(['imageslist'])->one();
+        return $this->render('productdetails',["products" => $model]);
     }
 
     public function actionCart()

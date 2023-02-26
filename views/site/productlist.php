@@ -57,7 +57,7 @@ $absoluteBaseUrl = Url::base(true);
                             <div class="product-cart-wrap mb-30">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
-                                        <a href="<?=$absoluteBaseUrl?>/site/productdetails">
+                                        <a href="<?=$absoluteBaseUrl?>/site/productdetails?id=<?= $products->id ?>">
                                             <?php foreach($products->imageslist as $imgkey=>$images){
                                             $filepath = $absoluteBaseUrl."/uploads/".$images->image;
                                             $imgClass = '';
@@ -83,7 +83,7 @@ $absoluteBaseUrl = Url::base(true);
                                     <div class="product-category">
                                         <a href="shop-grid-right.html">Snack</a>
                                     </div>
-                                    <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails"><?= $products->name ?></a></h2>
+                                    <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails?id=<?= $products->id ?>"><?= $products->name ?></a></h2>
                                     <div class="product-rate-cover">
                                         <div class="star-content">
                                                     <i class="ion-md-star"></i>
