@@ -139,8 +139,8 @@ class ProductsController extends Controller
         //$modelImages = [new ProductImages];
         $modelImages = ProductImages::find()->where(['product_id' => $id])->all();
         if ($this->request->isPost && $model->load($this->request->post())) {
-            $modelImages = Model::createMultiple(OptionValue::classname());
-            Model::loadMultiple($modelImages, Yii::$app->request->post());
+            $modelImages = Model::createMultiple(ProductImages::classname());
+            //Model::loadMultiple($modelImages, Yii::$app->request->post());
             if ($model->validate()) {
                 $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
