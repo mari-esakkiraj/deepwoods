@@ -57,7 +57,7 @@ $absoluteBaseUrl = Url::base(true);
                             <div class="product-cart-wrap mb-30">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
-                                        <a href="<?=$absoluteBaseUrl?>/site/productdetails">
+                                        <a href="<?=$absoluteBaseUrl?>/site/productdetails?id=<?= $products->id ?>">
                                             <?php foreach($products->imageslist as $imgkey=>$images){
                                             $filepath = $absoluteBaseUrl."/uploads/".$images->image;
                                             $imgClass = '';
@@ -83,7 +83,7 @@ $absoluteBaseUrl = Url::base(true);
                                     <div class="product-category">
                                         <a href="shop-grid-right.html">Snack</a>
                                     </div>
-                                    <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails"><?= $products->name ?></a></h2>
+                                    <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails?id=<?= $products->id ?>"><?= $products->name ?></a></h2>
                                     <div class="product-rate-cover">
                                         <div class="star-content">
                                                     <i class="ion-md-star"></i>
@@ -143,7 +143,7 @@ $absoluteBaseUrl = Url::base(true);
                 <div class="row" style="transform: none;">
                     <div class="col-xl-12">
                         <div class="product-detail accordion-detail">
-                            <div class="row mb-50 mt-30">
+                            <div class="row mb-50 mt-30 ml-10">
                                 <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
                                     <div class="product-thumb">
                                         <div class="swiper-container single-product-thumb-content single-product-thumb-slider">
