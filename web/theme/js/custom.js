@@ -92,7 +92,12 @@
 
   //wishlist
   $(".whishlist-add").on('click', function() {
-    console.log($this);
+    
+  });
+
+  //wishlist
+  $(".logout").on('click', function() {
+    $('.logoutSession').trigger('click');
   });
 
   // Popup Quick View JS

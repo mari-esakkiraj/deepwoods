@@ -28,59 +28,25 @@ $absoluteBaseUrl = Url::base(true);
                   <div class="align-right position-relative">
                     <div class="header-navigation-area">
                       <ul class="main-menu nav">
-                        <li><a href="<?=$absoluteBaseUrl?>">Home</a>
-                        </li>
+                        <li><a href="<?=$absoluteBaseUrl?>">Home</a></li>
                         <li><a href="<?=$absoluteBaseUrl?>/site/aboutus">About Us</a></li>
-                        <li class="has-submenu full-width"><a href="#">Product</a>
-                          <ul class="submenu-nav submenu-nav-mega submenu-nav-width">
-                            <li class="mega-menu-item"><a href="javascript:void(0)" class="mega-title">Product List</a>
-                              <ul>
-                                <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Kalabath - Black Rice</a></li>
-                                <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Coconut Oil - Cold Pressed</a></li>
-                                <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Jathi Kai - Pickles</a></li>
-                                <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Pepper - Black</a></li>
-                              </ul>
-                            </li>
-                            <li class="mega-menu-item"><a href="javascript:void(0)" class="mega-title">User</a>
-                              <ul>
-                              <?php 
-                                if(!Yii::$app->user->isGuest) {
-                              ?>
-                                <li><a href="javascript:void(0)">My Account</a></li>
-                                <li><a href="javascript:void(0)">
-                                <?php 
-                                  echo Html::beginForm(['/site/cus-logout'])
-                                  . Html::submitButton(
-                                      'Logout (' . Yii::$app->user->identity->username . ')',
-                                      
-                                  )
-                                  . Html::endForm();
-                                ?>
-                                </a></li>
-                              <?php
-                                }
-                                else {
-                              ?>
-                                <li><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
-                                <li><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#registerModal">Register</a></li>
-                              <?php 
-                                }
-                                ?>
-                              </ul>
-                            </li>
-                            <li class="mega-menu-item"><a href="javascript:void(0)" class="mega-title">Cart</a>
-                              <ul>
-                                <li><a href="<?=$absoluteBaseUrl?>/site/cart">Cart</a></li>
-                                <li><a href="<?=$absoluteBaseUrl?>/site/checkout">Checkout</a></li>
-                                <li><a href="javascript:void(0)">Wishlist</a></li>
-                                <li><a href="javascript:void(0)">Compare</a></li>
-                              </ul>
-                            </li>
+                        <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Product</a></li>
+                        <li><a href="<?=$absoluteBaseUrl?>/site/cart">Cart</a></li>
+                        <?php 
+                        if(!Yii::$app->user->isGuest) {
+                        ?>
+                        <li class="has-submenu">
+                          <a href="javascript:void(0)">
+                            <?php echo Yii::$app->user->identity->username ?>
+                          </a>
+                          <ul class="submenu-nav" style="min-width: 140px;">
+                            <li><a href="javascript:void(0)">My Account</a></li>
+                            <li><a href="javascript:void(0)" class="logout">Logout</a></li>
                           </ul>
                         </li>
-                        <li class=""><a href="#">Blog</a>
-                        </li>
-                        <li><a href="javascript:void(0)">Contact us</a></li>
+                        <?php }else{ ?>
+                          <li><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
+                        <?php } ?>
                       </ul>
                     </div>
                   
@@ -123,6 +89,14 @@ $absoluteBaseUrl = Url::base(true);
     </div>
     <!--== End Responsive Header ==-->
   </header>
+  <?php 
+  if(!Yii::$app->user->isGuest) {
+    echo Html::beginForm(['/site/cus-logout'])
+    . Html::submitButton(
+        'Logout (' . Yii::$app->user->identity->username . ')',['class' => 'logoutSession d-none'])
+    . Html::endForm();
+  }
+  ?>
 
   <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
       <div class="modal-dialog">

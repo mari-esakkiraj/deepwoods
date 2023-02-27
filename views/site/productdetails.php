@@ -7,7 +7,7 @@ $absoluteBaseUrl = Url::base(true);
     <div class="row" style="transform: none;">
         <div class="col-xl-12">
             <div class="product-detail accordion-detail">
-                <div class="row mb-50 mt-30">
+                <div class="row mb-50 mt-30 ml-10">
                     <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
                     <div class="product-thumb">
                         <div class="swiper-container single-product-thumb-content single-product-thumb-slider">
