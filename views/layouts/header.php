@@ -119,11 +119,15 @@ $absoluteBaseUrl = Url::base(true);
               </div>
             </form>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <div class="modal-footer justify-content-center">
             <button type="button" class="btn btn-primary" id="loginSubmitButton" >Login</button>
           </div>
-        </div>
+            <div class="modal-footer justify-content-center">
+              <p>Not a member? <a href="javascript:void(0)" class="blue-text siginup">Sign Up</a></p> <br>
+              <p>Forgot <a href="javascript:void(0)" class="blue-text forgotPassword">Password?</a></p>
+              <p>Forgot <a href="javascript:void(0)" class="blue-text forgotPassword">Username?</a></p>
+            </div>
+          </div>
       </div>
     </div>
 
@@ -195,8 +199,15 @@ $this->registerJs("
   // phone = phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
     $(this).val(phone);
   });
-  $('#loginSubmitButton').on('click', function() { 
 
+  
+
+  $(document).on('click','.siginup',function() {
+    $('#loginModal').modal('hide');
+    $('#registerModal').modal('show');
+  });
+
+  $(document).on('click','#loginSubmitButton',function() {  
     var userName = $('#login-form #username').val();
     var password = $('#login-form #password').val();
     var clr = 0;
