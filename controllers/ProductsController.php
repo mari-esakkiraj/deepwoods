@@ -57,8 +57,10 @@ class ProductsController extends Controller
      */
     public function actionView($id)
     {
+        $modelImages = ProductImages::find()->where(['product_id' => $id])->all();
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'modelImages' => $modelImages
         ]);
     }
 
@@ -163,8 +165,16 @@ class ProductsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        $transaction = \Yii::$app->db->beginTransaction();
+        try {                    
+            $this->findModel($id)->delete();
+            ProductImages::deleteAll(['product_id' => $id]);
+            $transaction->commit();
+        }catch (Exception $ex) {                      
+            $transaction->rollback();
+            Yii::$app->user->setFlash('error', 'could not delete');
+        }
         return $this->redirect(['index']);
     }
 
