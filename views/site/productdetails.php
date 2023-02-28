@@ -9,31 +9,33 @@ $absoluteBaseUrl = Url::base(true);
             <div class="product-detail accordion-detail">
                 <div class="row mb-50 mt-30 ml-10">
                     <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
-                    <div class="product-thumb">
-                        <div class="swiper-container single-product-thumb-content single-product-thumb-slider">
-                        <div class="swiper-wrapper">
-                            <?php foreach($products->imageslist as $imgkey=>$images){
-                                $filepath = $absoluteBaseUrl."/uploads/".$images->image;
-                            ?>
-                            <div class="swiper-slide">
-                                <img  src="<?=$filepath?>" alt="Image-HasTech">
+                        <div class="product-thumb">
+                            <div class="swiper-container single-product-thumb-content single-product-thumb-slider">
+                                <div class="swiper-wrapper">
+                                    <?php foreach($products->imageslist as $imgkey=>$images){
+                                        $filepath = $absoluteBaseUrl."/uploads/".$images->image;
+                                    ?>
+                                    <div class="swiper-slide">
+                                        <img  src="<?=$filepath?>" alt="Image-HasTech">
+                                    </div>
+                                    <?php } ?>
+                                </div>
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
                             </div>
-                            <?php } ?>
-                        </div>
-                        </div>
                         <div class="swiper-container single-product-nav-content single-product-nav-slider mt-2">
-                        <div class="swiper-wrapper">
-                            <?php foreach($products->imageslist as $imgkey=>$images){
-                                $filepath = $absoluteBaseUrl."/uploads/".$images->image;
-                            ?>
-                            <div class="swiper-slide">
-                                <img  src="<?=$filepath?>" alt="Image-HasTech">
+                            <div class="swiper-wrapper">
+                                <?php foreach($products->imageslist as $imgkey=>$images){
+                                    $filepath = $absoluteBaseUrl."/uploads/".$images->image;
+                                ?>
+                                <div class="swiper-slide">
+                                    <img  src="<?=$filepath?>" alt="Image-HasTech">
+                                </div>
+                                <?php } ?>
+                                
                             </div>
-                            <?php } ?>
-                            
+                            </div>
                         </div>
-                        </div>
-                    </div>
                     </div>
                     <div class="col-md-6 col-sm-12 col-xs-12 product-single-item">
                     <div class="product-single-info mt-sm-70">

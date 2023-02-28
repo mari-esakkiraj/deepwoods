@@ -66,7 +66,6 @@ use yii\widgets\Pjax;
                             'options' => ['class' => 'row product-grid'],   
                             'itemOptions' => ['class' => 'col-lg-1-5 col-md-3 col-12 col-sm-6'],
                             'pager' => [
-                                
                                 // Customzing options for pager container tag
                                 'options' => [
                                     'class' => 'pagination justify-content-end',
@@ -78,7 +77,6 @@ use yii\widgets\Pjax;
                         Pjax::end();
                     ?>
                 </div>
-                
             </div>
         </div>
     </div>
@@ -98,7 +96,7 @@ use yii\widgets\Pjax;
                             <div class="row mb-50 mt-30 ml-10">
                                 <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
                                     <div class="product-thumb">
-                                        <div class="swiper-container single-product-thumb-content single-product-thumb-slider">
+                                        <div class="swiper-container single-product-thumb-content single-product-thumb-slider-popup">
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
                                                 <img src="<?=$absoluteBaseUrl?>/theme/img/shop/product-single/02.jpg" alt="Image-HasTech">
@@ -108,7 +106,7 @@ use yii\widgets\Pjax;
                                             </div>
                                         </div>
                                         </div>
-                                        <div class="swiper-container single-product-nav-content single-product-nav-slider mt-2">
+                                        <div class="swiper-container single-product-nav-content single-product-nav-slider1 mt-2">
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
                                                 <img src="<?=$absoluteBaseUrl?>/theme/img/shop/product-single/02.jpg" alt="Image-HasTech">
