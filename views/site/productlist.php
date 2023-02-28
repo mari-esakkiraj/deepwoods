@@ -1,6 +1,8 @@
 <?php 
 use yii\helpers\Url;
 $absoluteBaseUrl = Url::base(true);
+use yii\widgets\ListView;
+use yii\widgets\Pjax;
 ?>
 <section class="product-area">
     <div class="container pt-65 pt-lg-40">
@@ -8,9 +10,12 @@ $absoluteBaseUrl = Url::base(true);
             <div class="col-12">
                 <div class="shop-product-fillter">
                 <div class="totall-product">
-                    <p>We found <strong class="text-brand"><?= count($productsList)?></strong> items for you!</p>
+                    <p>We found <strong class="text-brand"><?= $dataProvider->getTotalCount() ?></strong> items for you!</p>
                 </div>
                 <div class="sort-by-product-area">
+                    <div class="sort-by-cover mr-10">
+                        <input type="text" class="form-control" placeholder="Enter product name">
+                    </div>
                     <div class="sort-by-cover mr-10">
                         <div class="sort-by-product-wrap">
                             <div class="sort-by">
@@ -51,82 +56,29 @@ $absoluteBaseUrl = Url::base(true);
                     </div>
                 </div>
                 </div>
-                <div class="row product-grid">
-                    <?php foreach($productsList as $products){ ?>
-                        <div class="col-lg-1-5 col-md-3 col-12 col-sm-6">
-                            <div class="product-cart-wrap mb-30">
-                                <div class="product-img-action-wrap">
-                                    <div class="product-img product-img-zoom">
-                                        <a href="<?=$absoluteBaseUrl?>/site/productdetails?id=<?= $products->id ?>">
-                                            <?php foreach($products->imageslist as $imgkey=>$images){
-                                            $filepath = $absoluteBaseUrl."/uploads/".$images->image;
-                                            $imgClass = '';
-                                            if($imgkey == 0){
-                                                $imgClass = 'default-img';
-                                            }elseif($imgkey == 1){
-                                                $imgClass = 'hover-img';
-                                            }
-                                            ?>
-                                            <img class="<?=$imgClass?>" src="<?=$filepath?>" alt="">
-                                            <?php } ?>
-                                        </a>
-                                    </div>
-                                    <div class="product-action-1">
-                                        <a aria-label="Add To Wishlist" class="action-btn whishlist-add" href="javascript:void(0)"><i class='far fa-heart'></i></a>
-                                        <a aria-label="Quick view" class="action-btn btn-quick-view" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="far fa-eye" aria-hidden="true"></i></a>
-                                    </div>
-                                    <div class="product-badges product-badges-position product-badges-mrg">
-                                        <span class="new">New</span>
-                                    </div>
-                                </div>
-                                <div class="product-content-wrap">
-                                    <div class="product-category">
-                                        <a href="shop-grid-right.html">Snack</a>
-                                    </div>
-                                    <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails?id=<?= $products->id ?>"><?= $products->name ?></a></h2>
-                                    <div class="product-rate-cover">
-                                        <div class="star-content">
-                                                    <i class="ion-md-star"></i>
-                                                    <i class="ion-md-star"></i>
-                                                    <i class="ion-md-star"></i>
-                                                    <i class="ion-md-star"></i>
-                                                    <i class="ion-md-star"></i>
-                                                    </div>
-                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                    </div>
-                                    
-                                    <div class="product-card-bottom">
-                                        <div class="product-price">
-                                            <span><i class="fa fa-rupee"></i> <?= $products->price ?></span>
-                                            <span class="old-price"><i class="fa fa-rupee"></i> 150.00</span>
-                                        </div>
-                                        <div class="add-cart">
-                                            <a class="add" href="shop-cart.html">
-                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
+                <div class="">
+                    <?php 
+                        Pjax::begin(['id' => 'my-products']);
+                        echo ListView::widget([
+                            'dataProvider' => $dataProvider,
+                            'summary'=>'', 
+                            'itemView' => '_listProduct',
+                            'options' => ['class' => 'row product-grid'],   
+                            'itemOptions' => ['class' => 'col-lg-1-5 col-md-3 col-12 col-sm-6'],
+                            'pager' => [
+                                
+                                // Customzing options for pager container tag
+                                'options' => [
+                                    'class' => 'pagination justify-content-end',
+                                    'id' => 'product-custom-pagination',
+                                ],
+                        
+                            ],
+                        ]); 
+                        Pjax::end();
+                    ?>
                 </div>
-                <div class="pagination-area mt-20 mb-20" style="display:none">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-end">
-                            <li class="page-item">
-                                <a class="page-link" href="#"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link dot" href="#">...</a></li>
-                            <li class="page-item"><a class="page-link" href="#">6</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#"><i class="fa fa-arrow-right"></i></a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -224,4 +176,11 @@ $absoluteBaseUrl = Url::base(true);
             </div>
         </div>
       </div>
-    </div>
+</div>
+
+<script>
+    var base = "<?=Yii::$app->request->getAbsoluteUrl();?>";
+    $(".custom-pagination select").on('change', function(e){
+        $.pjax.reload({container:'#my-products', url: base+'?page='+$(this).val()});
+    });
+</script>

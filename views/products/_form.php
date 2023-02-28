@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use wbraganca\dynamicform\DynamicFormWidget;
+use dosamigos\ckeditor\CKEditor;
+
 
 /** @var yii\web\View $this */
 /** @var app\models\Products $model */
@@ -24,7 +26,10 @@ use wbraganca\dynamicform\DynamicFormWidget;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'description')->widget(CKEditor::className(), [
+        'options' => ['rows' => 6],
+        'preset' => 'basic'
+    ]) ?>
 
     <?php //= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
 

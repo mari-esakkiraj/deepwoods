@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
-            'description:ntext',
+            'description:html',
             //'image',
             'price',
             'status',
@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_by',
             'updated_by',*/
         ],
+        'template' => "<tr><th style='width: 15%;'>{label}</th><td>{value}.</td></tr>"
     ]) ?>
 
 </div>

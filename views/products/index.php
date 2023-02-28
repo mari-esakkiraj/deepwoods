@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'name',
                 'headerOptions' => ['style' => 'width:20%'],
             ],
-            'description:ntext',
+            'description:html',
             [
                 'attribute' => 'price',
                 'headerOptions' => ['style' => 'width:10%'],

@@ -100,8 +100,8 @@ class SiteController extends Controller
     {
         $this->layout = 'mainpage';
         $productsList = Products::find()->all();
-        $query = Products::find()->joinWith(['imageslist']);
-        $provider = new ActiveDataProvider([
+        $query = Products::find();
+        $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
                 'pageSize' => 10,
@@ -114,9 +114,9 @@ class SiteController extends Controller
         ]);
         
         // returns an array of Post objects
-        $productsList = $provider->getModels();
+        //$productsList = $provider->getModels();
 
-        return $this->render('productlist',["productsList" => $productsList]);
+        return $this->render('productlist',["dataProvider" => $dataProvider]);
     }
 
     public function actionProductdetails($id)
