@@ -127,6 +127,13 @@
   $(".sort-by-cover").on('click', function() {
     $(this).find(".sort-by-dropdown").toggleClass("show");
   });
+  $(".add-to-cart").on('click', function() {
+    toastr.options = {
+      positionClass: 'toast-bottom-right',
+      progressBar: true,
+    }
+    toastr.success('Added to the cart.');
+  });
 
   
   // Hero Slider Js

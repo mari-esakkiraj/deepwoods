@@ -175,10 +175,3 @@ use yii\widgets\Pjax;
         </div>
       </div>
 </div>
-
-<script>
-    var base = "<?=Yii::$app->request->getAbsoluteUrl();?>";
-    $(".custom-pagination select").on('change', function(e){
-        $.pjax.reload({container:'#my-products', url: base+'?page='+$(this).val()});
-    });
-</script>

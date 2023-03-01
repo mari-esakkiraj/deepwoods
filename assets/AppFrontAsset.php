@@ -40,7 +40,6 @@ class AppFrontAsset extends AssetBundle
     ];
     public $js = [
         'theme/js/modernizr.js',
-        'theme/js/jquery-main.js',
         'theme/js/jquery-migrate.js',
         'theme/js/bootstrap.min.js',
         'theme/js/jquery.appear.js',
