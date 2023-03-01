@@ -4,6 +4,9 @@ namespace app\controllers;
 use Yii;
 
 use app\models\Orders;
+use app\models\Users;
+use app\models\OrderItems;
+use app\models\OrderAddresses;
 use app\models\OrdersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -56,8 +59,12 @@ class OrdersController extends Controller
      */
     public function actionView($id)
     {
+        $items = OrderItems::find()->where(['order_id' => $id])->all();
+        $addresses = OrderAddresses::find()->where(['order_id' => $id])->one();
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'items' => $items,
+            'addresses' => $addresses
         ]);
     }
 
