@@ -50,13 +50,14 @@
     position: relative;
     overflow: hidden;
     border-radius: 15px;
+    height: 100%;
   }
   
   .product-cart-wrap .product-img-action-wrap {
     position: relative;
     background-color: #fff;
     overflow: hidden;
-    max-height: 320px;
+    height: 250px;
     padding: 25px 25px 0 25px;
   }
   

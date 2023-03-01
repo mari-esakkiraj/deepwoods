@@ -70,7 +70,7 @@ class CustomerController extends Controller
     public function actionCreate()
     {
         $model = new Users();
-        $model->password = '12345678';
+        //$model->password = '12345678';
         $model->status = '10';
         $model->admin = '0';
         if ($this->request->isPost) {
