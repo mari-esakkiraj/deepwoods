@@ -97,4 +97,8 @@ class Products extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::class, ['id' => 'updated_by']);
     }
+
+    public function getImageslist(){
+        return $this->hasMany(ProductImages::class, ['product_id' => 'id']);
+    }
 }
