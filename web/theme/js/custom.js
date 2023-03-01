@@ -127,6 +127,13 @@
   $(".sort-by-cover").on('click', function() {
     $(this).find(".sort-by-dropdown").toggleClass("show");
   });
+  $(".add-to-cart").on('click', function() {
+    toastr.options = {
+      positionClass: 'toast-bottom-right',
+      progressBar: true,
+    }
+    toastr.success('Added to the cart.');
+  });
 
   
   // Hero Slider Js
@@ -136,7 +143,10 @@
       loop: true,
       speed: 500,
       spaceBetween: 0,
-      autoplay: false,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
       effect: 'fade',
       fadeEffect: {
         crossFade: true,
@@ -155,10 +165,15 @@
         spaceBetween: 10,
         slidesPerView: 4,
         freeMode: true,
+        loop: false,
       });
       var ProductThumb = new Swiper('.single-product-thumb-slider', {
         freeMode: true,
         effect: 'fade',
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
         fadeEffect: {
           crossFade: true,
         },

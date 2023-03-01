@@ -185,37 +185,6 @@ $absoluteBaseUrl = Url::base(true);
 
 <!--=======================Javascript============================-->
 
-<!--=== Modernizr Min Js ===-->
-<script src="<?=$absoluteBaseUrl?>/theme/js/modernizr.js"></script>
-<!--=== jQuery Min Js ===-->
-<script src="<?=$absoluteBaseUrl?>/theme/js/jquery-main.js"></script>
-<!--=== jQuery Migration Min Js ===-->
-<script src="<?=$absoluteBaseUrl?>/theme/js/jquery-migrate.js"></script>
-<!--=== Bootstrap Min Js ===-->
-<script src="<?=$absoluteBaseUrl?>/theme/js/bootstrap.min.js"></script>
-<!--=== jQuery Appear Js ===-->
-<script src="<?=$absoluteBaseUrl?>/theme/js/jquery.appear.js"></script>
-<!--=== jQuery Swiper Min Js ===-->
-<script src="<?=$absoluteBaseUrl?>/theme/js/swiper.min.js"></script>
-<!--=== jQuery Fancy Box Min Js ===-->
-<script src="<?=$absoluteBaseUrl?>/theme/js/fancybox.min.js"></script>
-<!--=== jQuery Slick Nav Js ===-->
-<script src="<?=$absoluteBaseUrl?>/theme/js/slicknav.js"></script>
-<!--=== jQuery Waypoints Js ===-->
-<script src="<?=$absoluteBaseUrl?>/theme/js/waypoints.js"></script>
-<!--=== jQuery Owl Carousel Min Js ===-->
-<script src="<?=$absoluteBaseUrl?>/theme/js/owlcarousel.min.js"></script>
-<!--=== jQuery Match Height Min Js ===-->
-<script src="<?=$absoluteBaseUrl?>/theme/js/jquery-match-height.min.js"></script>
-<!--=== jQuery Zoom Min Js ===-->
-<script src="<?=$absoluteBaseUrl?>/theme/js/jquery-zoom.min.js"></script>
-<!--=== Countdown Js ===-->
-<script src="<?=$absoluteBaseUrl?>/theme/js/countdown.js"></script>
-
-<!--=== Custom Js ===-->
-<script src="<?=$absoluteBaseUrl?>/theme/js/custom.js"></script>
-<script src='<?=$absoluteBaseUrl?>/theme/js/fontawesome.js' crossorigin='anonymous'></script>
-<script src="<?=$absoluteBaseUrl?>/theme/toastr/toaster.js"></script>
 <?php $this->endBody() ?>
 </body>
 </html>
