@@ -31,40 +31,34 @@ $absoluteBaseUrl = Url::base(true);
                             </tr>
                         </thead>
                         <tbody>
-                            <?php for ($x = 0; $x <= 3; $x++) { ?>
-                            <tr class="pt-30">
-                                <td class="custome-checkbox pl-20">
-                                    <input class="form-check-input checkBoxClass" type="checkbox" name="checkbox" id="exampleCheckbox1" value="">
-                                    <label class="form-check-label" for="exampleCheckbox1"></label>
-                                </td>
-                                <td class="image product-thumbnail pt-40"><img src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="#"></td>
-                                <td class="product-des product-name">
-                                    <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="shop-product-right.html">Field Roast Chao Cheese Creamy Original</a></h6>
-                                    <div class="product-rate-cover">
-                                        <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width:90%">
+                            <?php foreach($dataProvider as $key=>$products) { ?>
+                                <tr class="pt-30">
+                                    <td class="custome-checkbox pl-20">
+                                        <input class="form-check-input checkBoxClass" type="checkbox" name="checkbox" id="exampleCheckbox1" value="">
+                                        <label class="form-check-label" for="exampleCheckbox1"></label>
+                                    </td>
+                                    <td class="image product-thumbnail pt-40"><img src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="#"></td>
+                                    <td class="product-des product-name">
+                                        <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="<?=$absoluteBaseUrl?>/site/productdetails?id=<?= $products->product->id ?>"><?= $products->product->name ?></a></h6>
+                                        <div class="product-rate-cover">
+                                            <div class="product-rate d-inline-block">
+                                                <div class="product-rating" style="width:90%">
+                                                </div>
                                             </div>
+                                            <span class="font-small ml-5 text-muted"> (4.0)</span>
                                         </div>
-                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                    </div>
-                                </td>
-                                <td class="price" data-title="Price">
-                                    <h4 class="text-body">$2.51 </h4>
-                                </td>
-                                <td class="text-center detail-info" data-title="Stock">
-                                    <div class="detail-extralink mr-15">
-                                        <div class="detail-qty border radius">
-                                            <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                            <span class="qty-val">1</span>
-                                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="price" data-title="Price">
-                                    <h4 class="text-brand">$2.51 </h4>
-                                </td>
-                                <td class="action text-center" data-title="Remove"><a href="javascript:void(0);" class="text-body"><i class="fa fa-trash remove-table" aria-hidden="true"></i></a></td>
-                            </tr>
+                                    </td>
+                                    <td class="price" data-title="Price">
+                                        <h4 class="text-body"><i class="fa fa-rupee"></i> <?= $products->product->price ?></h4>
+                                    </td>
+                                    <td class="text-center detail-info" data-title="Stock">
+                                        <input type="number" value="<?= $products->quantity ?>" style="width:50px;" min="1" id="cartquantity" data-productId="<?= $products->product_id ?>" data-price="<?= $products->product->price ?>">
+                                    </td>
+                                    <td class="price" data-title="Price">
+                                        <h4 class="text-brand"><i class="fa fa-rupee"></i> <span id="myprice-<?= $products->product_id?>"><?= $products->quantity * $products->product->price ?></span></h4>
+                                    </td>
+                                    <td class="action text-center" data-title="Remove"><a href="javascript:void(0);" class="text-body"><i class="fa fa-trash remove-table" aria-hidden="true"></i></a></td>
+                                </tr>
                             <?php } ?>
                         </tbody>
                     </table>

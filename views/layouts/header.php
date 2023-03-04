@@ -27,14 +27,15 @@ $absoluteBaseUrl = Url::base(true);
                 <div class="col-md-10">
                   <div class="align-right position-relative">
                     <div class="header-navigation-area">
-                      <ul class="main-menu nav">
+                      <ul class="main-menu nav" style="align-items: center;">
                         <li><a href="<?=$absoluteBaseUrl?>">Home</a></li>
                         <li><a href="<?=$absoluteBaseUrl?>/site/aboutus">About Us</a></li>
                         <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Product</a></li>
-                        <li><a href="<?=$absoluteBaseUrl?>/site/cart">Cart</a></li>
+                        
                         <?php 
                         if(!Yii::$app->user->isGuest) {
                         ?>
+                        <li><a href="<?=$absoluteBaseUrl?>/orders/cartlist"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart</a></li>
                         <li class="has-submenu">
                           <a href="javascript:void(0)">
                             <?php echo Yii::$app->user->identity->username ?>

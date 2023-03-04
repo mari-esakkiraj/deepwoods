@@ -104,7 +104,7 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 1,
+                'pageSize' => 20,
             ],
             'sort' => [
                 'defaultOrder' => [
