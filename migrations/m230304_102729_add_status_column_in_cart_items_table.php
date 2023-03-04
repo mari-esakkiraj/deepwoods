@@ -18,7 +18,7 @@ class m230304_102729_add_status_column_in_cart_items_table extends Migration
             'created_date',
             $this->timestamp()->defaultValue(null)->append('ON UPDATE CURRENT_TIMESTAMP')
         );
-        $sql = "ALTER TABLE `cart_items` ADD `status1` ENUM('created','updated','completed','order_placed') NULL DEFAULT NULL AFTER `created_date`";
+        $sql = "ALTER TABLE `cart_items` ADD `status` ENUM('created','updated','completed','order_placed') NULL DEFAULT NULL AFTER `created_date`";
         Yii::$app->db->createCommand($sql)->execute();
     }
 
