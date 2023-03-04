@@ -54,8 +54,9 @@ class SiteController extends Controller
 
     public function beforeAction($action) 
     {
-        $withoutCSRF = ['cus-login','register'];
-        if(in_array($action->id,$withoutCSRF)) {
+        $withoutCSRF = ['cus-login','register','forgotpassword'];
+        
+        if(in_array($action->id, $withoutCSRF)) {
             $this->enableCsrfValidation = false; 
         }
         return parent::beforeAction($action); 
@@ -137,7 +138,7 @@ class SiteController extends Controller
         $this->layout = 'mainpage';
         return $this->render('about');
     }
-
+    
     /**
      * Login action.
      *
@@ -261,7 +262,6 @@ class SiteController extends Controller
 
     public function actionRegister()
     {
-
         $username = $_POST['userName'] ?? null;
         $firstname = $_POST['firstname'] ?? null;
         $lastname = $_POST['lastname'] ?? null;
@@ -283,9 +283,86 @@ class SiteController extends Controller
         if($user->validate()){
             $user->save();
             $data = ['data'=> true];
+            $this->sendRegisterMail($user, $password);
         } else {
             $data = ['data' => $user->getErrors()];
         }
         return json_encode($data);
+    }
+
+    public function sendRegisterMail($data, $password)
+    {
+        $to = $data['email'];
+        $subject = "Your Login information to Deepwoods";
+        $message = "<html>
+                        <head>
+                            <title>Credentials detail</title>
+                        </head>
+                        <body>
+                            Hi <b>" . $data['firstname'] . ",</b><br><br>
+                            A login has been created for you to access Deepwoods. Below are your credentials to access the Deepwoods system.
+                            <br> username : " . $data['username'] . "<br>password : " . $password .
+                            " <br> <br>
+                            To login to the system click <a href='" . Yii::$app->urlManager->createAbsoluteUrl('') . "'>here</a> <br><br>
+                            If you have any questions, please contact your Deepwoods admin.
+                            <br> <br>
+                            This is a system generated email. Please do not reply to this email.
+                        </body>
+                    </html>";
+        $email = \Yii::$app->mailer->compose();
+        $email->setFrom(['no.reply@deepwoods.com' => 'Login Details - Deepwoods']);
+        $email->setTo($to);
+        $email->setCharset('UTF-8');
+        $email->setSubject($subject);
+        $email->setHtmlBody($message);
+        $email->send();
+        return null;
+    }
+
+    public function resetmail($data,$password)
+    {
+        $to = $data['email'];
+        $subject = "Your Reset Password to Deepwoods";
+        $message = "<html>
+                        <head>
+                            <title>Credentials detail</title>
+                        </head>
+                        <body>
+                            Hi <b>" . $data['name'] . ",</b><br><br>
+                            Your password has been reset to access Deepwoods. Below are your credentials to access the Deepwoods system.
+                            <br> username : " . $data['email'] . "<br>password : " . $password .
+                            " <br> <br>
+                            To login to the system click <a href='" . Yii::$app->urlManager->createAbsoluteUrl('') . "'>here</a> <br><br>
+                            If you have any questions, please contact your Deepwoods admin.
+                            <br> <br>
+                            This is a system generated email. Please do not reply to this email.
+                        </body>
+                    </html>";
+        $email = \Yii::$app->mailer->compose();
+        $email->setFrom(['no.reply@asaltatechnologies.com' => 'Employee - EPTW']);
+        $email->setTo($to);
+        $email->setCharset('UTF-8');
+        $email->setSubject($subject);
+        $email->setHtmlBody($message);
+        $email->send();
+        return null;
+    }
+
+    public function actionForgotpassword()
+    {
+        $email = $_POST['email'] ?? null;
+        $user = Users::find()->where(['email' => $email])->one();
+        if(empty($user)) {
+            $data = ['data'=> 'Email ID is invaild'];
+        } else {
+            $password = Yii::$app->getSecurity()->generateRandomString(8);
+            $user->password = $password;
+            $user->save();
+            $data = ['email' => $user->email,'name' => $user->firstname];
+            $this->resetmail($data, $password);
+            $data = ['data'=> true];
+        }
+       return json_encode($data);
+
     }
 }
