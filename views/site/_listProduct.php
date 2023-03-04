@@ -48,7 +48,7 @@ $absoluteBaseUrl = Url::base(true);
                 <span><i class="fa fa-rupee"></i> <?= $model->price ?></span>
                 <span class="old-price"><i class="fa fa-rupee"></i> 150.00</span>
             </div>
-            <div class="add-cart add-to-cart">
+            <div class="add-cart add-to-cart" data-product_id=<?=$model->id?>>
                 <a class="add" href="javascript:void(0)">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add </a>
             </div>
