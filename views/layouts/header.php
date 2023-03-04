@@ -123,9 +123,9 @@ $absoluteBaseUrl = Url::base(true);
             <button type="button" class="btn btn-primary" id="loginSubmitButton" >Login</button>
           </div>
             <div class="modal-footer justify-content-center">
-              <p>Not a member? <a href="javascript:void(0)" class="blue-text siginup">Sign Up</a></p> <br>
-              <p>Forgot <a href="javascript:void(0)" class="blue-text forgotPassword">Password?</a></p>
-              <p style="display:none">Forgot <a href="javascript:void(0)" class="blue-text forgotUsername">Username?</a></p>
+              <div>Not a member? <a href="javascript:void(0)" class="blue-text siginup">Sign Up</a></div>
+              <div>Forgot <a href="javascript:void(0)" class="blue-text forgotPassword">Password?</a></div>
+              <div style="display:none">Forgot <a href="javascript:void(0)" class="blue-text forgotPassword">Username?</a></div>
             </div>
           </div>
       </div>
@@ -275,13 +275,13 @@ $this->registerJs("
     var password = $('#login-form #password').val();
     var clr = 0;
     if(password == ''){
-      $('#loginpassword_error').html('<span style=\"color:red\">Password is Requried</span>');
+      $('#loginpassword_error').html('<span style=\"color:red\">Password is requried</span>');
       clr =1;
     } else {
       $('#loginpassword_error').html('');
     }
     if(userName == ''){
-      $('#loginusername_error').html('<span style=\"color:red\">User Name is Requried</span>');
+      $('#loginusername_error').html('<span style=\"color:red\">User Name is requried</span>');
       clr =1;
     } else {
       $('#loginusername_error').html('');
@@ -335,49 +335,49 @@ $this->registerJs("
     var gstNumber = $('.gst_number').val();
     var clr = 0;
     if(firstname == ''){
-      $("#firstname_error").html("<span style='color:red'>First Name is Requried</span>");
+      $("#firstname_error").html("<span style='color:red'>First Name is requried</span>");
       clr =1;
     } else {
       $("#firstname_error").html("");
     }
     if(lastname == ''){
-      $("#lastname_error").html("<span style='color:red'>Last Name is Requried</span>");
+      $("#lastname_error").html("<span style='color:red'>Last Name is requried</span>");
       clr =1;
     } else {
       $("#lastname_error").html("");
     }
     if(userName == ''){
-      $("#username_error").html("<span style='color:red'>User Name is Requried</span>");
+      $("#username_error").html("<span style='color:red'>User Name is requried</span>");
       clr =1;
     } else {
       $("#username_error").html("");
     }
     if(email == ''){
-      $("#email_error").html("<span style='color:red'>Email is Requried</span>");
+      $("#email_error").html("<span style='color:red'>Email is requried</span>");
       clr =1;
     } else {
       $("#email_error").html("");
     }
     if(phoneNumber == ''){
-      $("#phone_number_error").html("<span style='color:red'>Phone Number is Requried</span>");
+      $("#phone_number_error").html("<span style='color:red'>Phone Number is requried</span>");
       clr =1;
     } else {
       $("#phone_number_error").html("");
     }
     if(password == ''){
-      $("#password_error").html("<span style='color:red'>Password is Requried</span>");
+      $("#password_error").html("<span style='color:red'>Password is requried</span>");
       clr =1;
     } else {
       $("#password_error").html("");
     }
     if(confirmPassword == ''){
-      $("#confirm_password_error").html("<span style='color:red'>Confirm Password is Requried</span>");
+      $("#confirm_password_error").html("<span style='color:red'>Confirm Password is requried</span>");
       clr =1;
     } else {
       $("#confirm_password_error").html("");
     }
     // if(gstNumber == ''){
-    //   $("#gst_number_error").html("<span style='color:red'>GST Number is Requried</span>");
+    //   $("#gst_number_error").html("<span style='color:red'>GST Number is requried</span>");
     //   clr =1;
     // } else {
     //   $("#gst_number_error").html("");

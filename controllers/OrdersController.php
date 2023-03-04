@@ -1,8 +1,12 @@
 <?php
 
 namespace app\controllers;
+use Yii;
 
 use app\models\Orders;
+use app\models\Users;
+use app\models\OrderItems;
+use app\models\OrderAddresses;
 use app\models\OrdersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -55,8 +59,12 @@ class OrdersController extends Controller
      */
     public function actionView($id)
     {
+        $items = OrderItems::find()->where(['order_id' => $id])->all();
+        $addresses = OrderAddresses::find()->where(['order_id' => $id])->one();
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'items' => $items,
+            'addresses' => $addresses
         ]);
     }
 
@@ -70,6 +78,8 @@ class OrdersController extends Controller
         $model = new Orders();
 
         if ($this->request->isPost) {
+            $model->created_at = time();
+            $model->created_by = \Yii::$app->session->getId();
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -93,8 +103,12 @@ class OrdersController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost) {
+            $model->created_at = time();
+            $model->created_by = Yii::$app->session->getId();
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [

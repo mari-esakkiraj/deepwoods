@@ -74,6 +74,13 @@ class Users extends ActiveRecord implements IdentityInterface
         ];
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'password_repeat' => 'Confirm Password',
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
