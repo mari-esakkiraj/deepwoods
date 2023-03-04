@@ -182,4 +182,10 @@ class OrdersController extends Controller
         } 
         return json_encode(['data' => $returnData]);
     }
+    public function actionCartlist()
+    {
+        $this->layout = 'mainpage';
+        $productList = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id])->all();
+        return $this->render('cartlist',["dataProvider" => $productList]);
+    }
 }

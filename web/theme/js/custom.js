@@ -9,6 +9,8 @@
 
   // Header Sticky Js
   var varWindow = $(window);
+  var AppConfig = new AppConfigs();
+  var Baseurl = AppConfig.getBaseUrl();
   varWindow.on('scroll', function(event) {
     var scroll = varWindow.scrollTop();
     if (scroll < 350) {
@@ -132,7 +134,7 @@
     var productID = $(this).data('product_id');
     $.ajax({
       type:'post',
-      url:'/orders/savecheckout',
+      url:Baseurl+'/orders/savecheckout',
       dataType: 'json',
       data:{
           productId:productID,
@@ -147,6 +149,13 @@
       }
     })
     
+  });
+
+  $('#cartquantity').on('input', function() {
+    var cartquantity = $('#cartquantity').val();
+    var productId = $(this).attr("data-productid");
+    var price = $(this).attr("data-price");
+    $("#myprice-"+productId).html(cartquantity * price);
   });
 
   

@@ -59,6 +59,13 @@ $absoluteBaseUrl = Url::base(true);
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+<script>
+    var AppConfigs = function () {
+      this.getBaseUrl = function () {
+        return "<?= $absoluteBaseUrl ?>";
+      }
+    };
+</script>
 <?php $this->beginBody() ?>
 <body>
 
