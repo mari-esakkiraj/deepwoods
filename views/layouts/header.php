@@ -98,7 +98,7 @@ $absoluteBaseUrl = Url::base(true);
   }
   ?>
 
-  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -197,18 +197,19 @@ $absoluteBaseUrl = Url::base(true);
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-             <form id="forgotPassword-form">
-             <div class="card-body px-5">
-              <p class="card-text py-2">
-                  Enter your email address and we'll send you an email with instructions to reset your password.
-              </p>
-              <div class="form-outline">
-                <label class="form-label" for="typeEmail">Email</label>
-                <input type="email" id="typeEmail" class="form-control my-3 typeEmail" />
-                <span id='forgot_email_error'></span>
-              </div>
-              <div class="text-center">
-                <button type="button" id="resetPasswordSubmit" class="btn btn-primary resetPasswordSubmit">Reset password</button>
+            <form id="forgotPassword-form">
+              <div class="card-body">
+                <p class="card-text">
+                    Enter your email address and we'll send you an email with instructions to reset your password.
+                </p>
+                <div class="form-outline">
+                  <label class="form-label" for="typeEmail">Email</label>
+                  <input type="email" id="typeEmail" class="form-control my-3 typeEmail" />
+                  <span id='forgot_email_error'></span>
+                </div>
+                <div class="text-center">
+                  <button type="button" id="resetPasswordSubmit" class="btn btn-primary resetPasswordSubmit">Reset password</button>
+                </div>
               </div>
             </form>
           </div>

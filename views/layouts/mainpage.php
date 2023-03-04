@@ -152,7 +152,7 @@ $absoluteBaseUrl = Url::base(true);
   <!--== End Footer Area Wrapper ==-->
 
   <!--== Scroll Top Button ==-->
-  <div id="scroll-to-top" class="scroll-to-top"><span class="ion-md-arrow-up"></span></div>
+  <!-- <div id="scroll-to-top" class="scroll-to-top"><span class="ion-md-arrow-up"></span></div> -->
 
   <!--== Start Side Menu ==-->
   <aside class="off-canvas-wrapper">
