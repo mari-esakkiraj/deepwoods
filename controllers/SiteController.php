@@ -134,8 +134,8 @@ class SiteController extends Controller
 
     public function actionAboutus()
     {
-        $this->layout = 'about';
-        return $this->render('productlist');
+        $this->layout = 'mainpage';
+        return $this->render('about');
     }
 
     /**
