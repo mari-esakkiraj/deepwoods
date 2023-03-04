@@ -127,12 +127,26 @@
   $(".sort-by-cover").on('click', function() {
     $(this).find(".sort-by-dropdown").toggleClass("show");
   });
+  
   $(".add-to-cart").on('click', function() {
-    toastr.options = {
-      positionClass: 'toast-bottom-right',
-      progressBar: true,
-    }
-    toastr.success('Added to the cart.');
+    var productID = $(this).data('product_id');
+    $.ajax({
+      type:'post',
+      url:'/orders/savecheckout',
+      dataType: 'json',
+      data:{
+          productId:productID,
+      },
+      success:function(response) {
+        var resultData = response.data;
+        if(resultData){
+          toastr.success('Added to the cart.');
+        } else {
+          $('#loginModal').modal('show');
+        }
+      }
+    })
+    
   });
 
   

@@ -54,12 +54,10 @@ class SiteController extends Controller
 
     public function beforeAction($action) 
     {
-        $withoutCSRF = ['cus-login','register','forgotpassword','productlist'];
-        
+        $withoutCSRF = ['cus-login','register','forgotpassword'];
         if(in_array($action->id, $withoutCSRF)) {
             $this->enableCsrfValidation = false; 
         }
-        $this->enableCsrfValidation = false; 
         return parent::beforeAction($action); 
     }
 
@@ -106,7 +104,7 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 20,
+                'pageSize' => 1,
             ],
             'sort' => [
                 'defaultOrder' => [
