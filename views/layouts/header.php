@@ -125,7 +125,7 @@ $absoluteBaseUrl = Url::base(true);
             <div class="modal-footer justify-content-center">
               <p>Not a member? <a href="javascript:void(0)" class="blue-text siginup">Sign Up</a></p> <br>
               <p>Forgot <a href="javascript:void(0)" class="blue-text forgotPassword">Password?</a></p>
-              <p>Forgot <a href="javascript:void(0)" class="blue-text forgotPassword">Username?</a></p>
+              <p style="display:none">Forgot <a href="javascript:void(0)" class="blue-text forgotUsername">Username?</a></p>
             </div>
           </div>
       </div>
@@ -189,8 +189,34 @@ $absoluteBaseUrl = Url::base(true);
         </div>
       </div>
     </div>
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="forgotPasswordModal">Password Reset</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+             <form id="forgotPassword-form">
+             <div class="card-body px-5">
+              <p class="card-text py-2">
+                  Enter your email address and we'll send you an email with instructions to reset your password.
+              </p>
+              <div class="form-outline">
+                <label class="form-label" for="typeEmail">Email</label>
+                <input type="email" id="typeEmail" class="form-control my-3 typeEmail" />
+                <span id='forgot_email_error'></span>
+              </div>
+              <div class="text-center">
+                <button type="button" id="resetPasswordSubmit" class="btn btn-primary resetPasswordSubmit">Reset password</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <?php 
+<?php 
 $this->registerJs("
   $(document).on('keyup','.phone_number',function() {
     var phone = $(this).val();
@@ -205,6 +231,43 @@ $this->registerJs("
   $(document).on('click','.siginup',function() {
     $('#loginModal').modal('hide');
     $('#registerModal').modal('show');
+    $('#forgotPasswordModal').modal('hide');
+  });
+  $(document).on('click','.forgotPassword',function() {
+    $('#loginModal').modal('hide');
+    $('#registerModal').modal('hide');
+    $('#forgotPasswordModal').modal('show');
+  });
+
+  $(document).on('click','#resetPasswordSubmit',function() {  
+    var email = $('.typeEmail').val();
+    var clr = 0;
+    if(email == ''){
+      $('#forgot_email_error').html('<span style=\"color:red\">Email is Requried</span>');
+      clr =1;
+    } else {
+      $('#forgot_email_error').html('');
+    }
+    if(clr==0) 
+    {
+       $.ajax({
+          type:'post',
+          url:'".$absoluteBaseUrl."/site/forgotpassword',
+          dataType: 'json',
+          data:{
+              email:email,
+          },
+          success:function(response) {
+            var resultData = response.data;
+            if(resultData){
+              $('#forgotPasswordModal').modal('hide');
+              toastr.success('Forgot password changed Successfully');
+            } else {
+              $('#forgot_email_error').html('<span style=\"color:red\">'+resultData+'</span>');
+            }
+          }
+      }); 
+    }
   });
 
   $(document).on('click','#loginSubmitButton',function() {  
@@ -223,7 +286,6 @@ $this->registerJs("
     } else {
       $('#loginusername_error').html('');
     }
-    console.log(clr);
     if(clr==0) 
     {
        $.ajax({
