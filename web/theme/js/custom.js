@@ -132,6 +132,21 @@
   
   $(".add-to-cart").on('click', function() {
     var productID = $(this).data('product_id');
+    insertCart(productID);
+    
+  });
+
+  $('#cartquantity').on('input', function() {
+    var cartquantity = $('#cartquantity').val();
+    if(cartquantity < 11){
+      var productId = $(this).attr("data-productid");
+      var price = $(this).attr("data-price");
+      $("#myprice-"+productId).html(cartquantity * price);
+      insertCart(productId);
+    }
+  });
+
+  function insertCart(productID){
     $.ajax({
       type:'post',
       url:Baseurl+'/orders/savecheckout',
@@ -143,20 +158,25 @@
         var resultData = response.data;
         if(resultData){
           toastr.success('Added to the cart.');
+          getCartCount();
         } else {
           $('#loginModal').modal('show');
         }
       }
     })
-    
-  });
-
-  $('#cartquantity').on('input', function() {
-    var cartquantity = $('#cartquantity').val();
-    var productId = $(this).attr("data-productid");
-    var price = $(this).attr("data-price");
-    $("#myprice-"+productId).html(cartquantity * price);
-  });
+  }
+  getCartCount();
+  function getCartCount(){
+    $.ajax({
+      type:'GET',
+      url:Baseurl+'/orders/usercartcount',
+      dataType: 'json',
+      data:{},
+      success:function(response) {
+        $("#dwCartCount").text(response.data);        
+      }
+    })
+  }
 
   
   // Hero Slider Js

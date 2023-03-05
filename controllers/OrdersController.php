@@ -188,4 +188,14 @@ class OrdersController extends Controller
         $productList = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id])->all();
         return $this->render('cartlist',["dataProvider" => $productList]);
     }
+
+    public function actionUsercartcount()
+    {
+        $cartcount = 0;
+        if(!Yii::$app->user->isGuest) {
+            $productList = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id])->all();
+            $cartcount = count($productList);
+        } 
+        return json_encode(['data' => $cartcount]);
+    }
 }
