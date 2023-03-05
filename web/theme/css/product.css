@@ -1067,3 +1067,14 @@ table td, table th {
   box-sizing: border-box;
   padding: 10px 0;
 } */
+
+#dwCartCount {
+  font-size: 12px;
+  background-color: #c67605;
+  color: #fff;
+  padding: 2px 6px;
+  vertical-align: top;
+  margin-left: -3px;
+  position: absolute;
+  margin-top: -7px;
+}

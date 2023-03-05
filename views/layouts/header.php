@@ -35,7 +35,7 @@ $absoluteBaseUrl = Url::base(true);
                         <?php 
                         if(!Yii::$app->user->isGuest) {
                         ?>
-                        <li><a href="<?=$absoluteBaseUrl?>/orders/cartlist"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart</a></li>
+                        <li><a href="<?=$absoluteBaseUrl?>/orders/cartlist"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart<span class='badge badge-warning' id='dwCartCount'>0</span></a></li>
                         <li class="has-submenu">
                           <a href="javascript:void(0)">
                             <?php echo Yii::$app->user->identity->username ?>
@@ -273,6 +273,16 @@ $this->registerJs("
   });
 
   $(document).on('click','#loginSubmitButton',function() {  
+    submitLoginForm();
+  });
+  document.onkeydown=function(evt){
+    var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
+    if(keyCode == 13){
+      submitLoginForm();
+    }
+  }
+
+  function submitLoginForm(){
     var userName = $('#login-form #username').val();
     var password = $('#login-form #password').val();
     var clr = 0;
@@ -288,34 +298,33 @@ $this->registerJs("
     } else {
       $('#loginusername_error').html('');
     }
-    if(clr==0) 
-    {
-       $.ajax({
-          type:'post',
-          url:'".$absoluteBaseUrl."/site/cus-login',
-          dataType: 'json',
-          data:{
-              username:userName,
-              password:password,
-          },
-          success:function(response) {
-            //alert(response.success);
-            if(response.success==true)
-            {
-              window.location.reload();
-            }
-            else
-            {
-              //alert(response.message);
-              resultData = response.error;
-              $.each(resultData, function(key, value) {
-                $('#login'+key+'_error').html('<span style=\"color:red\">'+value+'</span>');
-              });
-            }
+    if(clr==0){
+      $.ajax({
+        type:'post',
+        url:'".$absoluteBaseUrl."/site/cus-login',
+        dataType: 'json',
+        data:{
+            username:userName,
+            password:password,
+        },
+        success:function(response) {
+          //alert(response.success);
+          if(response.success==true)
+          {
+            window.location.reload();
           }
+          else
+          {
+            //alert(response.message);
+            resultData = response.error;
+            $.each(resultData, function(key, value) {
+              $('#login'+key+'_error').html('<span style=\"color:red\">'+value+'</span>');
+            });
+          }
+        }
       }); 
     }
-  });
+  }
   
   $(document).on('click','.registerSubmit',function() {
     registerForm();
@@ -428,7 +437,7 @@ $this->registerJs("
             }            
         });
     }
-}
+  }
 
 
   
