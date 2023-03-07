@@ -142,8 +142,8 @@
     removeCart(cartItemId);
   });
 
-  $('#cartquantity').on('input', function() {
-    var cartquantity = $('#cartquantity').val();
+  $('.cartquantity').on('input', function() {
+    var cartquantity = $(this).val();
     if(cartquantity < 11){
       var productId = $(this).attr("data-productid");
       var cartItemId = $(this).attr("data-cartItemId");

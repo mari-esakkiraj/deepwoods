@@ -33,13 +33,21 @@ $absoluteBaseUrl = Url::base(true);
                         <tbody>
                             <?php
                             if(count($dataProvider) > 0){ 
-                                foreach($dataProvider as $key=>$products) { ?>
+                                foreach($dataProvider as $key=>$products) { 
+                                    $imgPath = $absoluteBaseUrl."/theme/img/shop/01.jpg";
+                                    if(isset($products->product->imageslist)){
+                                        $imgPath = $absoluteBaseUrl.'//theme/img/shop/01.jpg/'.$products->product->imageslist[0]->image;
+                                    }
+                                
+                                ?>
                                 <tr class="pt-30">
                                     <td class="custome-checkbox pl-20">
                                         <input class="form-check-input checkBoxClass" type="checkbox" name="checkbox" id="exampleCheckbox1" value="">
                                         <label class="form-check-label" for="exampleCheckbox1"></label>
                                     </td>
-                                    <td class="image product-thumbnail pt-40"><img src="<?=$absoluteBaseUrl?>/theme/img/shop/01.jpg" alt="#"></td>
+                                    <td class="image product-thumbnail pt-40">
+                                        <img src="<?=$imgPath?>" alt="#">
+                                    </td>
                                     <td class="product-des product-name">
                                         <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="<?=$absoluteBaseUrl?>/site/productdetails?id=<?= $products->product->id ?>"><?= $products->product->name ?></a></h6>
                                         <div class="product-rate-cover">
