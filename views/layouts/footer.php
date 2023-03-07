@@ -63,36 +63,3 @@ $absoluteBaseUrl = Url::base(true);
     </div>
     <!--== End Footer Bottom Area ==-->
   </footer>
-
-  <!--=======================Javascript============================-->
-
-<!--=== Modernizr Min Js ===-->
-<script src="theme/js/modernizr.js"></script>
-<!--=== jQuery Min Js ===-->
-<script src="theme/js/jquery-main.js"></script>
-<!--=== jQuery Migration Min Js ===-->
-<script src="theme/js/jquery-migrate.js"></script>
-<!--=== Bootstrap Min Js ===-->
-<script src="theme/js/bootstrap.min.js"></script>
-<!--=== jQuery Appear Js ===-->
-<script src="theme/js/jquery.appear.js"></script>
-<!--=== jQuery Swiper Min Js ===-->
-<script src="theme/js/swiper.min.js"></script>
-<!--=== jQuery Fancy Box Min Js ===-->
-<script src="theme/js/fancybox.min.js"></script>
-<!--=== jQuery Slick Nav Js ===-->
-<script src="theme/js/slicknav.js"></script>
-<!--=== jQuery Waypoints Js ===-->
-<script src="theme/js/waypoints.js"></script>
-<!--=== jQuery Owl Carousel Min Js ===-->
-<script src="theme/js/owlcarousel.min.js"></script>
-<!--=== jQuery Match Height Min Js ===-->
-<script src="theme/js/jquery-match-height.min.js"></script>
-<!--=== jQuery Zoom Min Js ===-->
-<script src="theme/js/jquery-zoom.min.js"></script>
-<!--=== Countdown Js ===-->
-<script src="theme/js/countdown.js"></script>
-
-<!--=== Custom Js ===-->
-<script src="theme/js/custom.js"></script>
-<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>

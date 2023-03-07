@@ -132,32 +132,48 @@
   
   $(".add-to-cart").on('click', function() {
     var productID = $(this).data('product_id');
-    insertCart(productID);
-    
+    insertCart(productID, 1, 1, 'default');
+  });
+
+  $(".remove-cart").on('click', function() {
+    var productID = $(this).attr('data-cartItemId');
+    var cartItemId = $(this).attr("data-cartItemId");
+    //insertCart(productID, cartItemId, 1, 'delete');
+    removeCart(cartItemId);
   });
 
   $('#cartquantity').on('input', function() {
     var cartquantity = $('#cartquantity').val();
     if(cartquantity < 11){
       var productId = $(this).attr("data-productid");
+      var cartItemId = $(this).attr("data-cartItemId");
       var price = $(this).attr("data-price");
       $("#myprice-"+productId).html(cartquantity * price);
-      insertCart(productId);
+      insertCart(productId, cartItemId, cartquantity, 'increment');
     }
   });
 
-  function insertCart(productID){
+  function insertCart(productID, id, quantity, action){
     $.ajax({
       type:'post',
       url:Baseurl+'/orders/savecheckout',
       dataType: 'json',
       data:{
           productId:productID,
+          quantity:quantity,
+          action:action,
+          id:id,
       },
       success:function(response) {
         var resultData = response.data;
         if(resultData){
-          toastr.success('Added to the cart.');
+          if(action == 'default'){
+            toastr.success('Added to the cart.');
+          }else if(action == 'delete'){
+            toastr.success('Cart item removed.');              
+          }else{
+            toastr.success('Your cart updated.');  
+          }
           getCartCount();
         } else {
           $('#loginModal').modal('show');
@@ -165,6 +181,24 @@
       }
     })
   }
+  function removeCart(productID){
+    $.ajax({
+      type:'post',
+      url:Baseurl+'/orders/removecart',
+      dataType: 'json',
+      data:{
+          productId:productID
+      },
+      success:function(response) {
+        var resultData = response.data;
+        if(resultData){
+          toastr.success('Cart item removed.'); 
+          getCartCount();
+        }
+      }
+    })
+  }
+
   getCartCount();
   function getCartCount(){
     $.ajax({

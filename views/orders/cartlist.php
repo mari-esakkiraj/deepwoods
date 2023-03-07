@@ -9,7 +9,7 @@ $absoluteBaseUrl = Url::base(true);
                 <h1 class="heading-2 mb-10">Your Cart</h1>
                 <div class="d-flex justify-content-between">
                     <h6 class="text-body">There are <span class="text-brand"><?= count($dataProvider) ?></span> products in your cart</h6>
-                    <h6 class="text-body"><a href="#" class="text-muted"><i class="fa fa-trash mr-5" aria-hidden="true"></i>Clear Cart</a></h6>
+                    <h6 class="text-body" style="display: none;"><a href="#" class="text-muted"><i class="fa fa-trash mr-5" aria-hidden="true"></i>Clear Cart</a></h6>
                 </div>
             </div>
         </div>
@@ -31,7 +31,9 @@ $absoluteBaseUrl = Url::base(true);
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach($dataProvider as $key=>$products) { ?>
+                            <?php
+                            if(count($dataProvider) > 0){ 
+                                foreach($dataProvider as $key=>$products) { ?>
                                 <tr class="pt-30">
                                     <td class="custome-checkbox pl-20">
                                         <input class="form-check-input checkBoxClass" type="checkbox" name="checkbox" id="exampleCheckbox1" value="">
@@ -52,12 +54,17 @@ $absoluteBaseUrl = Url::base(true);
                                         <h4 class="text-body"><i class="fa fa-rupee"></i> <?= $products->product->price ?></h4>
                                     </td>
                                     <td class="text-center detail-info" data-title="Stock">
-                                        <input type="number" value="<?= $products->quantity ?>" style="width:50px;" min="1" max="10" id="cartquantity" data-productId="<?= $products->product_id ?>" data-price="<?= $products->product->price ?>">
+                                        <input type="number" value="<?= $products->quantity ?>" style="width:70px;" min="1" max="10" id="cartquantity" data-productId="<?= $products->product_id ?>" data-price="<?= $products->product->price ?>" data-cartItemId="<?= $products->id ?>">
                                     </td>
                                     <td class="price" data-title="Price">
                                         <h4 class="text-brand"><i class="fa fa-rupee"></i> <span id="myprice-<?= $products->product_id?>"><?= $products->quantity * $products->product->price ?></span></h4>
                                     </td>
-                                    <td class="action text-center" data-title="Remove"><a href="javascript:void(0);" class="text-body"><i class="fa fa-trash remove-table" aria-hidden="true"></i></a></td>
+                                    <td class="action text-center remove-cart" data-title="Remove" data-cartItemId="<?= $products->id ?>"><a href="javascript:void(0);" class="text-body"><i class="fa fa-trash remove-table" aria-hidden="true" ></i></a></td>
+                                </tr>
+                            <?php } 
+                            } else{ ?>
+                                <tr>
+                                    <td rowspan="6" class="pl-10">Your cart is empty.</td>
                                 </tr>
                             <?php } ?>
                         </tbody>
@@ -65,8 +72,8 @@ $absoluteBaseUrl = Url::base(true);
                 </div>
                 <div class="divider-2 mb-30"></div>
                 <div class="cart-action d-flex justify-content-between">
-                    <a class="btn "><i class="fi-rs-arrow-left mr-10"></i>Continue Shopping</a>
-                    <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-refresh mr-10"></i>Update Cart</a>
+                    <a class="btn " href="<?=$absoluteBaseUrl?>/site/productlist"><i class="fi-rs-arrow-left mr-10"></i>Continue Shopping</a>
+                    <a class="btn  mr-10 mb-sm-15" href="<?=$absoluteBaseUrl?>/orders/cartlist"><i class="fi-rs-refresh mr-10"></i>Update Cart</a>
                 </div>
                 <div class="row mt-50">
                     <div class="col-lg-7">
