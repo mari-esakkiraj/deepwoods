@@ -36,7 +36,7 @@ $absoluteBaseUrl = Url::base(true);
                                 foreach($dataProvider as $key=>$products) { 
                                     $imgPath = $absoluteBaseUrl."/theme/img/shop/01.jpg";
                                     if(isset($products->product->imageslist)){
-                                        $imgPath = $absoluteBaseUrl.'//theme/img/shop/01.jpg/'.$products->product->imageslist[0]->image;
+                                        $imgPath = $absoluteBaseUrl.'/uploads/'.$products->product->imageslist[0]->image;
                                     }
                                 
                                 ?>
