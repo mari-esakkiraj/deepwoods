@@ -54,7 +54,7 @@ $absoluteBaseUrl = Url::base(true);
                                         <h4 class="text-body"><i class="fa fa-rupee"></i> <?= $products->product->price ?></h4>
                                     </td>
                                     <td class="text-center detail-info" data-title="Stock">
-                                        <input type="number" value="<?= $products->quantity ?>" style="width:70px;" min="1" max="10" id="cartquantity" data-productId="<?= $products->product_id ?>" data-price="<?= $products->product->price ?>" data-cartItemId="<?= $products->id ?>">
+                                        <input type="number" class="cartquantity" value="<?= $products->quantity ?>" style="width:70px;" min="1" max="10" id="cartquantity" data-productId="<?= $products->product_id ?>" data-price="<?= $products->product->price ?>" data-cartItemId="<?= $products->id ?>">
                                     </td>
                                     <td class="price" data-title="Price">
                                         <h4 class="text-brand"><i class="fa fa-rupee"></i> <span id="myprice-<?= $products->product_id?>"><?= $products->quantity * $products->product->price ?></span></h4>
