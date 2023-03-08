@@ -15,7 +15,7 @@ use dosamigos\ckeditor\CKEditor;
 
     <?php $form = ActiveForm::begin([
         'enableClientValidation' => false,
-        'enableAjaxValidation' => true,
+        'enableAjaxValidation' => false,
         'validateOnChange' => true,
         'validateOnBlur' => false,
         'options' => [
@@ -36,7 +36,8 @@ use dosamigos\ckeditor\CKEditor;
     <?= $this->render('_imageform', [
         'form' => $form,
         'model' => $model,
-        'modelImages' => $modelImages
+        'modelImages' => $modelImages,
+        'modelImagees' => $modelImagees
     ]) ?>
 
     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
