@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\base\Model;
+use yii\helpers\ArrayHelper;
 
 /**
  * ProductsController implements the CRUD actions for Products model.
@@ -124,7 +125,8 @@ class ProductsController extends Controller
         
         return $this->render('create', [
             'model' => $model,
-            'modelImages' => $modelImages
+            'modelImages' => $modelImages,
+            'modelImagees' => []
         ]);
     }
 
@@ -138,13 +140,94 @@ class ProductsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        //$modelImages = [new ProductImages];
-        $modelImages = ProductImages::find()->where(['product_id' => $id])->all();
+        $modelImages = [new ProductImages];
+        $modelImagees = ProductImages::find()->where(['product_id' => $id])->all();
         if ($this->request->isPost && $model->load($this->request->post())) {
-            $modelImages = Model::createMultiple(ProductImages::classname());
+            //$modelImages = ProductImages::find()->where(['product_id' => $id])->all();
+            $oldIDs = ArrayHelper::map($modelImagees, 'id', 'id');
+            $modelImagees = Model::createMultiple(ProductImages::classname(), $modelImagees);
+            Model::loadMultiple($modelImagees, $this->request->post());
+            $i=0;
+            //var_dump($_POST);
+            foreach ($modelImagees as $index => $modelImage) {
+                if ($modelImage->id == ''){
+                    $modelImage->image = \yii\web\UploadedFile::getInstance($modelImage, "[{$i}]image");
+                    $i++;
+                    if (!empty($modelImage->image)){
+                        $modelImage->image->saveAs('uploads/' . $modelImage->image->baseName . '.' . $modelImage->image->extension);
+                    }
+                }
+                //var_dump($index);
+            }
+            //die;
+            //var_dump($oldIDs);
+            //var_dump(array_filter(ArrayHelper::map($modelImagees, 'id', 'id')));
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelImagees, 'id', 'id')));
+            //var_dump($deletedIDs); //die;
+            $valid = $model->validate();
+            //var_dump(($valid)); 
+            $valid = Model::validateMultiple($modelImagees) && $valid;
+            //var_dump(($valid));// die;
             //Model::loadMultiple($modelImages, Yii::$app->request->post());
-            if ($model->validate()) {
-                $model->save();
+            if ($valid) {
+                if ($valid) {
+                    $i=0;
+                    foreach ($modelImagees as $index => $modelImage) {
+                        if ($modelImage->id == ''){
+                            $modelImage->image = \yii\web\UploadedFile::getInstance($modelImage, "[{$i}]image");
+                            
+                            if (!empty($modelImage->image)){
+                                $modelImage->image->saveAs('uploads/' . $modelImage->image->baseName . '.' . $modelImage->image->extension);
+                            }
+                            $i++;
+                        }
+                        {
+                            if ($modelImage->id != ''){
+                                $modeli = ProductImages::findOne($modelImage->id);//->where('id', $id)->findOne();
+                                $modelImage->image = $modeli->image;
+                            }
+                        }
+                        //echo $modelImage->image;
+                        
+                    }
+                    
+                    $transaction = \Yii::$app->db->beginTransaction();
+                    $model->status = '1';
+                    try 
+                    {
+                        if ($flag = $model->save(false)) {
+                            if (!empty($deletedIDs)) {
+                                $flag = ProductImages::deleteAll(['in', 'id', $deletedIDs]);
+                            }
+    
+                            foreach ($modelImagees as $modelImage) {
+                                $modelImage->product_id = $model->id;
+                                $modelImage->status = '1';
+                                $modelImage->isdesktop = '1';
+                                if (($flag = $modelImage->save(false)) === false) {
+                                    //var_dump($modelImage);
+                                    $transaction->rollBack();
+                                    break;
+                                }
+                                //var_dump($modelImage->id);
+                            }
+                            //die;
+                        }
+                        if ($flag) {
+                            $transaction->commit();
+                            //die;
+                            return $this->redirect(['view', 'id' => $model->id]);
+                        }
+                    }
+                    catch (Exception $e) 
+                     {
+                    
+                        $transaction->rollBack();
+                        
+                    }
+                    
+                }
+                
                 return $this->redirect(['view', 'id' => $model->id]);
             }
             
@@ -152,7 +235,21 @@ class ProductsController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'modelImages' => $modelImages
+            'modelImages' => $modelImages,
+            'modelImagees' => $modelImagees
+        ]);
+    }
+
+    public function actionUpdate1($id)
+    {
+        $model = $this->findModel($id);
+        $modelImages = ProductImages::find()->where(['product_id' => $id])->all();
+        $modelImagees = [new ProductImages]; //ProductImages::find()->where(['product_id' => $id])->all();
+
+        return $this->render('update1', [
+            'model' => $model,
+            'modelImages' => $modelImages,
+            'modelImagees' => $modelImagees
         ]);
     }
 
