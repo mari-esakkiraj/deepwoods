@@ -33,7 +33,7 @@ class ProductImages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['image'], 'required'],
+            //[['image'], 'required'],
             [['product_id', 'isdesktop', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['image'], 'file'],
         ];
