@@ -7,10 +7,15 @@ use app\models\Orders;
 use app\models\Users;
 use app\models\OrderItems;
 use app\models\OrderAddresses;
+use app\models\UserAddresses;
 use app\models\OrdersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use yii\web\Response;
+use app\base\Model;
+use yii\widgets\ActiveForm;
 
 /**
  * OrdersController implements the CRUD actions for Orders model.
@@ -101,18 +106,56 @@ class OrdersController extends Controller
      */
     public function actionUpdate($id)
     {
+        $modelsItems = OrderItems::find()->where(["order_id" => $id])->all();
         $model = $this->findModel($id);
 
-        if ($this->request->isPost) {
+        if ($model->load(Yii::$app->request->post())) {
+            $oldIDs = ArrayHelper::map($modelsItems, 'id', 'id');
+            $modelsItems = Model::createMultiple(OrderItems::classname(), $modelsItems);
+            Model::loadMultiple($modelsItems, Yii::$app->request->post());
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsItems, 'id', 'id')));
             $model->created_at = time();
             $model->created_by = Yii::$app->session->getId();
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            // ajax validation
+            if (Yii::$app->request->isAjax) {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                return ArrayHelper::merge(
+                    ActiveForm::validateMultiple($modelsItems),
+                    ActiveForm::validate($model)
+                );
+            }
+            // validate all models
+            $valid = $model->validate();
+            //var_dump($valid);
+            $valid = Model::validateMultiple($modelsItems) && $valid;
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $model->save(false)) {
+                        if (! empty($deletedIDs)) {
+                            OrderItems::deleteAll(['id' => $deletedIDs]);
+                        }
+                        foreach ($modelsItems as $modelsItem) {
+                            $modelsItem->order_id = $model->id;
+                            if (! ($flag = $modelsItem->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
             }
         }
 
         return $this->render('update', [
             'model' => $model,
+            'modelsItems' => (empty($modelsItems)) ? [new OrderItems] : $modelsItems
         ]);
     }
 
@@ -144,5 +187,22 @@ class OrdersController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionLists($id)
+    {				
+        $posts = UserAddresses::find()
+				->where(['user_id' => $id])
+				->orderBy('id DESC')
+				->all();
+				
+		if (!empty($posts)) {
+			foreach($posts as $post) {
+				echo "<option value='".$post->id."'>".$post->address.",".$post->city.",".$post->state.",".$post->country."-".$post->zipcode  ."</option>";
+			}
+		} else {
+			echo "<option>-</option>";
+		}
+		
     }
 }
