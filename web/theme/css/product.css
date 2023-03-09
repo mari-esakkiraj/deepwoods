@@ -1078,3 +1078,28 @@ table td, table th {
   position: absolute;
   margin-top: -7px;
 }
+
+.dashboard-menu ul li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.dashboard-menu ul li {
+  position: relative;
+  border-radius: 10px;
+  border: 1px solid #ececec;
+  border-radius: 10px;
+}
+
+.dashboard-menu ul li a.active, .dashboard-menu ul li a:hover {
+  color: #fff;
+  background-color: #3BB77E;
+  border-radius: 10px;
+}
+
+.dashboard-menu ul li a {
+  font-size: 16px;
+  color: #7E7E7E;
+  padding: 15px 30px;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
+}

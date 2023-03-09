@@ -76,7 +76,7 @@ $absoluteBaseUrl = Url::base(true);
                             <input type="text" id="quantity" title="Quantity" value="1">
                             </div>
                         </div>
-                        <a class="btn-product-add" href="#">Add to cart</a>
+                        <a class="btn-product-add add-to-cart" href="javascript:void(0)"  data-product_id="<?=$products->id?>">Add to cart</a>
                         </div>
                         <div class="product-wishlist-compare">
                         <a href="#" class="btn-wishlist"><i class="icon-heart"></i>Add to wishlist</a>

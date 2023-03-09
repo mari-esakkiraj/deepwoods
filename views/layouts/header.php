@@ -41,7 +41,7 @@ $absoluteBaseUrl = Url::base(true);
                             <?php echo Yii::$app->user->identity->username ?>
                           </a>
                           <ul class="submenu-nav" style="min-width: 140px;">
-                            <li><a href="javascript:void(0)">My Account</a></li>
+                            <li><a href="<?=$absoluteBaseUrl?>/profile">My Account</a></li>
                             <li><a href="javascript:void(0)" class="logout">Logout</a></li>
                           </ul>
                         </li>
