@@ -9,6 +9,8 @@
 
   // Header Sticky Js
   var varWindow = $(window);
+  var AppConfig = new AppConfigs();
+  var Baseurl = AppConfig.getBaseUrl();
   varWindow.on('scroll', function(event) {
     var scroll = varWindow.scrollTop();
     if (scroll < 350) {
@@ -92,7 +94,12 @@
 
   //wishlist
   $(".whishlist-add").on('click', function() {
-    console.log($this);
+    
+  });
+
+  //wishlist
+  $(".logout").on('click', function() {
+    $('.logoutSession').trigger('click');
   });
 
   // Popup Quick View JS
@@ -110,18 +117,91 @@
     $("body").removeClass("fix");
   });
 
-  // Add product
-  $(".btn-product-add,.quickViewModal").on('click', function() {
-    $(this).animate({
-      'opacity' : 0
-    }, 400, function(){
-        $(this).html('Added').animate({'opacity': 1}, 400);
-    });
-  });
-
   $(".sort-by-cover").on('click', function() {
     $(this).find(".sort-by-dropdown").toggleClass("show");
   });
+  
+  $(".add-to-cart").on('click', function() {
+    var productID = $(this).data('product_id');
+    insertCart(productID, 1, 1, 'default');
+  });
+
+  $(".remove-cart").on('click', function() {
+    var productID = $(this).attr('data-cartItemId');
+    var cartItemId = $(this).attr("data-cartItemId");
+    //insertCart(productID, cartItemId, 1, 'delete');
+    removeCart(cartItemId);
+  });
+
+  $('.cartquantity').on('input', function() {
+    var cartquantity = $(this).val();
+    if(cartquantity < 11){
+      var productId = $(this).attr("data-productid");
+      var cartItemId = $(this).attr("data-cartItemId");
+      var price = $(this).attr("data-price");
+      $("#myprice-"+productId).html(cartquantity * price);
+      insertCart(productId, cartItemId, cartquantity, 'increment');
+    }
+  });
+
+  function insertCart(productID, id, quantity, action){
+    $.ajax({
+      type:'post',
+      url:Baseurl+'/orders/savecheckout',
+      dataType: 'json',
+      data:{
+          productId:productID,
+          quantity:quantity,
+          action:action,
+          id:id,
+      },
+      success:function(response) {
+        var resultData = response.data;
+        if(resultData){
+          if(action == 'default'){
+            toastr.success('Added to the cart.');
+          }else if(action == 'delete'){
+            toastr.success('Cart item removed.');              
+          }else{
+            toastr.success('Your cart updated.');  
+          }
+          getCartCount();
+        } else {
+          $('#loginModal').modal('show');
+        }
+      }
+    })
+  }
+  function removeCart(productID){
+    $.ajax({
+      type:'post',
+      url:Baseurl+'/orders/removecart',
+      dataType: 'json',
+      data:{
+          productId:productID
+      },
+      success:function(response) {
+        var resultData = response.data;
+        if(resultData){
+          toastr.success('Cart item removed.'); 
+          getCartCount();
+        }
+      }
+    })
+  }
+
+  getCartCount();
+  function getCartCount(){
+    $.ajax({
+      type:'GET',
+      url:Baseurl+'/orders/usercartcount',
+      dataType: 'json',
+      data:{},
+      success:function(response) {
+        $("#dwCartCount").text(response.data);        
+      }
+    })
+  }
 
   
   // Hero Slider Js
@@ -131,7 +211,10 @@
       loop: true,
       speed: 500,
       spaceBetween: 0,
-      autoplay: false,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
       effect: 'fade',
       fadeEffect: {
         crossFade: true,
@@ -150,10 +233,15 @@
         spaceBetween: 10,
         slidesPerView: 4,
         freeMode: true,
+        loop: false,
       });
       var ProductThumb = new Swiper('.single-product-thumb-slider', {
         freeMode: true,
         effect: 'fade',
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
         fadeEffect: {
           crossFade: true,
         },

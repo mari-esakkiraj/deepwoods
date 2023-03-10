@@ -7,36 +7,40 @@ $absoluteBaseUrl = Url::base(true);
     <div class="row" style="transform: none;">
         <div class="col-xl-12">
             <div class="product-detail accordion-detail">
-                <div class="row mb-50 mt-30">
+                <div class="row mb-50 mt-30 ml-10">
                     <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
-                    <div class="product-thumb">
-                        <div class="swiper-container single-product-thumb-content single-product-thumb-slider">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <img src="<?=$absoluteBaseUrl?>/theme/img/shop/product-single/02.jpg" alt="Image-HasTech">
+                        <div class="product-thumb">
+                            <div class="swiper-container single-product-thumb-content single-product-thumb-slider">
+                                <div class="swiper-wrapper">
+                                    <?php foreach($products->imageslist as $imgkey=>$images){
+                                        $filepath = $absoluteBaseUrl."/uploads/".$images->image;
+                                    ?>
+                                    <div class="swiper-slide">
+                                        <img  src="<?=$filepath?>" alt="Image-HasTech">
+                                    </div>
+                                    <?php } ?>
+                                </div>
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
                             </div>
-                            <div class="swiper-slide">
-                                <img src="<?=$absoluteBaseUrl?>/theme/img/shop/product-single/01.jpg" alt="Image-HasTech">
-                            </div>
-                        </div>
-                        </div>
                         <div class="swiper-container single-product-nav-content single-product-nav-slider mt-2">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <img src="<?=$absoluteBaseUrl?>/theme/img/shop/product-single/02.jpg" alt="Image-HasTech">
+                            <div class="swiper-wrapper">
+                                <?php foreach($products->imageslist as $imgkey=>$images){
+                                    $filepath = $absoluteBaseUrl."/uploads/".$images->image;
+                                ?>
+                                <div class="swiper-slide">
+                                    <img  src="<?=$filepath?>" alt="Image-HasTech">
+                                </div>
+                                <?php } ?>
+                                
                             </div>
-                            <div class="swiper-slide">
-                                <img src="<?=$absoluteBaseUrl?>/theme/img/shop/product-single/01.jpg" alt="Image-HasTech">
                             </div>
-                            
                         </div>
-                        </div>
-                    </div>
                     </div>
                     <div class="col-md-6 col-sm-12 col-xs-12 product-single-item">
                     <div class="product-single-info mt-sm-70">
                         <span class="stock-status out-stock"> Sale Off </span>
-                        <h2 class="title">Kalabath - Black Rice</h2>
+                        <h2 class="title"><?= $products->name ?></h2>
                         <div class="product-detail-rating">
                             <div class="product-rate-cover text-end">
                                 <div class="star-content">
@@ -51,7 +55,7 @@ $absoluteBaseUrl = Url::base(true);
                         </div>
                         <div class="clearfix product-price-cover">
                             <div class="product-price primary-color float-left">
-                                <span class="current-price text-brand"><i class="fa fa-rupee"></i> 120.00</span>
+                                <span class="current-price text-brand"><i class="fa fa-rupee"></i> <?= $products->price ?></span>
                                 <span>
                                     <span class="save-price font-md color3 ml-15">20% Off</span>
                                     <span class="old-price font-md ml-15"><i class="fa fa-rupee"></i> 150.00</span>
@@ -72,7 +76,7 @@ $absoluteBaseUrl = Url::base(true);
                             <input type="text" id="quantity" title="Quantity" value="1">
                             </div>
                         </div>
-                        <a class="btn-product-add" href="#">Add to cart</a>
+                        <a class="btn-product-add add-to-cart" href="javascript:void(0)"  data-product_id="<?=$products->id?>">Add to cart</a>
                         </div>
                         <div class="product-wishlist-compare">
                         <a href="#" class="btn-wishlist"><i class="icon-heart"></i>Add to wishlist</a>
@@ -100,38 +104,7 @@ $absoluteBaseUrl = Url::base(true);
                         </ul>
                         <div class="tab-content shop_info_tab entry-main-content">
                             <div class="tab-pane fade  active show" id="Description">
-                                <div class="">
-                                    <p>Uninhibited carnally hired played in whimpered dear gorilla koala depending and much yikes off far quetzal goodness and from for grimaced goodness unaccountably and meadowlark near unblushingly crucial scallop tightly neurotic hungrily some and dear furiously this apart.</p>
-                                    <p>Spluttered narrowly yikes left moth in yikes bowed this that grizzly much hello on spoon-fed that alas rethought much decently richly and wow against the frequent fluidly at formidable acceptably flapped besides and much circa far over the bucolically hey precarious goldfinch mastodon goodness gnashed a jellyfish and one however because.</p>
-                                    <ul class="product-more-infor mt-30">
-                                        <li><span>Type Of Packing</span> Bottle</li>
-                                        <li><span>Color</span> Green, Pink, Powder Blue, Purple</li>
-                                        <li><span>Quantity Per Case</span> 100ml</li>
-                                        <li><span>Ethyl Alcohol</span> 70%</li>
-                                        <li><span>Piece In One</span> Carton</li>
-                                    </ul>
-                                    <hr class="wp-block-separator is-style-dots">
-                                    <p>Laconic overheard dear woodchuck wow this outrageously taut beaver hey hello far meadowlark imitatively egregiously hugged that yikes minimally unanimous pouted flirtatiously as beaver beheld above forward energetic across this jeepers beneficently cockily less a the raucously that magic upheld far so the this where crud then below after jeez enchanting drunkenly more much wow callously irrespective limpet.</p>
-                                    <h4 class="mt-30">Packaging &amp; Delivery</h4>
-                                    <hr class="wp-block-separator is-style-wide">
-                                    <p>Less lion goodness that euphemistically robin expeditiously bluebird smugly scratched far while thus cackled sheepishly rigid after due one assenting regarding censorious while occasional or this more crane went more as this less much amid overhung anathematic because much held one exuberantly sheep goodness so where rat wry well concomitantly.</p>
-                                    <p>Scallop or far crud plain remarkably far by thus far iguana lewd precociously and and less rattlesnake contrary caustic wow this near alas and next and pled the yikes articulate about as less cackled dalmatian in much less well jeering for the thanks blindly sentimental whimpered less across objectively fanciful grimaced wildly some wow and rose jeepers outgrew lugubrious luridly irrationally attractively dachshund.</p>
-                                    <h4 class="mt-30">Suggested Use</h4>
-                                    <ul class="product-more-infor mt-30">
-                                        <li>Refrigeration not necessary.</li>
-                                        <li>Stir before serving</li>
-                                    </ul>
-                                    <h4 class="mt-30">Other Ingredients</h4>
-                                    <ul class="product-more-infor mt-30">
-                                        <li>Organic raw pecans, organic raw cashews.</li>
-                                        <li>This butter was produced using a LTG (Low Temperature Grinding) process</li>
-                                        <li>Made in machinery that processes tree nuts but does not process peanuts, gluten, dairy or soy</li>
-                                    </ul>
-                                    <h4 class="mt-30">Warnings</h4>
-                                    <ul class="product-more-infor mt-30">
-                                        <li>Oil separation occurs naturally. May contain pieces of shell.</li>
-                                    </ul>
-                                </div>
+                                <?= $products->description ?>
                             </div>
                             <div class="tab-pane fade" id="Additional-info">
                                 <table class="font-md">

@@ -50,13 +50,14 @@
     position: relative;
     overflow: hidden;
     border-radius: 15px;
+    height: 100%;
   }
   
   .product-cart-wrap .product-img-action-wrap {
     position: relative;
     background-color: #fff;
     overflow: hidden;
-    max-height: 320px;
+    height: 250px;
     padding: 25px 25px 0 25px;
   }
   
@@ -305,19 +306,19 @@
     list-style: none;
 }
 
-.pagination-area .page-item:first-child {
+.product-grid #product-custom-pagination li:first-child {
     margin-left: 0;
 }
 
-.pagination-area .page-item {
+.product-grid #product-custom-pagination li {
     margin: 0 5px;
 }
 
-.page-item:not(:first-child) .page-link {
+.product-grid #product-custom-pagination li:not(:first-child) a {
     margin-left: -1px;
 }
 
-.pagination-area .page-link {
+.product-grid #product-custom-pagination li a, .product-grid #product-custom-pagination li span {
     border: 0;
     padding: 0 10px;
     -webkit-box-shadow: none;
@@ -336,9 +337,13 @@
     background-color: #F2F3F4;
 }
 
-.pagination-area .page-item.active .page-link, .pagination-area .page-item:hover .page-link {
+.product-grid #product-custom-pagination li.active a, .product-grid #product-custom-pagination li:hover a {
     color: #fff;
     background: #3BB77E;
+}
+
+.product-grid #product-custom-pagination li.disabled{
+  cursor: not-allowed;
 }
 
 
@@ -1050,4 +1055,51 @@ table td, table th {
   -webkit-transition: all 300ms linear 0s;
   transition: all 300ms linear 0s;
   letter-spacing: 0.5px;
+}
+
+/* .single-product-thumb-slider-popup {
+  height: 80% !important;
+  width: 100%;
+}
+
+.single-product-nav-slider1 {
+  height: 20% !important;
+  box-sizing: border-box;
+  padding: 10px 0;
+} */
+
+#dwCartCount {
+  font-size: 12px;
+  background-color: #c67605;
+  color: #fff;
+  padding: 2px 6px;
+  vertical-align: top;
+  margin-left: -3px;
+  position: absolute;
+  margin-top: -7px;
+}
+
+.dashboard-menu ul li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.dashboard-menu ul li {
+  position: relative;
+  border-radius: 10px;
+  border: 1px solid #ececec;
+  border-radius: 10px;
+}
+
+.dashboard-menu ul li a.active, .dashboard-menu ul li a:hover {
+  color: #fff;
+  background-color: #3BB77E;
+  border-radius: 10px;
+}
+
+.dashboard-menu ul li a {
+  font-size: 16px;
+  color: #7E7E7E;
+  padding: 15px 30px;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 700;
 }

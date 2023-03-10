@@ -7587,3 +7587,11 @@ section .container-fluid {
 {
 color:#fbe59c;
 }
+
+.form-group {
+  margin-top: 10px;
+}
+
+.form-group .help-block{
+  color: red;
+}

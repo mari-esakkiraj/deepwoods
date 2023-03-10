@@ -1,6 +1,8 @@
 <?php
 
 namespace app\controllers;
+
+use app\models\CartItems;
 use Yii;
 
 use app\models\Orders;
@@ -38,6 +40,15 @@ class OrdersController extends Controller
                 ],
             ]
         );
+    }
+
+    public function beforeAction($action) 
+    {
+        $withoutCSRF = ['savecheckout','removecart'];
+        if (in_array($action->id, $withoutCSRF)) {
+            $this->enableCsrfValidation = false; 
+        }
+        return parent::beforeAction($action); 
     }
 
     /**
@@ -204,5 +215,71 @@ class OrdersController extends Controller
 			echo "<option>-</option>";
 		}
 		
+    }
+
+    public function actionSavecheckout()
+    {
+        $returnData = false;
+        if(!Yii::$app->user->isGuest) {
+            $loginUserId = Yii::$app->user->identity->id ?? null;
+            $productId = $_POST['productId'] ?? null;
+            $quantity = $_POST['quantity'] ?? 1;
+            $action = $_POST['action'];
+            $id = $_POST['id'];
+            if($productId !== null){
+                $cartItems = CartItems::find()->where(['cart_items.product_id' => $productId, 'status' => 'created', 'created_by' => $loginUserId])->one();
+                if(empty($cartItems)) {
+                    $cartItems = new cartItems();
+                    $cartItems->quantity = 1;
+                    $cartItems->product_id = $productId;
+                    $cartItems->status = 'created';
+                    $cartItems->created_by = $loginUserId;
+                    $cartItems->created_date = date('Y-m-d H:i:s');
+                    $cartItems->save();
+                } else {
+                    if($action != 'delete'){
+                        if($action == 'increment'){
+                            $cartItems->quantity = $quantity;
+                        }else{
+                            $cartItems->quantity = $cartItems->quantity + 1;
+                        }
+                        $cartItems->save(false);
+                    }else{
+                        CartItems::findOne(['id' => $id])->delete();
+                    }
+                }
+                $returnData = true;
+            } 
+        } 
+        return json_encode(['data' => $returnData]);
+    }
+    public function actionCartlist()
+    {
+        $this->layout = 'mainpage';
+        $productList = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->all();
+        return $this->render('cartlist',["dataProvider" => $productList]);
+    }
+
+    public function actionUsercartcount()
+    {
+        $cartcount = 0;
+        if(!Yii::$app->user->isGuest) {
+            $productList = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->all();
+            $cartcount = count($productList);
+        } 
+        return json_encode(['data' => $cartcount]);
+    }
+
+    public function actionRemovecart()
+    {
+        $returnData = false;
+        $id = $_POST['productId'] ?? null;
+        if($id !== null){
+            CartItems::findOne(['id' => $id])->delete();
+            $returnData = true;
+        }
+       
+        
+        return json_encode(['data' => $returnData]);
     }
 }

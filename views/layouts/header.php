@@ -27,60 +27,27 @@ $absoluteBaseUrl = Url::base(true);
                 <div class="col-md-10">
                   <div class="align-right position-relative">
                     <div class="header-navigation-area">
-                      <ul class="main-menu nav">
-                        <li><a href="<?=$absoluteBaseUrl?>">Home</a>
-                        </li>
+                      <ul class="main-menu nav" style="align-items: center;">
+                        <li><a href="<?=$absoluteBaseUrl?>">Home</a></li>
                         <li><a href="<?=$absoluteBaseUrl?>/site/aboutus">About Us</a></li>
-                        <li class="has-submenu full-width"><a href="#">Product</a>
-                          <ul class="submenu-nav submenu-nav-mega submenu-nav-width">
-                            <li class="mega-menu-item"><a href="javascript:void(0)" class="mega-title">Product List</a>
-                              <ul>
-                                <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Kalabath - Black Rice</a></li>
-                                <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Coconut Oil - Cold Pressed</a></li>
-                                <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Jathi Kai - Pickles</a></li>
-                                <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Pepper - Black</a></li>
-                              </ul>
-                            </li>
-                            <li class="mega-menu-item"><a href="javascript:void(0)" class="mega-title">User</a>
-                              <ul>
-                              <?php 
-                                if(!Yii::$app->user->isGuest) {
-                              ?>
-                                <li><a href="javascript:void(0)">My Account</a></li>
-                                <li><a href="javascript:void(0)">
-                                <?php 
-                                  echo Html::beginForm(['/site/cus-logout'])
-                                  . Html::submitButton(
-                                      'Logout (' . Yii::$app->user->identity->username . ')',
-                                      
-                                  )
-                                  . Html::endForm();
-                                ?>
-                                </a></li>
-                              <?php
-                                }
-                                else {
-                              ?>
-                                <li><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
-                                <li><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#registerModal">Register</a></li>
-                              <?php 
-                                }
-                                ?>
-                              </ul>
-                            </li>
-                            <li class="mega-menu-item"><a href="javascript:void(0)" class="mega-title">Cart</a>
-                              <ul>
-                                <li><a href="<?=$absoluteBaseUrl?>/site/cart">Cart</a></li>
-                                <li><a href="<?=$absoluteBaseUrl?>/site/checkout">Checkout</a></li>
-                                <li><a href="javascript:void(0)">Wishlist</a></li>
-                                <li><a href="javascript:void(0)">Compare</a></li>
-                              </ul>
-                            </li>
+                        <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Product</a></li>
+                        
+                        <?php 
+                        if(!Yii::$app->user->isGuest) {
+                        ?>
+                        <li><a href="<?=$absoluteBaseUrl?>/orders/cartlist"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart<span class='badge badge-warning' id='dwCartCount'>0</span></a></li>
+                        <li class="has-submenu">
+                          <a href="javascript:void(0)">
+                            <?php echo Yii::$app->user->identity->username ?>
+                          </a>
+                          <ul class="submenu-nav" style="min-width: 140px;">
+                            <li><a href="<?=$absoluteBaseUrl?>/profile">My Account</a></li>
+                            <li><a href="javascript:void(0)" class="logout">Logout</a></li>
                           </ul>
                         </li>
-                        <li class=""><a href="#">Blog</a>
-                        </li>
-                        <li><a href="javascript:void(0)">Contact us</a></li>
+                        <?php }else{ ?>
+                          <li><a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></li>
+                        <?php } ?>
                       </ul>
                     </div>
                   
@@ -123,8 +90,16 @@ $absoluteBaseUrl = Url::base(true);
     </div>
     <!--== End Responsive Header ==-->
   </header>
+  <?php 
+  if(!Yii::$app->user->isGuest) {
+    echo Html::beginForm(['/site/cus-logout'])
+    . Html::submitButton(
+        'Logout (' . Yii::$app->user->identity->username . ')',['class' => 'logoutSession d-none'])
+    . Html::endForm();
+  }
+  ?>
 
-  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -145,11 +120,15 @@ $absoluteBaseUrl = Url::base(true);
               </div>
             </form>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <div class="modal-footer justify-content-center">
             <button type="button" class="btn btn-primary" id="loginSubmitButton" >Login</button>
           </div>
-        </div>
+            <div class="modal-footer justify-content-center">
+              <div>Not a member? <a href="javascript:void(0)" class="blue-text siginup">Sign Up</a></div>
+              <div>Forgot <a href="javascript:void(0)" class="blue-text forgotPassword">Password?</a></div>
+              <div style="display:none">Forgot <a href="javascript:void(0)" class="blue-text forgotPassword">Username?</a></div>
+            </div>
+          </div>
       </div>
     </div>
 
@@ -211,8 +190,35 @@ $absoluteBaseUrl = Url::base(true);
         </div>
       </div>
     </div>
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="forgotPasswordModal">Password Reset</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="forgotPassword-form">
+              <div class="card-body">
+                <p class="card-text">
+                    Enter your email address and we'll send you an email with instructions to reset your password.
+                </p>
+                <div class="form-outline">
+                  <label class="form-label" for="typeEmail">Email</label>
+                  <input type="email" id="typeEmail" class="form-control my-3 typeEmail" />
+                  <span id='forgot_email_error'></span>
+                </div>
+                <div class="text-center">
+                  <button type="button" id="resetPasswordSubmit" class="btn btn-primary resetPasswordSubmit">Reset password</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <?php 
+<?php 
 $this->registerJs("
   $(document).on('keyup','.phone_number',function() {
     var phone = $(this).val();
@@ -221,52 +227,104 @@ $this->registerJs("
   // phone = phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
     $(this).val(phone);
   });
-  $('#loginSubmitButton').on('click', function() { 
 
-    var userName = $('#login-form #username').val();
-    var password = $('#login-form #password').val();
+  
+
+  $(document).on('click','.siginup',function() {
+    $('#loginModal').modal('hide');
+    $('#registerModal').modal('show');
+    $('#forgotPasswordModal').modal('hide');
+  });
+  $(document).on('click','.forgotPassword',function() {
+    $('#loginModal').modal('hide');
+    $('#registerModal').modal('hide');
+    $('#forgotPasswordModal').modal('show');
+  });
+
+  $(document).on('click','#resetPasswordSubmit',function() {  
+    var email = $('.typeEmail').val();
     var clr = 0;
-    if(password == ''){
-      $('#loginpassword_error').html('<span style=\"color:red\">Password is Requried</span>');
+    if(email == ''){
+      $('#forgot_email_error').html('<span style=\"color:red\">Email is Requried</span>');
       clr =1;
     } else {
-      $('#loginpassword_error').html('');
+      $('#forgot_email_error').html('');
     }
-    if(userName == ''){
-      $('#loginusername_error').html('<span style=\"color:red\">User Name is Requried</span>');
-      clr =1;
-    } else {
-      $('#loginusername_error').html('');
-    }
-    console.log(clr);
     if(clr==0) 
     {
        $.ajax({
           type:'post',
-          url:'".$absoluteBaseUrl."/site/cus-login',
+          url:'".$absoluteBaseUrl."/site/forgotpassword',
           dataType: 'json',
           data:{
-              username:userName,
-              password:password,
+              email:email,
           },
           success:function(response) {
-            //alert(response.success);
-            if(response.success==true)
-            {
-              window.location.reload();
-            }
-            else
-            {
-              //alert(response.message);
-              resultData = response.error;
-              $.each(resultData, function(key, value) {
-                $('#login'+key+'_error').html('<span style=\"color:red\">'+value+'</span>');
-              });
+            var resultData = response.data;
+            if(resultData){
+              $('#forgotPasswordModal').modal('hide');
+              toastr.success('Forgot password changed Successfully');
+            } else {
+              $('#forgot_email_error').html('<span style=\"color:red\">'+resultData+'</span>');
             }
           }
       }); 
     }
   });
+
+  $(document).on('click','#loginSubmitButton',function() {  
+    submitLoginForm();
+  });
+  document.onkeydown=function(evt){
+    var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
+    if(keyCode == 13){
+      submitLoginForm();
+    }
+  }
+
+  function submitLoginForm(){
+    var userName = $('#login-form #username').val();
+    var password = $('#login-form #password').val();
+    var clr = 0;
+    if(password == ''){
+      $('#loginpassword_error').html('<span style=\"color:red\">Password is requried</span>');
+      clr =1;
+    } else {
+      $('#loginpassword_error').html('');
+    }
+    if(userName == ''){
+      $('#loginusername_error').html('<span style=\"color:red\">User Name is requried</span>');
+      clr =1;
+    } else {
+      $('#loginusername_error').html('');
+    }
+    if(clr==0){
+      $.ajax({
+        type:'post',
+        url:'".$absoluteBaseUrl."/site/cus-login',
+        dataType: 'json',
+        data:{
+            username:userName,
+            password:password,
+        },
+        success:function(response) {
+          //alert(response.success);
+          if(response.success==true)
+          {
+            window.location.reload();
+          }
+          else
+          {
+            //alert(response.message);
+            resultData = response.error;
+            $.each(resultData, function(key, value) {
+              $('#login'+key+'_error').html('<span style=\"color:red\">'+value+'</span>');
+            });
+          }
+        }
+      }); 
+    }
+  }
   
   $(document).on('click','.registerSubmit',function() {
     registerForm();
@@ -288,49 +346,49 @@ $this->registerJs("
     var gstNumber = $('.gst_number').val();
     var clr = 0;
     if(firstname == ''){
-      $("#firstname_error").html("<span style='color:red'>First Name is Requried</span>");
+      $("#firstname_error").html("<span style='color:red'>First Name is requried</span>");
       clr =1;
     } else {
       $("#firstname_error").html("");
     }
     if(lastname == ''){
-      $("#lastname_error").html("<span style='color:red'>Last Name is Requried</span>");
+      $("#lastname_error").html("<span style='color:red'>Last Name is requried</span>");
       clr =1;
     } else {
       $("#lastname_error").html("");
     }
     if(userName == ''){
-      $("#username_error").html("<span style='color:red'>User Name is Requried</span>");
+      $("#username_error").html("<span style='color:red'>User Name is requried</span>");
       clr =1;
     } else {
       $("#username_error").html("");
     }
     if(email == ''){
-      $("#email_error").html("<span style='color:red'>Email is Requried</span>");
+      $("#email_error").html("<span style='color:red'>Email is requried</span>");
       clr =1;
     } else {
       $("#email_error").html("");
     }
     if(phoneNumber == ''){
-      $("#phone_number_error").html("<span style='color:red'>Phone Number is Requried</span>");
+      $("#phone_number_error").html("<span style='color:red'>Phone Number is requried</span>");
       clr =1;
     } else {
       $("#phone_number_error").html("");
     }
     if(password == ''){
-      $("#password_error").html("<span style='color:red'>Password is Requried</span>");
+      $("#password_error").html("<span style='color:red'>Password is requried</span>");
       clr =1;
     } else {
       $("#password_error").html("");
     }
     if(confirmPassword == ''){
-      $("#confirm_password_error").html("<span style='color:red'>Confirm Password is Requried</span>");
+      $("#confirm_password_error").html("<span style='color:red'>Confirm Password is requried</span>");
       clr =1;
     } else {
       $("#confirm_password_error").html("");
     }
     // if(gstNumber == ''){
-    //   $("#gst_number_error").html("<span style='color:red'>GST Number is Requried</span>");
+    //   $("#gst_number_error").html("<span style='color:red'>GST Number is requried</span>");
     //   clr =1;
     // } else {
     //   $("#gst_number_error").html("");
@@ -379,7 +437,7 @@ $this->registerJs("
             }            
         });
     }
-}
+  }
 
 
   

@@ -22,26 +22,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'mobile_number')->textInput(['maxlength' => true]) ?>
 
-    <?php /*= $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
+    <?= ($model->isNewRecord) ? $form->field($model, 'password')->passwordInput(['maxlength' => true]) : ''?>
 
-    <?= $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?>
+    <?= ($model->isNewRecord) ? $form->field($model, 'password_repeat')->passwordInput()->label('Confirm Password') : '' ?>
 
-    <?= $form->field($model, 'password_reset_token')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'gst_number')->textInput() ?>
 
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'admin')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
-    <?= $form->field($model, 'verification_token')->textInput(['maxlength' => true]) */ ?>
-
-    <div class="form-group">
+    <div class="form-group text-center mt-4">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Cancel', ['index'], ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
