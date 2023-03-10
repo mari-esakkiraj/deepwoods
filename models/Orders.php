@@ -38,7 +38,7 @@ class Orders extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['total_price', 'status', 'firstname', 'lastname', 'email'], 'required'],
+            //[['total_price', 'status', 'firstname', 'lastname', 'email'], 'required'],
             [['total_price'], 'number'],
             [['status', 'created_at', 'created_by'], 'integer'],
             [['firstname', 'lastname'], 'string', 'max' => 45],
@@ -63,6 +63,11 @@ class Orders extends \yii\db\ActiveRecord
             'paypal_order_id' => 'Paypal Order ID',
             'created_at' => 'Created At',
             'created_by' => 'Created By',
+            'paypal_order_id' => 'Paypal Order ID',
+            'billing_address_id' => 'Billing Address',
+            'shipping_address_id' => 'Shipping Address',
+            'phone' => 'Phone',
+            'customer_id' => 'Customer'
         ];
     }
 
