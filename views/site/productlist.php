@@ -14,9 +14,9 @@ use yii\widgets\Pjax;
                 </div>
                 <div class="sort-by-product-area">
                     <div class="sort-by-cover mr-10">
-                        <input type="text" class="form-control" placeholder="Enter product name">
+                        <input type="text" class="form-control" placeholder="Search Product name">
                     </div>
-                    <div class="sort-by-cover mr-10">
+                    <div class="sort-by-cover mr-10 hide">
                         <div class="sort-by-product-wrap">
                             <div class="sort-by">
                                 <span><i class="fi-rs-apps"></i>Show:</span>
@@ -35,7 +35,7 @@ use yii\widgets\Pjax;
                             </ul>
                         </div>
                     </div>
-                    <div class="sort-by-cover">
+                    <div class="sort-by-cover hide">
                         <div class="sort-by-product-wrap">
                             <div class="sort-by">
                                 <span><i class="fi-rs-apps-sort"></i>Sort by:</span>

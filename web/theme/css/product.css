@@ -1105,5 +1105,5 @@ table td, table th {
 }
 
 .hide{
-  display: none;
+  display: none !important;
 }
