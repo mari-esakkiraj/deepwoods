@@ -176,6 +176,11 @@
         } else {
           $('#loginModal').modal('show');
         }
+      },
+      error: function (jqXHR, exception) {
+        if (jqXHR.status === 403) {
+          $('#loginModal').modal('show');
+        }
       }
     })
   }

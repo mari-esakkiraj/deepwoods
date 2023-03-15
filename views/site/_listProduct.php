@@ -21,9 +21,9 @@ $absoluteBaseUrl = Url::base(true);
         </div>
         <div class="product-action-1">
             <a aria-label="Add To Wishlist" class="action-btn whishlist-add hide" href="javascript:void(0)"><i class='far fa-heart'></i></a>
-            <a aria-label="Quick view" class="action-btn btn-quick-view" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="far fa-eye" aria-hidden="true"></i></a>
+            <a aria-label="Quick view" class="action-btn btn-quick-view hide" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="far fa-eye" aria-hidden="true"></i></a>
         </div>
-        <div class="product-badges product-badges-position product-badges-mrg">
+        <div class="product-badges product-badges-position product-badges-mrg hide">
             <span class="new">New</span>
         </div>
     </div>
@@ -46,7 +46,7 @@ $absoluteBaseUrl = Url::base(true);
         <div class="product-card-bottom">
             <div class="product-price">
                 <span><i class="fa fa-rupee"></i> <?= $model->price ?></span>
-                <span class="old-price"><i class="fa fa-rupee"></i> 150.00</span>
+                <span class="old-price hide"><i class="fa fa-rupee"></i> 150.00</span>
             </div>
             <div class="add-cart add-to-cart" data-product_id="<?=$model->id?>">
                 <a class="add" href="javascript:void(0)">

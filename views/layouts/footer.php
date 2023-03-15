@@ -51,7 +51,7 @@ $absoluteBaseUrl = Url::base(true);
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
-            <p class="copyright">Copyright © 2022 All Rights Reserved | Design by <a target="_blank" href="http://studiorda.com/">StudioRDA.</a></p>
+            <p class="copyright">Copyright © 2023 All Rights Reserved | Design by <a target="_blank" href="https://deccaInfo.com/">DeccaInfo.com</a></p>
           </div>
           <div class="col-lg-6">
             <div class="payment">

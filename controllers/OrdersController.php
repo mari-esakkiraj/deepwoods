@@ -18,6 +18,7 @@ use yii\helpers\ArrayHelper;
 use yii\web\Response;
 use app\base\Model;
 use yii\widgets\ActiveForm;
+use yii\filters\AccessControl;
 
 /**
  * OrdersController implements the CRUD actions for Orders model.
@@ -36,6 +37,23 @@ class OrdersController extends Controller
                     'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
+                    ],
+                ],
+            ],
+            [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['@'],
+                            'matchCallback' => function ($rule, $action) {
+                                if(Yii::$app->user->identity->admin !=1) {
+                                    return false;
+                                }
+                                return true;
+                            }
+                        ]
                     ],
                 ],
             ]

@@ -52,7 +52,8 @@ $absoluteBaseUrl = Url::base(true);
                                     <h3 class="mb-0">Your Orders</h3>
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive">
+                                    <div>No order.</div>
+                                    <div class="table-responsive hide">
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -117,7 +118,8 @@ $absoluteBaseUrl = Url::base(true);
                             </div>
                         </div>
                         <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
-                            <div class="row">
+                            <div>No Address found.</div>
+                            <div class="row hide">
                                 <div class="col-lg-6">
                                     <div class="card mb-3 mb-lg-0">
                                         <div class="card-header">
@@ -166,29 +168,19 @@ $absoluteBaseUrl = Url::base(true);
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label>Last Name <span class="required">*</span></label>
-                                                <input required="" class="form-control" name="phone">
+                                                <input required="" class="form-control" name="lname">
                                             </div>
-                                            <div class="form-group col-md-12">
-                                                <label>Display Name <span class="required">*</span></label>
-                                                <input required="" class="form-control" name="dname" type="text">
-                                            </div>
-                                            <div class="form-group col-md-12">
+                                            
+                                            <div class="form-group col-md-6">
                                                 <label>Email Address <span class="required">*</span></label>
                                                 <input required="" class="form-control" name="email" type="email">
                                             </div>
-                                            <div class="form-group col-md-12">
-                                                <label>Current Password <span class="required">*</span></label>
-                                                <input required="" class="form-control" name="password" type="password">
+                                            <div class="form-group col-md-6">
+                                                <label>Phone Number <span class="required">*</span></label>
+                                                <input required="" class="form-control" name="phone" type="text">
                                             </div>
-                                            <div class="form-group col-md-12">
-                                                <label>New Password <span class="required">*</span></label>
-                                                <input required="" class="form-control" name="npassword" type="password">
-                                            </div>
-                                            <div class="form-group col-md-12">
-                                                <label>Confirm Password <span class="required">*</span></label>
-                                                <input required="" class="form-control" name="cpassword" type="password">
-                                            </div>
-                                            <div class="col-md-12">
+                                           
+                                            <div class="col-md-12 mt-2">
                                                 <button type="submit" class="btn btn-fill-out submit font-weight-bold" name="submit" value="Submit">Save Change</button>
                                             </div>
                                         </div>

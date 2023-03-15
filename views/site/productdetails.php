@@ -39,7 +39,6 @@ $absoluteBaseUrl = Url::base(true);
                     </div>
                     <div class="col-md-6 col-sm-12 col-xs-12 product-single-item">
                     <div class="product-single-info mt-sm-70">
-                        <span class="stock-status out-stock"> Sale Off </span>
                         <h2 class="title"><?= $products->name ?></h2>
                         <div class="product-detail-rating">
                             <div class="product-rate-cover text-end">
@@ -56,7 +55,7 @@ $absoluteBaseUrl = Url::base(true);
                         <div class="clearfix product-price-cover">
                             <div class="product-price primary-color float-left">
                                 <span class="current-price text-brand"><i class="fa fa-rupee"></i> <?= $products->price ?></span>
-                                <span>
+                                <span class="hide">
                                     <span class="save-price font-md color3 ml-15">20% Off</span>
                                     <span class="old-price font-md ml-15"><i class="fa fa-rupee"></i> 150.00</span>
                                 </span>
