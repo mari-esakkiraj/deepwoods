@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\base\Model;
 use yii\helpers\ArrayHelper;
+
 use Yii;
 use yii\filters\AccessControl;
 
@@ -45,6 +46,7 @@ class ProductsController extends Controller
                                 if(Yii::$app->user->identity->admin !=1) {
                                     return false;
                                 }
+                                return true;
                             }
                         ]
                     ],
