@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use Yii;
+use yii\filters\AccessControl;
 use app\models\Products;
 use app\models\ProductImages;
 use app\models\ProductsSearch;
@@ -28,6 +30,23 @@ class ProductsController extends Controller
                     'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
+                    ],
+                ],
+            ],
+            [
+                'access' => [
+                    'class' => AccessControl::className(),
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'roles' => ['@'],
+                            'matchCallback' => function ($rule, $action) {
+                                if(Yii::$app->user->identity->admin !=1) {
+                                    return false;
+                                }
+                                return true;
+                            }
+                        ]
                     ],
                 ],
             ]
