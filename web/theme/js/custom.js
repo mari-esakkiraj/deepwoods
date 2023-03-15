@@ -192,6 +192,7 @@
         if(resultData){
           toastr.success('Cart item removed.'); 
           getCartCount();
+          findTotal();
         }
       }
     })
