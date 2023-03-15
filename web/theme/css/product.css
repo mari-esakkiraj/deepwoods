@@ -1103,3 +1103,7 @@ table td, table th {
   font-family: "Quicksand", sans-serif;
   font-weight: 700;
 }
+
+.hide{
+  display: none;
+}

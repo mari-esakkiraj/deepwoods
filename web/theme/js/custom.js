@@ -135,14 +135,21 @@
 
   $('.cartquantity').on('input', function() {
     var cartquantity = $(this).val();
-    if(cartquantity < 11){
-      var productId = $(this).attr("data-productid");
-      var cartItemId = $(this).attr("data-cartItemId");
-      var price = $(this).attr("data-price");
-      $("#myprice-"+productId).html(cartquantity * price);
-      insertCart(productId, cartItemId, cartquantity, 'increment');
-    }
+    var productId = $(this).attr("data-productid");
+    var cartItemId = $(this).attr("data-cartItemId");
+    var price = $(this).attr("data-price");
+    $("#myprice-"+productId).html(Math.round(cartquantity * price));
+    insertCart(productId, cartItemId, cartquantity, 'increment');
+    findTotal();
   });
+
+  function findTotal(){
+    var grandTotal = 0;
+    $("span[class^=subtotal]").each(function() {
+        grandTotal += parseFloat($(this).html()); 
+    });
+    $("#total-price").html(Math.round(grandTotal));
+  }
 
   function insertCart(productID, id, quantity, action){
     $.ajax({
@@ -185,6 +192,7 @@
         if(resultData){
           toastr.success('Cart item removed.'); 
           getCartCount();
+          findTotal();
         }
       }
     })
