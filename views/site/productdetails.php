@@ -77,12 +77,7 @@ $absoluteBaseUrl = Url::base(true);
                             </div>
                         </div>
                         <a class="btn-product-add add-to-cart" href="javascript:void(0)"  data-product_id="<?=$products->id?>">Add to cart</a>
-                        </div>
-                        <div class="product-wishlist-compare">
-                        <a href="#" class="btn-wishlist"><i class="icon-heart"></i>Add to wishlist</a>
-                        <a href="#" class="btn-compare"><i class="icon-shuffle"></i>Add to compare</a>
-                        </div>
-                        
+                        </div>                        
                     </div>
                     </div>
                 </div>
@@ -92,10 +87,10 @@ $absoluteBaseUrl = Url::base(true);
                             <li class="nav-item">
                                 <a class="nav-link active" id="Description-tab" data-bs-toggle="tab" href="#Description">Description</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" style="display:none">
                                 <a class="nav-link" id="Additional-info-tab" data-bs-toggle="tab" href="#Additional-info">Additional info</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" style="display:none">
                                 <a class="nav-link" id="Vendor-info-tab" data-bs-toggle="tab" href="#Vendor-info">Vendor</a>
                             </li>
                             <li class="nav-item">
