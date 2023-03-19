@@ -48,10 +48,10 @@ class OrdersController extends Controller
                             'allow' => true,
                             'roles' => ['@'],
                             'matchCallback' => function ($rule, $action) {
-                                if(Yii::$app->user->identity->admin !=1) {
-                                    return false;
+                                if(!Yii::$app->user->identity->admin) {
+                                    return true;
                                 }
-                                return true;
+                                return false;
                             }
                         ]
                     ],
@@ -62,7 +62,7 @@ class OrdersController extends Controller
 
     public function beforeAction($action) 
     {
-        $withoutCSRF = ['savecheckout','removecart'];
+        $withoutCSRF = ['savecheckout','removecart','usercartcount'];
         if (in_array($action->id, $withoutCSRF)) {
             $this->enableCsrfValidation = false; 
         }
@@ -282,10 +282,9 @@ class OrdersController extends Controller
     {
         $cartcount = 0;
         if(!Yii::$app->user->isGuest) {
-            $productList = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->all();
-            $cartcount = count($productList);
+            $cartcount = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->count();
         } 
-        return json_encode(['data' => $cartcount]);
+        return $cartcount;
     }
 
     public function actionClearcartlist()

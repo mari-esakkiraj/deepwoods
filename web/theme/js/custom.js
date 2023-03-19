@@ -208,10 +208,8 @@
     $.ajax({
       type:'GET',
       url:Baseurl+'/orders/usercartcount',
-      dataType: 'json',
-      data:{},
       success:function(response) {
-        $("#dwCartCount").text(response.data);        
+        $("#dwCartCount").html(response);        
       }
     })
   }
