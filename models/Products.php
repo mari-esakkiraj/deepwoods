@@ -38,15 +38,25 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'price'], 'required'],
+            [['name', 'price', 'quantity', 'description'], 'required'],
+            ['name', 'match', 'pattern' => '/^[a-zA-Z0-9_-]+$/', 'message' => 'Your name can only contain alphanumeric characters, underscores and dashes.'],
             [['description'], 'string'],
+            [['quantity'], 'integer'],
             [['price'], 'number'],
             [['status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['name'], 'string', 'max' => 255],
-            [['image'], 'string', 'max' => 2000],
+            //[['image'], 'file', 'skipOnEmpty' => false],
+            [['image'], 'file', 'minFiles' => 1,  'maxFiles' => 10, 'extensions' => 'png, jpg, jpeg, webp', 'skipOnEmpty' => false, 'maxSize' => 10 * 1024 * 1024],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],
         ];
+    }
+
+    public function beforeSave($insert) {
+        if ($this->isNewRecord) {
+            $this->status = '1';
+        } 
+        return true;
     }
 
     /**

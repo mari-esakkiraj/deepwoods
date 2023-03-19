@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Class m230304_102729_add_multiple_column_in_orders_table
  */
-class m230304_102729_add_multiple_column_in_orders_table extends Migration
+class m230304_102729_add_multiple_columns_in_orders_table extends Migration
 {
     /**
      * {@inheritdoc}
