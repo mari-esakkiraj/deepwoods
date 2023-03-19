@@ -5,14 +5,14 @@ use yii\widgets\ListView;
 use yii\widgets\Pjax;
 ?>
 <section class="product-area">
-    <div class="container pt-65 pt-lg-40">
+    <div class="container pt-30 pt-lg-30">
         <div class="row">
             <div class="col-12">
                 <div class="shop-product-fillter">
-                <div class="totall-product">
+                <div class="totall-product hide">
                     <p>We found <strong class="text-brand"><?= $dataProvider->getTotalCount() ?></strong> items for you!</p>
                 </div>
-                <div class="sort-by-product-area">
+                <div class="sort-by-product-area hide ">
                     <div class="sort-by-cover mr-10">
                         <input type="text" class="form-control" placeholder="Search Product name">
                     </div>
