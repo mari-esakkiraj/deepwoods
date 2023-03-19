@@ -159,32 +159,11 @@ $absoluteBaseUrl = Url::base(true);
                                     <h5>Account Details</h5>
                                 </div>
                                 <div class="card-body">
-                                    <p>Already have an account? <a href="page-login.html">Log in instead!</a></p>
-                                    <form method="post" name="enq">
-                                        <div class="row">
-                                            <div class="form-group col-md-6">
-                                                <label>First Name <span class="required">*</span></label>
-                                                <input required="" class="form-control" name="name" type="text">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label>Last Name <span class="required">*</span></label>
-                                                <input required="" class="form-control" name="lname">
-                                            </div>
-                                            
-                                            <div class="form-group col-md-6">
-                                                <label>Email Address <span class="required">*</span></label>
-                                                <input required="" class="form-control" name="email" type="email">
-                                            </div>
-                                            <div class="form-group col-md-6">
-                                                <label>Phone Number <span class="required">*</span></label>
-                                                <input required="" class="form-control" name="phone" type="text">
-                                            </div>
-                                           
-                                            <div class="col-md-12 mt-2">
-                                                <button type="submit" class="btn btn-fill-out submit font-weight-bold" name="submit" value="Submit">Save Change</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    <?php
+                                    echo $this->render('account_details', [
+                                        'user' => $user ?? []
+                                    ]);
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -194,3 +173,44 @@ $absoluteBaseUrl = Url::base(true);
         </div>
     </div>
 </div>
+
+<?php 
+$this->registerJs("
+    var AppConfig = new AppConfigs();
+    var baseurl = AppConfig.getBaseUrl();
+    $(document).on('click','.account_details_submit',function() { 
+        var fname = $('#account_details .fname').val();
+        var lname = $('#account_details .lname').val();
+        var gstNumber = $('#account_details .gst_number').val();
+        alert(fname)
+        var clr = 0;
+        if(fname == ''){
+          $('#fname_error').html('<span style=\"color:red\">First is Requried</span>');
+          clr =1;
+        } else {
+          $('#fname_error').html('');
+        }
+        if(lname == ''){
+            $('#lname_error').html('<span style=\"color:red\">First is Requried</span>');
+            clr =1;
+        } else {
+            $('#lname_error').html('');
+        } 
+        if(clr==0) {
+            $.ajax({
+                type:'post',
+                url:baseurl+'/profile/profile-update',
+                dataType: 'json',
+                data:{fname:fname,lname:lname,gstNumber:gstNumber},
+                success:function(response) {
+                    if(response) {
+                        toastr.success('Account details updated suceesfully');
+                    } else {
+                        toastr.error('something went wrong !')
+                    }
+                }
+            });
+        }
+    });
+");
+?>  
