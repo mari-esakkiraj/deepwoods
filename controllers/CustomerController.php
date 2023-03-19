@@ -74,7 +74,9 @@ class CustomerController extends Controller
         $model->status = '10';
         $model->admin = '0';
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save(false)) {
+            $model->load($this->request->post());
+            $model->username = $model->email;
+            if ($model->save(false)) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -89,11 +91,14 @@ class CustomerController extends Controller
     public function actionCreateAdmin()
     {
         $model = new Users();
-        $model->password = '12345678';
-        $model->status = '10';
-        $model->admin = '1';
+        
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            $model->load($this->request->post());
+            $model->username = $model->email;
+            $model->password = '12345678';
+            $model->status = '10';
+            $model->admin = '1';
+            if ($model->validate() && $model->save(false)) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {

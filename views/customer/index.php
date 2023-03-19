@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="customer-index">
     <div class="flex-container">
         <h1><?= Html::encode($this->title) ?></h1>
-        <?= Html::a('New Customer', ['create'], ['class' => 'btn btn-success flex-container-last']) ?>
+        <?php //= Html::a('New Customer', ['create'], ['class' => 'btn btn-success flex-container-last']) ?>
     </div>
 
     <?php Pjax::begin(); ?>
