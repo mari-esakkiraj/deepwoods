@@ -165,7 +165,7 @@ class ProductsController extends Controller
                 $model->load($this->request->post());
                 $model->image = UploadedFile::getInstances($model, 'image');
                 //var_dump($model->image);die;
-                if ($model->image && $model->validate()) {
+                if ($model->validate() && $model->image) {
                     $filenames = [];
                     foreach ($model->image as $file) {
                         $file->saveAs('uploads/' . $file->baseName . '.' . $file->extension);
