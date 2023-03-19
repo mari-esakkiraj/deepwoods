@@ -308,9 +308,9 @@ $this->registerJs("
             password:password,
         },
         success:function(response) {
-          //alert(response.success);
           if(response.success==true)
           {
+            debugger;
             window.location.reload();
           }
           else
@@ -429,6 +429,7 @@ $this->registerJs("
                     toastr.success('User Register Successfully');
                     $("#register_form").trigger('reset');
                     $("#registerModal").modal('hide');
+                    $("#loginModal").modal('show');
                 } else {
                   $.each(resultData, function(key, value) {
                     $('#'+key+'_error').html("<span style='color:red'>"+value[0]+"</span>");

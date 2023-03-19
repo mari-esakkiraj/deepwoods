@@ -289,9 +289,8 @@ class OrdersController extends Controller
 
     public function actionClearcartlist()
     {
-        $this->layout = 'mainpage';
         \Yii::$app->db->createCommand()->delete('cart_items', ['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->execute();
-        return $this->redirect(['cartlist']);
+        return json_encode(['data' => 'success']);
     }
 
     public function actionRemovecart()
