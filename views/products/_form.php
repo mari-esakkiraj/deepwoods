@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use wbraganca\dynamicform\DynamicFormWidget;
 use dosamigos\ckeditor\CKEditor;
-
+use kartik\widgets\FileInput;
 
 /** @var yii\web\View $this */
 /** @var app\models\Products $model */
@@ -30,17 +30,30 @@ use dosamigos\ckeditor\CKEditor;
         'options' => ['rows' => 6],
         'preset' => 'basic'
     ]) ?>
+    <?= $form->field($model, 'image[]')->fileInput(['multiple' => true]) ?>
+    <?php /*= $form->field($model, 'image')->widget(FileInput::classname(), [
+    'options' => [
+        'accept' => 'image/*',
+        'multiple' => true
+    ],
+    'pluginOptions' => [
+        'showPreview' => true,
+        'showCaption' => true,
+        'showRemove' => true,
+        'showUpload' => false
+    ]
+]);*/ ?>
 
-    <?php //= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
-
-    <?= $this->render('_imageform', [
+    <?php /*= $this->render('_imageform', [
         'form' => $form,
         'model' => $model,
         'modelImages' => $modelImages,
         'modelImagees' => $modelImagees
-    ]) ?>
+    ])*/ ?>
 
     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'quantity')->textInput(['maxlength' => true]) ?>
 
     <?php //= $form->field($model, 'status')->textInput() ?>
 
