@@ -12,6 +12,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\base\Model;
 use yii\helpers\ArrayHelper;
+use yii\web\UploadedFile;
 
 /**
  * ProductsController implements the CRUD actions for Products model.
@@ -89,7 +90,7 @@ class ProductsController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreateold()
     {
         $model = new Products();
         $modelImages = [new ProductImages];
@@ -142,6 +143,66 @@ class ProductsController extends Controller
             $model->loadDefaultValues();
         }
         
+        return $this->render('create', [
+            'model' => $model,
+            'modelImages' => $modelImages,
+            'modelImagees' => []
+        ]);
+    }
+
+    public function actionCreate()
+    {
+        $model = new Products();
+        $modelImages = [new ProductImages];
+        
+        if ($this->request->isPost) {
+            /*$model->load($this->request->post());
+            $model->image = UploadedFile::getInstances($model, 'image');
+            if ($model->validate()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }*/
+            if (Yii::$app->request->isPost) {
+                $model->load($this->request->post());
+                $model->image = UploadedFile::getInstances($model, 'image');
+                //var_dump($model->image);die;
+                if ($model->image && $model->validate()) {
+                    $filenames = [];
+                    foreach ($model->image as $file) {
+                        $file->saveAs('uploads/' . $file->baseName . '.' . $file->extension);
+                        $filenames[] = $file->baseName . '.' . $file->extension;
+                    }
+                    $model->image = json_encode($filenames);
+                    $transaction = \Yii::$app->db->beginTransaction();
+                    $model->status = '1';
+                    try {
+                        if ($flag = $model->save(false)) {
+                            foreach ($filenames as $filename) {
+                                $modelImage = new ProductImages();
+                                $modelImage->image = $filename;
+                                $modelImage->product_id = $model->id;
+                                $modelImage->status = '1';
+                                $modelImage->isdesktop = '1';
+                                if (($flag = $modelImage->save(false)) === false) {
+                                    $transaction->rollBack();
+                                    break;
+                                }
+                            }
+                        }
+                        if ($flag) {
+                            $transaction->commit();
+                            return $this->redirect(['view', 'id' => $model->id]);
+                        }
+                    } catch (Exception $e) {
+                       
+                        $transaction->rollBack();
+                        
+                    }
+                }
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
         return $this->render('create', [
             'model' => $model,
             'modelImages' => $modelImages,
