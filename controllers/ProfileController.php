@@ -20,6 +20,12 @@ class ProfileController extends Controller
                         'actions' => ['index'],
                         'allow' => true,
                         'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            if(!Yii::$app->user->identity->admin) {
+                                return true;
+                            }
+                            return false;
+                        }
                     ],
                 ],
                 'denyCallback' => function ($rule, $action) {
