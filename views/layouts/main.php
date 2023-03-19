@@ -74,7 +74,7 @@ if(!Yii::$app->user->isGuest) {
 <?php 
 if(!Yii::$app->user->isGuest) {
 ?>
-<footer id="footer" class="mt-auto py-3 bg-light">
+<footer id="footer" class="mt-auto py-3 bg-light hide" style="display:none;">
     <div class="container">
         <div class="row text-muted">
             <div class="col-md-6 text-center text-md-start">&copy; My Company <?= date('Y') ?></div>
