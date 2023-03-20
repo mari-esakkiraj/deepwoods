@@ -160,7 +160,7 @@
   function insertCart(productID, id, quantity, action){
     $.ajax({
       type:'post',
-      url:Baseurl+'/orders/savecheckout',
+      url:Baseurl+'/site/savecheckout',
       dataType: 'json',
       data:{
           productId:productID,
@@ -185,7 +185,6 @@
       },
       error: function (jqXHR, exception) {
         if (jqXHR.status === 403) {
-          $('#loginModal').modal('show');
           localStorage.setItem("productId", productID);
         }
       }
@@ -194,7 +193,7 @@
   function removeCart(productID){
     $.ajax({
       type:'post',
-      url:Baseurl+'/orders/removecart',
+      url:Baseurl+'/site/removecart',
       dataType: 'json',
       data:{
           productId:productID
@@ -218,7 +217,7 @@
   function clearClart(){
     $.ajax({
       type:'post',
-      url:Baseurl+'/orders/clearcartlist',
+      url:Baseurl+'/site/clearcartlist',
       dataType: 'json',
       data:{},
       success:function(response) {
@@ -236,7 +235,7 @@
   function getCartCount(){
     $.ajax({
       type:'GET',
-      url:Baseurl+'/orders/usercartcount',
+      url:Baseurl+'/site/usercartcount',
       success:function(response) {
         $("#dwCartCount").html(response);        
       }
@@ -344,31 +343,18 @@
       // Product Slider Js
         var product = $(".product-slider");
         product.owlCarousel({
-          autoplay: false,
-          smartSpeed: 1000,
-          nav: true,
+          autoplay: true,
+          loop:true,
+          margin:10,
+          responsiveClass:true,
+          responsive:{
+            0:{
+                items:4,
+                nav:true
+            },
+          },
           dots: false,
-          margin: 0,
-          responsive: {
-            0: {
-              items: 1,
-            },
-            540: {
-              items: 2,
-            },
-            576: {
-              items: 2,
-            },
-            768: {
-              items: 3,
-            },
-            992: {
-              items: 3,
-            },
-            1200: {
-              items: 4,
-            }
-          }
+          nav: true,
         });
 
       // Product Col2 Slider Js

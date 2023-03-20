@@ -28,10 +28,7 @@ $absoluteBaseUrl = Url::base(true);
         </div>
     </div>
     <div class="product-content-wrap">
-        <div class="product-category">
-            <a href="shop-grid-right.html">Snack</a>
-        </div>
-        <h2><a href="<?=$absoluteBaseUrl?>/site/productdetails?id=<?= $model->id ?>"><?= $model->name ?></a></h2>
+        <h2 class="mt-10"><a href="<?=$absoluteBaseUrl?>/site/productdetails?id=<?= $model->id ?>"><?= $model->name ?></a></h2>
         <div class="product-rate-cover">
             <div class="star-content">
                         <i class="ion-md-star"></i>

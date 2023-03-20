@@ -109,3 +109,7 @@ a.desc:after {
     background-color: #e6e6e6;
     border-color: #adadad;
 }
+
+.help-block{
+    color: red;
+}
