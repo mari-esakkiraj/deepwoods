@@ -200,15 +200,16 @@ $absoluteBaseUrl = Url::base(true);
           <div class="modal-body">
             <form id="forgotPassword-form">
               <div class="card-body">
-                <p class="card-text">
+                
+                <div class="alert alert-info" role="alert">
                     Enter your email address and we'll send you an email with instructions to reset your password.
-                </p>
+                </div>
                 <div class="form-outline">
                   <label class="form-label" for="typeEmail">Email</label>
-                  <input type="email" id="typeEmail" class="form-control my-3 typeEmail" />
+                  <input type="email" id="typeEmail" class="form-control typeEmail" />
                   <span id='forgot_email_error'></span>
                 </div>
-                <div class="text-center">
+                <div class="text-center mt-10">
                   <button type="button" id="resetPasswordSubmit" class="btn btn-primary resetPasswordSubmit">Reset password</button>
                 </div>
               </div>

@@ -21,6 +21,7 @@ class AppFrontAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
+        'theme/css/bootstrap.min.css',
         'theme/toastr/toaster.css',
         'theme/css/ionicons.min.css',
         'theme/css/simple-line-icons.css',

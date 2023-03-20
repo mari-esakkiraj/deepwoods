@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Users;
+use app\models\CartItems;
 
 use app\models\Products;
 use app\models\ProductImages;
@@ -54,7 +55,7 @@ class SiteController extends Controller
 
     public function beforeAction($action) 
     {
-        $withoutCSRF = ['cus-login','register','forgotpassword'];
+        $withoutCSRF = ['cus-login','register','forgotpassword','savecheckout','clearcartlist','removecart'];
         if(in_array($action->id, $withoutCSRF)) {
             $this->enableCsrfValidation = false; 
         }
@@ -87,13 +88,13 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $this->layout = 'mainpage';
-        return $this->render('mainpage');
-        return $this->render('index');
+        return $this->redirect('mainpage');
     }
     public function actionMainpage()
     {
         $this->layout = 'mainpage';
-        return $this->render('mainpage');
+        $productsList = Products::find()->limit(5)->all();
+        return $this->render('mainpage',["productsList" => $productsList]);
     }
 
     public function actionProductlist()
@@ -257,6 +258,69 @@ class SiteController extends Controller
     {
         $this->layout = 'mainpage';
         return $this->render('checkout');
+    }
+
+    public function actionUsercartcount()
+    {
+        $cartcount = 0;
+        if(!Yii::$app->user->isGuest) {
+            $cartcount = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->count();
+        } 
+        return $cartcount;
+    }
+
+    public function actionSavecheckout()
+    {
+        $returnData = false;
+        if(!Yii::$app->user->isGuest) {
+            $loginUserId = Yii::$app->user->identity->id ?? null;
+            $productId = $_POST['productId'] ?? null;
+            $quantity = $_POST['quantity'] ?? 1;
+            $action = $_POST['action'];
+            $id = $_POST['id'];
+            if($productId !== null){
+                $cartItems = CartItems::find()->where(['cart_items.product_id' => $productId, 'status' => 'created', 'created_by' => $loginUserId])->one();
+                if(empty($cartItems)) {
+                    $cartItems = new cartItems();
+                    $cartItems->quantity = 1;
+                    $cartItems->product_id = $productId;
+                    $cartItems->status = 'created';
+                    $cartItems->created_by = $loginUserId;
+                    $cartItems->created_date = date('Y-m-d H:i:s');
+                    $cartItems->save();
+                } else {
+                    if($action != 'delete'){
+                        if($action == 'increment'){
+                            $cartItems->quantity = $quantity;
+                        }else{
+                            $cartItems->quantity = $cartItems->quantity + 1;
+                        }
+                        $cartItems->save(false);
+                    }else{
+                        CartItems::findOne(['id' => $id])->delete();
+                    }
+                }
+                $returnData = true;
+            } 
+        } 
+        return json_encode(['data' => $returnData]);
+    }
+
+    public function actionClearcartlist()
+    {
+        \Yii::$app->db->createCommand()->delete('cart_items', ['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->execute();
+        return json_encode(['data' => 'success']);
+    }
+
+    public function actionRemovecart()
+    {
+        $returnData = false;
+        $id = $_POST['productId'] ?? null;
+        if($id !== null){
+            CartItems::findOne(['id' => $id])->delete();
+            $returnData = true;
+        }
+        return json_encode(['data' => $returnData]);
     }
 
     public function actionRegister()

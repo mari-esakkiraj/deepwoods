@@ -4,7 +4,7 @@ $absoluteBaseUrl = Url::base(true);
 ?>
 
 <main class="main-content">
-<section class="home-slider-area">
+    <section class="home-slider-area">
       <div class="swiper-container swiper-pagination-style dots-bg-light home-slider-container default-slider-container">
         <div class="swiper-wrapper home-slider-wrapper slider-default">
           <div class="swiper-slide">
@@ -13,7 +13,7 @@ $absoluteBaseUrl = Url::base(true);
                 <div class="row">
                   <div class="col-10 col-sm-7 col-md-6">
                     <div class="slider-content animate-pulse">
-                     <!-- <h5 class="sub-title transition-slide-0">Kalabath</h5>-->
+                      <!-- <h5 class="sub-title transition-slide-0">Kalabath</h5>-->
                       <h2 class="title transition-slide-1 mb-0"  style="color: #ff3300;"><span class="font-weight-400">Kalabath</span></h2>
                       <h2 class="title transition-slide-2" style="color: #ff3300;">Black Rice</h2>
                       <a class="btn-slide transition-slide-3" href="#/">Buy Now</a>
@@ -29,7 +29,7 @@ $absoluteBaseUrl = Url::base(true);
                 <div class="row">
                   <div class="col-10 col-sm-7 col-md-6">
                     <div class="slider-content animate-flipInX">
-                     <!--<h5 class="sub-title transition-slide-0">Our Tea Farm</h5>--> 
+                      <!--<h5 class="sub-title transition-slide-0">Our Tea Farm</h5>--> 
                       <h2 class="title transition-slide-1 mb-0"><span class="font-weight-400">Coconut Oil</span></h2>
                       <h2 class="title transition-slide-2">Cold Pressed</h2>
                       <a class="btn-slide transition-slide-3" href="#/">Buy Now</a>
@@ -45,7 +45,7 @@ $absoluteBaseUrl = Url::base(true);
                 <div class="row">
                   <div class="col-10 col-sm-7 col-md-6">
                     <div class="slider-content animate-flipInX">
-                     <!--<h5 class="sub-title transition-slide-0">Our Tea Farm</h5>--> 
+                      <!--<h5 class="sub-title transition-slide-0">Our Tea Farm</h5>--> 
                       <h2 class="title transition-slide-1 mb-0"><span class="font-weight-400" style="color: #fbe59c;">Farming Organically</span></h2>
                       <h2 class="title transition-slide-2" style="color: #fbe59c;">for a healthy lifestyle</h2>
                       <a class="btn-slide transition-slide-3" href="#/">Buy Now</a>
@@ -61,8 +61,8 @@ $absoluteBaseUrl = Url::base(true);
                 <div class="row">
                   <div class="col-10 col-sm-7 col-md-6">
                     <div class="slider-content animate-flipInX">
-                     <!--<h5 class="sub-title transition-slide-0">Our Tea Farm</h5>--> 
-                     <h2 class="title transition-slide-1 mb-0"><span class="font-weight-400" style="color: #121212;">Healthy Living</span></h2>
+                      <!--<h5 class="sub-title transition-slide-0">Our Tea Farm</h5>--> 
+                      <h2 class="title transition-slide-1 mb-0"><span class="font-weight-400" style="color: #121212;">Healthy Living</span></h2>
                       <h2 class="title transition-slide-2" style="color: #121212;">starts here</h2>
                       <a class="btn-slide transition-slide-3" href="#/">Buy Now</a>
                     </div>
@@ -78,71 +78,34 @@ $absoluteBaseUrl = Url::base(true);
         <div class="swiper-pagination"></div>
       </div>
     </section>
-
-    <section class="product-area product-category-area">
-      <div class="container pt-95 pb-0 pt-lg-70">
-        <div class="row">
+    <!--== Start Product Area Wrapper ==-->
+    <section class="product-area">
+      <div class="container m-0 p-0">
+        <div class="row pt-50 pt-lg-50">
           <div class="col-sm-8 m-auto">
-            <div class="section-title text-center mb-30">
-              <h2 class="title">Popular Categories</h2>
-              <div class="desc">
-                <p>Some of our popular categories</p>
-              </div>
+            <div class="section-title text-center">
+              <h2 class="title">Our Products</h2>
+              <!--<div class="desc">
+                <p>New arrivals to your weekly lineup</p>
+              </div>-->
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-12">
-            <div class="product-categorys-slider owl-carousel owl-theme">
-              <div class="item">
-                <div class="product-category-item">
-                  <div class="inner-content-style2">
-                    <div class="thumb">
-                      <a href="#/"><img src="<?=$absoluteBaseUrl?>/theme/img/shop/category/oil.jpg" alt="Image-HasTech" class="img"></a>
+            <div class="product-tabs-content-wrap">
+              <div class="tab-content product-tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="makeup-tab">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="product-slider owl-carousel owl-theme">
+                        <?php foreach($productsList as $model){ ?>
+                        <div class="item" >
+                          <?= $this->render('@app/views/site/_listProduct', ['model' => $model]) ?>
+                        </div>
+                        <?php } ?>
+                      </div>
                     </div>
-                    <!--<div class="content">
-                      <h4 class="title"><a href="#/">Neque Porro</a></h4>
-                      <p class="product-number">nec fermentum urna</p>
-                    </div>-->
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="product-category-item">
-                  <div class="inner-content-style2">
-                    <div class="thumb">
-                      <a href="#/"><img src="<?=$absoluteBaseUrl?>/theme/img/shop/category/rice.jpg" alt="Image-HasTech" class="img"></a>
-                    </div>
-                    <!--<div class="content">
-                      <h4 class="title"><a href="#/">Neque Porro</a></h4>
-                      <p class="product-number">nec fermentum urna</p>
-                    </div>-->
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="product-category-item">
-                  <div class="inner-content-style2">
-                    <div class="thumb">
-                      <a href="#/"><img src="<?=$absoluteBaseUrl?>/theme/img/shop/category/pickles.jpg" alt="Image-HasTech" class="img"></a>
-                    </div>
-                    <!--<div class="content">
-                      <h4 class="title"><a href="#/">Neque Porro</a></h4>
-                      <p class="product-number">nec fermentum urna</p>
-                    </div>-->
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="product-category-item">
-                  <div class="inner-content-style2">
-                    <div class="thumb">
-                      <a href="#/"><img src="<?=$absoluteBaseUrl?>/theme/img/shop/category/pepper.jpg" alt="Image-HasTech" class="img"></a>
-                    </div>
-                    <!--<div class="content">
-                      <h4 class="title"><a href="#/">Neque Porro</a></h4>
-                      <p class="product-number">nec fermentum urna</p>
-                    </div>-->
                   </div>
                 </div>
               </div>
@@ -151,10 +114,11 @@ $absoluteBaseUrl = Url::base(true);
         </div>
       </div>
     </section>
+    <!--== End Product Area Wrapper ==-->
     <!--== End Product Category Area Wrapper ==-->
     <!--== Start Testimonial Area Wrapper ==-->
     <section class="testimonial-area">
-      <div class="container pt-110 pt-lg-70">
+      <div class="container pt-50 pt-lg-50">
         <div class="row">
           <div class="col-sm-8 m-auto">
             <div class="section-title text-center">
@@ -247,7 +211,6 @@ $absoluteBaseUrl = Url::base(true);
     </section>
     <!--== End Testimonial Area Wrapper ==-->
 
-    <!--== End Product Area Wrapper ==-->
 
     <!--== Start Feature Area Wrapper ==-->
     <div class="feature-area">

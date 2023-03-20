@@ -15,7 +15,7 @@ $absoluteBaseUrl = Url::base(true);
                     <div class="inner-content">
                       <div class="footer-logo">
                         <a href="#/">
-                          <img class="logo-light" src="theme/img/deepwoods.png" alt="Logo" />
+                          <img class="logo-light" src="<?= $absoluteBaseUrl ?>/theme/img/deepwoods.png" alt="Logo" />
                         </a>
                       </div>
                       <p>Location: No 47 Breckỉnidge St, Fayettevill, India</p>

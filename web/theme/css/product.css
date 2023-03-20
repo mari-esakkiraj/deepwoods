@@ -1107,3 +1107,7 @@ table td, table th {
 .hide{
   display: none !important;
 }
+
+.product-slider .owl-item{
+  margin-right: 10px !important;
+}
