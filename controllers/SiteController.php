@@ -186,7 +186,7 @@ class SiteController extends Controller
 
         $user = Users::findByUsername($username);
         $data = [];
-        if (!$user) {
+        if (!$user || (!empty($user) && $user->admin==1)) {
             $data['success']=false;
             $data['error']['username']="Invalid username";
             $data['message']="Invalid username";
