@@ -199,6 +199,7 @@ class ProductsController extends Controller
                     }
                 }
             }
+            $model->image = '';
         } else {
             $model->loadDefaultValues();
         }
@@ -218,6 +219,68 @@ class ProductsController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+        $modelImages = [new ProductImages];
+        
+        if ($this->request->isPost) {
+            /*$model->load($this->request->post());
+            $model->image = UploadedFile::getInstances($model, 'image');
+            if ($model->validate()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }*/
+            if (Yii::$app->request->isPost) {
+                $image = $model->image;
+                $model->load($this->request->post());
+                $model->image = UploadedFile::getInstances($model, 'image');
+                //var_dump($model->image);die;
+                if ($model->validate() && $model->image) {
+                    $filenames = [];
+                    foreach ($model->image as $file) {
+                        $file->saveAs('uploads/' . $file->baseName . '.' . $file->extension);
+                        $filenames[] = $file->baseName . '.' . $file->extension;
+                    }
+                    $model->image = json_encode($filenames);
+                    $transaction = \Yii::$app->db->beginTransaction();
+                    $model->status = '1';
+                    try {
+                        if ($flag = $model->save(false)) {
+                            ProductImages::deleteAll(['product_id'=>$model->id]);
+                            foreach ($filenames as $filename) {
+                                $modelImage = new ProductImages();
+                                $modelImage->image = $filename;
+                                $modelImage->product_id = $model->id;
+                                $modelImage->status = '1';
+                                $modelImage->isdesktop = '1';
+                                if (($flag = $modelImage->save(false)) === false) {
+                                    $transaction->rollBack();
+                                    break;
+                                }
+                            }
+                        }
+                        if ($flag) {
+                            $transaction->commit();
+                            return $this->redirect(['view', 'id' => $model->id]);
+                        }
+                    } catch (Exception $e) {
+                       
+                        $transaction->rollBack();
+                        
+                    }
+                }
+                $model->image = $image;
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+            'modelImages' => $modelImages,
+            'modelImagees' => []
+        ]);
+    }
+    public function actionUpdateold($id)
     {
         $model = $this->findModel($id);
         $modelImages = [new ProductImages];

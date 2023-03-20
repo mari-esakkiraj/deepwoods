@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use wbraganca\dynamicform\DynamicFormWidget;
 use dosamigos\ckeditor\CKEditor;
 use kartik\widgets\FileInput;
+use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 /** @var app\models\Products $model */
@@ -30,8 +31,19 @@ use kartik\widgets\FileInput;
         'options' => ['rows' => 6],
         'preset' => 'basic'
     ]) ?>
-    <?= $form->field($model, 'image[]')->fileInput(['multiple' => true]) ?>
-    <?php /*= $form->field($model, 'image')->widget(FileInput::classname(), [
+    <?php //= $form->field($model, 'image[]')->fileInput(['multiple' => true]) ?>
+    <?php
+        $initialPreview = [];
+        if ($model->image != '') {
+            $images = json_decode($model->image, true);
+            $absoluteBaseUrl = Url::base(true);
+            foreach ($images as $image) {
+                $pathImg = $absoluteBaseUrl.'/uploads/' . $image;
+                //$initialPreview[] = Html::img($pathImg, ['class' => 'file-preview-image', 'style' =>"height:100px"]);
+            }
+        }
+    ?>
+    <?= $form->field($model, 'image')->widget(FileInput::classname(), [
     'options' => [
         'accept' => 'image/*',
         'multiple' => true
@@ -40,9 +52,13 @@ use kartik\widgets\FileInput;
         'showPreview' => true,
         'showCaption' => true,
         'showRemove' => true,
-        'showUpload' => false
+        'showUpload' => false,
+        'previewSettings' => [
+            'image' => ['width' => '138px', 'height' => 'auto']
+        ],
+        'initialPreview' => $initialPreview
     ]
-]);*/ ?>
+]); ?>
 
     <?php /*= $this->render('_imageform', [
         'form' => $form,
