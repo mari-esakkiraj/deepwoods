@@ -46,7 +46,7 @@ class Products extends \yii\db\ActiveRecord
             [['status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['name'], 'string', 'max' => 255],
             //[['image'], 'file', 'skipOnEmpty' => false],
-            [['image'], 'file', 'minFiles' => 1,  'maxFiles' => 10, 'extensions' => 'png, jpg, jpeg, webp', 'skipOnEmpty' => false, 'maxSize' => 2 * 1024 * 1024],
+            [['image'], 'file', 'minFiles' => 1,  'maxFiles' => 5, 'extensions' => 'png, jpg, jpeg', 'skipOnEmpty' => false, 'maxSize' => 2 * 1024 * 1024],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],
         ];
