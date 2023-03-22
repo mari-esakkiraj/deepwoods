@@ -180,6 +180,7 @@
           }
           getCartCount();
         } else {
+          localStorage.setItem("productId", productID);
           $('#loginModal').modal('show');
         }
       },
