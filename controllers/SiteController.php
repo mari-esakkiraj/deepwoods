@@ -127,6 +127,13 @@ class SiteController extends Controller
         return $this->render('productdetails',["products" => $model]);
     }
 
+    public function actionQuickview($id)
+    {
+        //$this->layout = 'mainpage';
+        $model = Products::find()->where(['products.id' => $id])->joinWith(['imageslist'])->one();
+        return $this->renderAjax('quickview',["products" => $model]);
+    }
+
     public function actionCart()
     {
         $this->layout = 'mainpage';
