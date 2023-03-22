@@ -104,7 +104,7 @@ $absoluteBaseUrl = Url::base(true);
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="loginModalLabel">Login</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close login-close" aria-label="Close"></button>
           </div>
           <div class="modal-body">
              <form id="login-form">
@@ -218,6 +218,17 @@ $absoluteBaseUrl = Url::base(true);
         </div>
       </div>
     </div>
+    
+    <div class="modal fade modal-xl" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModal" aria-hidden="true" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
 
 <?php 
 $this->registerJs("
@@ -227,14 +238,16 @@ $this->registerJs("
     phone = phone.replace(/[^0-9]/g, '');
   // phone = phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
     $(this).val(phone);
-  });
-
-  
+  });  
 
   $(document).on('click','.siginup',function() {
     $('#loginModal').modal('hide');
     $('#registerModal').modal('show');
     $('#forgotPasswordModal').modal('hide');
+  });
+  $(document).on('click','.login-close',function() {
+    localStorage.removeItem('productId');
+    $('#loginModal').modal('hide');
   });
   $(document).on('click','.forgotPassword',function() {
     $('#loginModal').modal('hide');

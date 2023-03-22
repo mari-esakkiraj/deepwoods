@@ -8,7 +8,7 @@ $absoluteBaseUrl = Url::base(true);
         <div class="col-xl-12">
             <div class="product-detail accordion-detail">
                 <div class="row mb-50 mt-30 ml-10">
-                    <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
+                    <div class="col-md-6">
                         <div class="product-thumb">
                             <div class="swiper-container single-product-thumb-content single-product-thumb-slider">
                                 <div class="swiper-wrapper">
@@ -37,7 +37,7 @@ $absoluteBaseUrl = Url::base(true);
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12 product-single-item">
+                    <div class="col-md-6 product-single-item">
                     <div class="product-single-info mt-sm-70">
                         <h2 class="title"><?= $products->name ?></h2>
                         <div class="product-detail-rating">
@@ -338,24 +338,9 @@ $absoluteBaseUrl = Url::base(true);
                                                             <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <input class="form-control" name="name" id="name" type="text" placeholder="Name">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <input class="form-control" name="website" id="website" type="text" placeholder="Website">
-                                                        </div>
-                                                    </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="button button-contactForm">Submit Review</button>
+                                                    <button type="button" class="button submit-review">Submit Review</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -371,3 +356,31 @@ $absoluteBaseUrl = Url::base(true);
     </div>
 </section>
     <!--== End Product Area Wrapper ==-->
+
+<?php 
+    $this->registerJs("
+    var ProductNav = new Swiper('.single-product-nav-slider', {
+        spaceBetween: 10,
+        slidesPerView: 4,
+        freeMode: true,
+        loop: false,
+      });
+      var ProductThumb = new Swiper('.single-product-thumb-slider', {
+        freeMode: true,
+        effect: 'fade',
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        fadeEffect: {
+          crossFade: true,
+        },
+        thumbs: {
+          swiper: ProductNav
+        }
+      });
+      $('#quickViewModal').on('hidden.bs.modal', function () {
+        $('body').removeClass('fix');
+      })
+    ");
+?>    

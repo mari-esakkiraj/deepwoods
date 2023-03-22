@@ -215,6 +215,25 @@
     clearClart();
   });
 
+  $(".submit-review").on('click', function() {
+    var productID = $(this).attr('data-cartItemId');
+    submitReview(productID);
+  });
+
+  function submitReview(productID){
+    $.ajax({
+      type:'post',
+      url:Baseurl+'/site/addreview',
+      dataType: 'json',
+      data:{
+          productId:productID
+      },
+      success:function(response) {
+        
+      }
+    });
+  }
+
   function clearClart(){
     $.ajax({
       type:'post',
@@ -269,26 +288,7 @@
   // Swiper Slider Js
 
     // Product Single Thumb Slider Js
-      var ProductNav = new Swiper('.single-product-nav-slider', {
-        spaceBetween: 10,
-        slidesPerView: 4,
-        freeMode: true,
-        loop: false,
-      });
-      var ProductThumb = new Swiper('.single-product-thumb-slider', {
-        freeMode: true,
-        effect: 'fade',
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-        fadeEffect: {
-          crossFade: true,
-        },
-        thumbs: {
-          swiper: ProductNav
-        }
-      });
+      
 
     // Product Single Thumb Slider2 Js
       var ProductNav2 = new Swiper('.single-product-nav-slider2', {
