@@ -43,6 +43,7 @@ if(!Yii::$app->user->isGuest) {
             ['label' => 'Home', 'url' => ['/customer/index']],
             ['label' => 'Users', 'url' => ['/customer/index']],
             ['label' => 'Product', 'url' => ['/products/index']],
+            ['label' => 'Settings', 'url' => ['/settings']],
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]
                 : '<li class="nav-item flex-container-last">'
