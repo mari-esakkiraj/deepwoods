@@ -41,11 +41,12 @@ class SettingsController extends Controller
         $model = $this->findModel(1);
         if ($this->request->post()) {
             if ($model->load($this->request->post())) {
-                $file_name = $model->company_logo;
-                $model->company_logo = \yii\web\UploadedFile::getInstance($model, 'company_logo');
-                $model->company_logo->saveAs('uploads/' . $model->company_logo->baseName . '.' . $model->company_logo->extension);
-                $model->company_logo = 'uploads/' . $model->company_logo->baseName . '.' . $model->company_logo->extension;
-                
+                    $file_name = $model->company_logo;
+                    $model->company_logo = \yii\web\UploadedFile::getInstance($model, 'company_logo');
+                    if(!empty($model->company_logo)) {
+                    $model->company_logo->saveAs('uploads/' . $model->company_logo->baseName . '.' . $model->company_logo->extension);
+                    $model->company_logo = 'uploads/' . $model->company_logo->baseName . '.' . $model->company_logo->extension;
+                }
                 if ($model->save()) {
                     return $this->redirect(['index']);
                 }
