@@ -18,6 +18,8 @@ use Yii;
  * @property string|null $country_code
  * @property string|null $phone_no
  * @property string|null $gst
+ * @property int|null $freight_charges
+ * @property int|null $qty_alert
  * @property string|null $company_logo
  * @property string|null $gst_number
  * @property string|null $sales_prefix
@@ -39,11 +41,11 @@ class Settings extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['freight_charges', 'qty_alert'], 'integer'],
             [['company_logo'], 'string'],
             [['company_name'], 'string', 'max' => 100],
-            [['address_line_1', 'address_line_2', 'city', 'gst_number', 'company_email'], 'string', 'max' => 255],
-            [['state', 'country_code', 'phone_no', 'gst', 'sales_prefix'], 'string', 'max' => 55],
-            [['postal_code', 'country'], 'string', 'max' => 15],
+            [['address_line_1', 'address_line_2', 'city', 'postal_code', 'gst_number', 'company_email'], 'string', 'max' => 255],
+            [['state', 'country', 'country_code', 'phone_no', 'gst', 'sales_prefix'], 'string', 'max' => 55],
         ];
     }
 
@@ -63,9 +65,11 @@ class Settings extends \yii\db\ActiveRecord
             'country' => 'Country',
             'country_code' => 'Country Code',
             'phone_no' => 'Phone No',
-            'gst' => 'Gst',
+            'gst' => 'GST/Tax',
+            'freight_charges' => 'Freight Charges',
+            'qty_alert' => 'Quantity Alert',
             'company_logo' => 'Company Logo',
-            'gst_number' => 'Gst Number',
+            'gst_number' => 'GST/Tax Number',
             'sales_prefix' => 'Sales Prefix',
             'company_email' => 'Company Email',
         ];
