@@ -61,7 +61,31 @@ $absoluteBaseUrl = Url::base(true);
         var productID = $(this).data('productid');
         var ajaxUrl = '$url'+'?id='+productID;
         $('#quickViewModal').modal('show').find('.modal-body').load(ajaxUrl);
+            var ProductNav = new Swiper('.single-product-nav-slider', {
+            spaceBetween: 10,
+            slidesPerView: 4,
+            freeMode: true,
+            loop: false,
+        });
+        var ProductThumb = new Swiper('.single-product-thumb-slider', {
+            freeMode: true,
+            effect: 'fade',
+            navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+            },
+            fadeEffect: {
+            crossFade: true,
+            },
+            thumbs: {
+            swiper: ProductNav
+            }
+        });
     });
+    
+    $('#quickViewModal').on('hidden.bs.modal', function () {
+    $('body').removeClass('fix');
+    })
     JS;
     $this->registerJs($script);
 ?>

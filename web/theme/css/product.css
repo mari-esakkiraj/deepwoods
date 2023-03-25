@@ -161,11 +161,11 @@
     text-decoration: line-through;
   }
   
-  .product-cart-wrap .product-card-bottom .add-cart {
+  .add-cart {
     cursor: pointer;
   }
   
-  .product-cart-wrap .product-card-bottom .add-cart .add {
+  .add-cart .add {
     position: relative;
     display: inline-block;
     padding: 6px 20px 6px 20px;
@@ -175,7 +175,7 @@
     font-weight: 700;
   }
   
-  .product-cart-wrap .product-card-bottom .add-cart .add:hover {
+  .add-cart .add:hover {
     background-color: #3BB77E;
     color: #fff;
     -webkit-transform: translateY(-3px);
