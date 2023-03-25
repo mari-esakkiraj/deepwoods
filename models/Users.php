@@ -61,16 +61,16 @@ class Users extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['firstname', 'lastname', 'email','mobile_number', 'password'], 'required'],
+            [['firstname', 'email','mobile_number', 'password'], 'required'],
             [['firstname', 'lastname', 'email'], 'string', 'max' => 255],
-            [['mobile_number', 'gst_number'], 'string', 'max' => 55],
+            [['mobile_number', 'gst_number', 'username'], 'string', 'max' => 55],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-            ['password', 'string', 'min' => 8],
+            ['password', 'string', 'min' => 6],
             ['admin', 'default', 'value' => 0],
             ['password_repeat', 'compare', 'compareAttribute' => 'password'],
-            ['username', 'unique', 'targetClass' => self::class, 'message' => 'This username has already been taken.'],
-            ['email', 'unique', 'targetClass' => self::class, 'message' => 'This email address has already been taken.'],
+            //['username', 'unique', 'targetClass' => self::class, 'message' => 'This username has already taken.'],
+            ['email', 'unique', 'targetClass' => self::class, 'message' => 'This email address has already taken.'],
         ];
     }
 

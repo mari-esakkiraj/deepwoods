@@ -241,6 +241,7 @@ class SiteController extends Controller
     public function actionContact()
     {
         $model = new ContactForm();
+        $this->layout = 'mainpage';
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
 
@@ -351,11 +352,14 @@ class SiteController extends Controller
         $user->status = 10;
 
         if($user->validate()){
-            $user->save();
-            $data = ['data'=> true];
-            $this->sendRegisterMail($user, $password);
+            if($user->save()){
+                $data = ['success' => true, 'data'=> true];
+                $this->sendRegisterMail($user, $password);
+            }else{
+                $data = ['success' => false, 'data' => $user->getErrors()];
+            }
         } else {
-            $data = ['data' => $user->getErrors()];
+            $data = ['success' => false, 'data' => $user->getErrors()];
         }
         return json_encode($data);
     }

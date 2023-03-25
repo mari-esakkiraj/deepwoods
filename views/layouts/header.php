@@ -30,6 +30,7 @@ $absoluteBaseUrl = Url::base(true);
                       <ul class="main-menu nav" style="align-items: center;">
                         <li><a href="<?=$absoluteBaseUrl?>">Home</a></li>
                         <li><a href="<?=$absoluteBaseUrl?>/site/aboutus">About Us</a></li>
+                        <li><a href="<?=$absoluteBaseUrl?>/site/contact">Contact Us</a></li>
                         <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Product</a></li>
                         
                         <?php 
@@ -141,8 +142,23 @@ $absoluteBaseUrl = Url::base(true);
           </div>
           <div class="modal-body">
             <form id='register_form'>
-            <div class="mb-3">
-                <label for="username" class="form-label">First Name</label>
+              <div class="mb-3">
+                <label for="email" class="form-label required">Email</label>
+                <input type="email" class="form-control email" id="email">
+                <span id='email_error'></span>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label required">Password</label>
+                <input type="password" class="form-control password" id="password">
+                <span id='password_error'></span>
+              </div>
+              <div class="mb-3">
+                <label for="confirm-password" class="form-label required">Confirm Password</label>
+                <input type="password" class="form-control confirm_password" id="confirm_password">
+                <span id='confirm_password_error'></span>
+              </div>
+              <div class="mb-3">
+                <label for="username" class="form-label required">First Name</label>
                 <input type="text" class="form-control firstname" id="firstname">
                 <span id='firstname_error'></span>
               </div>
@@ -151,31 +167,18 @@ $absoluteBaseUrl = Url::base(true);
                 <input type="text" class="form-control lastname" id="lastname">
                 <span id='lastname_error'></span>
               </div>
+              
               <div class="mb-3">
-                <label for="username" class="form-label">User Name</label>
-                <input type="text" class="form-control username" id="username">
-                <span id='username_error'></span>
-              </div>
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control email" id="email">
-                <span id='email_error'></span>
-              </div>
-              <div class="mb-3">
-                <label for="email" class="form-label">Phone Number</label>
+                <label for="email" class="form-label required">Phone Number</label>
                 <input type="text" class="form-control phone_number" id="phone_number">
                 <span id='phone_number_error'></span>
               </div>
+
               <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control password" id="password">
-                <span id='password_error'></span>
+                <label for="company" class="form-label">Company Name</label>
+                <input type="text" class="form-control company" id="company">
               </div>
-              <div class="mb-3">
-                <label for="confirm-password" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control confirm_password" id="confirm_password">
-                <span id='confirm_password_error'></span>
-              </div>
+              
               <div class="mb-3">
                 <label for="confirm-password" class="form-label">GST Number</label>
                 <input type="text" class="form-control gst_number" id="gst_number">
@@ -184,7 +187,7 @@ $absoluteBaseUrl = Url::base(true);
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary form-clear">Clear</button>
             <button type="button" class="btn btn-primary registerSubmit">Register</button>
           </div>
         </div>
@@ -289,6 +292,9 @@ $this->registerJs("
   $(document).on('click','#loginSubmitButton',function() {  
     submitLoginForm();
   });
+  $(document).on('click','.form-clear',function() {  
+    $('#register_form input.form-control').val('');
+  });
   document.onkeydown=function(evt){
     var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
     if(keyCode == 13){
@@ -349,10 +355,11 @@ $this->registerJs("
 
 <script>
   function registerForm(){
-    var userName = $('.username').val();
+    
     var firstname = $('.firstname').val();
     var lastname = $('.lastname').val();
     var email = $('.email').val();
+    var userName = $('.email').val();
     var phoneNumber = $('.phone_number').val();
     var password = $('.password').val();
     var confirmPassword = $('.confirm_password').val();
@@ -364,18 +371,12 @@ $this->registerJs("
     } else {
       $("#firstname_error").html("");
     }
-    if(lastname == ''){
-      $("#lastname_error").html("<span style='color:red'>Last Name is requried</span>");
-      clr =1;
-    } else {
-      $("#lastname_error").html("");
-    }
-    if(userName == ''){
-      $("#username_error").html("<span style='color:red'>User Name is requried</span>");
-      clr =1;
-    } else {
-      $("#username_error").html("");
-    }
+    // if(lastname == ''){
+    //   $("#lastname_error").html("<span style='color:red'>Last Name is requried</span>");
+    //   clr =1;
+    // } else {
+    //   $("#lastname_error").html("");
+    // }
     if(email == ''){
       $("#email_error").html("<span style='color:red'>Email is requried</span>");
       clr =1;
@@ -413,7 +414,7 @@ $this->registerJs("
         
     }
     var emailRegex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    if (!emailRegex.test(email)) {
+    if (email != '' && !emailRegex.test(email)) {
         $('#email_error').html("<span style='color:red'>Invalid email address.</span>");
         clr =1;
     }
@@ -432,19 +433,21 @@ $this->registerJs("
                     "userName": userName,"firstname": firstname,
                     "lastname": lastname,"email": email,
                     "phoneNumber": phoneNumber,"password": password,
-                    "confirmPassword": confirmPassword,"gstNumber": gstNumber
+                    "confirmPassword": confirmPassword,"gstNumber": gstNumber,
+                    "company": $('.company').val()
 
                 },
             dataType: 'json',
             success: function(response) {
-                var resultData = response.data;
+                var resultData = response.success;
                 if(resultData) {
                     toastr.success('User Register Successfully');
                     $("#register_form").trigger('reset');
                     $("#registerModal").modal('hide');
                     $("#loginModal").modal('show');
                 } else {
-                  $.each(resultData, function(key, value) {
+                  debugger;
+                  $.each(response.data, function(key, value) {
                     $('#'+key+'_error').html("<span style='color:red'>"+value[0]+"</span>");
                   });
                 }
