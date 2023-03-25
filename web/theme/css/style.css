@@ -4887,7 +4887,7 @@ section .container-fluid {
   border-right: none;
   color: #232323;
   font-weight: 300;
-  height: 48px;
+  height: 36px;
   padding: 0.175rem 0.5rem;
   width: 60px;
 }
@@ -4897,7 +4897,7 @@ section .container-fluid {
   cursor: pointer;
   display: block;
   font-size: 16px;
-  height: 25px;
+  height: 18px;
   line-height: 25px;
   position: absolute;
   right: 0;

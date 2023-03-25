@@ -126,7 +126,7 @@
     insertCart(productID, 1, 1, 'default');
   });
 
-  $(".add-to-cart-view").on('click', function() {
+  $(document).on('click','.add-to-cart-view',function(e) {
     var productID = $(this).data('product_id');
     var quantity = $("#product-quantity").val();
     insertCart(productID, 1, quantity, 'increment');
@@ -186,6 +186,10 @@
           }
           getCartCount();
         } else {
+          var quickModal = $('#quickViewModal').hasClass('show');
+          if(quickModal){
+            $('#quickViewModal').modal('hide');
+          }
           localStorage.setItem("productId", productID);
           $('#loginModal').modal('show');
         }
@@ -218,7 +222,11 @@
   }
 
   $(".clear-cart").on('click', function() {
-    clearClart();
+    if(confirm("Are you sure you want to clear?")){
+      clearClart();
+    }else{
+      return false;
+    }
   });
 
   $(".submit-review").on('click', function() {
@@ -573,10 +581,7 @@
         });
 
   // Product Quantity JS
-  var proQty = $(".pro-qty");
-  proQty.append('<div class="inc qty-btn"><i class="fa fa-angle-up"></i></div>');
-  proQty.append('<div class= "dec qty-btn"><i class="fa fa-angle-down"></i></div>');
-  $('.qty-btn').on('click', function (e) {
+  $(document).on('click','.qty-btn',function(e) { 
     e.preventDefault();
     var $button = $(this);
     var oldValue = $button.parent().find('input').val();

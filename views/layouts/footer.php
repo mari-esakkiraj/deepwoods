@@ -18,7 +18,7 @@ $absoluteBaseUrl = Url::base(true);
                           <img class="logo-light" src="<?= $absoluteBaseUrl ?>/theme/img/deepwoods.png" alt="Logo" />
                         </a>
                       </div>
-                      <p>Location: No 47 Breckỉnidge St, Fayettevill, India</p>
+                      <p>Shop No. 2, Ground Floor, <br>No 37/16, Mirbakshi ali street,<br>royapettah, chennai - 600 014. <br>Mob: +91 6380 589 226</p>
                     </div>
                     <div class="widget-desc">
                       <p>Aliquam quis molestie massa, non aliquet ipsum. Donec hendrerit dictum tortor sit amet lobortis.</p>
