@@ -241,63 +241,27 @@ $absoluteBaseUrl = Url::base(true);
                                         <div class="col-lg-8">
                                             <h4 class="mb-30">Customer questions &amp; answers</h4>
                                             <div class="comment-list">
-                                                <div class="single-comment justify-content-between d-flex mb-30">
-                                                    <div class="user justify-content-between d-flex">
-                                                        <div class="thumb text-center">
-                                                            <img src="assets/imgs/blog/author-2.png" alt="">
-                                                            <a href="#" class="font-heading text-brand">Sienna</a>
-                                                        </div>
-                                                        <div class="desc">
-                                                            <div class="d-flex justify-content-between mb-10">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="font-xs text-muted">December 4, 2022 at 3:12 pm </span>
-                                                                </div>
-                                                                <div class="product-rate d-inline-block">
-                                                                    <div class="product-rating" style="width: 100%"></div>
-                                                                </div>
+                                                <?php foreach($products->review as $review){ ?>
+                                                    <div class="single-comment justify-content-between d-flex mb-30">
+                                                        <div class="user justify-content-between d-flex">
+                                                            <div class="thumb text-center">
+                                                                <img src="<?=$absoluteBaseUrl?>/theme/img/testimonial/02.png" alt="">
+                                                                <a href="#" class="font-heading text-brand">Sienna</a>
                                                             </div>
-                                                            <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt? <a href="#" class="reply">Reply</a></p>
+                                                            <div class="desc">
+                                                                <div class="d-flex justify-content-between mb-10">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <span class="font-xs text-muted">December 4, 2022 at 3:12 pm </span>
+                                                                    </div>
+                                                                    <div class="product-rate d-inline-block">
+                                                                        <div class="product-rating" style="width: 100%"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <p class="mb-10"><?= $review->review ?></p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="single-comment justify-content-between d-flex mb-30 ml-30">
-                                                    <div class="user justify-content-between d-flex">
-                                                        <div class="thumb text-center">
-                                                            <img src="assets/imgs/blog/author-3.png" alt="">
-                                                            <a href="#" class="font-heading text-brand">Brenna</a>
-                                                        </div>
-                                                        <div class="desc">
-                                                            <div class="d-flex justify-content-between mb-10">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="font-xs text-muted">December 4, 2022 at 3:12 pm </span>
-                                                                </div>
-                                                                <div class="product-rate d-inline-block">
-                                                                    <div class="product-rating" style="width: 80%"></div>
-                                                                </div>
-                                                            </div>
-                                                            <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt? <a href="#" class="reply">Reply</a></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="single-comment justify-content-between d-flex">
-                                                    <div class="user justify-content-between d-flex">
-                                                        <div class="thumb text-center">
-                                                            <img src="assets/imgs/blog/author-4.png" alt="">
-                                                            <a href="#" class="font-heading text-brand">Gemma</a>
-                                                        </div>
-                                                        <div class="desc">
-                                                            <div class="d-flex justify-content-between mb-10">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="font-xs text-muted">December 4, 2022 at 3:12 pm </span>
-                                                                </div>
-                                                                <div class="product-rate d-inline-block">
-                                                                    <div class="product-rating" style="width: 80%"></div>
-                                                                </div>
-                                                            </div>
-                                                            <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt? <a href="#" class="reply">Reply</a></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <?php } ?>
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
@@ -335,7 +299,6 @@ $absoluteBaseUrl = Url::base(true);
                                 <!--comment form-->
                                 <div class="comment-form">
                                     <h4 class="mb-15">Add a review</h4>
-                                    <div class="product-rate d-inline-block mb-30"></div>
                                     <div class="row">
                                         <div class="col-lg-8 col-md-12">
                                             <form class="form-contact comment_form" action="#" id="commentForm">
@@ -347,7 +310,7 @@ $absoluteBaseUrl = Url::base(true);
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="button" class="button submit-review">Submit Review</button>
+                                                    <button type="button" class="button submit-review" data-cartItemId="<?=$products->id?>">Submit Review</button>
                                                 </div>
                                             </form>
                                         </div>

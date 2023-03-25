@@ -88,6 +88,11 @@ class Products extends \yii\db\ActiveRecord
         return $this->hasMany(CartItems::class, ['product_id' => 'id']);
     }
 
+    public function getReview()
+    {
+        return $this->hasMany(ProductReview::class, ['product_id' => 'id']);
+    }
+
     /**
      * Gets query for [[CreatedBy]].
      *

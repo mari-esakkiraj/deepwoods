@@ -182,7 +182,6 @@ $this->registerJs("
         var fname = $('#account_details .fname').val();
         var lname = $('#account_details .lname').val();
         var gstNumber = $('#account_details .gst_number').val();
-        alert(fname)
         var clr = 0;
         if(fname == ''){
           $('#fname_error').html('<span style=\"color:red\">First is Requried</span>');
