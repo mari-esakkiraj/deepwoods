@@ -72,10 +72,15 @@ $absoluteBaseUrl = Url::base(true);
                         <div class="product-quick-action">
                         <div class="product-quick-qty">
                             <div class="pro-qty">
-                            <input type="text" id="quantity" title="Quantity" value="1">
+                            <input type="number" id="product-quantity" title="Quantity" value="1" min="1" max="999">
                             </div>
                         </div>
-                        <a class="btn-product-add add-to-cart" href="javascript:void(0)"  data-product_id="<?=$products->id?>">Add to cart</a>
+                        <div class="product-card-bottom">
+                        <div class="add-cart add-to-cart-view" data-product_id="<?=$products->id?>">
+                            <a class="add" href="javascript:void(0)">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add </a>
+                        </div>
+                        </div>
                         </div>                        
                     </div>
                     </div>

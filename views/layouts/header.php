@@ -324,7 +324,6 @@ $this->registerJs("
         success:function(response) {
           if(response.success==true)
           {
-            debugger;
             window.location.reload();
           }
           else

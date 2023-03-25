@@ -126,6 +126,12 @@
     insertCart(productID, 1, 1, 'default');
   });
 
+  $(".add-to-cart-view").on('click', function() {
+    var productID = $(this).data('product_id');
+    var quantity = $("#product-quantity").val();
+    insertCart(productID, 1, quantity, 'increment');
+  });
+
   $(".remove-cart").on('click', function() {
     var productID = $(this).attr('data-cartItemId');
     var cartItemId = $(this).attr("data-cartItemId");
