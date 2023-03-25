@@ -11,6 +11,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Users;
 use app\models\CartItems;
+use app\models\ProductReview;
 
 use app\models\Products;
 use app\models\ProductImages;
@@ -55,7 +56,7 @@ class SiteController extends Controller
 
     public function beforeAction($action) 
     {
-        $withoutCSRF = ['cus-login','register','forgotpassword','savecheckout','clearcartlist','removecart'];
+        $withoutCSRF = ['cus-login','register','forgotpassword','savecheckout','clearcartlist','removecart', 'addreview'];
         if(in_array($action->id, $withoutCSRF)) {
             $this->enableCsrfValidation = false; 
         }
@@ -312,6 +313,22 @@ class SiteController extends Controller
             } 
         } 
         return json_encode(['data' => $returnData]);
+    }
+
+    public function actionAddreview(){
+        $productId = $_POST['productId'] ?? null;
+        $comment = $_POST['comment'] ?? null;
+        if(!Yii::$app->user->isGuest) {
+            $loginUserId = Yii::$app->user->identity->id ?? null;
+            $model = new ProductReview();
+            $model->product_id = $productId;
+            $model->user_id = $loginUserId;
+            $model->review =  $comment;
+            $model->created_by = $loginUserId;
+            //$model->created_at = date('Y-m-d H:i:s');
+            $model->save();
+        }
+        return json_encode(['data' => true]);
     }
 
     public function actionClearcartlist()

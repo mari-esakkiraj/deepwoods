@@ -240,7 +240,8 @@
       url:Baseurl+'/site/addreview',
       dataType: 'json',
       data:{
-          productId:productID
+          productId: productID,
+          comment: $("#comment").val(),
       },
       success:function(response) {
         
