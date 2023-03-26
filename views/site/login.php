@@ -7,7 +7,7 @@
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
 
-$this->title = 'Deepwoods Login';
+$this->title = 'Admin Login';
 //$this->params['breadcrumbs'][] = $this->title;
 use yii\helpers\Url;
 $absoluteBaseUrl = Url::base(true);
@@ -23,12 +23,12 @@ $absoluteBaseUrl = Url::base(true);
             <div class="col-lg-4">
                 <div class="site-login">
                     <h1><?= Html::encode($this->title) ?></h1>
-                    <p>Please fill out the following fields to login:</p>
                     <?php $form = ActiveForm::begin(['id' => 'login-form',]); ?>
                 
                         <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
                 
                         <?= $form->field($model, 'password')->passwordInput() ?>
+                        
                 
                         <div class="form-group">
                                 <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
@@ -44,4 +44,17 @@ $absoluteBaseUrl = Url::base(true);
 </div>
 
 
+
+
+<?php
+    $script = <<< JS
+        $('<i id="toggle_pwd" class="fa fa-fw fa-eye field_icon"></i>').insertAfter("#loginform-password");
+        $("#toggle_pwd").click(function () {
+            $(this).toggleClass("fa-eye fa-eye-slash");
+            var type = $(this).hasClass("fa-eye-slash") ? "text" : "password";
+            $("#loginform-password").attr("type", type);
+        });
+    JS;
+    $this->registerJs($script);
+?>
 

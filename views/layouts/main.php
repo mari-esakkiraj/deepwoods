@@ -40,7 +40,7 @@ if(!Yii::$app->user->isGuest) {
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav w-100'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/customer/index']],
+            ['label' => 'Home', 'url' => ['/customer/indexv1']],
             ['label' => 'Users', 'url' => ['/customer/index']],
             ['label' => 'Product', 'url' => ['/products/index']],
             ['label' => 'Settings', 'url' => ['/settings']],
@@ -65,7 +65,13 @@ if(!Yii::$app->user->isGuest) {
 <main id="main" class="flex-shrink-0" role="main">
     <div class="container">
         <?php if (!empty($this->params['breadcrumbs'])): ?>
-            <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
+            <?= Breadcrumbs::widget([
+                'homeLink' => [
+                    'label' => 'Home',
+                    'url' => false,
+                ],
+                'links' => $this->params['breadcrumbs']
+            ]) ?>
         <?php endif ?>
         <?= Alert::widget() ?>
         <?= $content ?>

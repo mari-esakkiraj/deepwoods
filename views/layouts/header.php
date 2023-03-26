@@ -39,7 +39,7 @@ $absoluteBaseUrl = Url::base(true);
                         <li><a href="<?=$absoluteBaseUrl?>/orders/cartlist"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart<span class='badge badge-warning' id='dwCartCount'>0</span></a></li>
                         <li class="has-submenu">
                           <a href="javascript:void(0)">
-                            <?php echo Yii::$app->user->identity->username ?>
+                            <?php echo Yii::$app->user->identity->firstname.' '.Yii::$app->user->identity->	lastname ?>
                           </a>
                           <ul class="submenu-nav" style="min-width: 140px;">
                             <li><a href="<?=$absoluteBaseUrl?>/profile">My Account</a></li>

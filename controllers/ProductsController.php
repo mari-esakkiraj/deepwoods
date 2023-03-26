@@ -274,7 +274,7 @@ class ProductsController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('create', [
+        return $this->render('update', [
             'model' => $model,
             'modelImages' => $modelImages,
             'modelImagees' => []
