@@ -27,6 +27,7 @@ use yii\widgets\ActiveForm;
     <?= ($model->isNewRecord) ? $form->field($model, 'password_repeat')->passwordInput()->label('Confirm Password') : '' ?>
 
     <?= $form->field($model, 'gst_number')->textInput() ?>
+    <?= $form->field($model, 'company')->textInput() ?>
 
     <div class="form-group text-center mt-4">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
