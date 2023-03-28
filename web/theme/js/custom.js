@@ -136,7 +136,9 @@
     var productID = $(this).attr('data-cartItemId');
     var cartItemId = $(this).attr("data-cartItemId");
     //insertCart(productID, cartItemId, 1, 'delete');
-    removeCart(cartItemId);
+    if(confirm("Are you sure you want to remove?")){
+      removeCart(cartItemId);
+    }
   });
 
   $('.cartquantity').on('input', function() {
@@ -272,7 +274,13 @@
       type:'GET',
       url:Baseurl+'/site/usercartcount',
       success:function(response) {
-        $("#dwCartCount").html(response);        
+        if(response > 0){
+          $("#dwCartCount").removeClass('hide');
+          $("#dwCartCount").html(response);
+        }else{
+          $("#dwCartCount").addClass('hide');
+        }
+                
       }
     })
   }
@@ -360,6 +368,7 @@
         var product = $(".product-slider");
         product.owlCarousel({
           autoplay: true,
+          autoplayHoverPause: true,
           loop:true,
           margin:10,
           responsiveClass:true,

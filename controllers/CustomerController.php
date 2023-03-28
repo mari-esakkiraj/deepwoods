@@ -50,6 +50,23 @@ class CustomerController extends Controller
     }
 
     /**
+     * Lists all Customer models.
+     *
+     * @return string
+     */
+    public function actionIndexv1()
+    {
+        $searchModel = new CustomerSearch();
+        $searchModel->admin = 0;
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('indexv1', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
      * Displays a single Customer model.
      * @param int $id ID
      * @return string

@@ -113,3 +113,13 @@ a.desc:after {
 .help-block{
     color: red;
 }
+
+#toggle_pwd{
+    float: right;
+    margin-top: -25px;
+    margin-right: 10px;
+}
+
+#loginform-password{
+    background-image: none !important;
+}

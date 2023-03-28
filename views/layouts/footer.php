@@ -20,9 +20,6 @@ $absoluteBaseUrl = Url::base(true);
                       </div>
                       <p>Shop No. 2, Ground Floor, <br>No 37/16, Mirbakshi ali street,<br>royapettah, chennai - 600 014. <br>Mob: +91 6380 589 226</p>
                     </div>
-                    <div class="widget-desc">
-                      <p>Aliquam quis molestie massa, non aliquet ipsum. Donec hendrerit dictum tortor sit amet lobortis.</p>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -30,12 +27,9 @@ $absoluteBaseUrl = Url::base(true);
                 <div class="widget-item">
                   <div class="widget-menu-wrap">
                     <ul class="nav-menu">
-                      <li><a href="#/">Delivery</a></li>
                       <li><a href="<?=$absoluteBaseUrl?>/site/aboutus">About us</a></li>
-                      <li><a href="#/">Secure payment</a></li>
-                      <li><a href="#/">Contact us</a></li>
-                      <li><a href="#/">Sitemap</a></li>
-                      <li><a href="#/">My account</a></li>
+                      <li><a href="<?=$absoluteBaseUrl?>/site/contact">Contact us</a></li>
+                      <li><a href="<?=$absoluteBaseUrl?>/profile">My account</a></li>
                     </ul>
                   </div>
                 </div>
