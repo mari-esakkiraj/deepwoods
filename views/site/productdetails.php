@@ -61,13 +61,13 @@ $absoluteBaseUrl = Url::base(true);
                                 </span>
                             </div>
                         </div>
-                        <div class="product-description">
-                        <ul class="product-desc-list">
-                            <li>Rich in antioxidants.</li>
-                            <li>Good source of several nutrients.</li>
-                            <li>May boost your overall health.</li>
-                            <li>Naturally gluten-free.</li>
-                        </ul>
+                        <div class="product-description hide">
+                            <ul class="product-desc-list">
+                                <li>Rich in antioxidants.</li>
+                                <li>Good source of several nutrients.</li>
+                                <li>May boost your overall health.</li>
+                                <li>Naturally gluten-free.</li>
+                            </ul>
                         </div>
                         <div class="product-quick-action">
                         <div class="product-quick-qty">

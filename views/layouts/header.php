@@ -144,7 +144,7 @@ $absoluteBaseUrl = Url::base(true);
             <form id='register_form'>
               <div class="mb-3">
                 <label for="email" class="form-label required">Email</label>
-                <input type="email" class="form-control email" id="email">
+                <input type="email" class="form-control email" id="email" title="Please enter valid email address">
                 <span id='email_error'></span>
               </div>
               <div class="mb-3">
@@ -170,7 +170,7 @@ $absoluteBaseUrl = Url::base(true);
               
               <div class="mb-3">
                 <label for="email" class="form-label required">Phone Number</label>
-                <input type="text" class="form-control phone_number" id="phone_number">
+                <input type="text" class="form-control phone_number" id="phone_number" pattern="[7-9]{1}[0-9]{9}" >
                 <span id='phone_number_error'></span>
               </div>
 
@@ -348,6 +348,16 @@ $this->registerJs("
   $(document).on('click','.registerSubmit',function() {
     registerForm();
   });
+
+  $(document).on('keyup','.confirm_password',function() {
+    var password = $('.password').val();
+    var confirmPassword = $('.confirm_password').val();
+    if (password != confirmPassword) {
+      $('#confirm_password_error').html('<span style=\'color:red\'>Password doesn\'t match</span>');
+    }else{
+      $('#confirm_password_error').html('');
+    }
+  });
 ");
 
 
@@ -410,7 +420,7 @@ $this->registerJs("
 
     if (password != confirmPassword) {
         clr =1;
-        $("#confirm_password_error").html("<span style='color:red'>Passwords do not match</span>");
+        $("#confirm_password_error").html("<span style='color:red'>Password doesn't match</span>");
         
     }
     var emailRegex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;

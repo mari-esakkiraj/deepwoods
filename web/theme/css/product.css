@@ -1112,7 +1112,7 @@ table td, table th {
   margin-right: 10px !important;
 }
 
-.required:after {
+#register_form .required:after {
   content:" *";
   color: red;
 }
