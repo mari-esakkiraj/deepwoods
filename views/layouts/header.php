@@ -100,7 +100,7 @@ $absoluteBaseUrl = Url::base(true);
   }
   ?>
 
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true" data-keyboard="false">
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -117,6 +117,7 @@ $absoluteBaseUrl = Url::base(true);
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control loginpassword" name="password" id="password">
+                <i class="fa fa-fw fa-eye" id="togglePassword"></i>
                 <span id='loginpassword_error'></span>
               </div>
             </form>
@@ -166,6 +167,10 @@ $absoluteBaseUrl = Url::base(true);
                 <label for="username" class="form-label">Last Name</label>
                 <input type="text" class="form-control lastname" id="lastname">
                 <span id='lastname_error'></span>
+              </div>
+              <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <textarea class="form-control user-address" id="user-address" rows="3"></textarea>
               </div>
               
               <div class="mb-3">
@@ -237,11 +242,18 @@ $absoluteBaseUrl = Url::base(true);
 $this->registerJs("
   $(document).on('keyup','.phone_number',function() {
     var phone = $(this).val();
-    // format phone number as (xxx) xxx-xxxx
-    phone = phone.replace(/[^0-9]/g, '');
-  // phone = phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
-    $(this).val(phone);
-  });  
+    let pattern = new RegExp(\"^[0-9]{10}$\");
+    $('#phone_number_error').html('');
+    if(phone !== '' && !pattern.test(phone)){
+      $('#phone_number_error').html('<span style=\"color:red\">Please enter valid phone number.</span>');
+    }
+  }); 
+  
+  $(\"#togglePassword\").click(function () {
+      $(this).toggleClass(\"fa-eye fa-eye-slash\");
+      var type = $(this).hasClass(\"fa-eye-slash\") ? \"text\" : \"password\";
+      $(\".loginpassword\").attr(\"type\", type);
+  });
 
   $(document).on('click','.siginup',function() {
     $('#loginModal').modal('hide');
@@ -444,8 +456,8 @@ $this->registerJs("
                     "lastname": lastname,"email": email,
                     "phoneNumber": phoneNumber,"password": password,
                     "confirmPassword": confirmPassword,"gstNumber": gstNumber,
-                    "company": $('.company').val()
-
+                    "company": $('.company').val(),
+                    "address": $("#user-address").val(),
                 },
             dataType: 'json',
             success: function(response) {

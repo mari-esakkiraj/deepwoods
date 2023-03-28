@@ -326,9 +326,11 @@ class SiteController extends Controller
             $model->review =  $comment;
             $model->created_by = $loginUserId;
             //$model->created_at = date('Y-m-d H:i:s');
-            $model->save();
+            if($model->save()){
+                return json_encode(['data' => true]);
+            }
         }
-        return json_encode(['data' => true]);
+        return json_encode(['data' => false]);
     }
 
     public function actionClearcartlist()
@@ -357,6 +359,7 @@ class SiteController extends Controller
         $phoneNumber = $_POST['phoneNumber'] ?? null;
         $password = $_POST['password'] ?? null;
         $gstNumber = $_POST['gstNumber'] ?? null;
+        $address = $_POST['address'] ?? null;
         
         $user = new Users();
         $user->firstname = $firstname;

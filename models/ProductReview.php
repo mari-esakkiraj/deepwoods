@@ -58,4 +58,14 @@ class ProductReview extends \yii\db\ActiveRecord
             'updated_by' => 'Updated By',
         ];
     }
+
+    /**
+     * Gets query for [[user_id]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCreatedUser()
+    {
+        return $this->hasOne(Users::class, ['id' => 'user_id']);
+    }
 }

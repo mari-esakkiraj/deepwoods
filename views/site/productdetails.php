@@ -1,6 +1,7 @@
 <?php 
 use yii\helpers\Url;
 $absoluteBaseUrl = Url::base(true);
+use yii\widgets\Pjax;
 ?>
 <!--== Start Product Area Wrapper ==-->
 <section class="product-area">
@@ -87,8 +88,9 @@ $absoluteBaseUrl = Url::base(true);
                     </div>
                     </div>
                 </div>
+                <?php Pjax::begin(['id' => 'my-product-review']); ?>
                 <div class="product-info">
-                    <div class="tab-style3">
+                    <div class="tab-style3" id="my-product-tabs">
                         <ul class="nav nav-tabs text-uppercase">
                             <li class="nav-item">
                                 <a class="nav-link active" id="Description-tab" data-bs-toggle="tab" href="#Description">Description</a>
@@ -100,7 +102,7 @@ $absoluteBaseUrl = Url::base(true);
                                 <a class="nav-link" id="Vendor-info-tab" data-bs-toggle="tab" href="#Vendor-info">Vendor</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews (3)</a>
+                                <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews (<?= count($products->review) ?>)</a>
                             </li>
                         </ul>
                         <div class="tab-content shop_info_tab entry-main-content">
@@ -238,15 +240,16 @@ $absoluteBaseUrl = Url::base(true);
                                 <!--Comments-->
                                 <div class="comments-area">
                                     <div class="row">
+                                        
                                         <div class="col-lg-8">
                                             <h4 class="mb-30">Customer questions &amp; answers</h4>
                                             <div class="comment-list">
-                                                <?php foreach($products->review as $review){ ?>
-                                                    <div class="single-comment justify-content-between d-flex mb-30">
+                                                <?php if(count($products->review) > 0){ foreach($products->review as $review){ ?>
+                                                    <div class="single-comment justify-content-between d-flex mb-10">
                                                         <div class="user justify-content-between d-flex">
                                                             <div class="thumb text-center">
-                                                                <img src="<?=$absoluteBaseUrl?>/theme/img/testimonial/02.png" alt="">
-                                                                <a href="#" class="font-heading text-brand">Sienna</a>
+                                                                <img src="<?=$absoluteBaseUrl?>/theme/img/testimonial/02.png" alt="" class="hide">
+                                                                <a href="#" class="font-heading text-brand"><?= $review->createdUser->firstname.' '.$review->createdUser->lastname ?></a>
                                                             </div>
                                                             <div class="desc">
                                                                 <div class="d-flex justify-content-between mb-10">
@@ -261,10 +264,13 @@ $absoluteBaseUrl = Url::base(true);
                                                             </div>
                                                         </div>
                                                     </div>
+                                                <?php } }else{ ?>
+                                                    <div>No review found</div>
                                                 <?php } ?>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        
+                                        <div class="col-lg-4 hide">
                                             <h4 class="mb-30">Customer reviews</h4>
                                             <div class="d-flex mb-30">
                                                 <div class="product-rate d-inline-block mr-15">
@@ -305,7 +311,8 @@ $absoluteBaseUrl = Url::base(true);
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                                                            <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Type a message here"></textarea>
+                                                            <span style="color:red" id="commentErrorMsg"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -320,7 +327,7 @@ $absoluteBaseUrl = Url::base(true);
                         </div>
                     </div>
                 </div>
-                
+                <?php  Pjax::end(); ?>
             </div>
         </div>
     </div>

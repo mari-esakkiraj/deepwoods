@@ -231,9 +231,16 @@
     }
   });
 
-  $(".submit-review").on('click', function() {
-    var productID = $(this).attr('data-cartItemId');
-    submitReview(productID);
+  $(document).on('click','.submit-review',function(e) { 
+    var review = $("#comment").val();
+    if(review !== ''){
+      $("#commentErrorMsg").text("");
+      var productID = $(this).attr('data-cartItemId');
+      submitReview(productID);
+    }else{
+      $("#commentErrorMsg").text("Please type a message.");
+    }
+   
   });
 
   function submitReview(productID){
@@ -246,7 +253,11 @@
           comment: $("#comment").val(),
       },
       success:function(response) {
-        
+        if(response.data){
+          toastr.success('Your review added.');
+          $.pjax.reload({container: '#my-product-review'});
+          $("#comment").val("")
+        }
       }
     });
   }
