@@ -1,6 +1,8 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\Pjax;
+
 $absoluteBaseUrl = Url::base(true);
 ?>
 <div class="container">
@@ -118,40 +120,13 @@ $absoluteBaseUrl = Url::base(true);
                             </div>
                         </div>
                         <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
-                            <div>No Address found.</div>
-                            <div class="row hide">
-                                <div class="col-lg-6">
-                                    <div class="card mb-3 mb-lg-0">
-                                        <div class="card-header">
-                                            <h3 class="mb-0">Billing Address</h3>
-                                        </div>
-                                        <div class="card-body">
-                                            <address>
-                                                3522 Interstate<br>
-                                                75 Business Spur,<br>
-                                                Sault Ste. <br>Marie, MI 49783
-                                            </address>
-                                            <p>New York</p>
-                                            <a href="#" class="btn-small">Edit</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5 class="mb-0">Shipping Address</h5>
-                                        </div>
-                                        <div class="card-body">
-                                            <address>
-                                                4299 Express Lane<br>
-                                                Sarasota, <br>FL 34249 USA <br>Phone: 1.941.227.4444
-                                            </address>
-                                            <p>Sarasota</p>
-                                            <a href="#" class="btn-small">Edit</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php
+                            Pjax::begin(['id' => 'workers-gridview','timeout'=>5000]); 
+                                echo $this->render('address_details', [
+                                    'userID' => $user->id ?? null
+                                ]);
+                            Pjax::end();
+                            ?>
                         </div>
                         <div class="tab-pane fade" id="account-detail" role="tabpanel" aria-labelledby="account-detail-tab">
                             <div class="card">
@@ -174,6 +149,20 @@ $absoluteBaseUrl = Url::base(true);
     </div>
 </div>
 
+<div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModal" aria-hidden="true" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addressModal">Address</Address></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body addressUpdateModal">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
 <?php 
 $this->registerJs("
     var AppConfig = new AppConfigs();
@@ -184,13 +173,13 @@ $this->registerJs("
         var gstNumber = $('#account_details .gst_number').val();
         var clr = 0;
         if(fname == ''){
-          $('#fname_error').html('<span style=\"color:red\">First is Requried</span>');
+          $('#fname_error').html('<span style=\"color:red\">First Name is Requried</span>');
           clr =1;
         } else {
           $('#fname_error').html('');
         }
         if(lname == ''){
-            $('#lname_error').html('<span style=\"color:red\">First is Requried</span>');
+            $('#lname_error').html('<span style=\"color:red\">First Name is Requried</span>');
             clr =1;
         } else {
             $('#lname_error').html('');
@@ -207,6 +196,81 @@ $this->registerJs("
                     } else {
                         toastr.error('something went wrong !')
                     }
+                }
+            });
+        }
+    });
+
+    $(document).on('click','.addressUpdate',function() { 
+        var addressId = $(this).data('address_id');
+        var addressType = $(this).data('address_type');
+        $.ajax({
+            type:'post',
+            url:baseurl+'/profile/address-update',
+            data:{addressId:addressId,addressType:addressType},
+            success:function(response) {
+                $('.addressUpdateModal').html(response);
+                $('#addressModal').modal('show');
+            }
+        });
+    });
+    $(document).on('click','.address_update_submit',function() {
+        var address = $('#address_update_form .address').val();
+        var city = $('#address_update_form .city').val();
+        var state = $('#address_update_form .state').val();
+        var country = $('#address_update_form .country').val();
+        var pinCode = $('#address_update_form .pinCode').val();
+        var addressid = $('#address_update_form .addressid').val();
+        var addresstype = $('#address_update_form .addresstype').val();
+        var clr = 0;
+        if(address == ''){
+            $('#address_error').html('<span style=\"color:red\">Address is Requried</span>');
+            clr =1;
+        } else {
+            $('#address_error').html('');
+        }
+
+        if(city == ''){
+            $('#city_error').html('<span style=\"color:red\">City is Requried</span>');
+            clr =1;
+        } else {
+            $('#city_error').html('');
+        }
+
+        if(state == ''){
+            $('#state_error').html('<span style=\"color:red\">State is Requried</span>');
+            clr =1;
+        } else {
+            $('#state_error').html('');
+        }
+
+        if(country == ''){
+            $('#country_error').html('<span style=\"color:red\">Country is Requried</span>');
+            clr =1;
+        } else {
+            $('#country_error').html('');
+        }
+
+        if(pinCode == ''){
+            $('#pinCode_error').html('<span style=\"color:red\">Pincode is Requried</span>');
+            clr =1;
+        } else {
+            $('#pinCode_error').html('');
+        }
+
+        if(clr==0) {
+            $.ajax({
+                type:'post',
+                url:baseurl+'/profile/address-save',
+                data:{address:address,city:city,state:state,country:country,pinCode:pinCode,addressid:addressid,addresstype:addresstype},
+                success:function(response) {
+                    if(response) {
+                        toastr.success('Address saved suceesfully');
+                    } else {
+                        toastr.error('something went wrong !')
+                    }
+                    $.pjax.reload({container:'#workers-gridview',timeout:'5000'}); 
+                    $('#addressModal').modal('hide');
                 }
             });
         }
