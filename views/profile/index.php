@@ -51,46 +51,14 @@ $absoluteBaseUrl = Url::base(true);
                         <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="mb-0">Your Orders</h3>
+                                    <h5 class="mb-0">Your Orders</h5>
                                 </div>
                                 <div class="card-body">
-                                    <div>No order.</div>
-                                    <div class="table-responsive hide">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Order</th>
-                                                    <th>Date</th>
-                                                    <th>Status</th>
-                                                    <th>Total</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>#1357</td>
-                                                    <td>March 45, 2020</td>
-                                                    <td>Processing</td>
-                                                    <td>$125.00 for 2 item</td>
-                                                    <td><a href="#" class="btn-small d-block">View</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>#2468</td>
-                                                    <td>June 29, 2020</td>
-                                                    <td>Completed</td>
-                                                    <td>$364.00 for 5 item</td>
-                                                    <td><a href="#" class="btn-small d-block">View</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>#2366</td>
-                                                    <td>August 02, 2020</td>
-                                                    <td>Completed</td>
-                                                    <td>$280.00 for 3 item</td>
-                                                    <td><a href="#" class="btn-small d-block">View</a></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                    <?php
+                                        echo $this->render('order_details', [
+                                            'userID' => $user->id ?? null
+                                        ]);
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -121,7 +89,7 @@ $absoluteBaseUrl = Url::base(true);
                         </div>
                         <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
                             <?php
-                            Pjax::begin(['id' => 'workers-gridview','timeout'=>5000]); 
+                            Pjax::begin(['id' => 'address-gridview','timeout'=>5000]); 
                                 echo $this->render('address_details', [
                                     'userID' => $user->id ?? null
                                 ]);
@@ -269,7 +237,7 @@ $this->registerJs("
                     } else {
                         toastr.error('something went wrong !')
                     }
-                    $.pjax.reload({container:'#workers-gridview',timeout:'5000'}); 
+                    $.pjax.reload({container:'#address-gridview',timeout:'5000'}); 
                     $('#addressModal').modal('hide');
                 }
             });
