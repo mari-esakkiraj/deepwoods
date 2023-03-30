@@ -50,16 +50,26 @@ $config = [
         ],
         'mailer' => [
             'class' => \yii\symfonymailer\Mailer::class,
+            //'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@app/mail',
             // send all mails to a file by default.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
+            'transport' => [
+                'scheme' => 'smtps',
+                'host' => 'smtp.hostinger.com',
+                'username' => 'testing@deepwoodsorganics.com',
+                'password' => 'Deep@$2023',
+                'port' => 465,
+                //'dsn' => 'sendmail://default',
+                'encryption' => 'tls', 
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error'],
                 ],
             ],
         ],
