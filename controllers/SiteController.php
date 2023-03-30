@@ -433,7 +433,7 @@ class SiteController extends Controller
                         </body>
                     </html>";
         $email = \Yii::$app->mailer->compose();
-        $email->setFrom(['no.reply@asaltatechnologies.com' => 'Employee - EPTW']);
+        $email->setFrom(['testing@deepwoodsorganics.com' => 'Employee - EPTW']);
         $email->setTo($to);
         $email->setCharset('UTF-8');
         $email->setSubject($subject);
