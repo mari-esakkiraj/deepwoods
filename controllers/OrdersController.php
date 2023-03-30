@@ -19,6 +19,9 @@ use yii\web\Response;
 use app\base\Model;
 use yii\widgets\ActiveForm;
 use yii\filters\AccessControl;
+use Razorpay\Api\Api;
+use app\models\Settings;
+use Razorpay\Api\Errors\SignatureVerificationError;
 
 /**
  * OrdersController implements the CRUD actions for Orders model.
@@ -55,7 +58,7 @@ class OrdersController extends Controller
                             }
                         ],
                         [
-                            'actions' => ['cartlist','checkout'],
+                            'actions' => ['cartlist','checkout', 'payment', 'verify'],
                             'allow' => true,
                             'roles' => ['@'],
                         ],
@@ -67,7 +70,7 @@ class OrdersController extends Controller
 
     public function beforeAction($action) 
     {
-        $withoutCSRF = ['savecheckout','removecart'];
+        $withoutCSRF = ['savecheckout','removecart', 'verify'];
         if (in_array($action->id, $withoutCSRF)) {
             $this->enableCsrfValidation = false; 
         }
@@ -252,5 +255,130 @@ class OrdersController extends Controller
         $this->layout = 'mainpage';
         $productList = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->all();
         return $this->render('checkout',["dataProvider" => $productList]);
+    }
+
+    public function actionPayment()
+    {   
+        $keyId = 'rzp_test_837Iw9MVhmAj9z';
+        $keySecret = 'PcntHmmtBWoM2te93AIt2Uh7';
+        $displayCurrency = 'INR';
+
+        $this->layout = 'mainpage';
+        $productLists = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->all();
+        $amount = 0;
+        foreach ($productLists as $productList) {
+            $amount+=($productList->product->price * $productList->quantity);
+        }
+        $api = new Api($keyId, $keySecret);
+        $setting = Settings::findOne(1);
+        if (!empty($setting)) {
+            $gst = $setting->gst;
+        }
+        $orderData = [
+            'receipt'         => 3456,
+            'amount'          => $amount*100, // 2000 rupees in paise
+            'currency'        => 'INR',
+            'payment_capture' => 1 // auto capture
+        ];
+        
+        $razorpayOrder = $api->order->create($orderData);
+        
+        $razorpayOrderId = $razorpayOrder['id'];
+        
+        $_SESSION['razorpay_order_id'] = $razorpayOrderId;
+        
+        $displayAmount = $amount = $orderData['amount'];
+        
+        if ($displayCurrency !== 'INR')
+        {
+            $url = "https://api.fixer.io/latest?symbols=$displayCurrency&base=INR";
+            $exchange = json_decode(file_get_contents($url), true);
+        
+            $displayAmount = $exchange['rates'][$displayCurrency] * $amount / 100;
+        }
+
+        $data = [
+            "key"               => $keyId,
+            "amount"            => $amount,
+            "name"              => "DJ Tiesto",
+            "description"       => "Tron Legacy",
+            "image"             => "https://s29.postimg.org/r6dj1g85z/daft_punk.jpg",
+            "prefill"           => [
+            "name"              => "Daft Punk",
+            "email"             => "customer@merchant.com",
+            "contact"           => "9999999999",
+            ],
+            "notes"             => [
+            "address"           => "Hello World",
+            "merchant_order_id" => "12312321",
+            ],
+            "theme"             => [
+            "color"             => "#F37254"
+            ],
+            "order_id"          => $razorpayOrderId,
+            'tax'=>100
+        ];
+        
+        if ($displayCurrency !== 'INR')
+        {
+            $data['display_currency']  = $displayCurrency;
+            $data['display_amount']    = $displayAmount;
+        }
+        
+        $json = json_encode($data);
+
+        return $this->render('payment',["json" => $json]);
+    }
+
+    public function actionVerify()
+    {
+        $this->enableCsrfValidation = false;
+        $success = true;
+        $keyId = 'rzp_test_837Iw9MVhmAj9z';
+        $keySecret = 'PcntHmmtBWoM2te93AIt2Uh7';
+        $displayCurrency = 'INR';
+        $error = "Payment Failed";
+
+        if (empty($_POST['razorpay_payment_id']) === false)
+        {
+            $api = new Api($keyId, $keySecret);
+
+            try
+            {
+                // Please note that the razorpay order ID must
+                // come from a trusted source (session here, but
+                // could be database or something else)
+                $attributes = array(
+                    'razorpay_order_id' => $_SESSION['razorpay_order_id'],
+                    'razorpay_payment_id' => $_POST['razorpay_payment_id'],
+                    'razorpay_signature' => $_POST['razorpay_signature']
+                );
+
+                $api->utility->verifyPaymentSignature($attributes);
+            }
+            catch(SignatureVerificationError $e)
+            {
+                $success = false;
+                $error = 'Razorpay Error : ' . $e->getMessage();
+            }
+        }
+
+        if ($success === true)
+        {
+            $html = "<p>Your payment was successful</p>
+                    <p>Payment ID: {$_POST['razorpay_payment_id']}</p>";
+            //$productList = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->deleteAll();
+        }
+        else
+        {
+            $html = "<p>Your payment failed</p>
+                    <p>{$error}</p>";
+        }
+
+        //echo $html;
+
+        $this->layout = 'mainpage';
+        
+        return $this->render('verify',["success" => $success, 'message' => $html]);
     }
 }

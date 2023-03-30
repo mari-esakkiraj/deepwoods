@@ -40,9 +40,10 @@ if(!Yii::$app->user->isGuest) {
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav w-100'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/customer/index']],
+            ['label' => 'Home', 'url' => ['/customer/indexv1']],
             ['label' => 'Users', 'url' => ['/customer/index']],
             ['label' => 'Product', 'url' => ['/products/index']],
+            ['label' => 'Settings', 'url' => ['/settings']],
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]
                 : '<li class="nav-item flex-container-last">'
@@ -60,11 +61,18 @@ if(!Yii::$app->user->isGuest) {
 </header>
 <?php } ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <main id="main" class="flex-shrink-0" role="main">
     <div class="container">
         <?php if (!empty($this->params['breadcrumbs'])): ?>
-            <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
+            <?= Breadcrumbs::widget([
+                'homeLink' => [
+                    'label' => 'Home',
+                    'url' => false,
+                ],
+                'links' => $this->params['breadcrumbs']
+            ]) ?>
         <?php endif ?>
         <?= Alert::widget() ?>
         <?= $content ?>

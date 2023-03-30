@@ -30,6 +30,7 @@ $absoluteBaseUrl = Url::base(true);
                       <ul class="main-menu nav" style="align-items: center;">
                         <li><a href="<?=$absoluteBaseUrl?>">Home</a></li>
                         <li><a href="<?=$absoluteBaseUrl?>/site/aboutus">About Us</a></li>
+                        <li><a href="<?=$absoluteBaseUrl?>/site/contact">Contact Us</a></li>
                         <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Product</a></li>
                         
                         <?php 
@@ -38,7 +39,7 @@ $absoluteBaseUrl = Url::base(true);
                         <li><a href="<?=$absoluteBaseUrl?>/orders/cartlist"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart<span class='badge badge-warning' id='dwCartCount'>0</span></a></li>
                         <li class="has-submenu">
                           <a href="javascript:void(0)">
-                            <?php echo Yii::$app->user->identity->username ?>
+                            <?php echo Yii::$app->user->identity->firstname.' '.Yii::$app->user->identity->	lastname ?>
                           </a>
                           <ul class="submenu-nav" style="min-width: 140px;">
                             <li><a href="<?=$absoluteBaseUrl?>/profile">My Account</a></li>
@@ -99,12 +100,12 @@ $absoluteBaseUrl = Url::base(true);
   }
   ?>
 
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true" data-keyboard="false">
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="loginModalLabel">Login</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close login-close" aria-label="Close"></button>
           </div>
           <div class="modal-body">
              <form id="login-form">
@@ -116,6 +117,7 @@ $absoluteBaseUrl = Url::base(true);
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control loginpassword" name="password" id="password">
+                <i class="fa fa-fw fa-eye" id="togglePassword"></i>
                 <span id='loginpassword_error'></span>
               </div>
             </form>
@@ -141,8 +143,23 @@ $absoluteBaseUrl = Url::base(true);
           </div>
           <div class="modal-body">
             <form id='register_form'>
-            <div class="mb-3">
-                <label for="username" class="form-label">First Name</label>
+              <div class="mb-3">
+                <label for="email" class="form-label required">Email</label>
+                <input type="email" class="form-control email" id="email" title="Please enter valid email address">
+                <span id='email_error'></span>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label required">Password</label>
+                <input type="password" class="form-control password" id="password">
+                <span id='password_error'></span>
+              </div>
+              <div class="mb-3">
+                <label for="confirm-password" class="form-label required">Confirm Password</label>
+                <input type="password" class="form-control confirm_password" id="confirm_password">
+                <span id='confirm_password_error'></span>
+              </div>
+              <div class="mb-3">
+                <label for="username" class="form-label required">First Name</label>
                 <input type="text" class="form-control firstname" id="firstname">
                 <span id='firstname_error'></span>
               </div>
@@ -152,30 +169,21 @@ $absoluteBaseUrl = Url::base(true);
                 <span id='lastname_error'></span>
               </div>
               <div class="mb-3">
-                <label for="username" class="form-label">User Name</label>
-                <input type="text" class="form-control username" id="username">
-                <span id='username_error'></span>
+                <label for="address" class="form-label">Address</label>
+                <textarea class="form-control user-address" id="user-address" rows="3"></textarea>
               </div>
+              
               <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control email" id="email">
-                <span id='email_error'></span>
-              </div>
-              <div class="mb-3">
-                <label for="email" class="form-label">Phone Number</label>
-                <input type="text" class="form-control phone_number" id="phone_number">
+                <label for="email" class="form-label required">Phone Number</label>
+                <input type="text" class="form-control phone_number" id="phone_number" pattern="[7-9]{1}[0-9]{9}" >
                 <span id='phone_number_error'></span>
               </div>
+
               <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control password" id="password">
-                <span id='password_error'></span>
+                <label for="company" class="form-label">Company Name</label>
+                <input type="text" class="form-control company" id="company">
               </div>
-              <div class="mb-3">
-                <label for="confirm-password" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control confirm_password" id="confirm_password">
-                <span id='confirm_password_error'></span>
-              </div>
+              
               <div class="mb-3">
                 <label for="confirm-password" class="form-label">GST Number</label>
                 <input type="text" class="form-control gst_number" id="gst_number">
@@ -184,7 +192,7 @@ $absoluteBaseUrl = Url::base(true);
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary form-clear">Clear</button>
             <button type="button" class="btn btn-primary registerSubmit">Register</button>
           </div>
         </div>
@@ -218,23 +226,43 @@ $absoluteBaseUrl = Url::base(true);
         </div>
       </div>
     </div>
+    
+    <div class="modal fade modal-xl" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModal" aria-hidden="true" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
 
 <?php 
 $this->registerJs("
   $(document).on('keyup','.phone_number',function() {
     var phone = $(this).val();
-    // format phone number as (xxx) xxx-xxxx
-    phone = phone.replace(/[^0-9]/g, '');
-  // phone = phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
-    $(this).val(phone);
-  });
-
+    let pattern = new RegExp(\"^[0-9]{10}$\");
+    $('#phone_number_error').html('');
+    if(phone !== '' && !pattern.test(phone)){
+      $('#phone_number_error').html('<span style=\"color:red\">Please enter valid phone number.</span>');
+    }
+  }); 
   
+  $(\"#togglePassword\").click(function () {
+      $(this).toggleClass(\"fa-eye fa-eye-slash\");
+      var type = $(this).hasClass(\"fa-eye-slash\") ? \"text\" : \"password\";
+      $(\".loginpassword\").attr(\"type\", type);
+  });
 
   $(document).on('click','.siginup',function() {
     $('#loginModal').modal('hide');
     $('#registerModal').modal('show');
     $('#forgotPasswordModal').modal('hide');
+  });
+  $(document).on('click','.login-close',function() {
+    localStorage.removeItem('productId');
+    $('#loginModal').modal('hide');
   });
   $(document).on('click','.forgotPassword',function() {
     $('#loginModal').modal('hide');
@@ -276,6 +304,9 @@ $this->registerJs("
   $(document).on('click','#loginSubmitButton',function() {  
     submitLoginForm();
   });
+  $(document).on('click','.form-clear',function() {  
+    $('#register_form input.form-control').val('');
+  });
   document.onkeydown=function(evt){
     var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
     if(keyCode == 13){
@@ -311,7 +342,6 @@ $this->registerJs("
         success:function(response) {
           if(response.success==true)
           {
-            debugger;
             window.location.reload();
           }
           else
@@ -330,6 +360,16 @@ $this->registerJs("
   $(document).on('click','.registerSubmit',function() {
     registerForm();
   });
+
+  $(document).on('keyup','.confirm_password',function() {
+    var password = $('.password').val();
+    var confirmPassword = $('.confirm_password').val();
+    if (password != confirmPassword) {
+      $('#confirm_password_error').html('<span style=\'color:red\'>Password doesn\'t match</span>');
+    }else{
+      $('#confirm_password_error').html('');
+    }
+  });
 ");
 
 
@@ -337,10 +377,11 @@ $this->registerJs("
 
 <script>
   function registerForm(){
-    var userName = $('.username').val();
+    
     var firstname = $('.firstname').val();
     var lastname = $('.lastname').val();
     var email = $('.email').val();
+    var userName = $('.email').val();
     var phoneNumber = $('.phone_number').val();
     var password = $('.password').val();
     var confirmPassword = $('.confirm_password').val();
@@ -352,18 +393,12 @@ $this->registerJs("
     } else {
       $("#firstname_error").html("");
     }
-    if(lastname == ''){
-      $("#lastname_error").html("<span style='color:red'>Last Name is requried</span>");
-      clr =1;
-    } else {
-      $("#lastname_error").html("");
-    }
-    if(userName == ''){
-      $("#username_error").html("<span style='color:red'>User Name is requried</span>");
-      clr =1;
-    } else {
-      $("#username_error").html("");
-    }
+    // if(lastname == ''){
+    //   $("#lastname_error").html("<span style='color:red'>Last Name is requried</span>");
+    //   clr =1;
+    // } else {
+    //   $("#lastname_error").html("");
+    // }
     if(email == ''){
       $("#email_error").html("<span style='color:red'>Email is requried</span>");
       clr =1;
@@ -397,11 +432,11 @@ $this->registerJs("
 
     if (password != confirmPassword) {
         clr =1;
-        $("#confirm_password_error").html("<span style='color:red'>Passwords do not match</span>");
+        $("#confirm_password_error").html("<span style='color:red'>Password doesn't match</span>");
         
     }
     var emailRegex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    if (!emailRegex.test(email)) {
+    if (email != '' && !emailRegex.test(email)) {
         $('#email_error').html("<span style='color:red'>Invalid email address.</span>");
         clr =1;
     }
@@ -420,19 +455,21 @@ $this->registerJs("
                     "userName": userName,"firstname": firstname,
                     "lastname": lastname,"email": email,
                     "phoneNumber": phoneNumber,"password": password,
-                    "confirmPassword": confirmPassword,"gstNumber": gstNumber
-
+                    "confirmPassword": confirmPassword,"gstNumber": gstNumber,
+                    "company": $('.company').val(),
+                    "address": $("#user-address").val(),
                 },
             dataType: 'json',
             success: function(response) {
-                var resultData = response.data;
+                var resultData = response.success;
                 if(resultData) {
                     toastr.success('User Register Successfully');
                     $("#register_form").trigger('reset');
                     $("#registerModal").modal('hide');
                     $("#loginModal").modal('show');
                 } else {
-                  $.each(resultData, function(key, value) {
+                  debugger;
+                  $.each(response.data, function(key, value) {
                     $('#'+key+'_error').html("<span style='color:red'>"+value[0]+"</span>");
                   });
                 }

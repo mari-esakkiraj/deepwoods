@@ -61,16 +61,16 @@ class Users extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['firstname', 'lastname', 'email','mobile_number', 'password'], 'required'],
+            [['firstname', 'email','mobile_number', 'password'], 'required'],
             [['firstname', 'lastname', 'email'], 'string', 'max' => 255],
-            [['mobile_number', 'gst_number','company'], 'string', 'max' => 55],
+            [['gst_number','company', 'username'], 'string', 'max' => 55],
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-            ['password', 'string', 'min' => 8],
+            ['password', 'string', 'min' => 6],
             ['admin', 'default', 'value' => 0],
             ['password_repeat', 'compare', 'compareAttribute' => 'password'],
-            ['username', 'unique', 'targetClass' => self::class, 'message' => 'This username has already been taken.'],
-            ['email', 'unique', 'targetClass' => self::class, 'message' => 'This email address has already been taken.'],
+            ['mobile_number', 'unique', 'targetClass' => self::class, 'message' => 'This mobile number has already taken.'],
+            ['email', 'unique', 'targetClass' => self::class, 'message' => 'This email address has already taken.'],
         ];
     }
 
@@ -105,7 +105,7 @@ class Users extends ActiveRecord implements IdentityInterface
      */
     public static function findByUsername($username)
     {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+        return static::find()->andWhere(['or',['email' => $username],['mobile_number' => $username]])->andWhere(['status' => self::STATUS_ACTIVE])->one();
     }
 
     /**

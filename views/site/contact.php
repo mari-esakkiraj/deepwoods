@@ -8,9 +8,10 @@ use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
 use yii\captcha\Captcha;
 
-$this->title = 'Contact';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Contact Us';
+// $this->params['breadcrumbs'][] = $this->title;
 ?>
+<section class="product-area"><div class="mt-20 ml-20 mb-20">
 <div class="site-contact">
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -47,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <?= $form->field($model, 'email') ?>
 
-                    <?= $form->field($model, 'subject') ?>
+                    <?php // $form->field($model, 'subject') ?>
 
                     <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
 
@@ -65,3 +66,5 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php endif; ?>
 </div>
+</div>
+</section>

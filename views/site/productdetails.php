@@ -1,6 +1,7 @@
 <?php 
 use yii\helpers\Url;
 $absoluteBaseUrl = Url::base(true);
+use yii\widgets\Pjax;
 ?>
 <!--== Start Product Area Wrapper ==-->
 <section class="product-area">
@@ -8,7 +9,7 @@ $absoluteBaseUrl = Url::base(true);
         <div class="col-xl-12">
             <div class="product-detail accordion-detail">
                 <div class="row mb-50 mt-30 ml-10">
-                    <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
+                    <div class="col-md-6">
                         <div class="product-thumb">
                             <div class="swiper-container single-product-thumb-content single-product-thumb-slider">
                                 <div class="swiper-wrapper">
@@ -37,7 +38,7 @@ $absoluteBaseUrl = Url::base(true);
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12 product-single-item">
+                    <div class="col-md-6 product-single-item">
                     <div class="product-single-info mt-sm-70">
                         <h2 class="title"><?= $products->name ?></h2>
                         <div class="product-detail-rating">
@@ -61,27 +62,35 @@ $absoluteBaseUrl = Url::base(true);
                                 </span>
                             </div>
                         </div>
-                        <div class="product-description">
-                        <ul class="product-desc-list">
-                            <li>Rich in antioxidants.</li>
-                            <li>Good source of several nutrients.</li>
-                            <li>May boost your overall health.</li>
-                            <li>Naturally gluten-free.</li>
-                        </ul>
+                        <div class="product-description hide">
+                            <ul class="product-desc-list">
+                                <li>Rich in antioxidants.</li>
+                                <li>Good source of several nutrients.</li>
+                                <li>May boost your overall health.</li>
+                                <li>Naturally gluten-free.</li>
+                            </ul>
                         </div>
                         <div class="product-quick-action">
                         <div class="product-quick-qty">
                             <div class="pro-qty">
-                            <input type="text" id="quantity" title="Quantity" value="1">
+                                <input type="number" id="product-quantity" title="Quantity" value="1" min="1" max="999">
+                                <div class="inc qty-btn"><i class="fa fa-angle-up"></i></div>
+                                <div class= "dec qty-btn"><i class="fa fa-angle-down"></i></div>
                             </div>
                         </div>
-                        <a class="btn-product-add add-to-cart" href="javascript:void(0)"  data-product_id="<?=$products->id?>">Add to cart</a>
+                        <div class="product-card-bottom">
+                        <div class="add-cart add-to-cart-view" data-product_id="<?=$products->id?>">
+                            <a class="add" href="javascript:void(0)">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add </a>
+                        </div>
+                        </div>
                         </div>                        
                     </div>
                     </div>
                 </div>
+                <?php Pjax::begin(['id' => 'my-product-review']); ?>
                 <div class="product-info">
-                    <div class="tab-style3">
+                    <div class="tab-style3" id="my-product-tabs">
                         <ul class="nav nav-tabs text-uppercase">
                             <li class="nav-item">
                                 <a class="nav-link active" id="Description-tab" data-bs-toggle="tab" href="#Description">Description</a>
@@ -93,7 +102,7 @@ $absoluteBaseUrl = Url::base(true);
                                 <a class="nav-link" id="Vendor-info-tab" data-bs-toggle="tab" href="#Vendor-info">Vendor</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews (3)</a>
+                                <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews (<?= count($products->review) ?>)</a>
                             </li>
                         </ul>
                         <div class="tab-content shop_info_tab entry-main-content">
@@ -231,69 +240,37 @@ $absoluteBaseUrl = Url::base(true);
                                 <!--Comments-->
                                 <div class="comments-area">
                                     <div class="row">
+                                        
                                         <div class="col-lg-8">
                                             <h4 class="mb-30">Customer questions &amp; answers</h4>
                                             <div class="comment-list">
-                                                <div class="single-comment justify-content-between d-flex mb-30">
-                                                    <div class="user justify-content-between d-flex">
-                                                        <div class="thumb text-center">
-                                                            <img src="assets/imgs/blog/author-2.png" alt="">
-                                                            <a href="#" class="font-heading text-brand">Sienna</a>
-                                                        </div>
-                                                        <div class="desc">
-                                                            <div class="d-flex justify-content-between mb-10">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="font-xs text-muted">December 4, 2022 at 3:12 pm </span>
-                                                                </div>
-                                                                <div class="product-rate d-inline-block">
-                                                                    <div class="product-rating" style="width: 100%"></div>
-                                                                </div>
+                                                <?php if(count($products->review) > 0){ foreach($products->review as $review){ ?>
+                                                    <div class="single-comment justify-content-between d-flex mb-10">
+                                                        <div class="user justify-content-between d-flex">
+                                                            <div class="thumb text-center">
+                                                                <img src="<?=$absoluteBaseUrl?>/theme/img/testimonial/02.png" alt="" class="hide">
+                                                                <a href="#" class="font-heading text-brand"><?= $review->createdUser->firstname.' '.$review->createdUser->lastname ?></a>
                                                             </div>
-                                                            <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt? <a href="#" class="reply">Reply</a></p>
+                                                            <div class="desc">
+                                                                <div class="d-flex justify-content-between mb-10">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <span class="font-xs text-muted">December 4, 2022 at 3:12 pm </span>
+                                                                    </div>
+                                                                    <div class="product-rate d-inline-block">
+                                                                        <div class="product-rating" style="width: 100%"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <p class="mb-10"><?= $review->review ?></p>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="single-comment justify-content-between d-flex mb-30 ml-30">
-                                                    <div class="user justify-content-between d-flex">
-                                                        <div class="thumb text-center">
-                                                            <img src="assets/imgs/blog/author-3.png" alt="">
-                                                            <a href="#" class="font-heading text-brand">Brenna</a>
-                                                        </div>
-                                                        <div class="desc">
-                                                            <div class="d-flex justify-content-between mb-10">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="font-xs text-muted">December 4, 2022 at 3:12 pm </span>
-                                                                </div>
-                                                                <div class="product-rate d-inline-block">
-                                                                    <div class="product-rating" style="width: 80%"></div>
-                                                                </div>
-                                                            </div>
-                                                            <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt? <a href="#" class="reply">Reply</a></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="single-comment justify-content-between d-flex">
-                                                    <div class="user justify-content-between d-flex">
-                                                        <div class="thumb text-center">
-                                                            <img src="assets/imgs/blog/author-4.png" alt="">
-                                                            <a href="#" class="font-heading text-brand">Gemma</a>
-                                                        </div>
-                                                        <div class="desc">
-                                                            <div class="d-flex justify-content-between mb-10">
-                                                                <div class="d-flex align-items-center">
-                                                                    <span class="font-xs text-muted">December 4, 2022 at 3:12 pm </span>
-                                                                </div>
-                                                                <div class="product-rate d-inline-block">
-                                                                    <div class="product-rating" style="width: 80%"></div>
-                                                                </div>
-                                                            </div>
-                                                            <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt? <a href="#" class="reply">Reply</a></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <?php } }else{ ?>
+                                                    <div>No review found</div>
+                                                <?php } ?>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        
+                                        <div class="col-lg-4 hide">
                                             <h4 class="mb-30">Customer reviews</h4>
                                             <div class="d-flex mb-30">
                                                 <div class="product-rate d-inline-block mr-15">
@@ -328,34 +305,19 @@ $absoluteBaseUrl = Url::base(true);
                                 <!--comment form-->
                                 <div class="comment-form">
                                     <h4 class="mb-15">Add a review</h4>
-                                    <div class="product-rate d-inline-block mb-30"></div>
                                     <div class="row">
                                         <div class="col-lg-8 col-md-12">
                                             <form class="form-contact comment_form" action="#" id="commentForm">
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <input class="form-control" name="name" id="name" type="text" placeholder="Name">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <input class="form-control" name="website" id="website" type="text" placeholder="Website">
+                                                            <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Type a message here"></textarea>
+                                                            <span style="color:red" id="commentErrorMsg"></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button type="submit" class="button button-contactForm">Submit Review</button>
+                                                    <button type="button" class="button submit-review" data-cartItemId="<?=$products->id?>">Submit Review</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -365,9 +327,37 @@ $absoluteBaseUrl = Url::base(true);
                         </div>
                     </div>
                 </div>
-                
+                <?php  Pjax::end(); ?>
             </div>
         </div>
     </div>
 </section>
     <!--== End Product Area Wrapper ==-->
+
+<?php 
+    $this->registerJs("
+    var ProductNav = new Swiper('.single-product-nav-slider', {
+        spaceBetween: 10,
+        slidesPerView: 4,
+        freeMode: true,
+        loop: false,
+      });
+      var ProductThumb = new Swiper('.single-product-thumb-slider', {
+        freeMode: true,
+        effect: 'fade',
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        fadeEffect: {
+          crossFade: true,
+        },
+        thumbs: {
+          swiper: ProductNav
+        }
+      });
+      $('#quickViewModal').on('hidden.bs.modal', function () {
+        $('body').removeClass('fix');
+      })
+    ");
+?>    

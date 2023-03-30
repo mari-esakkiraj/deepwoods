@@ -11,6 +11,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Users;
 use app\models\CartItems;
+use app\models\ProductReview;
 
 use app\models\Products;
 use app\models\ProductImages;
@@ -55,7 +56,7 @@ class SiteController extends Controller
 
     public function beforeAction($action) 
     {
-        $withoutCSRF = ['cus-login','register','forgotpassword','savecheckout','clearcartlist','removecart'];
+        $withoutCSRF = ['cus-login','register','forgotpassword','savecheckout','clearcartlist','removecart', 'addreview'];
         if(in_array($action->id, $withoutCSRF)) {
             $this->enableCsrfValidation = false; 
         }
@@ -125,6 +126,13 @@ class SiteController extends Controller
         $this->layout = 'mainpage';
         $model = Products::find()->where(['products.id' => $id])->joinWith(['imageslist'])->one();
         return $this->render('productdetails',["products" => $model]);
+    }
+
+    public function actionQuickview($id)
+    {
+        //$this->layout = 'mainpage';
+        $model = Products::find()->where(['products.id' => $id])->joinWith(['imageslist'])->one();
+        return $this->renderAjax('quickview',["products" => $model]);
     }
 
     public function actionCart()
@@ -234,6 +242,7 @@ class SiteController extends Controller
     public function actionContact()
     {
         $model = new ContactForm();
+        $this->layout = 'mainpage';
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
 
@@ -306,6 +315,24 @@ class SiteController extends Controller
         return json_encode(['data' => $returnData]);
     }
 
+    public function actionAddreview(){
+        $productId = $_POST['productId'] ?? null;
+        $comment = $_POST['comment'] ?? null;
+        if(!Yii::$app->user->isGuest) {
+            $loginUserId = Yii::$app->user->identity->id ?? null;
+            $model = new ProductReview();
+            $model->product_id = $productId;
+            $model->user_id = $loginUserId;
+            $model->review =  $comment;
+            $model->created_by = $loginUserId;
+            //$model->created_at = date('Y-m-d H:i:s');
+            if($model->save()){
+                return json_encode(['data' => true]);
+            }
+        }
+        return json_encode(['data' => false]);
+    }
+
     public function actionClearcartlist()
     {
         \Yii::$app->db->createCommand()->delete('cart_items', ['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->execute();
@@ -332,6 +359,7 @@ class SiteController extends Controller
         $phoneNumber = $_POST['phoneNumber'] ?? null;
         $password = $_POST['password'] ?? null;
         $gstNumber = $_POST['gstNumber'] ?? null;
+        $address = $_POST['address'] ?? null;
         
         $user = new Users();
         $user->firstname = $firstname;
@@ -344,11 +372,14 @@ class SiteController extends Controller
         $user->status = 10;
 
         if($user->validate()){
-            $user->save();
-            $data = ['data'=> true];
-            $this->sendRegisterMail($user, $password);
+            if($user->save()){
+                $data = ['success' => true, 'data'=> true];
+                $this->sendRegisterMail($user, $password);
+            }else{
+                $data = ['success' => false, 'data' => $user->getErrors()];
+            }
         } else {
-            $data = ['data' => $user->getErrors()];
+            $data = ['success' => false, 'data' => $user->getErrors()];
         }
         return json_encode($data);
     }
