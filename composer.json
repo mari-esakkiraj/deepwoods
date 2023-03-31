@@ -21,7 +21,8 @@
         "mervick/yii2-under-construction": "~1.0",
         "wbraganca/yii2-dynamicform": "*",
         "kartik-v/yii2-widgets": "*",
-        "2amigos/yii2-ckeditor-widget" : "~2.1"
+        "2amigos/yii2-ckeditor-widget" : "~2.1",
+        "razorpay/razorpay": "^2.8"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

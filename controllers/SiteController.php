@@ -12,7 +12,7 @@ use app\models\ContactForm;
 use app\models\Users;
 use app\models\CartItems;
 use app\models\ProductReview;
-
+use app\models\ForgotPassword;
 use app\models\Products;
 use app\models\ProductImages;
 use app\models\ProductsSearch;
@@ -186,6 +186,24 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
+    public function actionForgotpasswordadmin(){
+        $model = new ForgotPassword();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->sendEmail()) {
+                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+                return $this->goHome();
+            } else {
+                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
+            }
+        }
+
+        return $this->render('forgotpassword', [
+            'model' => $model,
+        ]);
+    }
+
 
     public function actionCusLogin()
     {
