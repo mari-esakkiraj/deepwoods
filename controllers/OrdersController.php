@@ -70,7 +70,7 @@ class OrdersController extends Controller
 
     public function beforeAction($action) 
     {
-        $withoutCSRF = ['savecheckout','removecart', 'verify'];
+        $withoutCSRF = ['savecheckout','removecart', 'verify', 'payment'];
         if (in_array($action->id, $withoutCSRF)) {
             $this->enableCsrfValidation = false; 
         }
@@ -253,8 +253,28 @@ class OrdersController extends Controller
     public function actionCheckout()
     {
         $this->layout = 'mainpage';
-        $productList = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->all();
-        return $this->render('checkout',["dataProvider" => $productList]);
+        $cartItems = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->all();
+        $totalPrice = 0;
+        foreach ($cartItems as $productList) {
+            $totalPrice+=($productList->product->price * $productList->quantity);
+        }
+
+        $order = new Orders();
+
+        $order->total_price = $totalPrice;
+        $order->status = 0;
+        $order->created_at = time();
+        $order->created_by = Yii::$app->user->identity->id;
+
+        $orderAddress = new OrderAddresses();
+
+        return $this->render('checkout',[
+            'order' => $order,
+            'orderAddress' => $orderAddress,
+            'cartItems' => $cartItems,
+            'productQuantity' => 0,
+            'totalPrice' => $totalPrice
+        ]);
     }
 
     public function actionPayment()
@@ -263,7 +283,7 @@ class OrdersController extends Controller
         $keySecret = 'PcntHmmtBWoM2te93AIt2Uh7';
         $displayCurrency = 'INR';
 
-        $this->layout = 'mainpage';
+        $this->layout = false;
         $productLists = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->all();
         $amount = 0;
         foreach ($productLists as $productList) {
@@ -325,7 +345,7 @@ class OrdersController extends Controller
             $data['display_amount']    = $displayAmount;
         }
         
-        $json = json_encode($data);
+        return $json = json_encode($data);
 
         return $this->render('payment',["json" => $json]);
     }

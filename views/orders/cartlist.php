@@ -41,7 +41,7 @@ use yii\widgets\Pjax;
                                 $total = 0;
                                 foreach($dataProvider as $key=>$products) { 
                                     $imgPath = $absoluteBaseUrl."/theme/img/shop/01.jpg";
-                                    if(isset($products->product->imageslist)){
+                                    if(isset($products->product->imageslist) && count($products->product->imageslist)>0){
                                         $imgPath = $absoluteBaseUrl.'/uploads/'.$products->product->imageslist[0]->image;
                                     }
                                     $total = $total + $products->quantity * $products->product->price;
