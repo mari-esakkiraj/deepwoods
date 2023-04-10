@@ -422,7 +422,7 @@ class SiteController extends Controller
                         </body>
                     </html>";
         $email = \Yii::$app->mailer->compose();
-        $email->setFrom(['no.reply@deepwoods.com' => 'Login Details - Deepwoods']);
+        $email->setFrom([Yii::$app->params['adminEmail'] => 'Deepwoods - Admin']);
         $email->setTo($to);
         $email->setCharset('UTF-8');
         $email->setSubject($subject);
@@ -451,7 +451,7 @@ class SiteController extends Controller
                         </body>
                     </html>";
         $email = \Yii::$app->mailer->compose();
-        $email->setFrom(['testing@deepwoodsorganics.com' => 'Employee - EPTW']);
+        $email->setFrom([Yii::$app->params['adminEmail'] => 'Deepwoods - Admin']);
         $email->setTo($to);
         $email->setCharset('UTF-8');
         $email->setSubject($subject);

@@ -350,7 +350,9 @@ class OrdersController extends Controller
             }
             
             $json = json_encode($data);
-
+            if(!isset($orderAddress->id)){
+                $orderAddress->load(Yii::$app->request->post());
+            }
             return $this->render('payment',["json" => $json, 'order' => $order, 'orderAddress' => $orderAddress,
             'productQuantity' => $productQuantity,
             'totalPrice' => $totalPrice
