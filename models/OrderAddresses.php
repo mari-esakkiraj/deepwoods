@@ -32,9 +32,9 @@ class OrderAddresses extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'address', 'city', 'state', 'country'], 'required'],
-            [['order_id'], 'integer'],
-            [['address', 'city', 'state', 'country', 'zipcode'], 'string', 'max' => 255],
+            [['order_id', 'address', 'city', 'state', 'country','zipcode'], 'required'],
+            [['order_id', 'zipcode'], 'integer'],
+            [['address', 'city', 'state', 'country'], 'string', 'max' => 255],
             [['order_id'], 'unique'],
             [['order_id'], 'exist', 'skipOnError' => true, 'targetClass' => Orders::class, 'targetAttribute' => ['order_id' => 'id']],
         ];

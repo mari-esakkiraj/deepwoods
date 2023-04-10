@@ -50,7 +50,7 @@ class ForgotPassword extends Model
         return Yii::$app
             ->mailer
             ->compose()
-            ->setFrom([Yii::$app->params['adminEmail'] => Yii::$app->name . ' robot'])
+            ->setFrom([Yii::$app->params['adminEmail'] => 'Deepwoods - Admin'])
             ->setTo($this->email)
             ->setHtmlBody($message)
             ->setSubject('Password reset for ' . Yii::$app->name)

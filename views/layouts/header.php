@@ -175,8 +175,8 @@ $absoluteBaseUrl = Url::base(true);
               
               <div class="mb-3">
                 <label for="email" class="form-label required">Phone Number</label>
-                <input type="text" class="form-control phone_number" id="phone_number" pattern="[7-9]{1}[0-9]{9}" >
-                <span id='phone_number_error'></span>
+                <input type="text" class="form-control mobile_number" id="mobile_number" pattern="[7-9]{1}[0-9]{9}" >
+                <span id='mobile_number_error'></span>
               </div>
 
               <div class="mb-3">
@@ -240,12 +240,12 @@ $absoluteBaseUrl = Url::base(true);
 
 <?php 
 $this->registerJs("
-  $(document).on('keyup','.phone_number',function() {
+  $(document).on('keyup','.mobile_number',function() {
     var phone = $(this).val();
     let pattern = new RegExp(\"^[0-9]{10}$\");
-    $('#phone_number_error').html('');
+    $('#mobile_number_error').html('');
     if(phone !== '' && !pattern.test(phone)){
-      $('#phone_number_error').html('<span style=\"color:red\">Please enter valid phone number.</span>');
+      $('#mobile_number_error').html('<span style=\"color:red\">Please enter valid phone number.</span>');
     }
   }); 
   
@@ -382,7 +382,7 @@ $this->registerJs("
     var lastname = $('.lastname').val();
     var email = $('.email').val();
     var userName = $('.email').val();
-    var phoneNumber = $('.phone_number').val();
+    var phoneNumber = $('.mobile_number').val();
     var password = $('.password').val();
     var confirmPassword = $('.confirm_password').val();
     var gstNumber = $('.gst_number').val();
@@ -406,10 +406,10 @@ $this->registerJs("
       $("#email_error").html("");
     }
     if(phoneNumber == ''){
-      $("#phone_number_error").html("<span style='color:red'>Phone Number is requried</span>");
+      $("#mobile_number_error").html("<span style='color:red'>Phone Number is requried</span>");
       clr =1;
     } else {
-      $("#phone_number_error").html("");
+      $("#mobile_number_error").html("");
     }
     if(password == ''){
       $("#password_error").html("<span style='color:red'>Password is requried</span>");
@@ -443,7 +443,7 @@ $this->registerJs("
 
     var filter = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;    
     if (filter.test(phoneNumber)) {
-        $('#phone_number_error').html("<span style='color:red'>Invalid phone number.</span>");
+        $('#mobile_number_error').html("<span style='color:red'>Invalid phone number.</span>");
         clr =1;
     }
 
@@ -468,7 +468,6 @@ $this->registerJs("
                     $("#registerModal").modal('hide');
                     $("#loginModal").modal('show');
                 } else {
-                  debugger;
                   $.each(response.data, function(key, value) {
                     $('#'+key+'_error').html("<span style='color:red'>"+value[0]+"</span>");
                   });

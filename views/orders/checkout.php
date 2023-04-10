@@ -57,8 +57,8 @@ use app\models\UserAddresses;
             <div class="card-body" style="border-top: 2px solid #ddd;">
                 <?= $form->field($orderAddress, 'address') ?>
                 <?= $form->field($orderAddress, 'city') ?>
-                <?= $form->field($orderAddress, 'state') ?>
-                <?= $form->field($orderAddress, 'country') ?>
+                <?= $form->field($orderAddress, 'state')->dropDownList(['Tamilnadu'=>'Tamilnadu']);?>
+                <?= $form->field($orderAddress, 'country')->dropDownList(['India'=>'India']);?>
                 <?= $form->field($orderAddress, 'zipcode') ?>
             </div>
         </div>
@@ -119,6 +119,7 @@ use app\models\UserAddresses;
 
                 <p class="text-right mt-3">
                     <button class="btn btn-secondary">Continue Payment</button>
+                    <button class="btn btn-secondary hide" >Cash on Delivery</button>
                 </p>
             </div>
         </div>

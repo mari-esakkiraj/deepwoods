@@ -92,7 +92,9 @@ use yii\widgets\Pjax;
                 <div class="divider-2 mb-30"></div>
                 <div class="cart-action d-flex justify-content-between">
                     <a class="btn " href="<?=$absoluteBaseUrl?>/site/productlist"><i class="fi-rs-arrow-left mr-10"></i>Continue Shopping</a>
+                    <?php if(count($dataProvider) > 0){  ?>
                     <a class="btn  mr-10 mb-sm-15" href="<?=$absoluteBaseUrl?>/orders/checkout"><i class="fi-rs-refresh mr-10"></i>Checkout</a>
+                    <?php } ?>
                 </div>
                
             </div>
