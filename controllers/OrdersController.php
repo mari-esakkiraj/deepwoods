@@ -265,15 +265,14 @@ class OrdersController extends Controller
         if (!empty($setting)) {
             $gst = $setting->gst;
         }
+        $order = new Orders();
 
         $orderAddress = UserAddresses::find()->where(['user_id' => Yii::$app->user->identity->id,'type' => 'shipping'])->one();
         if(empty($orderAddress)) {
-            $orderAddress = new OrderAddresses();
-        }else{
-            $order->shipping_address_id = $orderAddress->id;
+            $orderAddress = new UserAddresses();
         }
 
-        $order = new Orders();
+        
         $order->firstname = Yii::$app->user->identity->firstname;
         $order->lastname = Yii::$app->user->identity->lastname;
         $order->email = Yii::$app->user->identity->email;
@@ -286,9 +285,17 @@ class OrdersController extends Controller
 
         
         $transaction = Yii::$app->db->beginTransaction();
+        
         if ($order->load(Yii::$app->request->post())
             && $order->save()
             && $order->saveOrderItems()) {
+            if(!isset($orderAddress->id)){
+                $orderAddress->load(Yii::$app->request->post());
+                $orderAddress->user_id = Yii::$app->user->identity->id;
+                $orderAddress->save(false);
+                $order->shipping_address_id = $orderAddress->id;
+            }
+            
             $transaction->commit();
             CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
             $keyId = 'rzp_test_837Iw9MVhmAj9z';
@@ -350,9 +357,7 @@ class OrdersController extends Controller
             }
             
             $json = json_encode($data);
-            if(!isset($orderAddress->id)){
-                $orderAddress->load(Yii::$app->request->post());
-            }
+            
             return $this->render('payment',["json" => $json, 'order' => $order, 'orderAddress' => $orderAddress,
             'productQuantity' => $productQuantity,
             'totalPrice' => $totalPrice
@@ -472,18 +477,37 @@ class OrdersController extends Controller
                 $error = 'Razorpay Error : ' . $e->getMessage();
             }
         }
-
+        $order_id = $_POST['order_id'];
+        $order = Orders::findOne($order_id);
         if ($success === true)
         {
+            $order->status = 1;
+            $order->paypal_order_id = $_POST['razorpay_payment_id'];
             $html = "<p>Your payment was successful</p>
                     <p>Payment ID: {$_POST['razorpay_payment_id']}</p>";
+            
             //$productList = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->deleteAll();
         }
         else
         {
+            $order->status = 2;
+            $order->paypal_order_id = $_POST['razorpay_payment_id'];
+            
             $html = "<p>Your payment failed</p>
                     <p>{$error}</p>";
+
+            $items = OrderItems::find()->where(['order_id' => $order->id])->all();
+            foreach ($items as $item) {
+                $cartItems = new cartItems();
+                $cartItems->quantity = $item->quantity;
+                $cartItems->product_id = $item->quantity;
+                $cartItems->status = 'created';
+                $cartItems->created_by = Yii::$app->user->identity->id;
+                $cartItems->created_date = date('Y-m-d H:i:s');
+                $cartItems->save();
+            }
         }
+        $order->save();
 
         //echo $html;
 

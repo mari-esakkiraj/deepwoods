@@ -12,7 +12,8 @@ $billingAddresses = UserAddresses::find()->where(['user_id' => $userID,'type' =>
                 <h5 class="mb-0">
                     Billing Address
                     <?php
-                    if(empty($billingAddresses)) {
+                    //if(empty($billingAddresses)) 
+                    {
                     ?>
                     <a href="javascript:void(0)"  class="btn-small pull-right addressUpdate" data-address_id = "new"  data-address_type="billing">Add</a>
                     <?php
@@ -47,7 +48,8 @@ $billingAddresses = UserAddresses::find()->where(['user_id' => $userID,'type' =>
                 <h5 class="mb-0">
                     Shipping Address
                     <?php
-                    if(empty($shippingAddresses)) {
+                    //if(empty($shippingAddresses)) 
+                    {
                     ?>
                     <a href="javascript:void(0)"  class="btn-small pull-right addressUpdate" data-address_id = "new"  data-address_type = "shipping">Add</a>
                     <?php

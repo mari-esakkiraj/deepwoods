@@ -42,7 +42,7 @@ class Orders extends \yii\db\ActiveRecord
             [['total_price'], 'number'],
             [['status', 'created_at', 'created_by'], 'integer'],
             [['firstname', 'lastname'], 'string', 'max' => 45],
-            [['email', 'transaction_id', 'paypal_order_id'], 'string', 'max' => 255],
+            [['email', 'transaction_id', 'paypal_order_id', 'shipping_address_id'], 'string', 'max' => 255],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['created_by' => 'id']],
         ];
     }

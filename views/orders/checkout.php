@@ -29,6 +29,7 @@ use app\models\UserAddresses;
                     </div>
                 </div>
                 <?= $form->field($order, 'email')->textInput(['autofocus' => true]) ?>
+                
 
             </div>
         </div>
@@ -46,13 +47,16 @@ use app\models\UserAddresses;
                             <?=$shipping->address?><br>
                             <?=$shipping->city.' ,'.$shipping->state?><br>
                             <?=$shipping->country.' - '.$shipping->zipcode?> <br>
-                            <a href="javascript:void(0)" class="btn-small pull-right addressChoose"  data-address_type = "shipping" data-address_id = "<?=$shipping->id?>" data-address = "<?=$shipping->address?>" data-city = "<?=$shipping->city?>" data-country = "<?=$shipping->country?>" data-state = "<?=$shipping->state?>" data-zipcode = "<?=$shipping->zipcode?>">Select Address</a>
+                            <a href="javascript:void(0)" class="btn-small pull-right addressChoose"  data-shipping_address_id = "<?=$shipping->id?>" data-address_type = "shipping" data-address_id = "<?=$shipping->id?>" data-address = "<?=$shipping->address?>" data-city = "<?=$shipping->city?>" data-country = "<?=$shipping->country?>" data-state = "<?=$shipping->state?>" data-zipcode = "<?=$shipping->zipcode?>">Select Address</a>
                         </address></div>
                         <?php 
+                        $order->shipping_address_id = $shipping->id;
                     } 
+                    
                 } else {
                     echo "<div>No Address found.</div>";
                 }?>
+                <?= $form->field($order, 'shipping_address_id')->hiddenInput(['autofocus' => true])->label(false) ?>
             </div>
             <div class="card-body" style="border-top: 2px solid #ddd;">
                 <?= $form->field($orderAddress, 'address') ?>
@@ -135,6 +139,7 @@ $this->registerJs("
         $('#useraddresses-state').val($(this).attr('data-state'));
         $('#useraddresses-country').val($(this).attr('data-country'));
         $('#useraddresses-zipcode').val($(this).attr('data-zipcode'));
+        $('#orders-shipping_address_id').val($(this).attr('data-shipping_address_id'));
     });
 ");
 
