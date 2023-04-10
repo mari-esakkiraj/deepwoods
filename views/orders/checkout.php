@@ -118,7 +118,7 @@ use app\models\UserAddresses;
                 </table>
 
                 <p class="text-right mt-3">
-                    <button class="btn btn-secondary">Checkout</button>
+                    <button class="btn btn-secondary">Continue Payment</button>
                 </p>
             </div>
         </div>
@@ -134,10 +134,7 @@ $this->registerJs("
         $('#useraddresses-state').val($(this).attr('data-state'));
         $('#useraddresses-country').val($(this).attr('data-country'));
         $('#useraddresses-zipcode').val($(this).attr('data-zipcode'));
-
     });
-
-    
 ");
 
 
