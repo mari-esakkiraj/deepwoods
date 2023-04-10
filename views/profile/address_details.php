@@ -11,8 +11,14 @@ $billingAddresses = UserAddresses::find()->where(['user_id' => $userID,'type' =>
             <div class="card-header">
                 <h5 class="mb-0">
                     Billing Address
+                    <?php
+                    if(empty($billingAddresses)) {
+                    ?>
                     <a href="javascript:void(0)"  class="btn-small pull-right addressUpdate" data-address_id = "new"  data-address_type="billing">Add</a>
-                </h5>
+                    <?php
+                    }
+                    ?>
+                    </h5>
                 
             </div>
             <div class="card-body">
@@ -40,7 +46,13 @@ $billingAddresses = UserAddresses::find()->where(['user_id' => $userID,'type' =>
             <div class="card-header">
                 <h5 class="mb-0">
                     Shipping Address
+                    <?php
+                    if(empty($shippingAddresses)) {
+                    ?>
                     <a href="javascript:void(0)"  class="btn-small pull-right addressUpdate" data-address_id = "new"  data-address_type = "shipping">Add</a>
+                    <?php
+                    }
+                    ?>
                 </h5>
 
             </div>

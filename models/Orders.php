@@ -18,7 +18,7 @@ use Yii;
  * @property int|null $created_at
  * @property int|null $created_by
  *
- * @property User $createdBy
+ * @property Users $createdBy
  * @property OrderAddresses $orderAddresses
  * @property OrderItems[] $orderItems
  */
@@ -43,7 +43,7 @@ class Orders extends \yii\db\ActiveRecord
             [['status', 'created_at', 'created_by'], 'integer'],
             [['firstname', 'lastname'], 'string', 'max' => 45],
             [['email', 'transaction_id', 'paypal_order_id'], 'string', 'max' => 255],
-            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
+            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['created_by' => 'id']],
         ];
     }
 
@@ -78,7 +78,7 @@ class Orders extends \yii\db\ActiveRecord
      */
     public function getCreatedBy()
     {
-        return $this->hasOne(User::class, ['id' => 'created_by']);
+        return $this->hasOne(Users::class, ['id' => 'created_by']);
     }
 
     /**
@@ -99,5 +99,23 @@ class Orders extends \yii\db\ActiveRecord
     public function getOrderItems()
     {
         return $this->hasMany(OrderItems::class, ['order_id' => 'id']);
+    }
+
+    public function saveOrderItems()
+    {
+        $cartItems = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->all();
+        foreach ($cartItems as $cartItem) {
+            $orderItem = new OrderItems();
+            $orderItem->product_name = $cartItem->product->name;
+            $orderItem->product_id = $cartItem->product->id;
+            $orderItem->unit_price = $cartItem->product->price;
+            $orderItem->order_id = $this->id;
+            $orderItem->quantity = $cartItem->quantity;
+            if (!$orderItem->save()) {
+                throw new Exception("Order item was not saved: " . implode('<br>', $orderItem->getFirstErrors()));
+            }
+        }
+
+        return true;
     }
 }
