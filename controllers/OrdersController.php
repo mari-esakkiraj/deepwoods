@@ -269,6 +269,8 @@ class OrdersController extends Controller
         $orderAddress = UserAddresses::find()->where(['user_id' => Yii::$app->user->identity->id,'type' => 'shipping'])->one();
         if(empty($orderAddress)) {
             $orderAddress = new OrderAddresses();
+        }else{
+            $order->shipping_address_id = $orderAddress->id;
         }
 
         $order = new Orders();
@@ -282,7 +284,7 @@ class OrdersController extends Controller
         $order->customer_id = Yii::$app->user->identity->id;
         $order->phone = Yii::$app->user->identity->mobile_number;
 
-        $order->shipping_address_id = $orderAddress->id;
+        
         $transaction = Yii::$app->db->beginTransaction();
         if ($order->load(Yii::$app->request->post())
             && $order->save()
