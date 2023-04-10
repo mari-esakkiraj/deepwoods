@@ -95,6 +95,7 @@ use yii\widgets\Pjax;
         <form name='razorpayform' action="verify" method="POST">
             <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
             <input type="hidden" name="razorpay_signature"  id="razorpay_signature" >
+            <input type="hidden" name="order_id"  id="order_id" value="<?php echo $order->id ;?>" >
         </form>
     </div>
 </div>
