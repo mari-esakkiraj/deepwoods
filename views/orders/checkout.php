@@ -5,6 +5,7 @@ use yii\widgets\Pjax;
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\UserAddresses;
 
 ?>
 <section class="checkout-cart-area">
@@ -35,6 +36,26 @@ use yii\widgets\ActiveForm;
             <div class="card-header">
                 <h5>Address information</h5>
             </div>
+            <?php
+            /*
+            <div class="card-body">
+                <?php
+                $shippingAddresses = UserAddresses::find()->where(['user_id' => Yii::$app->user->identity->id,'type' => 'shipping'])->all();
+                if(!empty($shippingAddresses)) {
+                    foreach($shippingAddresses as $shipping) { ?>
+                        <address>
+                            <?=$shipping->address?><br>
+                            <?=$shipping->city.' ,'.$shipping->state?><br>
+                            <?=$shipping->country.' - '.$shipping->zipcode?> <br>
+                            <a href="javascript:void(0)"  class="btn-small pull-right addressChoose"  data-address_type = "shipping" data-address_id = "<?=$shipping->id?>">Choose</a>
+                        </address>
+                        <?php 
+                    } 
+                } else {
+                    echo "<div>No Address found.</div>";
+                }?>
+            </div>
+            */?>
             <div class="card-body">
                 <?= $form->field($orderAddress, 'address') ?>
                 <?= $form->field($orderAddress, 'city') ?>
