@@ -56,7 +56,7 @@ class SiteController extends Controller
 
     public function beforeAction($action) 
     {
-        $withoutCSRF = ['cus-login','register','forgotpassword','savecheckout','clearcartlist','removecart', 'addreview'];
+        $withoutCSRF = ['cus-login','register','forgotpassword','savecheckout','clearcartlist','removecart', 'addreview','contact'];
         if(in_array($action->id, $withoutCSRF)) {
             $this->enableCsrfValidation = false; 
         }

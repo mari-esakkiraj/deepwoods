@@ -36,27 +36,25 @@ use app\models\UserAddresses;
             <div class="card-header">
                 <h5>Address information</h5>
             </div>
-            <?php
-            /*
+            
             <div class="card-body">
                 <?php
                 $shippingAddresses = UserAddresses::find()->where(['user_id' => Yii::$app->user->identity->id,'type' => 'shipping'])->all();
                 if(!empty($shippingAddresses)) {
                     foreach($shippingAddresses as $shipping) { ?>
-                        <address>
+                        <div><address style="border-top: 2px solid #ddd;">
                             <?=$shipping->address?><br>
                             <?=$shipping->city.' ,'.$shipping->state?><br>
                             <?=$shipping->country.' - '.$shipping->zipcode?> <br>
-                            <a href="javascript:void(0)"  class="btn-small pull-right addressChoose"  data-address_type = "shipping" data-address_id = "<?=$shipping->id?>">Choose</a>
-                        </address>
+                            <a href="javascript:void(0)" class="btn-small pull-right addressChoose"  data-address_type = "shipping" data-address_id = "<?=$shipping->id?>" data-address = "<?=$shipping->address?>" data-city = "<?=$shipping->city?>" data-country = "<?=$shipping->country?>" data-state = "<?=$shipping->state?>" data-zipcode = "<?=$shipping->zipcode?>">Select Address</a>
+                        </address></div>
                         <?php 
                     } 
                 } else {
                     echo "<div>No Address found.</div>";
                 }?>
             </div>
-            */?>
-            <div class="card-body">
+            <div class="card-body" style="border-top: 2px solid #ddd;">
                 <?= $form->field($orderAddress, 'address') ?>
                 <?= $form->field($orderAddress, 'city') ?>
                 <?= $form->field($orderAddress, 'state') ?>
@@ -120,68 +118,24 @@ use app\models\UserAddresses;
                 </table>
 
                 <p class="text-right mt-3">
-                    <button class="btn btn-secondary">Checkout</button>
+                    <button class="btn btn-secondary">Continue Payment</button>
                 </p>
             </div>
         </div>
     </div>
 </div>
 <?php ActiveForm::end(); ?>
-
-    <!-- <div id="paymentbutton" style="display:none">
-        <button id="rzp-button1">Pay with Razorpay</button>
-        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-        <form name='razorpayform' action="verify" method="POST">
-            <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
-            <input type="hidden" name="razorpay_signature"  id="razorpay_signature" >
-        </form>
-    </div> -->
 </section>
 <?php 
-/*$this->registerJs("
-    
-    var AppConfig = new AppConfigs();
-    var baseurl = AppConfig.getBaseUrl();
-    $.ajax({
-        type:'post',
-        url:baseurl+'/orders/payment',
-        data:[],
-        dataType: 'json',
-        success:function(response) {
-            createpaybutton(response);
-        }
+$this->registerJs("
+    $(document).on('click','.addressChoose',function(e) {
+        $('#useraddresses-address').val($(this).attr('data-address'));
+        $('#useraddresses-city').val($(this).attr('data-city'));
+        $('#useraddresses-state').val($(this).attr('data-state'));
+        $('#useraddresses-country').val($(this).attr('data-country'));
+        $('#useraddresses-zipcode').val($(this).attr('data-zipcode'));
     });
-
-    function createpaybutton(options) {
-        options.handler = function (response){
-            document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
-            document.getElementById('razorpay_signature').value = response.razorpay_signature;
-            document.razorpayform.submit();
-        };
-
-        // Boolean whether to show image inside a white frame. (default: true)
-        options.theme.image_padding = false;
-
-        options.modal = {
-            ondismiss: function() {
-                console.log('This code runs when the popup is closed');
-            },
-            // Boolean indicating whether pressing escape key 
-            // should close the checkout form. (default: true)
-            escape: true,
-            // Boolean indicating whether clicking translucent blank
-            // space outside checkout form should close the form. (default: false)
-            backdropclose: false
-        };
-
-        var rzp = new Razorpay(options);
-
-        document.getElementById('rzp-button1').onclick = function(e){
-            rzp.open();
-            e.preventDefault();
-        }
-    }
-    
 ");
-*/
+
+
 ?>  
