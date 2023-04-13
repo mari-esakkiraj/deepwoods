@@ -9,13 +9,47 @@ use yii\widgets\Pjax;
 /** @var yii\web\View $this */
 /** @var app\models\CustomerSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
+use app\models\Orders;
 
 $this->title = 'Dashboard';
 $this->params['breadcrumbs'][] = $this->title;
+$orders = Orders::find()->orderBy(['id' => SORT_DESC])->limit(10)->all();
 ?>
 <div class="customer-index">
     <div class="flex-container">
-        <h1><?= Html::encode($this->title) ?></h1>
-        <?php //= Html::a('New Customer', ['create'], ['class' => 'btn btn-success flex-container-last']) ?>
+        <h1>Recent Orders</h1>
+        
     </div>
+    <div class="row">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Order</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Total</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if(empty($orders)) {
+                        echo "<div>No order.</div>";
+                        } else {
+                            foreach($orders as $order) { ?>
+                                <tr>
+                                    <td>#<?=$order->id ?? ''?></td>
+                                    <td><?=$order->created_at ?? ''?></td>
+                                    <td><?=$order->status ?? ''?></td>
+                                    <td>₹<?=$order->total_price ?? ''?></td>
+                                    <td><a href="javascript:void(0)" class="btn-small d-block">View</a></td>
+                                </tr>
+                                <?php
+                            }
+                        }?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 </div>
