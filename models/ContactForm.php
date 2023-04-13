@@ -51,17 +51,18 @@ class ContactForm extends Model
      */
     public function contact($email)
     {
-        if ($this->validate()) {
+
+        //if ($this->validate()) {
             Yii::$app->mailer->compose()
                 ->setTo($email)
                 ->setFrom([Yii::$app->params['adminEmail'] => 'Deepwoods - Admin'])
                 ->setReplyTo([$this->email => $this->name])
-                ->setSubject("Test")
+                ->setSubject("Contect Us")
                 ->setTextBody($this->body)
                 ->send();
 
             return true;
-        }
-        return false;
+        //}
+        //return false;
     }
 }

@@ -1142,3 +1142,7 @@ table td, table th {
 .checkout-cart-area{
   padding: 20px;
 }
+
+.file-footer-buttons{
+  display: none !important;
+}

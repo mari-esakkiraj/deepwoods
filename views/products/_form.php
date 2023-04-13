@@ -35,7 +35,7 @@ use yii\helpers\Url;
     <?php
         $initialPreview = [];
         if ($model->image != '') {
-            $images = $model->image;
+            $images = json_decode($model->image, true);
             $absoluteBaseUrl = Url::base(true);
             foreach ($images as $image) {
                 $pathImg = $absoluteBaseUrl.'/uploads/' . $image;
@@ -56,7 +56,8 @@ use yii\helpers\Url;
         'previewSettings' => [
             'image' => ['width' => '138px', 'height' => 'auto']
         ],
-        'initialPreview' => $initialPreview
+        'initialPreview' => $initialPreview,
+        'actions' => false,
     ]
 ]); ?>
 
@@ -71,7 +72,9 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'quantity')->textInput(['maxlength' => true]) ?>
 
-    <?php //= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'gst_no')->textInput() ?>
+
+    <?= $form->field($model, 'hsn_sac')->textInput() ?>
 
     <?php /*= $form->field($model, 'created_at')->textInput() ?>
 
@@ -89,3 +92,12 @@ use yii\helpers\Url;
     <?php ActiveForm::end(); ?>
 
 </div>
+<?php $style= <<< CSS
+
+    .file-footer-buttons{
+        display: none !important;
+    }
+
+ CSS;
+ $this->registerCss($style);
+?>

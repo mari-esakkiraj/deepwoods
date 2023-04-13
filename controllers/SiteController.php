@@ -16,6 +16,7 @@ use app\models\ForgotPassword;
 use app\models\Products;
 use app\models\ProductImages;
 use app\models\ProductsSearch;
+use app\models\ContactUs;
 use yii\data\ActiveDataProvider;
 
 
@@ -259,12 +260,19 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
-        $model = new ContactForm();
+        $model = new ContactUs();
         $this->layout = 'mainpage';
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
+        $model->status = 1;
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if($model->save()){
+                $email = Yii::$app->params['adminEmail'];
+                $email = $model->email; 
+                $model->contact(Yii::$app->params['adminEmail']);
+                Yii::$app->session->setFlash('contactFormSubmitted');
+                //Yii::$app->session->setFlash('success', "Your message to display.");
+                return $this->redirect('contact');
+            }
+           // return $this->refresh();
         }
         return $this->render('contact', [
             'model' => $model,
