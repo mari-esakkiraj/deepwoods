@@ -35,11 +35,11 @@ use yii\helpers\Url;
     <?php
         $initialPreview = [];
         if ($model->image != '') {
-            $images = json_decode($model->image, true);
+            $images = $model->image;
             $absoluteBaseUrl = Url::base(true);
             foreach ($images as $image) {
                 $pathImg = $absoluteBaseUrl.'/uploads/' . $image;
-                //$initialPreview[] = Html::img($pathImg, ['class' => 'file-preview-image', 'style' =>"height:100px"]);
+                $initialPreview[] = Html::img($pathImg, ['class' => 'file-preview-image', 'style' =>"height:100px"]);
             }
         }
     ?>

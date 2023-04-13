@@ -233,18 +233,26 @@ class ProductsController extends Controller
                 $image = $model->image;
                 $model->load($this->request->post());
                 $model->image = UploadedFile::getInstances($model, 'image');
-                //var_dump($model->image);die;
-                if ($model->validate() && $model->image) {
+                if ($model->validate()) {
                     $filenames = [];
-                    foreach ($model->image as $file) {
-                        $file->saveAs('uploads/' . $file->baseName . '.' . $file->extension);
-                        $filenames[] = $file->baseName . '.' . $file->extension;
+                    if(!empty($model->image)) {
+                        foreach ($model->image as $file) {
+                            $file->saveAs('uploads/' . $file->baseName . '.' . $file->extension);
+                            $filenames[] = $file->baseName . '.' . $file->extension;
+                        }
+                        $model->image = json_encode($filenames);
+                    } else {
+                        $modelold = $this->findModel($id);
+                        if(!empty($modelold) && !empty($modelold->image)) {
+                            $model->image = $modelold->image;
+                        }
                     }
-                    $model->image = json_encode($filenames);
                     $transaction = \Yii::$app->db->beginTransaction();
                     $model->status = '1';
+
                     try {
                         if ($flag = $model->save(false)) {
+                            if(!empty($filenames)) {
                             ProductImages::deleteAll(['product_id'=>$model->id]);
                             foreach ($filenames as $filename) {
                                 $modelImage = new ProductImages();
@@ -257,6 +265,7 @@ class ProductsController extends Controller
                                     break;
                                 }
                             }
+                        }
                         }
                         if ($flag) {
                             $transaction->commit();

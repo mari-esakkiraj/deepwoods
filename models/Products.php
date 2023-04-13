@@ -46,9 +46,9 @@ class Products extends \yii\db\ActiveRecord
             [['status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['name'], 'string', 'max' => 255],
             //[['image'], 'file', 'skipOnEmpty' => false],
-            [['image'], 'file', 'minFiles' => 1,  'maxFiles' => 4, 'extensions' => 'png, jpg, jpeg', 'skipOnEmpty' => false, 'maxSize' => 2 * 1024 * 1024],
-            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['created_by' => 'id']],
-            [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['updated_by' => 'id']],
+            [['image'], 'file', 'minFiles' => 1,  'maxFiles' => 4, 'extensions' => 'png, jpg, jpeg', 'skipOnEmpty' => true, 'maxSize' => 2 * 1024 * 1024],
+            [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['created_by' => 'id']],
+            [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['updated_by' => 'id']],
         ];
     }
 
@@ -56,9 +56,19 @@ class Products extends \yii\db\ActiveRecord
         if ($this->isNewRecord) {
             $this->status = '1';
         } 
+        if (!empty($this->image)){
+            $this->image = json_encode($this->image, true);
+        }
         return true;
     }
+    public function afterFind(){
 
+        parent::afterFind();
+    
+        if (!empty($this->image)){
+            $this->image = json_decode($this->image, true);
+        }
+    }
     /**
      * {@inheritdoc}
      */
