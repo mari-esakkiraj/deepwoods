@@ -40,7 +40,7 @@ class Products extends \yii\db\ActiveRecord
         return [
             [['name', 'price', 'quantity', 'description'], 'required'],
             ['name', 'match', 'pattern' => "/^[a-zA-Z0-9\/\\_\\-\\s]+$/", 'message' => 'Your name can only contain alphanumeric characters, underscores and dashes.'],
-            [['description'], 'string'],
+            [['description','gst_no','hsn_sac'], 'string'],
             [['quantity'], 'integer'],
             [['price'], 'number'],
             [['status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],

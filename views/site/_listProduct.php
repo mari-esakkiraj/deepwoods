@@ -12,7 +12,7 @@ $absoluteBaseUrl = Url::base(true);
                 if($imgkey == 0){
                     $imgClass = 'default-img';
                 }elseif($imgkey == 1){
-                    $imgClass = 'hover-img';
+                    $imgClass = 'hover-img1';
                 }
                 ?>
                 <img class="<?=$imgClass?>" src="<?=$filepath?>" alt="">
