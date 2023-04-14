@@ -61,11 +61,15 @@ class ProfileController extends Controller
     {
         $fname = Yii::$app->request->post('fname') ?? null;
         $lname = Yii::$app->request->post('lname') ?? null;
+        $company = Yii::$app->request->post('company') ?? null;
+        $gstNumber = Yii::$app->request->post('gstNumber') ?? null;
         $userID = Yii::$app->user->identity->id;
         $user = Users::find()->where(['id' => $userID])->one();
         if(!empty($user)) {
             $user->firstname = $fname;
             $user->lastname = $lname;
+            $user->gst_number = $gstNumber;
+            $user->company = $company;
             $user->save(false);
             return true;
         } else {

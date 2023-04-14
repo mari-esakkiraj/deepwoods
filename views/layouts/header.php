@@ -309,7 +309,8 @@ $this->registerJs("
   });
   document.onkeydown=function(evt){
     var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
-    if(keyCode == 13){
+    var loginmodel = $('#loginModal').hasClass('show');
+    if(keyCode == 13 && loginmodel){
       submitLoginForm();
     }
   }
