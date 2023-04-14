@@ -139,6 +139,7 @@ $this->registerJs("
         var fname = $('#account_details .fname').val();
         var lname = $('#account_details .lname').val();
         var gstNumber = $('#account_details .gst_number').val();
+        var company = $('#account_details .company').val();
         var clr = 0;
         if(fname == ''){
           $('#fname_error').html('<span style=\"color:red\">First Name is Requried</span>');
@@ -157,7 +158,7 @@ $this->registerJs("
                 type:'post',
                 url:baseurl+'/profile/profile-update',
                 dataType: 'json',
-                data:{fname:fname,lname:lname,gstNumber:gstNumber},
+                data:{fname:fname,lname:lname,gstNumber:gstNumber,company:company},
                 success:function(response) {
                     if(response) {
                         toastr.success('Account details updated suceesfully');

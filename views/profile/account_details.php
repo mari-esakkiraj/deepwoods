@@ -25,7 +25,11 @@
         </div>
         <div class="form-group col-md-6">
             <label>GST Number</label>
-            <input required="" class="form-control" name="phone" type="text" value="<?=$user->gst_number ?? null ?>">
+            <input required="" class="form-control gst_number" name="gst" type="text" value="<?=$user->gst_number ?? null ?>">
+        </div>
+        <div class="form-group col-md-6">
+            <label>Company Name</label>
+            <input required="" class="form-control company" name="company" type="text" value="<?=$user->company ?? null ?>">
         </div>
     
         <div class="col-md-12 mt-2">
