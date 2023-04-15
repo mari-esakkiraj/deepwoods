@@ -254,6 +254,10 @@ class OrdersController extends Controller
     {
         $this->layout = 'mainpage';
         $cartItems = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->all();
+        if (empty($cartItems)) {
+            return $this->redirect(['site/productlist']);
+        }
+        
         $totalPrice = 0;
         $productQuantity = count($cartItems);
         foreach ($cartItems as $productList) {
