@@ -86,7 +86,38 @@ use yii\widgets\Pjax;
             </tr>
             <tr>
                 <th>Total Price</th>
-                <td><?php echo $order->total_price ?></td>
+                <td><?php echo $order->product_price ?></td>
+            </tr>
+            
+            <?php 
+            if($gstenable) {
+                ?>
+                <tr>
+                    <td>GST <?php echo $gst;?>%</td>
+                    <td class="text-right">
+                        <?php echo $order->gst; ?>
+                    </td>
+                </tr>
+                <?php 
+            }
+            ?>
+            <?php 
+            if($freight_chargesenable) {
+                ?>
+                <tr>
+                    <td>Freight Charges <?php echo $freight_charges;?>%</td>
+                    <td class="text-right">
+                        <?php echo $order->freight_charges; ?>
+                    </td>
+                </tr>
+                <?php 
+            }
+            ?>
+            <tr>
+                <td>Total </td>
+                <td class="text-right">
+                    <?php echo $order->total_price; ?>
+                </td>
             </tr>
         </table>
 

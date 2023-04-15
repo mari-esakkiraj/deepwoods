@@ -260,11 +260,34 @@ class OrdersController extends Controller
             $totalPrice+=($productList->product->price * $productList->quantity);
             //$productQuantity+=$productList->quantity;
         }
-        $gst = 0;
+
+        $product_price = $totalPrice;
         $setting = Settings::findOne(1);
+        $gst = 0;
+        $gstenable = false;
+        $gst_amount = 0;
         if (!empty($setting)) {
             $gst = $setting->gst;
         }
+        if ($gst>0) {
+            $gstenable = true;
+            $gst_amount = $product_price * ($gst / 100);
+            $totalPrice+=$gst_amount;
+        }
+        
+
+        $freight_charges = 0;
+        $freight_chargesenable = false;
+        $freight_amount = 0;
+        if (!empty($setting)) {
+            $freight_charges = $setting->freight_charges;
+        }
+        if ($freight_charges>0) {
+            $freight_chargesenable = true;
+            $freight_amount = $product_price * ($freight_charges / 100);
+            $totalPrice+=$freight_amount;
+        }
+
         $order = new Orders();
 
         $orderAddress = UserAddresses::find()->where(['user_id' => Yii::$app->user->identity->id,'type' => 'shipping'])->one();
@@ -277,6 +300,9 @@ class OrdersController extends Controller
         $order->lastname = Yii::$app->user->identity->lastname;
         $order->email = Yii::$app->user->identity->email;
         $order->total_price = $totalPrice;
+        $order->gst = $gst_amount;
+        $order->freight_charges = $freight_amount;
+        $order->product_price = $product_price;
         $order->status = 0;
         $order->created_at = time();
         $order->created_by = Yii::$app->user->identity->id;
@@ -360,7 +386,14 @@ class OrdersController extends Controller
             
             return $this->render('payment',["json" => $json, 'order' => $order, 'orderAddress' => $orderAddress,
             'productQuantity' => $productQuantity,
-            'totalPrice' => $totalPrice
+            'totalPrice' => $totalPrice,
+            'gstenable' => $gstenable,
+            'gst' => $gst,
+            'freight_chargesenable' => $freight_chargesenable,
+            'freight_charges' => $freight_charges,
+            'product_price' => $product_price,
+            'gst_amount' => $gst_amount,
+            'freight_amount' => $freight_amount
         ]);
         }
         return $this->render('checkout',[
@@ -368,7 +401,14 @@ class OrdersController extends Controller
             'orderAddress' => $orderAddress,
             'cartItems' => $cartItems,
             'productQuantity' => $productQuantity,
-            'totalPrice' => $totalPrice
+            'totalPrice' => $totalPrice,
+            'gstenable' => $gstenable,
+            'gst' => $gst,
+            'freight_chargesenable' => $freight_chargesenable,
+            'freight_charges' => $freight_charges,
+            'product_price' => $product_price,
+            'gst_amount' => $gst_amount,
+            'freight_amount' => $freight_amount
         ]);
     }
 
@@ -386,8 +426,13 @@ class OrdersController extends Controller
         }
         $api = new Api($keyId, $keySecret);
         $setting = Settings::findOne(1);
+        $gst = 0;
+        $gstenable = false;
         if (!empty($setting)) {
             $gst = $setting->gst;
+        }
+        if ($gst>0) {
+            $gstenable = true;
         }
         $orderData = [
             'receipt'         => 3456,

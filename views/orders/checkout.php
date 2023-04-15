@@ -116,6 +116,36 @@ use app\models\UserAddresses;
                     <tr>
                         <td>Total Price</td>
                         <td class="text-right">
+                            <?php echo $product_price; ?>
+                        </td>
+                    </tr>
+                    <?php 
+                    if($gstenable) {
+                        ?>
+                        <tr>
+                            <td>GST <?php echo $gst;?>%</td>
+                            <td class="text-right">
+                                <?php echo $gst_amount; ?>
+                            </td>
+                        </tr>
+                        <?php 
+                    }
+                    ?>
+                    <?php 
+                    if($freight_chargesenable) {
+                        ?>
+                        <tr>
+                            <td>Freight Charges <?php echo $freight_charges;?>%</td>
+                            <td class="text-right">
+                                <?php echo $freight_amount; ?>
+                            </td>
+                        </tr>
+                        <?php 
+                    }
+                    ?>
+                    <tr>
+                        <td>Total </td>
+                        <td class="text-right">
                             <?php echo $totalPrice; ?>
                         </td>
                     </tr>
