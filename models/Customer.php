@@ -126,4 +126,10 @@ class Customer extends \yii\db\ActiveRecord
     {
         return $this->hasMany(UserAddresses::class, ['user_id' => 'id']);
     }
+
+    public function delete()
+    {
+        $this->status = 0;
+        $this->save(false);
+    }
 }

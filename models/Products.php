@@ -126,4 +126,10 @@ class Products extends \yii\db\ActiveRecord
     public function getImageslist(){
         return $this->hasMany(ProductImages::class, ['product_id' => 'id']);
     }
+
+    public function delete()
+    {
+        $this->status = 0;
+        $this->save(false);
+    }
 }

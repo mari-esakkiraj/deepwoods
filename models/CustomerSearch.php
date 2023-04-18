@@ -56,6 +56,8 @@ class CustomerSearch extends Customer
             return $dataProvider;
         }
 
+        $query->where(['!=',  'status', '0']);
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,

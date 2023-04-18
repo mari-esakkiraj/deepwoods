@@ -267,4 +267,21 @@ class Users extends ActiveRecord implements IdentityInterface
             $this->generateAuthKey();
         }
     }
+
+    /**
+     * @return \common\models\UserAddress|null
+     * @author Zura Sekhniashvili <zurasekhniashvili@gmail.com>
+     */
+    /*public function getAddress(): ?UserAddress
+    {
+        $address = $this->addresses[0] ?? new UserAddress();
+        $address->user_id = $this->id;
+        return $address;
+    }*/
+
+    public function delete()
+    {
+        $this->status = 0;
+        $this->save(false);
+    }
 }

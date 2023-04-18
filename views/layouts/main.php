@@ -41,7 +41,7 @@ if(!Yii::$app->user->isGuest) {
         'options' => ['class' => 'navbar-nav w-100'],
         'items' => [
             ['label' => 'Home', 'url' => ['/customer/indexv1']],
-            ['label' => 'Users', 'url' => ['/customer/index']],
+            ['label' => 'Customer', 'url' => ['/customer/index']],
             ['label' => 'Product', 'url' => ['/products/index']],
             ['label' => 'Settings', 'url' => ['/settings']],
             Yii::$app->user->isGuest
