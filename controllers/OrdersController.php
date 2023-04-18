@@ -564,4 +564,67 @@ class OrdersController extends Controller
         
         return $this->render('verify',["success" => $success, 'message' => $html]);
     }
+
+    public function actionSendordermail($order_id){
+        if(!empty($order_id)) {
+            $model = $this->findModel($order_id);
+            if(!empty($model)) {
+                $setting = Settings::findOne(1);
+                $items = OrderItems::find()->where(['order_id' => $id])->all();
+
+                $to = $model->email; 
+                $from = $setting->company_email; 
+                $fromName = $setting->company_name; 
+                
+                $subject = "Your order total amount is Rs.".$model->total_price; 
+                $htmlContent = ' 
+        <html> 
+        <head> 
+            <title>Your order</title> 
+        </head> 
+        <body> 
+                <h1>Thanks you for ordering '.$fromName.'</h1> 
+            <table cellspacing="0" style="border: 2px dashed #FB4314; width: 100%;"> 
+                <tr> 
+                    <th>Product Name:</th><th>Quantity</th> <th>Unit Price</th> 
+                </tr> ';
+                if(!empty($items)) {
+                    foreach($items as $item){
+                        $htmlContent = '     
+                        <tr style="background-color: #e0e0e0;"> 
+                            <td>'.$item->product_name.'</td><td>'.$item->quantity.'</td> <td>'.$item->unit_price.'</td> 
+                        </tr> ';
+                    }
+                }
+                $htmlContent = '     
+                        <tr style="background-color: #e0e0e0;"> 
+                            <th colspan="2">Total:</th><td>'.$model->total_price.'</td> 
+                        </tr> 
+                        </table> 
+                </body> 
+                </html>'; 
+                 // Set content-type header for sending HTML email 
+            $headers = "MIME-Version: 1.0" . "\r\n"; 
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n"; 
+            
+            // Additional headers 
+            $headers .= 'From: '.$fromName.'<'.$from.'>' . "\r\n"; 
+            $headers .= 'Cc: welcome@example.com' . "\r\n"; 
+            $headers .= 'Bcc: welcome2@example.com' . "\r\n"; 
+            
+            // Send email 
+            if(mail($to, $subject, $htmlContent, $headers)){ 
+                echo 'Email has sent successfully.'; 
+            }else{ 
+                echo 'Email sending failed.'; 
+            }
+            }
+        
+        }
+
+      
+    
+    
+           
+    }
 }
