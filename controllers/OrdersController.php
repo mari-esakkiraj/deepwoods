@@ -58,7 +58,7 @@ class OrdersController extends Controller
                             }
                         ],
                         [
-                            'actions' => ['cartlist','checkout', 'payment', 'verify'],
+                            'actions' => ['cartlist','checkout', 'payment', 'verify', 'applycoupon'],
                             'allow' => true,
                             'roles' => ['@'],
                         ],
@@ -70,7 +70,7 @@ class OrdersController extends Controller
 
     public function beforeAction($action) 
     {
-        $withoutCSRF = ['savecheckout','removecart', 'verify', 'payment'];
+        $withoutCSRF = ['savecheckout','removecart', 'verify', 'payment', 'applycoupon'];
         if (in_array($action->id, $withoutCSRF)) {
             $this->enableCsrfValidation = false; 
         }
@@ -492,6 +492,11 @@ class OrdersController extends Controller
         $json = json_encode($data);
 
         return $this->render('payment',["json" => $json]);
+    }
+
+    public function actionApplycoupon(){
+        $returnData = ['success'=>false];
+        return json_encode(['data' => $returnData]);
     }
 
     public function actionVerify()
