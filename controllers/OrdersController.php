@@ -22,6 +22,7 @@ use yii\filters\AccessControl;
 use Razorpay\Api\Api;
 use app\models\Settings;
 use Razorpay\Api\Errors\SignatureVerificationError;
+use app\models\Promotion;
 
 /**
  * OrdersController implements the CRUD actions for Orders model.
@@ -496,6 +497,23 @@ class OrdersController extends Controller
 
     public function actionApplycoupon(){
         $returnData = ['success'=>false];
+        $coupon_code=$_POST['coupon_code'];
+        $product_price=$_POST['product_price'];
+        if ($coupon_code!= '') {
+            $promotion = Promotion::find()->where(['name' => $coupon_code])->andWhere(['promotion_type' => 'coupon'])->one();
+            if (!empty($promotion)) {
+                $returnData['success'] = true;
+                $returnData['promotion_id'] = $promotion->id;
+                $returnData['promotion_code'] = $coupon_code;
+                if($promotion->discount_type == 'Flat') {
+                    $returnData['promotion_price'] = $promotion->price;
+                }
+                if($promotion->discount_type == 'Percentage') {
+                    $returnData['promotion_price'] = round(($product_price*$promotion->price)/100, 2);
+                }
+            }
+        }
+        
         return json_encode(['data' => $returnData]);
     }
 
