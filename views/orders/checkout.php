@@ -107,6 +107,9 @@ use app\models\UserAddresses;
                     <?php endforeach; ?>
                     </tbody>
                 </table>
+                <div class="form-group"> <label>Have coupon?</label>
+                                <div class="input-group"> <input type="text" class="form-control coupon" name="" placeholder="Coupon code" id="coupon_code"> <span class="input-group-append"> <button class="btn btn-primary btn-apply coupon" onclick="return applycoupon();">Apply</button> </span> </div>
+                            </div>
                 <hr>
                 <table class="table">
                     <tr>
@@ -153,7 +156,7 @@ use app\models\UserAddresses;
 
                 <p class="text-right mt-3">
                     <button class="btn btn-secondary">Continue Payment</button>
-                    <button class="btn btn-secondary hide" >Cash on Delivery</button>
+                    <button class="btn btn-secondary" onclick="return false;">Cash on Delivery</button>
                 </p>
             </div>
         </div>
@@ -171,7 +174,31 @@ $this->registerJs("
         $('#useraddresses-zipcode').val($(this).attr('data-zipcode'));
         $('#orders-shipping_address_id').val($(this).attr('data-shipping_address_id'));
     });
+
+    
+    
 ");
 
 
 ?>  
+<script>
+    function applycoupon(){
+        alert('a');
+        $.ajax({
+          type:'post',
+          url:'<?php echo $absoluteBaseUrl; ?>/orders/applycoupon',
+          dataType: 'json',
+          data:{
+            coupon:$('#coupon_code').val(),
+            product_price:'<?php echo $product_price;?>'
+          },
+          success:function(response) {
+            var resultData = response.data;
+            if(!resultData.success){
+              toastr.warning('Invalid Code.'); 
+            }
+          }
+        })
+        return false;
+      }
+    </script>
