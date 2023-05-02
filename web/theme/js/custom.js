@@ -385,9 +385,13 @@
           responsiveClass:true,
           responsive:{
             0:{
-                items:4,
+                items:1,
                 nav:true
             },
+            600:{
+              items:4,
+              nav:true
+          },
           },
           dots: false,
           nav: true,
