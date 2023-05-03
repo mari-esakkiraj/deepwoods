@@ -113,6 +113,18 @@ use yii\widgets\Pjax;
                 <?php 
             }
             ?>
+            <?php 
+            if($order->promotion_price>0) {
+                ?>
+                <tr>
+                    <td>Promotion</td>
+                    <td class="text-right">
+                        <?php echo $order->promotion_price; ?>
+                    </td>
+                </tr>
+                <?php 
+            }
+            ?>
             <tr>
                 <td>Total </td>
                 <td class="text-right">

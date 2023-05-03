@@ -107,6 +107,11 @@ use app\models\UserAddresses;
                     <?php endforeach; ?>
                     </tbody>
                 </table>
+                <div class="form-group" id="promotion_div"> <label>Have coupon?</label>
+                                <div class="input-group"> <input type="text" class="form-control coupon" name="coupon_code" placeholder="Coupon code" id="coupon_code"> <span class="input-group-append"> <button class="btn btn-primary btn-apply coupon" onclick="return applycoupon();">Apply</button> </span> </div>
+                                <input type="hidden" name="promotion_id" id="promotion_id"/>
+                                <input type="hidden" name="promotion_price" id="promotion_price"/>
+                            </div>
                 <hr>
                 <table class="table">
                     <tr>
@@ -143,9 +148,15 @@ use app\models\UserAddresses;
                         <?php 
                     }
                     ?>
+                    <tr id="promotion_tr" style="display:none;">
+                        <td id="promotion_desc">Promotion</td>
+                        <td class="text-right" id="promotion_amount">
+                           
+                        </td>
+                    </tr>
                     <tr>
                         <td>Total </td>
-                        <td class="text-right">
+                        <td class="text-right" id="total_price_td">
                             <?php echo $totalPrice; ?>
                         </td>
                     </tr>
@@ -153,7 +164,7 @@ use app\models\UserAddresses;
 
                 <p class="text-right mt-3">
                     <button class="btn btn-secondary">Continue Payment</button>
-                    <button class="btn btn-secondary hide" >Cash on Delivery</button>
+                    <button class="btn btn-secondary" onclick="return false;">Cash on Delivery</button>
                 </p>
             </div>
         </div>
@@ -171,7 +182,44 @@ $this->registerJs("
         $('#useraddresses-zipcode').val($(this).attr('data-zipcode'));
         $('#orders-shipping_address_id').val($(this).attr('data-shipping_address_id'));
     });
+
+    
+    
 ");
 
 
 ?>  
+<script>
+    function applycoupon(){
+        $("#promotion_id").val('');
+        $("#promotion_price").val('');
+        var totalprice = <?php echo $totalPrice;?>;
+        $("#total_price_td").html(totalprice);
+        $("#promotion_amount").html('');
+        $("#promotion_tr").hide();
+        $.ajax({
+          type:'post',
+          url:'<?php echo $absoluteBaseUrl; ?>/orders/applycoupon',
+          dataType: 'json',
+          data:{
+            coupon_code:$('#coupon_code').val(),
+            product_price:'<?php echo $product_price;?>'
+          },
+          success:function(response) {
+            var resultData = response.data;
+            if(!resultData.success){
+              toastr.warning('Invalid Code.'); 
+            }
+            else {
+                $("#promotion_id").val(resultData.promotion_id);
+                $("#promotion_price").val(resultData.promotion_price);
+                var totalprice = <?php echo $totalPrice;?> - resultData.promotion_price;
+                $("#total_price_td").html(totalprice);
+                $("#promotion_amount").html(resultData.promotion_price);
+                $("#promotion_tr").show();
+            }
+          }
+        })
+        return false;
+      }
+    </script>

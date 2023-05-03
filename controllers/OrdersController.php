@@ -22,6 +22,7 @@ use yii\filters\AccessControl;
 use Razorpay\Api\Api;
 use app\models\Settings;
 use Razorpay\Api\Errors\SignatureVerificationError;
+use app\models\Promotion;
 
 /**
  * OrdersController implements the CRUD actions for Orders model.
@@ -58,7 +59,7 @@ class OrdersController extends Controller
                             }
                         ],
                         [
-                            'actions' => ['cartlist','checkout', 'payment', 'verify'],
+                            'actions' => ['cartlist','checkout', 'payment', 'verify', 'applycoupon'],
                             'allow' => true,
                             'roles' => ['@'],
                         ],
@@ -70,7 +71,7 @@ class OrdersController extends Controller
 
     public function beforeAction($action) 
     {
-        $withoutCSRF = ['savecheckout','removecart', 'verify', 'payment'];
+        $withoutCSRF = ['savecheckout','removecart', 'verify', 'payment', 'applycoupon'];
         if (in_array($action->id, $withoutCSRF)) {
             $this->enableCsrfValidation = false; 
         }
@@ -292,7 +293,11 @@ class OrdersController extends Controller
             $totalPrice+=$freight_amount;
         }
 
+        
+
         $order = new Orders();
+
+        
 
         $orderAddress = UserAddresses::find()->where(['user_id' => Yii::$app->user->identity->id,'type' => 'shipping'])->one();
         if(empty($orderAddress)) {
@@ -304,6 +309,21 @@ class OrdersController extends Controller
         $order->lastname = Yii::$app->user->identity->lastname;
         $order->email = Yii::$app->user->identity->email;
         $order->total_price = $totalPrice;
+        if (isset($_POST['promotion_id']) && $_POST['promotion_id']!='') {
+            $promotion = Promotion::findOne($_POST['promotion_id']);
+            if(!empty($promotion)) {
+                $order->promotion_price = 0;
+                if($promotion->discount_type == 'Flat') {
+                    $order->promotion_price = $promotion->price;
+                }
+                if($promotion->discount_type == 'Percentage') {
+                    $order->promotion_price = round(($product_price*$promotion->price)/100, 2);
+                }
+
+                $order->total_price = $totalPrice - $order->promotion_price;
+            }
+            
+        }
         $order->gst = $gst_amount;
         $order->freight_charges = $freight_amount;
         $order->product_price = $product_price;
@@ -492,6 +512,28 @@ class OrdersController extends Controller
         $json = json_encode($data);
 
         return $this->render('payment',["json" => $json]);
+    }
+
+    public function actionApplycoupon(){
+        $returnData = ['success'=>false];
+        $coupon_code=$_POST['coupon_code'];
+        $product_price=$_POST['product_price'];
+        if ($coupon_code!= '') {
+            $promotion = Promotion::find()->where(['name' => $coupon_code])->andWhere(['promotion_type' => 'coupon'])->one();
+            if (!empty($promotion)) {
+                $returnData['success'] = true;
+                $returnData['promotion_id'] = $promotion->id;
+                $returnData['promotion_code'] = $coupon_code;
+                if($promotion->discount_type == 'Flat') {
+                    $returnData['promotion_price'] = $promotion->price;
+                }
+                if($promotion->discount_type == 'Percentage') {
+                    $returnData['promotion_price'] = round(($product_price*$promotion->price)/100, 2);
+                }
+            }
+        }
+        
+        return json_encode(['data' => $returnData]);
     }
 
     public function actionVerify()
