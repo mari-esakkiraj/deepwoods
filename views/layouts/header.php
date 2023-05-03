@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 $absoluteBaseUrl = Url::base(true);
+use app\models\CartItems;
+use yii\widgets\Pjax;
 ?>
 
 <header class="header-area header-default header-style4">
@@ -35,8 +37,47 @@ $absoluteBaseUrl = Url::base(true);
                         
                         <?php 
                         if(!Yii::$app->user->isGuest) {
+                          $productList = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->all();
                         ?>
-                        <li><a href="<?=$absoluteBaseUrl?>/orders/cartlist"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart<span class='badge badge-warning' id='dwCartCount'></span></a></li>
+                        <li class="header-action-icon-2"><a href="<?=$absoluteBaseUrl?>/orders/cartlist"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart<span class='badge badge-warning' id='dwCartCount'></span></a>
+                            <?php Pjax::begin(['id' => 'my-cardlist-new']); ?> 
+                            <?php
+                            if(count($productList) > 0){
+                              $total = 0;
+                              
+                            ?>
+                            <div class="cart-dropdown-wrap cart-dropdown-hm2">
+                                <ul>
+                                    <?php foreach($productList as $key=>$products) {
+                                        $imgPath = $absoluteBaseUrl."/theme/img/shop/01.jpg";
+                                        if(isset($products->product->imageslist) && count($products->product->imageslist)>0){
+                                            $imgPath = $absoluteBaseUrl.'/uploads/'.$products->product->imageslist[0]->image;
+                                        }
+                                        $total = $total + $products->quantity * $products->product->price; ?>
+                                    <li>
+                                        <div class="shopping-cart-img">
+                                            <a href="shop-product-right.html"><img alt="Nest" src="<?=$imgPath?>"></a>
+                                        </div>
+                                        <div class="shopping-cart-title">
+                                            <h4 class="cartItemName"><?= $products->product->name ?></h4>
+                                            <h4><?= $products->quantity ?> * <i class="fa fa-rupee"></i><?= $products->product->price ?></h4>
+                                        </div>
+                                    </li>
+                                    <?php } ?>
+                                </ul>
+                                <div class="shopping-cart-footer">
+                                    <div class="shopping-cart-total">
+                                        <h4>Total <span><i class="fa fa-rupee"></i> <?= $total ?></span></h4>
+                                    </div>
+                                    <div class="shopping-cart-button">
+                                        <a class="btn" href="<?=$absoluteBaseUrl?>/orders/cartlist">View cart</a>
+                                        <a class="btn" href="<?=$absoluteBaseUrl?>/orders/checkout">Checkout</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php } ?>
+                            <?php  Pjax::end(); ?>
+                        </li>
                         <li class="has-submenu">
                           <a href="javascript:void(0)">
                             <?php echo Yii::$app->user->identity->firstname.' '.Yii::$app->user->identity->	lastname ?>
