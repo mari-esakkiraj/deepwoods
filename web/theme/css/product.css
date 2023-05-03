@@ -1146,3 +1146,98 @@ table td, table th {
 .file-footer-buttons{
   display: none !important;
 }
+
+
+
+.cart-dropdown-wrap {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 20px);
+  z-index: 99;
+  width: 320px;
+  background-color: #fff;
+  -webkit-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+  padding: 15px;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+  border-radius: 10px;
+  border: 1px solid #ececec;
+}
+
+.header-action-icon-2:hover .cart-dropdown-wrap {
+  opacity: 1;
+  visibility: visible;
+  top: calc(100% + 10px);
+}
+
+.cart-dropdown-wrap .shopping-cart-footer .shopping-cart-total {
+  margin: 10px 0;
+  padding: 10px 0 0;
+}
+
+.cart-dropdown-wrap .shopping-cart-footer .shopping-cart-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+.cart-dropdown-wrap ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 0 0 10px;
+  
+  border-bottom: 2px solid #f3f3f3;
+}
+
+.cart-dropdown-wrap ul li .shopping-cart-img {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 80px;
+  flex: 0 0 80px;
+  margin-right: 10px;
+}
+
+.cart-dropdown-wrap ul li .shopping-cart-title {
+  margin: 6px 0 0;
+}
+
+.cart-dropdown-wrap ul li .shopping-cart-title h4 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  margin: 0 0 9px;
+}
+
+.cart-dropdown-wrap ul li .shopping-cart-title h4.cartItemName {
+  color: #3BB77E;
+}
+
+.cart-dropdown-wrap .shopping-cart-footer .shopping-cart-total h4 {
+  color: #9b9b9b;
+  font-weight: 700;
+  font-size: 16px;
+  margin: 0;
+}
+
+.cart-dropdown-wrap .shopping-cart-footer .shopping-cart-total h4 span {
+  font-size: 18px;
+  float: right;
+  color: #3BB77E;
+}
