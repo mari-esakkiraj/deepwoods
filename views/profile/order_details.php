@@ -34,12 +34,12 @@ $orders = Orders::find()->where(['customer_id' => $userID])->all();
         </tbody>
     </table>
 </div>
-<div class="orderDetails">
+<!-- <div class="orderDetails">
     <div><button class="btn backOrder">Back</button></div>
     <div>
         <div class="">Order ID: </div>
     </div>
-</div>
+</div> -->
 
 <?php 
 /*$this->registerJs("
