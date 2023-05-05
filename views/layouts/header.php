@@ -412,8 +412,14 @@ $this->registerJs("
       $('#confirm_password_error').html('');
     }
   });
-  document.getElementById('cartlistURL').onclick = function () { location.href = '".$absoluteBaseUrl."/orders/cartlist'; };
-  document.getElementById('checkoutURL').onclick = function () { location.href = '".$absoluteBaseUrl."/orders/checkout'; };
+  
+  $(document).on('click','#cartlistURL',function() {
+    location.href = '".$absoluteBaseUrl."/orders/cartlist';
+  });
+
+  $(document).on('click','#checkoutURL',function() {
+    location.href = '".$absoluteBaseUrl."/orders/checkout'; 
+  });
 ");
 
 
