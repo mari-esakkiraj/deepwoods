@@ -18,6 +18,7 @@ use app\models\ProductImages;
 use app\models\ProductsSearch;
 use app\models\ContactUs;
 use yii\data\ActiveDataProvider;
+use app\models\UserAddresses;
 
 
 class SiteController extends Controller
@@ -399,6 +400,13 @@ class SiteController extends Controller
 
         if($user->validate()){
             if($user->save()){
+                $addresses = new UserAddresses();
+                $addresses->address = $address;
+                $addresses->user_id = $user->id;
+                $addresses->city = "Chennai";
+                $addresses->state = "Tamilnadu";
+                $addresses->country = "India";
+                $addresses->save(false);
                 $data = ['success' => true, 'data'=> true];
                 $this->sendRegisterMail($user, $password);
             }else{
