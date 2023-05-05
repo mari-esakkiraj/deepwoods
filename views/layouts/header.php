@@ -70,8 +70,8 @@ use yii\widgets\Pjax;
                                         <h4>Total <span><i class="fa fa-rupee"></i> <?= $total ?></span></h4>
                                     </div>
                                     <div class="shopping-cart-button">
-                                        <a class="btn" href="<?=$absoluteBaseUrl?>/orders/cartlist">View cart</a>
-                                        <a class="btn" href="<?=$absoluteBaseUrl?>/orders/checkout">Checkout</a>
+                                        <a class="btn" id="cartlistURL">View cart</a>
+                                        <a class="btn" id="checkoutURL">Checkout</a>
                                     </div>
                                 </div>
                             </div>
@@ -412,6 +412,8 @@ $this->registerJs("
       $('#confirm_password_error').html('');
     }
   });
+  document.getElementById('cartlistURL').onclick = function () { location.href = '".$absoluteBaseUrl."/orders/cartlist'; };
+  document.getElementById('checkoutURL').onclick = function () { location.href = '".$absoluteBaseUrl."/orders/checkout'; };
 ");
 
 
@@ -518,7 +520,4 @@ $this->registerJs("
         });
     }
   }
-
-
-  
 </script>
