@@ -285,10 +285,10 @@
       type:'GET',
       url:Baseurl+'/site/usercartcount',
       success:function(response) {
+        $.pjax.reload({container: '#my-cardlist-new'});
         if(response > 0){
           $("#dwCartCount").removeClass('hide');
           $("#dwCartCount").html(response);
-          $.pjax.reload({container: '#my-cardlist-new'});
         }else{
           $("#dwCartCount").addClass('hide');
         }
