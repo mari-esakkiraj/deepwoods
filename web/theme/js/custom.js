@@ -132,7 +132,7 @@
     insertCart(productID, 1, quantity, 'increment');
   });
 
-  $(".remove-cart").on('click', function() {
+  $(document).on('click','.remove-cart',function(e) {
     var productID = $(this).attr('data-cartItemId');
     var cartItemId = $(this).attr("data-cartItemId");
     //insertCart(productID, cartItemId, 1, 'delete');
@@ -186,6 +186,7 @@
           }else{
             toastr.success('Your cart updated.');  
           }
+          $.pjax.reload({container: '#popup-order'});
           getCartCount();
         } else {
           var quickModal = $('#quickViewModal').hasClass('show');
@@ -217,13 +218,15 @@
           toastr.warning('Cart item removed.'); 
           getCartCount();
           findTotal();
-          $.pjax.reload({container: '#my-cardlist'});
+          $.pjax.reload({container: '#my-cardlist'}).done(function () {
+            $.pjax.reload({container: '#popup-order'});
+          });
         }
       }
     })
   }
 
-  $(".clear-cart").on('click', function() {
+  $(document).on('click','.clear-cart',function(e) {
     if(confirm("Are you sure you want to clear?")){
       clearClart();
     }else{
@@ -273,7 +276,9 @@
         if(resultData){
           toastr.warning('Cart item cleared.'); 
           getCartCount();
-          $.pjax.reload({container: '#my-cardlist'});
+          $.pjax.reload({container: '#my-cardlist'}).done(function () {
+            $.pjax.reload({container: '#popup-order'});
+          });
         }
       }
     })
@@ -285,7 +290,6 @@
       type:'GET',
       url:Baseurl+'/site/usercartcount',
       success:function(response) {
-        $.pjax.reload({container: '#my-cardlist-new'});
         if(response > 0){
           $("#dwCartCount").removeClass('hide');
           $("#dwCartCount").html(response);
