@@ -40,14 +40,14 @@ use yii\widgets\Pjax;
                           $productList = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->all();
                         ?>
                         <li class="header-action-icon-2"><a href="<?=$absoluteBaseUrl?>/orders/cartlist"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart<span class='badge badge-warning' id='dwCartCount'></span></a>
-                            <?php Pjax::begin(['id' => 'my-cardlist-new']); ?> 
+                            <?php Pjax::begin(['id' => 'popup-order']); ?> 
                             <?php
                             if(count($productList) > 0){
                               $total = 0;
                               
                             ?>
                             <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                <ul>
+                                <ul style="max-height: 400px;overflow: auto;">
                                     <?php foreach($productList as $key=>$products) {
                                         $imgPath = $absoluteBaseUrl."/theme/img/shop/01.jpg";
                                         if(isset($products->product->imageslist) && count($products->product->imageslist)>0){
