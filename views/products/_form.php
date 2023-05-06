@@ -68,9 +68,9 @@ use yii\helpers\Url;
         'modelImagees' => $modelImagees
     ])*/ ?>
 
-    <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'price')->textInput(['maxlength' => true, 'type' => 'number']) ?>
 
-    <?= $form->field($model, 'quantity')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'quantity')->textInput(['maxlength' => true, 'type' => 'number']) ?>
 
     <?= $form->field($model, 'gst_no')->textInput() ?>
 
