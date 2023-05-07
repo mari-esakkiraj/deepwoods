@@ -45,7 +45,7 @@ $absoluteBaseUrl = Url::base(true);
                                     <td><?= date("d-M-Y",$order->created_at) ?? ''?></td>
                                     <td><?= (($order->status==2) ? 'Failed' : (($order->status==1) ? 'Success'  : 'Pending'))?></td>
                                     <td>₹<?=$order->total_price ?? ''?></td>
-                                    <td><a href="javascript:void(0)" class="btn-small d-block view-orders" data-orderid="<?=$order->id?>">View</a></td>
+                                    <td><a href="javascript:void(0)" class="btn-small d-block view-orders-new" data-orderid="<?=$order->id?>">View</a></td>
                                 </tr>
                                 <?php
                             }
