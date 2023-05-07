@@ -7,7 +7,7 @@ $absoluteBaseUrl = Url::base(true);
       <div class="row">
         <div class="col-12">
           <!--== Start Footer Widget Area ==-->
-          <div class="footer-widget-area pb-30">
+          <div class="footer-widget-area">
             <div class="row">
               <div class="col-lg-6">
                 <div class="widget-item" style="display: flex; align-items: center; gap: 60px;">
