@@ -3,6 +3,9 @@
 use app\models\Orders;
 
 $orders = Orders::find()->where(['customer_id' => $userID])->all();
+use yii\helpers\Html;
+use yii\helpers\Url;
+$absoluteBaseUrl = Url::base(true);
 ?>
 <div class="table-responsive orders-table">
     <table class="table">
@@ -26,7 +29,7 @@ $orders = Orders::find()->where(['customer_id' => $userID])->all();
                         <td><?=$order->created_at ?? ''?></td>
                         <td><?=$order->status ?? ''?></td>
                         <td>₹<?=$order->total_price ?? ''?></td>
-                        <td><a href="javascript:void(0)" data-details="<?= json_encode($order) ?>" class="btn-small d-block view-orders">View</a></td>
+                        <td><a href="javascript:void(0)" data-orderid="<?= $order->id ?>" class="btn-small d-block view-orders">View</a></td>
                     </tr>
                     <?php
                 }
@@ -42,17 +45,13 @@ $orders = Orders::find()->where(['customer_id' => $userID])->all();
 </div> -->
 
 <?php 
-/*$this->registerJs("
+$this->registerJs("
     $('.orderDetails').hide();
     var AppConfig = new AppConfigs();
     var baseurl = AppConfig.getBaseUrl();
     $(document).on('click','.view-orders',function() { 
-        $('.orders-table').hide();
-        $('.orderDetails').show();
+        let id = $(this).attr('data-orderid');
+        location.href = '".$absoluteBaseUrl."/profile/vieworder?id='+id;
     });
-    $(document).on('click','.backOrder',function() { 
-        $('.orders-table').show();
-        $('.orderDetails').hide();
-    });
-");*/
+");
 ?>  

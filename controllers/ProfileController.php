@@ -57,6 +57,17 @@ class ProfileController extends Controller
         return $this->render('index', ['user' => $user]);
     }
 
+    public function actionVieworder($id)
+    {
+        $userID = null;
+        if (!Yii::$app->user->isGuest) {
+            $userID = Yii::$app->user->identity->id ?? null;
+        }
+        $user = Users::find()->where(['id' => $userID])->one();
+       
+        return $this->render('vieworder', ['id' => $id]);
+    }
+
     public function actionProfileUpdate()
     {
         $fname = Yii::$app->request->post('fname') ?? null;
