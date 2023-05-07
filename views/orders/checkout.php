@@ -15,7 +15,8 @@ use app\models\UserAddresses;
 ]); ?>
 <div class="row">
     <div class="col">
-        <div class="card mb-3">
+    <?php /* ?>    
+    <div class="card mb-3">
             <div class="card-header">
                 <h5>Account information</h5>
             </div>
@@ -33,6 +34,7 @@ use app\models\UserAddresses;
 
             </div>
         </div>
+        <?php */ ?>    
         <div class="card">
             <div class="card-header">
                 <h5>Address information</h5>
@@ -59,6 +61,7 @@ use app\models\UserAddresses;
                 <?= $form->field($order, 'shipping_address_id')->hiddenInput(['autofocus' => true])->label(false) ?>
             </div>
             <div class="card-body" style="border-top: 2px solid #ddd;">
+                <?= $form->field($order, 'firstname')->textInput(['autofocus' => true]) ?>
                 <?= $form->field($orderAddress, 'address') ?>
                 <?= $form->field($orderAddress, 'city') ?>
                 <?= $form->field($orderAddress, 'state')->dropDownList(['Tamilnadu'=>'Tamilnadu']);?>
@@ -107,11 +110,12 @@ use app\models\UserAddresses;
                     <?php endforeach; ?>
                     </tbody>
                 </table>
-                <div class="form-group" id="promotion_div"> <label>Have coupon?</label>
-                                <div class="input-group"> <input type="text" class="form-control coupon" name="coupon_code" placeholder="Coupon code" id="coupon_code"> <span class="input-group-append"> <button class="btn btn-primary btn-apply coupon" onclick="return applycoupon();">Apply</button> </span> </div>
-                                <input type="hidden" name="promotion_id" id="promotion_id"/>
-                                <input type="hidden" name="promotion_price" id="promotion_price"/>
-                            </div>
+                <div class="form-group" id="promotion_div"> 
+                    <label>Have coupon?</label>
+                    <div class="input-group1" style="display: flex;gap: 20px;align-items: center;"> <input type="text" class="form-control coupon" name="coupon_code" placeholder="Coupon code" id="coupon_code" style="width: 250px;"> <span class="input-group-append"> <button class="btn btn-primary btn-apply coupon" onclick="return applycoupon();">Apply</button> </span> </div>
+                    <input type="hidden" name="promotion_id" id="promotion_id"/>
+                    <input type="hidden" name="promotion_price" id="promotion_price"/>
+                </div>
                 <hr>
                 <table class="table">
                     <tr>
