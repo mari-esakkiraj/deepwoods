@@ -163,8 +163,9 @@ use app\models\UserAddresses;
                 </table>
 
                 <p class="text-right mt-3">
+                    <input type="hidden" name="cashondelivery" id="cashondelivery"/>
                     <button class="btn btn-secondary">Continue Payment</button>
-                    <button class="btn btn-secondary" onclick="return false;">Cash on Delivery</button>
+                    <button class="btn btn-secondary" onclick="return cashondelivery();" style="display:none">Cash on Delivery</button>
                 </p>
             </div>
         </div>
@@ -208,7 +209,7 @@ $this->registerJs("
           success:function(response) {
             var resultData = response.data;
             if(!resultData.success){
-              toastr.warning('Invalid Code.'); 
+              toastr.warning('Invalid Coupon.'); 
             }
             else {
                 $("#promotion_id").val(resultData.promotion_id);
@@ -220,6 +221,12 @@ $this->registerJs("
             }
           }
         })
+        return false;
+      }
+
+      function cashondelivery(){
+        //alert("aa");
+        $("#cashondelivery").val(1);
         return false;
       }
     </script>
