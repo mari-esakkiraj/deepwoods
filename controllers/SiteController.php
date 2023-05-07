@@ -178,7 +178,7 @@ class SiteController extends Controller
                 'model' => $model,
             ]);
             return ['access_token' => $user->access_token];*/
-            $this->redirect(['products/index']);
+            $this->redirect(['customer/indexv1']);
             
 
         }

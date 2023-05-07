@@ -333,18 +333,12 @@ class OrdersController extends Controller
         $order->customer_id = Yii::$app->user->identity->id;
         $order->phone = Yii::$app->user->identity->mobile_number;
 
-        $cashondelivery = 0;
-        if (isset($_POST['cashondelivery']) && $_POST['cashondelivery']=='1') {
-            $cashondelivery = 1;
-            $order->cashondelivery = 1;
-        }
         
         $transaction = Yii::$app->db->beginTransaction();
         
         if ($order->load(Yii::$app->request->post())
             && $order->save()
             && $order->saveOrderItems()) {
-                
             if(!isset($orderAddress->id)){
                 $orderAddress->load(Yii::$app->request->post());
                 $orderAddress->user_id = Yii::$app->user->identity->id;
@@ -354,18 +348,6 @@ class OrdersController extends Controller
             
             $transaction->commit();
             CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
-
-            /*if ($cashondelivery==1) {
-                $order->status = 1;
-                $order->paypal_order_id = 'DW00'.$order->id;
-                $html = "<p>Your payment was successful</p>
-                        <p>Payment ID: {$order->paypal_order_id}</p>";
-                $order->save();
-                $this->layout = 'mainpage';
-        
-                return $this->render('verify',["success" => $success, 'message' => $html]);
-            }*/
-
             $keyId = 'rzp_test_837Iw9MVhmAj9z';
             $keySecret = 'PcntHmmtBWoM2te93AIt2Uh7';
             $displayCurrency = 'INR';
@@ -425,19 +407,19 @@ class OrdersController extends Controller
             }
             
             $json = json_encode($data);
+            
             return $this->render('payment',["json" => $json, 'order' => $order, 'orderAddress' => $orderAddress,
-                'productQuantity' => $productQuantity,
-                'totalPrice' => $totalPrice,
-                'gstenable' => $gstenable,
-                'gst' => $gst,
-                'freight_chargesenable' => $freight_chargesenable,
-                'freight_charges' => $freight_charges,
-                'product_price' => $product_price,
-                'gst_amount' => $gst_amount,
-                'freight_amount' => $freight_amount
-            ]);
+            'productQuantity' => $productQuantity,
+            'totalPrice' => $totalPrice,
+            'gstenable' => $gstenable,
+            'gst' => $gst,
+            'freight_chargesenable' => $freight_chargesenable,
+            'freight_charges' => $freight_charges,
+            'product_price' => $product_price,
+            'gst_amount' => $gst_amount,
+            'freight_amount' => $freight_amount
+        ]);
         }
-        //echo "aa";die;
         return $this->render('checkout',[
             'order' => $order,
             'orderAddress' => $orderAddress,
@@ -586,14 +568,8 @@ class OrdersController extends Controller
                 $error = 'Razorpay Error : ' . $e->getMessage();
             }
         }
-        if (isset($_POST['order_id']) && $_POST['order_id'] != '') {
-            $order_id = $_POST['order_id'];
-            $order = Orders::findOne($order_id);
-        }
-        else {
-            $order = Orders::find()->where(['transaction_id' => $_SESSION['razorpay_order_id']])->one();
-        }
-        
+        $order_id = $_POST['order_id'];
+        $order = Orders::findOne($order_id);
         if ($success === true)
         {
             $order->status = 1;

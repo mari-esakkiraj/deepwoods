@@ -35,7 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'name',
                 'headerOptions' => ['style' => 'width:20%'],
             ],
-            'description:html',
+            [
+                'attribute' => 'description',
+                'format'=>'raw',
+                'value' => function ($model) {
+                    return $model->description;
+                }
+            ],
             [
                 'attribute' => 'price',
                 'headerOptions' => ['style' => 'width:10%'],

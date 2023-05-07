@@ -1139,7 +1139,7 @@ table td, table th {
   display: none;
 }
 
-.checkout-cart-area{
+.checkout-cart-area, .view-order-area{
   padding: 20px;
 }
 
