@@ -3,6 +3,15 @@ use yii\helpers\Url;
 $absoluteBaseUrl = Url::base(true);
 use yii\widgets\Pjax;
 ?>
+<?php
+// Function to create read more link of a content with link to full page
+function readMore($content,$limit) {
+$content = substr($content,0,$limit);
+$content = substr($content,0,strrpos($content,' '));
+$content = $content." <a href='javascript:void(0);' class='readmore'>Read More...</a>";
+return $content;
+}
+?>
 <!--== Start Product Area Wrapper ==-->
 <section class="product-area">
     <div class="row" style="transform: none;">
@@ -84,11 +93,8 @@ use yii\widgets\Pjax;
                             <i class="fa fa-shopping-cart" aria-hidden="true"></i> Add </a>
                         </div>
                         </div>
-                        </div>                        
-                    </div>
-                    </div>
-                </div>
-                <?php Pjax::begin(['id' => 'my-product-review']); ?>
+                        </div>     
+                        <?php Pjax::begin(['id' => 'my-product-review']); ?>
                 <div class="product-info">
                     <div class="tab-style3" id="my-product-tabs">
                         <ul class="nav nav-tabs text-uppercase">
@@ -107,7 +113,13 @@ use yii\widgets\Pjax;
                         </ul>
                         <div class="tab-content shop_info_tab entry-main-content">
                             <div class="tab-pane fade  active show" id="Description">
-                                <?= $products->description ?>
+                                <label class="small-desc">
+                                    <?= readMore($products->description,400); ?></p>
+                                </label>
+                                <label class="big-desc" style="display: none;">
+                                    <?= $products->description; ?>
+                                    <a href='javascript:void(0);' class='lessmore'>Less More...</a>
+                                </label>
                             </div>
                             <div class="tab-pane fade" id="Additional-info">
                                 <table class="font-md">
@@ -327,7 +339,10 @@ use yii\widgets\Pjax;
                         </div>
                     </div>
                 </div>
-                <?php  Pjax::end(); ?>
+                <?php  Pjax::end(); ?>                   
+                    </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -358,6 +373,14 @@ use yii\widgets\Pjax;
       });
       $('#quickViewModal').on('hidden.bs.modal', function () {
         $('body').removeClass('fix');
-      })
+      });
+      $('.readmore').on('click', function () {
+        $('.small-desc').hide();
+        $('.big-desc').show()
+      });
+      $('.lessmore').on('click', function () {
+        $('.big-desc').hide();
+        $('.small-desc').show()
+      });
     ");
 ?>    
