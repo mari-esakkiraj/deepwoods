@@ -168,7 +168,7 @@ use yii\widgets\Pjax;
           </div>
             <div class="modal-footer justify-content-center">
               <div>Not a member? <a href="javascript:void(0)" class="blue-text siginup">Sign Up</a></div>
-              <div>Forgot <a href="javascript:void(0)" class="blue-text forgotPassword">Password?</a></div>
+              <div><a href="javascript:void(0)" class="blue-text forgotPassword">Forgot Password?</a></div>
               <div style="display:none">Forgot <a href="javascript:void(0)" class="blue-text forgotPassword">Username?</a></div>
             </div>
           </div>

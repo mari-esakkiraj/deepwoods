@@ -21,7 +21,7 @@ $absoluteBaseUrl = Url::base(true);
         </div>
         <div class="product-action-1">
             <a aria-label="Add To Wishlist" class="action-btn whishlist-add hide" href="javascript:void(0)"><i class='far fa-heart'></i></a>
-            <a aria-label="Quick view" class="action-btn btn-quick-view" data-bs-toggle="modal" data-bs-target="#quickViewModal" data-productid="<?= $model->id ?>"><i class="far fa-eye" aria-hidden="true"></i></a>
+            <a aria-label="Quick view" class="action-btn btn-quick-view hide" data-bs-toggle="modal" data-bs-target="#quickViewModal" data-productid="<?= $model->id ?>"><i class="far fa-eye" aria-hidden="true"></i></a>
         </div>
         <div class="product-badges product-badges-position product-badges-mrg hide">
             <span class="new">New</span>

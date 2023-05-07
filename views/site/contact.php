@@ -22,11 +22,8 @@ $this->title = 'Contact Us';
         </div>
 
     <?php endif; ?>
+    <?php if (!Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
 
-        <p>
-            If you have business inquiries or other questions, please fill out the following form to contact us.
-            Thank you.
-        </p>
 
         <div class="row">
             <div class="col-lg-5">
@@ -52,6 +49,7 @@ $this->title = 'Contact Us';
 
             </div>
         </div>
+        <?php endif; ?>
 
 </div>
 </div>
