@@ -80,7 +80,7 @@ use yii\widgets\Pjax;
                         </li>
                         <li class="has-submenu">
                           <a href="javascript:void(0)">
-                            <?php echo Yii::$app->user->identity->firstname.' '.Yii::$app->user->identity->	lastname ?>
+                            <?php echo Yii::$app->user->identity->firstname ?>
                           </a>
                           <ul class="submenu-nav" style="min-width: 140px;">
                             <li><a href="<?=$absoluteBaseUrl?>/profile">My Account</a></li>

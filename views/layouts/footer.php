@@ -2,7 +2,7 @@
 use yii\helpers\Url;
 $absoluteBaseUrl = Url::base(true);
 ?>
-<footer class="footer-area">
+<footer class="footer-area" style="padding-top: 20px; margin-top: 70px;">
     <div class="container">
       <div class="row">
         <div class="col-12">
@@ -10,17 +10,18 @@ $absoluteBaseUrl = Url::base(true);
           <div class="footer-widget-area pb-30">
             <div class="row">
               <div class="col-lg-6">
-                <div class="widget-item">
+                <div class="widget-item" style="display: flex; align-items: center; gap: 60px;">
                   <div class="about-widget">
-                    <div class="inner-content">
+                    <div class="inner-content" style="max-width: 170px;">
                       <div class="footer-logo">
                         <a href="#/">
                           <img class="logo-light" src="<?= $absoluteBaseUrl ?>/theme/img/deepwoods.png" alt="Logo" />
                         </a>
                       </div>
-                      <p>Shop No. 2, Ground Floor, <br>No 37/16, Mirbakshi ali street,<br>royapettah, chennai - 600 014. <br>Mob: +91 6380 589 226</p>
+                      
                     </div>
                   </div>
+                  <p>Shop No. 2, Ground Floor, <br>No 37/16, Mirbakshi ali street,<br>royapettah, chennai - 600 014. <br>Mob: +91 6380 589 226</p>
                 </div>
               </div>
               <div class="col-lg-6">
@@ -41,7 +42,7 @@ $absoluteBaseUrl = Url::base(true);
       </div>
     </div>
     <!--== Start Footer Bottom Area ==-->
-    <div class="footer-bottom">
+    <div class="footer-bottom" style="padding: 10px;">
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
