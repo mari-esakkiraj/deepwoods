@@ -14,6 +14,8 @@ use app\models\Orders;
 $this->title = 'Dashboard';
 $this->params['breadcrumbs'][] = $this->title;
 $orders = Orders::find()->orderBy(['id' => SORT_DESC])->limit(10)->all();
+$absoluteBaseUrl = Url::base(true);
+
 ?>
 <div class="customer-index">
     <div class="flex-container">
@@ -40,10 +42,10 @@ $orders = Orders::find()->orderBy(['id' => SORT_DESC])->limit(10)->all();
                             foreach($orders as $order) { ?>
                                 <tr>
                                     <td>#<?=$order->id ?? ''?></td>
-                                    <td><?=$order->created_at ?? ''?></td>
-                                    <td><?=$order->status ?? ''?></td>
+                                    <td><?= date("d-M-Y",$order->created_at) ?? ''?></td>
+                                    <td><?= (($order->status==2) ? 'Failed' : (($order->status==1) ? 'Success'  : 'Pending'))?></td>
                                     <td>₹<?=$order->total_price ?? ''?></td>
-                                    <td><a href="javascript:void(0)" class="btn-small d-block">View</a></td>
+                                    <td><a href="javascript:void(0)" class="btn-small d-block view-orders" data-orderid="<?=$order->id?>">View</a></td>
                                 </tr>
                                 <?php
                             }
@@ -53,3 +55,11 @@ $orders = Orders::find()->orderBy(['id' => SORT_DESC])->limit(10)->all();
             </div>
         </div>
 </div>
+<?php 
+$this->registerJs("
+    $(document).on('click','.view-orders',function() { 
+        let id = $(this).attr('data-orderid');
+        location.href = '".$absoluteBaseUrl."/profile/vieworder?id='+id;
+    });
+");
+?>  
