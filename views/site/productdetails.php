@@ -29,7 +29,7 @@ use yii\widgets\Pjax;
                                 <?php foreach($products->imageslist as $imgkey=>$images){
                                     $filepath = $absoluteBaseUrl."/uploads/".$images->image;
                                 ?>
-                                <div class="swiper-slide">
+                                <div class="swiper-slide"  style="height:150px;border:1px solid;border-radius: 16px;">
                                     <img  src="<?=$filepath?>" alt="Image-HasTech">
                                 </div>
                                 <?php } ?>
