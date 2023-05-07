@@ -8,23 +8,12 @@ use yii\widgets\Pjax;
 <hr>
 <div class="row">
     <div class="col">
-        <h5>Account information</h5>
+        <h5>Address information</h5>
         <table class="table">
             <tr>
                 <th>Firstname</th>
                 <td><?php echo $order->firstname ?></td>
             </tr>
-            <tr>
-                <th>Lastname</th>
-                <td><?php echo $order->lastname ?></td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td><?php echo $order->email ?></td>
-            </tr>
-        </table>
-        <h5>Address information</h5>
-        <table class="table">
             <tr>
                 <th>Address</th>
                 <td><?php echo $orderAddress->address ?></td>

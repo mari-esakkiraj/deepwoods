@@ -17,11 +17,11 @@
         
         <div class="form-group col-md-6">
             <label>Email Address <span class="required">*</span></label>
-            <input required readonly=true class="form-control email" name="email" type="email" value="<?=$user->email ?? null ?>">
+            <input required readonly=true class="form-control email" name="email" type="email" value="<?=$user->email ?? null ?>" style="background-color: #ececec;">
         </div>
         <div class="form-group col-md-6">
             <label>Phone Number <span class="required">*</span></label>
-            <input required  readonly=true class="form-control phone" name="phone" type="text" value="<?=$user->mobile_number ?? null ?>">
+            <input required  readonly=true class="form-control phone" name="phone" type="text" value="<?=$user->mobile_number ?? null ?>" style="background-color: #ececec;">
         </div>
         <div class="form-group col-md-6">
             <label>GST Number</label>
