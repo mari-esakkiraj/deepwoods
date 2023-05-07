@@ -21,7 +21,7 @@ $absoluteBaseUrl = Url::base(true);
         <tbody>
             <?php
             if(empty($orders)) {
-               echo "<div>No order.</div>";
+               echo "<tr><td colspan='5'>No order.</td></tr>";
             } else {
                 foreach($orders as $order) { ?>
                     <tr>

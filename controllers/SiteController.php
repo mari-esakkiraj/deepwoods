@@ -387,6 +387,7 @@ class SiteController extends Controller
         $password = $_POST['password'] ?? null;
         $gstNumber = $_POST['gstNumber'] ?? null;
         $address = $_POST['address'] ?? null;
+        $company = $_POST['company'] ?? null;
         
         $user = new Users();
         $user->firstname = $firstname;
@@ -396,6 +397,7 @@ class SiteController extends Controller
         $user->mobile_number = $phoneNumber;
         $user->password = $password;
         $user->gst_number = $gstNumber;
+        $user->company = $company;
         $user->status = 10;
 
         if($user->validate()){
