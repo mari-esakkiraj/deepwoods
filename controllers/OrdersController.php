@@ -59,7 +59,7 @@ class OrdersController extends Controller
                             }
                         ],
                         [
-                            'actions' => ['cartlist','checkout', 'payment', 'verify', 'applycoupon'],
+                            'actions' => ['cartlist','checkout', 'payment', 'verify', 'applycoupon', 'vieworder'],
                             'allow' => true,
                             'roles' => ['@'],
                         ],
@@ -605,7 +605,13 @@ class OrdersController extends Controller
             $order->paypal_order_id = $_POST['razorpay_payment_id'];
             $html = "<p>Your payment was successful</p>
                     <p>Payment ID: {$_POST['razorpay_payment_id']}</p>";
+            $order->save();
+
+            //echo $html;
+    
+            $this->layout = 'mainpage';
             
+            return $this->render('vieworder',["success" => $success, 'message' => $html, 'order' => $order]);
             //$productList = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->deleteAll();
         }
         else
@@ -634,6 +640,16 @@ class OrdersController extends Controller
         $this->layout = 'mainpage';
         
         return $this->render('verify',["success" => $success, 'message' => $html]);
+    }
+
+    public function actionVieworder($id){
+        $html = "";
+        $order = Orders::findOne($id);
+
+        $this->layout = 'mainpage';
+        
+        return $this->render('vieworder',["success" => "", 'message' => $html, 'order' => $order]);
+        
     }
 
     public function actionSendordermail($order_id){
