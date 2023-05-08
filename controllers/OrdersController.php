@@ -425,6 +425,9 @@ class OrdersController extends Controller
             }
             
             $json = json_encode($data);
+
+            $order_count = Orders::find()->where(['customer_id' => Yii::$app->user->identity->id])->count();
+
             return $this->render('payment',["json" => $json, 'order' => $order, 'orderAddress' => $orderAddress,
                 'productQuantity' => $productQuantity,
                 'totalPrice' => $totalPrice,
@@ -434,7 +437,8 @@ class OrdersController extends Controller
                 'freight_charges' => $freight_charges,
                 'product_price' => $product_price,
                 'gst_amount' => $gst_amount,
-                'freight_amount' => $freight_amount
+                'freight_amount' => $freight_amount,
+                'order_count' => $order_count
             ]);
         }
         //echo "aa";die;
@@ -528,8 +532,9 @@ class OrdersController extends Controller
         }
         
         $json = json_encode($data);
+        $order_count = Orders::find()->where(['customer_id' => Yii::$app->user->identity->id])->count();
 
-        return $this->render('payment',["json" => $json]);
+        return $this->render('payment',["json" => $json, 'order_count' => $order_count]);
     }
 
     public function actionApplycoupon(){

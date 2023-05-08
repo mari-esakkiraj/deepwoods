@@ -4,7 +4,7 @@ $absoluteBaseUrl = Url::base(true);
 use yii\widgets\Pjax;
 ?>
 <section class="checkout-cart-area">
-<h3>Order #<?php echo $order->id ?>: </h3>
+<h3>Order #<?php echo $order_count ?>: </h3>
 <hr>
 <div class="row">
     <div class="col">
