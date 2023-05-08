@@ -51,7 +51,7 @@ $this->registerJs("
     var baseurl = AppConfig.getBaseUrl();
     $(document).on('click','.view-orders',function() { 
         let id = $(this).attr('data-orderid');
-        location.href = '".$absoluteBaseUrl."/profile/vieworder?id='+id;
+        location.href = '".$absoluteBaseUrl."/orders/vieworder?id='+id;
     });
 ");
 ?>  
