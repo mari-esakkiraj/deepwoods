@@ -2,9 +2,17 @@
 use yii\helpers\Url;
 $absoluteBaseUrl = Url::base(true);
 use yii\widgets\Pjax;
+use app\models\UserAddresses;
+
+$orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_id])->one();
+        
+
 ?>
 <section class="checkout-cart-area">
-<h3>Order #<?php echo $order_count ?>: </h3>
+<?php 
+    echo $message;
+?>
+<h3>Order #<?php echo $order->id ?>: </h3>
 <hr>
 <div class="row">
     <div class="col">
@@ -71,7 +79,7 @@ use yii\widgets\Pjax;
         <table class="table">
             <tr>
                 <th>Total Items</th>
-                <td><?php echo $productQuantity ?></td>
+                <td><?php echo count($order->orderItems) ?></td>
             </tr>
             <tr>
                 <th>Total Price</th>
@@ -79,10 +87,11 @@ use yii\widgets\Pjax;
             </tr>
             
             <?php 
-            if($gstenable) {
+            if($order->gst != 0) 
+            {
                 ?>
                 <tr>
-                    <td>GST <?php echo $gst;?>%</td>
+                    <td>GST <?php //echo $gst;%?></td>
                     <td class="text-right">
                         <?php echo $order->gst; ?>
                     </td>
@@ -91,10 +100,10 @@ use yii\widgets\Pjax;
             }
             ?>
             <?php 
-            if($freight_chargesenable) {
+            if($order->freight_charges != 0)  {
                 ?>
                 <tr>
-                    <td>Freight Charges <?php echo $freight_charges;?>%</td>
+                    <td>Freight Charges <?php //echo $freight_charges;%?></td>
                     <td class="text-right">
                         <?php echo $order->freight_charges; ?>
                     </td>
@@ -122,50 +131,9 @@ use yii\widgets\Pjax;
             </tr>
         </table>
 
-        <button id="rzp-button1" class="btn btn-secondary">Pay with Razorpay</button>
-        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-        <form name='razorpayform' action="verify" method="POST">
-            <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
-            <input type="hidden" name="razorpay_signature"  id="razorpay_signature" >
-            <input type="hidden" name="order_id"  id="order_id" value="<?php echo $order->id ;?>" >
-        </form>
+        
     </div>
 </div>
     
-    <script>
-        // Checkout details as a json
-        var options = <?php echo $json?>;
-
-        /**
-         * The entire list of Checkout fields is available at
-         * https://docs.razorpay.com/docs/checkout-form#checkout-fields
-         */
-        options.handler = function (response){
-            document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
-            document.getElementById('razorpay_signature').value = response.razorpay_signature;
-            document.razorpayform.submit();
-        };
-
-        // Boolean whether to show image inside a white frame. (default: true)
-        options.theme.image_padding = false;
-
-        options.modal = {
-            ondismiss: function() {
-                console.log("This code runs when the popup is closed");
-            },
-            // Boolean indicating whether pressing escape key 
-            // should close the checkout form. (default: true)
-            escape: true,
-            // Boolean indicating whether clicking translucent blank
-            // space outside checkout form should close the form. (default: false)
-            backdropclose: false
-        };
-
-        var rzp = new Razorpay(options);
-
-        document.getElementById('rzp-button1').onclick = function(e){
-            rzp.open();
-            e.preventDefault();
-        }
-    </script>
+   
 </section>
