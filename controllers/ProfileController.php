@@ -5,6 +5,7 @@ use app\models\UserAddresses;
 use app\models\Users;
 use Yii;
 use yii\filters\AccessControl;
+use kartik\mpdf\Pdf;
 use yii\web\Controller;
 
 class ProfileController extends Controller
@@ -66,6 +67,30 @@ class ProfileController extends Controller
         $user = Users::find()->where(['id' => $userID])->one();
        
         return $this->render('vieworder', ['id' => $id]);
+    }
+    public function actionPdforder($id)
+    {
+        $destination = "I";
+        $content =  $this->renderPartial('_invoice_pdf', ['id' => $id]);
+
+        $pdf = new Pdf([
+            'mode' => Pdf::MODE_UTF8,
+            'format' => Pdf::FORMAT_A4,
+            'marginTop'    => 6,
+            'marginBottom' => 4,
+            'defaultFontSize' => 10,
+            'orientation' => Pdf::ORIENT_PORTRAIT,
+            'filename' => 'Invoice ' . time() . '.pdf',
+            'destination' => $destination,
+            'content' => $content,
+            'options' => ['title' => 'Invoice'],
+            'methods' => [ 
+                //'SetHeader'=>['Krajee Report Header'], 
+                'SetFooter'=>['{PAGENO}'],
+            ]
+    ]);
+    return $pdf->render();
+       
     }
 
     public function actionProfileUpdate()
