@@ -712,17 +712,14 @@ class OrdersController extends Controller
            
     }
 
-    public function actionPdfreport($id) {
-        $html = "";
+    public function actionPdfreport($id, $destination='print') {
         $order = Orders::findOne($id);
-        // get your HTML raw content without any layouts or scripts
-        $content = $this->renderPartial('pdforder',["success" => '', 'message' => $html, 'order' => $order]);
-        //$content = '<p>aaa</p>';
-        /*$mpdf = new mPDF();
-        $mpdf->WriteHTML($content);
-        $mpdf->Output();die;
-        die;*/
-        // setup kartik\mpdf\Pdf component
+        $content = $this->renderPartial('pdforder',['order' => $order]);
+        if($destination === 'print') {
+            $destination = "I";
+        } else {
+            $destination = "D";
+        }
         $pdf = new Pdf([
             // set to use core fonts only
             'mode' => Pdf::MODE_CORE, 
@@ -731,19 +728,16 @@ class OrdersController extends Controller
             // portrait orientation
             'orientation' => Pdf::ORIENT_PORTRAIT, 
             // stream to browser inline
-            'destination' => Pdf::DEST_BROWSER, 
+            'destination' => $destination, 
             // your html content input
             'content' => $content,//$content,  
-            // format content from your own css file if needed or use the
-            // enhanced bootstrap css built by Krajee for mPDF formatting 
-            //'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
-            // any css to be embedded if required
+            'filename' => 'Invoice ' . time() . '.pdf',
             'cssInline' => '.kv-heading-1{font-size:18px}', 
              // set mPDF properties on the fly
-            'options' => ['title' => 'Krajee Report Title'],
+            'options' => ['title' => 'Invoice Pdf'],
              // call mPDF methods on the fly
             'methods' => [ 
-                'SetHeader'=>['Krajee Report Header'], 
+                //'SetHeader'=>['Krajee Report Header'], 
                 'SetFooter'=>['{PAGENO}'],
             ]
         ]);

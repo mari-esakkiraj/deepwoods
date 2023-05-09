@@ -1,7 +1,6 @@
 <?php 
 use yii\helpers\Url;
 $absoluteBaseUrl = Url::base(true);
-use yii\widgets\Pjax;
 use app\models\UserAddresses;
 
 $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_id])->one();
@@ -10,43 +9,43 @@ $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_i
 ?>
 <section class="checkout-cart-area">
 <?php 
-    echo $message;
+    echo '';
 ?>
 <h3>Order #<?php echo $order->id ?>: </h3>
 <hr>
 <div class="row">
     <div class="col">
-        <h5>Address information</h5>
-        <table class="table">
+        <h4><b>Address information</b></h4>
+        <table class="table table-hover table-bordered ">
             <tr>
                 <th>Firstname</th>
-                <td><?php echo $order->firstname ?></td>
+                <td><?php echo $order->firstname ?? '-'; ?></td>
             </tr>
             <tr>
                 <th>Address</th>
-                <td><?php echo $orderAddress->address ?></td>
+                <td><?php echo $orderAddress->address ?? '-'; ?></td>
             </tr>
             <tr>
                 <th>City</th>
-                <td><?php echo $orderAddress->city ?></td>
+                <td><?php echo $orderAddress->city ?? '-'; ?></td>
             </tr>
             <tr>
                 <th>State</th>
-                <td><?php echo $orderAddress->state ?></td>
+                <td><?php echo $orderAddress->state ?? '-'; ?></td>
             </tr>
             <tr>
                 <th>Country</th>
-                <td><?php echo $orderAddress->country ?></td>
+                <td><?php echo $orderAddress->country ?? '-'; ?></td>
             </tr>
             <tr>
                 <th>ZipCode</th>
-                <td><?php echo $orderAddress->zipcode ?></td>
+                <td><?php echo $orderAddress->zipcode ?? '-'; ?></td>
             </tr>
         </table>
     </div>
     <div class="col">
         <h5>Products</h5>
-        <table class="table table-sm">
+        <table class="table table-hover table-bordered">
             <thead>
             <tr>
                 <th>Name</th>
@@ -57,15 +56,6 @@ $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_i
             <tbody>
             <?php foreach ($order->orderItems as $item): ?>
                 <tr>
-                    <td>
-                    <?php
-                        $imgPath = $absoluteBaseUrl."/theme/img/shop/01.jpg";
-                        if(isset($item->product->imageslist) && count($item->product->imageslist)>0){
-                            $imgPath = $absoluteBaseUrl.'/uploads/'.$item->product->imageslist[0]->image;
-                        }
-                    ?>
-                        
-                    </td>
                     <td><?php echo $item->product_name ?></td>
                     <td><?php echo $item->quantity ?></td>
                     <td><?php echo $item->quantity * $item->unit_price; ?></td>
@@ -74,14 +64,14 @@ $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_i
             </tbody>
         </table>
         <hr>
-        <table class="table">
+        <table class="table table-hover table-bordered">
             <tr>
-                <th>Total Items</th>
+                <th style="text-align: right">Total Items</th>
                 <td><?php echo count($order->orderItems) ?></td>
             </tr>
             <tr>
-                <th>Total Price</th>
-                <td><?php echo $order->product_price ?></td>
+                <th style="text-align: right">Total Price</th>
+                <td style="text-align: right"><?php echo $order->product_price ?></td>
             </tr>
             
             <?php 
@@ -89,8 +79,8 @@ $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_i
             {
                 ?>
                 <tr>
-                    <td>GST <?php //echo $gst;%?></td>
-                    <td class="text-right">
+                    <td style="text-align: right">GST <?php //echo $gst;%?></td>
+                    <td style="text-align: right">
                         <?php echo $order->gst; ?>
                     </td>
                 </tr>
@@ -101,7 +91,7 @@ $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_i
             if($order->freight_charges != 0)  {
                 ?>
                 <tr>
-                    <td>Freight Charges <?php //echo $freight_charges;%?></td>
+                    <td style="text-align: right">Freight Charges <?php //echo $freight_charges;%?></td>
                     <td class="text-right">
                         <?php echo $order->freight_charges; ?>
                     </td>
@@ -113,7 +103,7 @@ $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_i
             if($order->promotion_price>0) {
                 ?>
                 <tr>
-                    <td>Promotion</td>
+                    <td style="text-align: right">Promotion</td>
                     <td class="text-right">
                         <?php echo $order->promotion_price; ?>
                     </td>
@@ -122,7 +112,7 @@ $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_i
             }
             ?>
             <tr>
-                <td>Total </td>
+                <td style="text-align: right">Total </td>
                 <td class="text-right">
                     <?php echo $order->total_price; ?>
                 </td>
