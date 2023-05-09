@@ -44,6 +44,14 @@ if ($freight_charges>0) {
             <div class="card">
                 <div class="card-header">
                     <h5>Order Summary</h5>
+                    <h3 class="pull-right" style = "margin-top: -3%;">
+                        <a class="text-right" href="<?= Yii::$app->urlManager->createUrl('orders/pdfreport?id='.$id.'&option=print')?>" target='_blank'>
+                            <i class="fa fa-print" style="font-size:18px"></i>
+                        </a>
+                        <a class="text-right" href="<?= Yii::$app->urlManager->createUrl('orders/pdfreport?id='.$id.'&option=pdf')?>" target='_blank'>
+                            <i class="fa fa-file-pdf-o" style="font-size:18px"></i>
+                        </a>
+                   </h3>
                 </div>
                 <div class="card-body">
                     <table class="table table-sm">
