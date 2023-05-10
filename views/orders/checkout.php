@@ -99,7 +99,22 @@ use app\models\UserAddresses;
                                      style="width: 50px;"
                                      alt="<?php echo $item->product->name ?>">
                             </td>
-                            <td><?php echo $item->product->name ?></td>
+                            <td>
+                                <?php 
+                                    echo $item->product->name;
+                                    if (isset($notavilableproduct[$item->product->id])) {
+                                        ?>
+                                        <br>
+                                        <span class="error">
+                                            Sorry currently not avilable. Avilable quantity  
+                                            <?php 
+                                                echo (int) $notavilableproduct[$item->product->id]['available'];
+                                            ?> 
+                                        </span>
+                                        <?php
+                                    }
+                                ?>
+                            </td>
                             <td>
                                 <?php echo $item['quantity'] ?>
                             </td>
@@ -165,12 +180,18 @@ use app\models\UserAddresses;
                         </td>
                     </tr>
                 </table>
+                <?php 
+                    if (empty($notavilableproduct)) {
 
+                ?>
                 <p class="text-right mt-3">
                     <input type="hidden" name="cashondelivery" id="cashondelivery"/>
                     <button class="btn btn-secondary">Continue Payment</button>
                     <button class="btn btn-secondary" onclick="return cashondelivery();" style="display:none">Cash on Delivery</button>
                 </p>
+                <?php 
+                    }
+                ?>
             </div>
         </div>
     </div>

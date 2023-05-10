@@ -259,11 +259,15 @@ class OrdersController extends Controller
         if (empty($cartItems)) {
             return $this->redirect(['site/productlist']);
         }
+        $notavilableproduct = [];
         
         $totalPrice = 0;
         $productQuantity = count($cartItems);
         foreach ($cartItems as $productList) {
             $totalPrice+=($productList->product->price * $productList->quantity);
+            if ($productList->quantity > $productList->product->quantity) {
+                $notavilableproduct[$productList->product->id] = ['available' => $productList->product->quantity];
+            }
             //$productQuantity+=$productList->quantity;
         }
 
@@ -341,106 +345,107 @@ class OrdersController extends Controller
         }
         
         $transaction = Yii::$app->db->beginTransaction();
-        
-        if ($order->load(Yii::$app->request->post())
-            && $order->save()
-            && $order->saveOrderItems()) {
+        if (empty($notavilableproduct)) {
+            if ($order->load(Yii::$app->request->post())
+                && $order->save()
+                && $order->saveOrderItems()) {
+                    
+                if(!isset($orderAddress->id)){
+                    $orderAddress->load(Yii::$app->request->post());
+                    $orderAddress->user_id = Yii::$app->user->identity->id;
+                    $orderAddress->save(false);
+                    $order->shipping_address_id = $orderAddress->id;
+                }
                 
-            if(!isset($orderAddress->id)){
-                $orderAddress->load(Yii::$app->request->post());
-                $orderAddress->user_id = Yii::$app->user->identity->id;
-                $orderAddress->save(false);
-                $order->shipping_address_id = $orderAddress->id;
-            }
-            
-            $transaction->commit();
-            CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
+                $transaction->commit();
+                CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
 
-            /*if ($cashondelivery==1) {
-                $order->status = 1;
-                $order->paypal_order_id = 'DW00'.$order->id;
-                $html = "<p>Your payment was successful</p>
-                        <p>Payment ID: {$order->paypal_order_id}</p>";
+                /*if ($cashondelivery==1) {
+                    $order->status = 1;
+                    $order->paypal_order_id = 'DW00'.$order->id;
+                    $html = "<p>Your payment was successful</p>
+                            <p>Payment ID: {$order->paypal_order_id}</p>";
+                    $order->save();
+                    $this->layout = 'mainpage';
+            
+                    return $this->render('verify',["success" => $success, 'message' => $html]);
+                }*/
+
+                $keyId = 'rzp_test_837Iw9MVhmAj9z';
+                $keySecret = 'PcntHmmtBWoM2te93AIt2Uh7';
+                $displayCurrency = 'INR';
+                
+                $api = new Api($keyId, $keySecret);
+                
+                $orderData = [
+                    'receipt'         => 'DW00'.$order->id,
+                    'amount'          => $totalPrice*100, // 2000 rupees in paise
+                    'currency'        => 'INR',
+                    'payment_capture' => 1 // auto capture
+                ];
+                
+                $razorpayOrder = $api->order->create($orderData);
+                
+                $razorpayOrderId = $razorpayOrder['id'];
+                
+                $_SESSION['razorpay_order_id'] = $razorpayOrderId;
+                
+                $displayAmount = $amount = $orderData['amount'];
+                
+                if ($displayCurrency !== 'INR')
+                {
+                    $url = "https://api.fixer.io/latest?symbols=$displayCurrency&base=INR";
+                    $exchange = json_decode(file_get_contents($url), true);
+                
+                    $displayAmount = $exchange['rates'][$displayCurrency] * $amount / 100;
+                }
+
+                $data = [
+                    "key"               => $keyId,
+                    "amount"            => $amount,
+                    "name"              => "DeepWoods",
+                    /*"description"       => "Tron Legacy",
+                    "image"             => "https://s29.postimg.org/r6dj1g85z/daft_punk.jpg",*/
+                    "prefill"           => [
+                    "name"              => "DeepWoods",
+                    "email"             => "customer@deepwoods.com",
+                    //"contact"           => "9999999999",
+                    ],
+                    "notes"             => [
+                    "address"           => "Hello World",
+                    "merchant_order_id" => $order->id,
+                    ],
+                    "theme"             => [
+                    "color"             => "#F37254"
+                    ],
+                    "order_id"          => $razorpayOrderId,
+                    'tax'=>100
+                ];
+                $order->transaction_id = $razorpayOrderId;
                 $order->save();
-                $this->layout = 'mainpage';
-        
-                return $this->render('verify',["success" => $success, 'message' => $html]);
-            }*/
+                if ($displayCurrency !== 'INR')
+                {
+                    $data['display_currency']  = $displayCurrency;
+                    $data['display_amount']    = $displayAmount;
+                }
+                
+                $json = json_encode($data);
 
-            $keyId = 'rzp_test_837Iw9MVhmAj9z';
-            $keySecret = 'PcntHmmtBWoM2te93AIt2Uh7';
-            $displayCurrency = 'INR';
-            
-            $api = new Api($keyId, $keySecret);
-            
-            $orderData = [
-                'receipt'         => 'DW00'.$order->id,
-                'amount'          => $totalPrice*100, // 2000 rupees in paise
-                'currency'        => 'INR',
-                'payment_capture' => 1 // auto capture
-            ];
-            
-            $razorpayOrder = $api->order->create($orderData);
-            
-            $razorpayOrderId = $razorpayOrder['id'];
-            
-            $_SESSION['razorpay_order_id'] = $razorpayOrderId;
-            
-            $displayAmount = $amount = $orderData['amount'];
-            
-            if ($displayCurrency !== 'INR')
-            {
-                $url = "https://api.fixer.io/latest?symbols=$displayCurrency&base=INR";
-                $exchange = json_decode(file_get_contents($url), true);
-            
-                $displayAmount = $exchange['rates'][$displayCurrency] * $amount / 100;
+                $order_count = Orders::find()->where(['customer_id' => Yii::$app->user->identity->id])->count();
+
+                return $this->render('payment',["json" => $json, 'order' => $order, 'orderAddress' => $orderAddress,
+                    'productQuantity' => $productQuantity,
+                    'totalPrice' => $totalPrice,
+                    'gstenable' => $gstenable,
+                    'gst' => $gst,
+                    'freight_chargesenable' => $freight_chargesenable,
+                    'freight_charges' => $freight_charges,
+                    'product_price' => $product_price,
+                    'gst_amount' => $gst_amount,
+                    'freight_amount' => $freight_amount,
+                    'order_count' => $order_count
+                ]);
             }
-
-            $data = [
-                "key"               => $keyId,
-                "amount"            => $amount,
-                "name"              => "DeepWoods",
-                /*"description"       => "Tron Legacy",
-                "image"             => "https://s29.postimg.org/r6dj1g85z/daft_punk.jpg",*/
-                "prefill"           => [
-                "name"              => "DeepWoods",
-                "email"             => "customer@deepwoods.com",
-                //"contact"           => "9999999999",
-                ],
-                "notes"             => [
-                "address"           => "Hello World",
-                "merchant_order_id" => $order->id,
-                ],
-                "theme"             => [
-                "color"             => "#F37254"
-                ],
-                "order_id"          => $razorpayOrderId,
-                'tax'=>100
-            ];
-            $order->transaction_id = $razorpayOrderId;
-            $order->save();
-            if ($displayCurrency !== 'INR')
-            {
-                $data['display_currency']  = $displayCurrency;
-                $data['display_amount']    = $displayAmount;
-            }
-            
-            $json = json_encode($data);
-
-            $order_count = Orders::find()->where(['customer_id' => Yii::$app->user->identity->id])->count();
-
-            return $this->render('payment',["json" => $json, 'order' => $order, 'orderAddress' => $orderAddress,
-                'productQuantity' => $productQuantity,
-                'totalPrice' => $totalPrice,
-                'gstenable' => $gstenable,
-                'gst' => $gst,
-                'freight_chargesenable' => $freight_chargesenable,
-                'freight_charges' => $freight_charges,
-                'product_price' => $product_price,
-                'gst_amount' => $gst_amount,
-                'freight_amount' => $freight_amount,
-                'order_count' => $order_count
-            ]);
         }
         //echo "aa";die;
         return $this->render('checkout',[
@@ -455,7 +460,8 @@ class OrdersController extends Controller
             'freight_charges' => $freight_charges,
             'product_price' => $product_price,
             'gst_amount' => $gst_amount,
-            'freight_amount' => $freight_amount
+            'freight_amount' => $freight_amount,
+            'notavilableproduct' => $notavilableproduct
         ]);
     }
 
@@ -599,15 +605,22 @@ class OrdersController extends Controller
         else {
             $order = Orders::find()->where(['transaction_id' => $_SESSION['razorpay_order_id']])->one();
         }
-        
+        if ($order->status == '1') {
+            $this->layout = 'mainpage';
+            return $this->render('vieworder',["success" => "", 'message' => "", 'order' => $order]);
+        }
         if ($success === true)
         {
             $order->status = 1;
             $order->paypal_order_id = $_POST['razorpay_payment_id'];
             $html = "<p>Your payment was successful</p>
                     <p>Payment ID: {$_POST['razorpay_payment_id']}</p>";
-            $order->save();
+            $order->save(false);
 
+            foreach ($order->orderItems as $item) {
+                $item->product->quantity = $item->product->quantity - $item->quantity;
+                $item->product->save();
+            }
             //echo $html;
     
             $this->layout = 'mainpage';
