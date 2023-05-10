@@ -59,18 +59,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['style' => 'width:10%'],
             ],
             [
-                'attribute' => 'quantity',
-                'headerOptions' => ['style' => 'width:10%'],
-            ],
-            [
-                'attribute' => 'gst_no',
-                'headerOptions' => ['style' => 'width:10%'],
-            ],
-            [
-                'attribute' => 'hsn_sac',
-                'headerOptions' => ['style' => 'width:10%'],
-            ],
-            [
                 'class' => ActionColumn::className(),
                 'headerOptions' => ['style' => 'width:8%'],
                 'template'=>'{view}{update}{delete}',
