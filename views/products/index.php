@@ -43,10 +43,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
-                'attribute' => 'price',
-                'headerOptions' => ['style' => 'width:10%'],
-            ],
-            [
                 'attribute' => 'quantity',
                 'headerOptions' => ['style' => 'width:10%'],
             ],
@@ -56,6 +52,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'hsn_sac',
+                'headerOptions' => ['style' => 'width:10%'],
+            ],
+            [
+                'attribute' => 'price',
                 'headerOptions' => ['style' => 'width:10%'],
             ],
             [

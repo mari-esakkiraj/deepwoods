@@ -22,7 +22,7 @@ use yii\widgets\Pjax;
                       <a href="<?=$absoluteBaseUrl?>"> 
                         <img class="logo-main" src="<?=$absoluteBaseUrl?>/theme/img/deepwoods.png" alt="Logo" />
                         <img class="logo-light d-none" src="<?=$absoluteBaseUrl?>/theme/img/deepwoods.png" alt="Logo" />
-                      </a>
+                    </a>
                     </div>
                   </div>
                 </div>
@@ -33,7 +33,7 @@ use yii\widgets\Pjax;
                         <li><a href="<?=$absoluteBaseUrl?>">Home</a></li>
                         <li><a href="<?=$absoluteBaseUrl?>/site/aboutus">About Us</a></li>
                         <li><a href="<?=$absoluteBaseUrl?>/site/contact">Contact Us</a></li>
-                        <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Product</a></li>
+                        <li><a href="<?=$absoluteBaseUrl?>/site/productlist">Products</a></li>
                         
                         <?php 
                         if(!Yii::$app->user->isGuest) {
