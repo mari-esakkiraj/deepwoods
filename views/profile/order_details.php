@@ -26,8 +26,7 @@ $absoluteBaseUrl = Url::base(true);
                 foreach($orders as $order) { ?>
                     <tr>
                         <td>#<?=$order->id ?? ''?></td>
-                        <td><?=$order->created_at ?? ''?></td>
-                        <td><?=$order->status ?? ''?></td>
+                        <td><?=date("d-M-Y",$order->created_at) ?? ''?></td>
                         <td>₹<?=$order->total_price ?? ''?></td>
                         <td><a href="javascript:void(0)" data-orderid="<?= $order->id ?>" class="btn-small d-block view-orders">View</a></td>
                     </tr>

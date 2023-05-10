@@ -1236,6 +1236,17 @@ table td, table th {
   margin: 0;
 }
 
+.product-thumbs-list{
+  width: 100px !important;
+  height: 100px !important;
+  text-align: center;
+  
+}
+
+.product-thumbs-list img {
+  border:1px solid;
+}
+
 .cart-dropdown-wrap .shopping-cart-footer .shopping-cart-total h4 span {
   font-size: 18px;
   float: right;

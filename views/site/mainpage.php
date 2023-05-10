@@ -16,7 +16,7 @@ $absoluteBaseUrl = Url::base(true);
                       <!-- <h5 class="sub-title transition-slide-0">Kalabath</h5>-->
                       <h2 class="title transition-slide-1 mb-0"  style="color: #ff3300;"><span class="font-weight-400">Kalabath</span></h2>
                       <h2 class="title transition-slide-2" style="color: #ff3300;">Black Rice</h2>
-                      <a class="btn-slide transition-slide-3" href="#/">Buy Now</a>
+                      <a class="btn-slide transition-slide-3" href="<?=$absoluteBaseUrl?>/site/productlist">Buy Now</a>
                     </div>
                   </div>
                 </div>
@@ -32,7 +32,7 @@ $absoluteBaseUrl = Url::base(true);
                       <!--<h5 class="sub-title transition-slide-0">Our Tea Farm</h5>--> 
                       <h2 class="title transition-slide-1 mb-0"><span class="font-weight-400">Coconut Oil</span></h2>
                       <h2 class="title transition-slide-2">Cold Pressed</h2>
-                      <a class="btn-slide transition-slide-3" href="#/">Buy Now</a>
+                      <a class="btn-slide transition-slide-3" href="<?=$absoluteBaseUrl?>/site/productlist">Buy Now</a>
                     </div>
                   </div>
                 </div>
@@ -48,7 +48,7 @@ $absoluteBaseUrl = Url::base(true);
                       <!--<h5 class="sub-title transition-slide-0">Our Tea Farm</h5>--> 
                       <h2 class="title transition-slide-1 mb-0"><span class="font-weight-400" style="color: #fbe59c;">Farming Organically</span></h2>
                       <h2 class="title transition-slide-2" style="color: #fbe59c;">for a healthy lifestyle</h2>
-                      <a class="btn-slide transition-slide-3" href="#/">Buy Now</a>
+                      <a class="btn-slide transition-slide-3" href="<?=$absoluteBaseUrl?>/site/productlist">Buy Now</a>
                     </div>
                   </div>
                 </div>
@@ -64,7 +64,7 @@ $absoluteBaseUrl = Url::base(true);
                       <!--<h5 class="sub-title transition-slide-0">Our Tea Farm</h5>--> 
                       <h2 class="title transition-slide-1 mb-0"><span class="font-weight-400" style="color: #121212;">Healthy Living</span></h2>
                       <h2 class="title transition-slide-2" style="color: #121212;">starts here</h2>
-                      <a class="btn-slide transition-slide-3" href="#/">Buy Now</a>
+                      <a class="btn-slide transition-slide-3" href="<?=$absoluteBaseUrl?>/site/productlist">Buy Now</a>
                     </div>
                   </div>
                 </div>
@@ -287,7 +287,7 @@ $absoluteBaseUrl = Url::base(true);
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="divider-content text-center">
+                  <div class="divider-content text-center hide">
                     <h4 class="title hidden-sm-down" data-margin-bottom="32">Sign Up For Newsletter</h4>
                     <h4 class="title2 hidden-md-up collapsed" data-bs-toggle="collapse" data-bs-target="#dividerId-2">Sign Up For Newsletter</h4>
                     <div id="dividerId-2" class="collapse">

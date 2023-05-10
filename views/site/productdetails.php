@@ -17,7 +17,7 @@ return $content;
     <div class="row" style="transform: none;">
         <div class="col-xl-12">
             <div class="product-detail accordion-detail">
-                <div class="row mb-50 mt-30 ml-10">
+                <div class="row mb-50 mt-30 ml-10 mr-10">
                     <div class="col-md-6">
                         <div class="product-thumb">
                             <div class="swiper-container single-product-thumb-content single-product-thumb-slider">
@@ -38,7 +38,7 @@ return $content;
                                 <?php foreach($products->imageslist as $imgkey=>$images){
                                     $filepath = $absoluteBaseUrl."/uploads/".$images->image;
                                 ?>
-                                <div class="swiper-slide"  style="height:150px;border:1px solid;border-radius: 16px;">
+                                <div class="swiper-slide product-thumbs-list">
                                     <img  src="<?=$filepath?>" alt="Image-HasTech">
                                 </div>
                                 <?php } ?>
@@ -356,6 +356,7 @@ return $content;
         slidesPerView: 4,
         freeMode: true,
         loop: false,
+        slideToClickedSlide: true,
       });
       var ProductThumb = new Swiper('.single-product-thumb-slider', {
         freeMode: true,

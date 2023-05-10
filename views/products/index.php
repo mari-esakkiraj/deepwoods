@@ -43,6 +43,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             [
+                'attribute' => 'quantity',
+                'headerOptions' => ['style' => 'width:10%'],
+            ],
+            [
+                'attribute' => 'gst_no',
+                'headerOptions' => ['style' => 'width:10%'],
+            ],
+            [
+                'attribute' => 'hsn_sac',
+                'headerOptions' => ['style' => 'width:10%'],
+            ],
+            [
                 'attribute' => 'price',
                 'headerOptions' => ['style' => 'width:10%'],
             ],
