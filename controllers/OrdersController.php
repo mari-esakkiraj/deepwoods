@@ -431,7 +431,7 @@ class OrdersController extends Controller
                     'tax'=>100
                 ];
                 $order->transaction_id = $razorpayOrderId;
-                $order->save();
+                $order->save(false);
                 if ($displayCurrency !== 'INR')
                 {
                     $data['display_currency']  = $displayCurrency;
