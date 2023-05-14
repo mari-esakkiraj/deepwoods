@@ -50,7 +50,7 @@ return $content;
                     <div class="col-md-6 product-single-item">
                     <div class="product-single-info mt-sm-70">
                         <h2 class="title"><?= $products->name ?></h2>
-                        <div class="product-detail-rating">
+                        <div class="product-detail-rating hide">
                             <div class="product-rate-cover text-end">
                                 <div class="star-content">
                                     <i class="ion-md-star"></i>
@@ -95,9 +95,9 @@ return $content;
                         </div>
                         </div>     
                         <?php Pjax::begin(['id' => 'my-product-review']); ?>
-                <div class="product-info">
+                <div class="product-info1">
                     <div class="tab-style3" id="my-product-tabs">
-                        <ul class="nav nav-tabs text-uppercase">
+                        <ul class="nav nav-tabs text-uppercase" style="gap:10px;">
                             <li class="nav-item">
                                 <a class="nav-link active" id="Description-tab" data-bs-toggle="tab" href="#Description">Description</a>
                             </li>
