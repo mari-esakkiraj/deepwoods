@@ -51,8 +51,9 @@ $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_i
             <tr>
                 <th>Image</th>
                 <th>Name</th>
-                <th>Quantity</th>
+                <th>Qty</th>
                 <th>Price</th>
+                <th>GST</th>
             </tr>
             </thead>
             <tbody>
@@ -71,6 +72,7 @@ $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_i
                     <td><?php echo $item->product_name ?></td>
                     <td><?php echo $item->quantity ?></td>
                     <td><?php echo $item->quantity * $item->unit_price; ?></td>
+                    <td><?php echo $item->product_gst_price ?></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
@@ -84,6 +86,10 @@ $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_i
             <tr>
                 <th>Total Price</th>
                 <td><?php echo $order->product_price ?></td>
+            </tr>
+            <tr>
+                <th>GST</th>
+                <td><?php echo $order->products_gst_price ?></td>
             </tr>
             
             <?php 
