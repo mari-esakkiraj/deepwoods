@@ -43,6 +43,7 @@ class Products extends \yii\db\ActiveRecord
             [['description','gst_no', 'hsn_sac'], 'string'],
             [['quantity'], 'integer'],
             [['price', 'gst'], 'number'],
+            ['gst', 'compare', 'compareValue' => 100, 'operator' => '<'],
             [['status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['name'], 'string', 'max' => 255],
             //[['image'], 'file', 'skipOnEmpty' => false],
