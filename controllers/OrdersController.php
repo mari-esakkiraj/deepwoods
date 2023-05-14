@@ -263,8 +263,13 @@ class OrdersController extends Controller
         
         $totalPrice = 0;
         $productQuantity = count($cartItems);
+        $product_gst = [];
         foreach ($cartItems as $productList) {
             $totalPrice+=($productList->product->price * $productList->quantity);
+            $product_gst[$productList->product->id] = 0;
+            if($productList->product->gst !=0 && $productList->product->gst != null){
+                $product_gst[$productList->product->id] = ($productList->product->price * $productList->quantity) * ($productList->product->gst / 100);
+            }
             if ($productList->quantity > $productList->product->quantity) {
                 $notavilableproduct[$productList->product->id] = ['available' => $productList->product->quantity];
             }
@@ -285,6 +290,9 @@ class OrdersController extends Controller
             $totalPrice+=$gst_amount;
         }
         
+        if (array_sum($product_gst)>0) {
+            $totalPrice+=array_sum($product_gst);
+        }
 
         $freight_charges = 0;
         $freight_chargesenable = false;
@@ -314,6 +322,7 @@ class OrdersController extends Controller
         $order->lastname = Yii::$app->user->identity->lastname;
         $order->email = Yii::$app->user->identity->email;
         $order->total_price = $totalPrice;
+        $order->products_gst_price = array_sum($product_gst);
         if (isset($_POST['promotion_id']) && $_POST['promotion_id']!='') {
             $promotion = Promotion::findOne($_POST['promotion_id']);
             if(!empty($promotion)) {
@@ -443,7 +452,8 @@ class OrdersController extends Controller
                     'product_price' => $product_price,
                     'gst_amount' => $gst_amount,
                     'freight_amount' => $freight_amount,
-                    'order_count' => $order_count
+                    'order_count' => $order_count,
+                    'product_gst' => $product_gst
                 ]);
             }
         }
@@ -461,7 +471,8 @@ class OrdersController extends Controller
             'product_price' => $product_price,
             'gst_amount' => $gst_amount,
             'freight_amount' => $freight_amount,
-            'notavilableproduct' => $notavilableproduct
+            'notavilableproduct' => $notavilableproduct,
+            'product_gst' => $product_gst
         ]);
     }
 
