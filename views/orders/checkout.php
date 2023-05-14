@@ -81,7 +81,7 @@ use app\models\UserAddresses;
                     <tr>
                         <th>Image</th>
                         <th>Name</th>
-                        <th>Quantity</th>
+                        <th>Qty</th>
                         <th>Price</th>
                     </tr>
                     </thead>
@@ -105,8 +105,8 @@ use app\models\UserAddresses;
                                     if (isset($notavilableproduct[$item->product->id])) {
                                         ?>
                                         <br>
-                                        <span class="error">
-                                            Sorry currently not avilable. Avilable quantity  
+                                        <span class="error" style="color:red;">
+                                            Out Of Stock. Avilable quantity  
                                             <?php 
                                                 echo (int) $notavilableproduct[$item->product->id]['available'];
                                             ?> 

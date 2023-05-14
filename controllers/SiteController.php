@@ -96,7 +96,7 @@ class SiteController extends Controller
     public function actionMainpage()
     {
         $this->layout = 'mainpage';
-        $productsList = Products::find()->limit(5)->all();
+        $productsList = Products::find()->limit(5)->orderBy(['id' => SORT_DESC])->all();
         return $this->render('mainpage',["productsList" => $productsList]);
     }
 
