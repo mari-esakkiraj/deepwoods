@@ -365,7 +365,11 @@ class OrdersController extends Controller
                     $orderAddress->save(false);
                     $order->shipping_address_id = $orderAddress->id;
                 }
-                
+                $orderAddress = UserAddresses::find()->where(
+                        [
+                            'id' => $order->shipping_address_id
+                        ]
+                    )->one();
                 $transaction->commit();
                 CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
 
