@@ -38,11 +38,12 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'price', 'quantity', 'description'], 'required'],
+            [['name', 'price', 'quantity', 'description', 'gst'], 'required'],
             ['name', 'match', 'pattern' => "/^[a-zA-Z0-9\/\\_\\-\\s]+$/", 'message' => 'Your name can only contain alphanumeric characters, underscores and dashes.'],
-            [['description','gst_no','hsn_sac'], 'string'],
+            [['description','gst_no', 'hsn_sac'], 'string'],
             [['quantity'], 'integer'],
-            [['price'], 'number'],
+            [['price', 'gst'], 'number'],
+            ['gst', 'compare', 'compareValue' => 100, 'operator' => '<'],
             [['status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['name'], 'string', 'max' => 255],
             //[['image'], 'file', 'skipOnEmpty' => false],
