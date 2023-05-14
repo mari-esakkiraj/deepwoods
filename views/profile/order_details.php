@@ -13,7 +13,6 @@ $absoluteBaseUrl = Url::base(true);
             <tr>
                 <th>Order</th>
                 <th>Date</th>
-                <th>Status</th>
                 <th>Total</th>
                 <th>Actions</th>
             </tr>
@@ -50,7 +49,7 @@ $this->registerJs("
     var baseurl = AppConfig.getBaseUrl();
     $(document).on('click','.view-orders',function() { 
         let id = $(this).attr('data-orderid');
-        location.href = '".$absoluteBaseUrl."/orders/vieworder?id='+id;
+        location.href = '".$absoluteBaseUrl."/profile/vieworder?id='+id;
     });
 ");
 ?>  

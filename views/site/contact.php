@@ -7,9 +7,10 @@
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
 use yii\captcha\Captcha;
-
+use yii\helpers\Url;
 $this->title = 'Contact Us';
 // $this->params['breadcrumbs'][] = $this->title;
+$absoluteBaseUrl = Url::base(true);
 ?>
 <section class="product-area"><div class="mt-20 ml-20 mb-20">
 <div class="site-contact">
@@ -25,8 +26,8 @@ $this->title = 'Contact Us';
     <?php if (!Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
 
 
-        <div class="row">
-            <div class="col-lg-5">
+        <div class="row" style="    padding-right: 10px;">
+            <div class="col-lg-6">
 
                 <?php $form = ActiveForm::begin(['id' => 'contact-form-new']); ?>
 
@@ -47,6 +48,10 @@ $this->title = 'Contact Us';
 
                 <?php ActiveForm::end(); ?>
 
+            </div>
+            <div class="col-lg-4" style="display: flex;align-items: center;padding: 20px;">
+
+                <img src="<?=$absoluteBaseUrl?>/theme/img/contact.jpg" alt="" class="border-radius-15 mb-md-3 mb-lg-0 mb-sm-4">
             </div>
         </div>
         <?php endif; ?>
