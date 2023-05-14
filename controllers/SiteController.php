@@ -318,7 +318,7 @@ class SiteController extends Controller
                 $cartItems = CartItems::find()->where(['cart_items.product_id' => $productId, 'status' => 'created', 'created_by' => $loginUserId])->one();
                 if(empty($cartItems)) {
                     $cartItems = new cartItems();
-                    $cartItems->quantity = 1;
+                    $cartItems->quantity = $quantity;
                     $cartItems->product_id = $productId;
                     $cartItems->status = 'created';
                     $cartItems->created_by = $loginUserId;
@@ -327,7 +327,7 @@ class SiteController extends Controller
                 } else {
                     if($action != 'delete'){
                         if($action == 'increment'){
-                            $cartItems->quantity = $quantity;
+                            $cartItems->quantity = $cartItems->quantity + $quantity;
                         }else{
                             $cartItems->quantity = $cartItems->quantity + 1;
                         }
@@ -353,7 +353,7 @@ class SiteController extends Controller
             $model->review =  $comment;
             $model->created_by = $loginUserId;
             //$model->created_at = date('Y-m-d H:i:s');
-            if($model->save()){
+            if($model->save(false)){
                 return json_encode(['data' => true]);
             }
         }
