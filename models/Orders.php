@@ -111,6 +111,11 @@ class Orders extends \yii\db\ActiveRecord
             $orderItem->unit_price = $cartItem->product->price;
             $orderItem->order_id = $this->id;
             $orderItem->quantity = $cartItem->quantity;
+            $orderItem->product_gst_price = 0;
+            if($cartItem->product->gst !=0 && $cartItem->product->gst != null){
+                $orderItem->product_gst_price = ($cartItem->product->price * $cartItem->quantity) * ($cartItem->product->gst / 100);
+            }
+
             if (!$orderItem->save()) {
                 throw new Exception("Order item was not saved: " . implode('<br>', $orderItem->getFirstErrors()));
             }

@@ -83,6 +83,7 @@ use app\models\UserAddresses;
                         <th>Name</th>
                         <th>Qty</th>
                         <th>Price</th>
+                        <th>GST</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -121,6 +122,9 @@ use app\models\UserAddresses;
                             <td>
                                 <?= $item->quantity * $item->product->price ?>
                             </td>
+                            <td>
+                                <?= $product_gst[$item->product->id] ?>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
@@ -141,6 +145,12 @@ use app\models\UserAddresses;
                         <td>Total Price</td>
                         <td class="text-right">
                             <?php echo $product_price; ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>GST</td>
+                        <td class="text-right">
+                            <?php echo array_sum($product_gst); ?>
                         </td>
                     </tr>
                     <?php 
