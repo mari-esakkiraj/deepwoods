@@ -72,7 +72,7 @@ use yii\helpers\Url;
 
     <?= $form->field($model, 'quantity')->textInput(['maxlength' => true, 'type' => 'number']) ?>
 
-    <?= $form->field($model, 'gst_no')->textInput() ?>
+    <?= $form->field($model, 'gst')->textInput() ?>
 
     <?= $form->field($model, 'hsn_sac')->textInput() ?>
 
