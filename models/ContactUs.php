@@ -71,7 +71,7 @@ class ContactUs extends \yii\db\ActiveRecord
                 ->setTo($email)
                 ->setFrom([Yii::$app->params['adminEmail'] => 'Deepwoods - Admin'])
                 ->setReplyTo([$this->email => $this->name])
-                ->setSubject("Contect Us")
+                ->setSubject("Deepwoodsorganics Contact Us Form")
                 ->setTextBody($this->message)
                 ->send();
 

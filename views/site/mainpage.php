@@ -258,57 +258,5 @@ $absoluteBaseUrl = Url::base(true);
         </div>
       </div>
     </div>
-    <!--== End Feature Area Wrapper ==-->
-
-  
-
-    
-
-    <!--== Start Divider Area Wrapper ==-->
-    <section class="divider-area">
-      <div class="container pt-90 pt-lg-70 pb-lg-60">
-        <div class="row">
-          <div class="col-12">
-            <div class="divider-style-wrap">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="divider-content text-center">
-                    <h4 class="title hidden-sm-down">Let’s Connect On Social</h4>
-                    <h4 class="title2 hidden-md-up collapsed" data-bs-toggle="collapse" data-bs-target="#dividerId-1">Let’s Connect On Social</h4>
-                    <div id="dividerId-1" class="collapse">
-                      <div class="social-icons">
-                        <a href="#/"><i class="la la-facebook"></i></a>
-                        <a href="#/"><i class="la la-twitter"></i></a>
-                        <a href="#/"><i class="la la-youtube"></i></a>
-                        <a href="#/"><i class="la la-instagram"></i></a>
-                      </div>
-                      <p class="mb-sm-25">Follow us on your favorite platforms. Check out new launch teasers, how-to videos, and share your favorite looks.</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="divider-content text-center hide">
-                    <h4 class="title hidden-sm-down" data-margin-bottom="32">Sign Up For Newsletter</h4>
-                    <h4 class="title2 hidden-md-up collapsed" data-bs-toggle="collapse" data-bs-target="#dividerId-2">Sign Up For Newsletter</h4>
-                    <div id="dividerId-2" class="collapse">
-                      <div class="newsletter-content-wrap">
-                        <div class="newsletter-form">
-                          <form>
-                            <input type="email" class="form-control" placeholder="Your email address">
-                            <button class="btn btn-submit" type="button">Sign up</button>
-                          </form>
-                        </div>
-                      </div>
-                      <p>You may unsubscribe at any moment. For that purpose, please find our contact info in the legal notice.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!--== End Divider Area Wrapper ==-->
   </main>
 
