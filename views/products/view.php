@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'image',
             'price',
             'quantity',
-            'gst_no',
+            'gst',
             'hsn_sac',
             //'status',
             /*'created_at',
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_by',
             'updated_by',*/
         ],
-        'template' => "<tr><th style='width: 15%;'>{label}</th><td>{value}.</td></tr>"
+        'template' => "<tr><th style='width: 15%;'>{label}</th><td>{value}</td></tr>"
     ]) ?>
     <h1 class="mt-20">Product Images</h1>
     <table class="table table-striped table-bordered">

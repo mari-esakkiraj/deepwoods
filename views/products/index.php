@@ -47,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['style' => 'width:10%'],
             ],
             [
-                'attribute' => 'gst_no',
+                'attribute' => 'gst',
                 'headerOptions' => ['style' => 'width:10%'],
             ],
             [
