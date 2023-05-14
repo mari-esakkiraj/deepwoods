@@ -9,7 +9,7 @@ $absoluteBaseUrl = Url::base(true);
           <!--== Start Footer Widget Area ==-->
           <div class="footer-widget-area">
             <div class="row">
-              <div class="col-lg-6">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="widget-item" style="display: flex; align-items: center; gap: 60px;">
                   <div class="about-widget">
                     <div class="inner-content" style="max-width: 170px;">
@@ -24,17 +24,24 @@ $absoluteBaseUrl = Url::base(true);
                   <p>Shop No. 2, Ground Floor, <br>No 37/16, Mirbakshi ali street,<br>royapettah, chennai - 600 014. <br>Mob: +91 6380 589 226</p>
                 </div>
               </div>
-              <div class="col-lg-6">
-                <div class="widget-item">
-                  <div class="widget-menu-wrap">
+              <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 hide">
+                <div class="widget-item" style="display: flex;align-items: center;padding: 20px;vertical-align: middle;justify-content: center;">
                     <ul class="nav-menu">
                       <li><a href="<?=$absoluteBaseUrl?>/site/aboutus">About us</a></li>
                       <li><a href="<?=$absoluteBaseUrl?>/site/contact">Contact us</a></li>
                       <li><a href="<?=$absoluteBaseUrl?>/profile">My account</a></li>
                     </ul>
-                  </div>
-                </div>
               </div>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                <div class="widget-item" style="display: flex;align-items: center;padding: 20px;vertical-align: middle;justify-content: center;">
+                  <div class="social-icons">
+                        <a href="#/"><i class="la la-facebook"></i></a>
+                        <a href="#/"><i class="la la-twitter"></i></a>
+                        <a href="#/"><i class="la la-youtube"></i></a>
+                        <a href="#/"><i class="la la-instagram"></i></a>
+                    </div>
+                </div>
             </div>
           </div>
           <!--== End Footer Widget Area ==-->
