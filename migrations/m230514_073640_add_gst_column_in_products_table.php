@@ -12,7 +12,7 @@ class m230514_073640_add_gst_column_in_products_table extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('{{%products}}', 'gst', $this->decimal(10,2)->null()->after('quantity'));
+        $this->addColumn('{{%products}}', 'gst', $this->decimal(10,2)->null()->defaultValue(0)->after('quantity'));
     }
 
     /**
