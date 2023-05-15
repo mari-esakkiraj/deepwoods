@@ -261,12 +261,12 @@ return $content;
                                                         <div class="user justify-content-between d-flex">
                                                             <div class="thumb text-center">
                                                                 <img src="<?=$absoluteBaseUrl?>/theme/img/testimonial/02.png" alt="" class="hide">
-                                                                <a href="#" class="font-heading text-brand"><?= $review->createdUser->firstname.' '.$review->createdUser->lastname ?></a>
+                                                                <a href="#" class="font-heading text-brand"><?= $review->createdUser->firstname ?></a>
                                                             </div>
                                                             <div class="desc">
                                                                 <div class="d-flex justify-content-between mb-10">
                                                                     <div class="d-flex align-items-center">
-                                                                        <span class="font-xs text-muted">December 4, 2022 at 3:12 pm </span>
+                                                                        <span class="font-xs text-muted"><?= date("d-M-Y h:i A",$review->created_at) ?></span>
                                                                     </div>
                                                                     <div class="product-rate d-inline-block">
                                                                         <div class="product-rating" style="width: 100%"></div>
