@@ -55,7 +55,7 @@ use yii\widgets\Pjax;
                                         <img src="<?=$imgPath?>" alt="#">
                                     </td>
                                     <td class="product-des product-name">
-                                        <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="<?=$absoluteBaseUrl?>/site/productdetails?id=<?= $products->product->id ?>"><?= $products->product->name ?></a></h6>
+                                        <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="<?=$absoluteBaseUrl?>/site/productdetails?id=<?= $products->product_id ?>"><?= $products->product->name ?></a></h6>
                                         <div class="product-rate-cover">
                                             <div class="product-rate d-inline-block">
                                                 <div class="product-rating" style="width:90%">

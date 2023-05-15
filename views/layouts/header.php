@@ -56,7 +56,7 @@ use yii\widgets\Pjax;
                                         $total = $total + $products->quantity * $products->product->price; ?>
                                     <li>
                                         <div class="shopping-cart-img">
-                                            <a href="shop-product-right.html"><img alt="Nest" src="<?=$imgPath?>"></a>
+                                            <a href="<?= $absoluteBaseUrl.'/site/productdetails?id='.$products->product_id ?>"><img src="<?=$imgPath?>"></a>
                                         </div>
                                         <div class="shopping-cart-title">
                                             <h4 class="cartItemName"><?= $products->product->name ?></h4>
