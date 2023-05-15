@@ -66,6 +66,6 @@ class ProductReview extends \yii\db\ActiveRecord
      */
     public function getCreatedUser()
     {
-        return $this->hasOne(Users::class, ['id' => 'user_id', 'status' => '10']);
+        return $this->hasOne(Users::class, ['id' => 'user_id']);
     }
 }
