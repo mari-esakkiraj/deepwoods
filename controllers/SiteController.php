@@ -352,6 +352,8 @@ class SiteController extends Controller
             $model->user_id = $loginUserId;
             $model->review =  $comment;
             $model->created_by = $loginUserId;
+            $model->review_type =  '2';
+            $model->status =  '1';
             //$model->created_at = date('Y-m-d H:i:s');
             if($model->save(false)){
                 return json_encode(['data' => true]);
