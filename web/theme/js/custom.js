@@ -147,7 +147,7 @@
     var cartItemId = $(this).attr("data-cartItemId");
     var price = $(this).attr("data-price");
     $("#myprice-"+productId).html(Math.round(cartquantity * price));
-    insertCart(productId, cartItemId, cartquantity, 'increment');
+    insertCart(productId, cartItemId, cartquantity, 'cart');
     findTotal();
   });
 
