@@ -327,9 +327,13 @@ class SiteController extends Controller
                 } else {
                     if($action != 'delete'){
                         if($action == 'increment'){
-                            $cartItems->quantity = $cartItems->quantity + $quantity;
+                            $cartItems->quantity = (int)$cartItems->quantity + (int)$quantity;
                         }else{
-                            $cartItems->quantity = $cartItems->quantity + 1;
+                            if($action == 'cart'){
+                                $cartItems->quantity = (int)$quantity;
+                            }else{
+                                $cartItems->quantity = (int)$cartItems->quantity + 1;
+                            }
                         }
                         $cartItems->save(false);
                     }else{
