@@ -5,7 +5,11 @@ use yii\widgets\ListView;
 use yii\widgets\Pjax;
 ?>
 <section class="product-area">
+    
     <div class="container pt-30 pt-lg-30">
+        <div class="flex-container">
+            <h1>Products</h1>
+        </div>
         <div class="row">
             <div class="col-12">
                 <div class="shop-product-fillter">

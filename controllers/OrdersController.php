@@ -628,8 +628,7 @@ class OrdersController extends Controller
         {
             $order->status = 1;
             $order->paypal_order_id = $_POST['razorpay_payment_id'];
-            $html = "<p>Your payment was successful</p>
-                    <p>Payment ID: {$_POST['razorpay_payment_id']}</p>";
+            $html = "<div class='alert alert-success'>Your payment was successful and Your Payment ID: <b>{$_POST['razorpay_payment_id']}</b></div>";
             $order->save(false);
 
             foreach ($order->orderItems as $item) {

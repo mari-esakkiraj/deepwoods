@@ -35,6 +35,13 @@ $absoluteBaseUrl = Url::base(true);
             ],
             //'status',
             [
+                'attribute' => 'customer_id',
+                'label' => 'Customer',
+                'value' => function( $data ) {
+                    return $data->createdBy->firstname;  
+                },
+            ],
+            [
                 'attribute' => 'status',
                 'label' => 'Status',
                 'filter'=>array("1"=>"Success","2"=>"Failed","0"=>"Pending"),
@@ -47,12 +54,17 @@ $absoluteBaseUrl = Url::base(true);
                 'header' => 'Actions',
                 'class' => ActionColumn::className(),
                 'headerOptions' => ['style' => 'width:8%'],
-                'template'=>'{myButton}',
+                'template'=>'{myButton}{pdfIcon}',
                 'buttons' => [
                     'myButton' => function($url, $model, $key) { 
                         $absoluteBaseUrl = Url::base(true);
                         $myUrl = $absoluteBaseUrl."/orders/vieworderv1?id=".$model->id;
-                        return '<a href="'.$myUrl.'">View</a>';
+                        return '<a href="'.$myUrl.'" title="View" aria-label="View"><svg aria-hidden="true" style="display:inline-block;font-size:inherit;height:1em;overflow:visible;vertical-align:-.125em;width:1.125em" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M573 241C518 136 411 64 288 64S58 136 3 241a32 32 0 000 30c55 105 162 177 285 177s230-72 285-177a32 32 0 000-30zM288 400a144 144 0 11144-144 144 144 0 01-144 144zm0-240a95 95 0 00-25 4 48 48 0 01-67 67 96 96 0 1092-71z"></path></svg></a>';
+                    },
+                    'pdfIcon' => function($url, $model, $key) { 
+                        $absoluteBaseUrl = Url::base(true);
+                        $myUrl = $absoluteBaseUrl."/orders/pdfreport?id=".$model->id."&option=pdf";
+                        return '<a href="'.$myUrl.'" style="padding-left:10px;"><i style="font-size:14px" class="fa">&#xf1c1;</i></a>';
                     }
                 ]
             ],
