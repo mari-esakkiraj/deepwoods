@@ -13,12 +13,12 @@ $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_i
     echo $message;
 ?>
 <h3>Order #<?php echo $order->id ?>: </h3>
-<h3 class="pull-right" style = "margin-top: -3%;">
+<h3 class="pull-right" style = "margin-top: -3%;float: right;">
     <a class="text-right" href="<?= Yii::$app->urlManager->createUrl('orders/pdfreport?id='.$order->id.'&option=print')?>" target='_blank'>
         <i class="fa fa-print" style="font-size:18px"></i>
     </a>
     <a class="text-right" href="<?= Yii::$app->urlManager->createUrl('orders/pdfreport?id='.$order->id.'&option=pdf')?>" target='_blank'>
-        <i class="fa fa-file-pdf-o" style="font-size:18px"></i>
+        <i style="font-size:18px" class="fa">&#xf1c1;</i>
     </a>
 </h3>
 <hr>

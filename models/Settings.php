@@ -57,7 +57,7 @@ class Settings extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'company_name' => 'Company Name',
-            'address_line_1' => 'Address Line 1',
+            'address_line_1' => 'Address',
             'address_line_2' => 'Address Line 2',
             'city' => 'City',
             'state' => 'State',

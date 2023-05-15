@@ -60,7 +60,7 @@ class OrdersController extends Controller
                             }
                         ],
                         [
-                            'actions' => ['cartlist','checkout', 'payment', 'verify', 'applycoupon', 'vieworder'],
+                            'actions' => ['cartlist','checkout', 'payment', 'verify', 'applycoupon', 'vieworder', 'vieworderv1','pdfreport'],
                             'allow' => true,
                             'roles' => ['@'],
                         ],
@@ -676,6 +676,16 @@ class OrdersController extends Controller
         $order = Orders::findOne($id);
 
         $this->layout = 'mainpage';
+        
+        return $this->render('vieworder',["success" => "", 'message' => $html, 'order' => $order]);
+        
+    }
+
+    public function actionVieworderv1($id){
+        $html = "";
+        $order = Orders::findOne($id);
+
+        //$this->layout = 'mainpage';
         
         return $this->render('vieworder',["success" => "", 'message' => $html, 'order' => $order]);
         

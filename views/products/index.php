@@ -29,25 +29,27 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             [
                 'class' => 'yii\grid\SerialColumn',
-                'contentOptions' => ['style' => 'width:50px;'],
+                //'header' => 'SNo',
+                'contentOptions' => ['style' => 'width:5%'],
             ],
             [
                 'attribute' => 'name',
                 'headerOptions' => ['style' => 'width:20%'],
             ],
-            [
-                'attribute' => 'description',
-                'format'=>'raw',
-                'value' => function ($model) {
-                    return $model->description;
-                }
-            ],
+            // [
+            //     'attribute' => 'description',
+            //     'format'=>'raw',
+            //     'value' => function ($model) {
+            //         return $model->description;
+            //     }
+            // ],
             [
                 'attribute' => 'quantity',
                 'headerOptions' => ['style' => 'width:10%'],
             ],
             [
                 'attribute' => 'gst',
+                'format'=>['decimal',0],
                 'headerOptions' => ['style' => 'width:10%'],
             ],
             [
@@ -59,6 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['style' => 'width:10%'],
             ],
             [
+                'header' => 'Actions',
                 'class' => ActionColumn::className(),
                 'headerOptions' => ['style' => 'width:8%'],
                 'template'=>'{view}{update}{delete}',
@@ -72,3 +75,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::end(); ?>
 
 </div>
+<?php $style= <<< CSS
+
+   a[title='Delete'], a[title='Update']{
+    padding-left : 10px;
+   }
+
+ CSS;
+ $this->registerCss($style);
+?>
