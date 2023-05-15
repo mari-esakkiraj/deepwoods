@@ -47,6 +47,7 @@ class CustomerSearch extends Customer
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort'=> ['defaultOrder' => ['firstname' => SORT_ASC]],
+            'pagination' => ['pageSize' => 20],
         ]);
 
         $this->load($params);

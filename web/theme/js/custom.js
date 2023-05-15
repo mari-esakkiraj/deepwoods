@@ -121,7 +121,8 @@
     $(this).find(".sort-by-dropdown").toggleClass("show");
   });
   
-  $(".add-to-cart").on('click', function() {
+  //$(".add-to-cart").on('click', function() {
+  $(document).on('click','.add-to-cart',function(e) {
     var productID = $(this).data('product_id');
     insertCart(productID, 1, 1, 'default');
   });

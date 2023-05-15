@@ -123,3 +123,47 @@ a.desc:after {
 #loginform-password{
     background-image: none !important;
 }
+
+.grid-view .pagination  {
+    justify-content: right;
+}
+
+.grid-view .pagination li:first-child {
+    margin-left: 0;
+}
+
+.grid-view .pagination li {
+    margin: 0 5px;
+}
+
+.grid-view .pagination li:not(:first-child) a {
+    margin-left: -1px;
+}
+
+.grid-view .pagination li a, .grid-view .pagination li span {
+    border: 0;
+    padding: 0 10px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    outline: 0;
+    width: 40px;
+    height: 40px;
+    display: block;
+    border-radius: 40px;
+    color: #7E7E7E;
+    line-height: 40px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+    background-color: #F2F3F4;
+    text-decoration: none;
+}
+
+.grid-view .pagination li.active a, .grid-view .pagination li:hover a {
+    color: #fff;
+    background: rgba(var(--bs-dark-rgb));
+}
+
+.grid-view .pagination li.disabled{
+  cursor: not-allowed;
+}
