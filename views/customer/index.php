@@ -41,6 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'updated_at',
             //'verification_token',
             [
+                'header' => 'Actions',
                 'class' => ActionColumn::className(),
                 'headerOptions' => ['style' => 'width:8%'],
                 'template'=>'{view}{delete}',
@@ -54,3 +55,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::end(); ?>
 
 </div>
+<?php $style= <<< CSS
+
+    a[title='Delete'], a[title='Update']{
+    padding-left : 10px;
+   }
+
+ CSS;
+ $this->registerCss($style);
+?>

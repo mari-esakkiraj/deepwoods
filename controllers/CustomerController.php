@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Customer;
 use app\models\CustomerSearch;
+use app\models\OrdersSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -56,9 +57,8 @@ class CustomerController extends Controller
      */
     public function actionIndexv1()
     {
-        $searchModel = new CustomerSearch();
-        $searchModel->admin = 0;
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $searchModel = new OrdersSearch();
+        $dataProvider = $searchModel->dashboardorder($this->request->queryParams);
 
         return $this->render('indexv1', [
             'searchModel' => $searchModel,

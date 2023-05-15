@@ -22,10 +22,10 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'company_name')->textInput(['maxlength' => true]) ?>
     </div>
     <div class="col-md-6">
-        <?= $form->field($model, 'address_line_1')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'company_email')->textInput(['maxlength' => true]) ?>
         </div>
     <div class="col-md-6">
-        <?= $form->field($model, 'address_line_2')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'address_line_1')->textarea(['maxlength' => true]) ?>
     </div>
     <div class="col-md-6">
         <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>
@@ -37,10 +37,10 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'postal_code')->textInput(['maxlength' => true]) ?>
     </div>
     <div class="col-md-6">
-        <?= $form->field($model, 'country')->textInput(['maxlength' => true]) ?>
+        <?php // $form->field($model, 'country')->textInput(['maxlength' => true]) ?>
     </div>
     <div class="col-md-6">
-        <?= $form->field($model, 'country_code')->textInput(['maxlength' => true]) ?>
+        <?php // $form->field($model, 'country_code')->textInput(['maxlength' => true]) ?>
     </div>
     <div class="col-md-6">
         <?= $form->field($model, 'phone_no')->textInput(['maxlength' => true]) ?>
@@ -63,10 +63,10 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'gst_number')->textInput(['maxlength' => true]) ?>
     </div>
     <div class="col-md-6">
-        <?= $form->field($model, 'sales_prefix')->textInput(['maxlength' => true]) ?>
+        <?php // $form->field($model, 'sales_prefix')->textInput(['maxlength' => true]) ?>
     </div>
     <div class="col-md-6">
-        <?= $form->field($model, 'company_email')->textInput(['maxlength' => true]) ?>
+        
     </div>
 </div>
 <div class="row justify-content-center" style="margin:10px">

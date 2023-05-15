@@ -39,14 +39,18 @@ class SettingsController extends Controller
     public function actionIndex()
     {
         $model = $this->findModel(1);
+        $old_logo = $model->company_logo;
         if ($this->request->post()) {
             if ($model->load($this->request->post())) {
                     $file_name = $model->company_logo;
-                    $model->company_logo = \yii\web\UploadedFile::getInstance($model, 'company_logo');
-                    if(!empty($model->company_logo)) {
-                    $model->company_logo->saveAs('uploads/' . $model->company_logo->baseName . '.' . $model->company_logo->extension);
-                    $model->company_logo = 'uploads/' . $model->company_logo->baseName . '.' . $model->company_logo->extension;
-                }
+                    $company_logo = \yii\web\UploadedFile::getInstance($model, 'company_logo');
+                    if(!empty($company_logo)) {
+                        $model->company_logo = $company_logo;
+                        $model->company_logo->saveAs('uploads/' . $model->company_logo->baseName . '.' . $model->company_logo->extension);
+                        $model->company_logo = 'uploads/' . $model->company_logo->baseName . '.' . $model->company_logo->extension;
+                    }else{
+                        $model->company_logo = $old_logo;
+                    }
                 if ($model->save()) {
                     return $this->redirect(['index']);
                 }
