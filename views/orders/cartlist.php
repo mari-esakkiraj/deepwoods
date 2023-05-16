@@ -72,7 +72,7 @@ use yii\widgets\Pjax;
                                     <td class="price" data-title="Price">
                                         <h4 class="text-brand"><i class="fa fa-rupee"></i> <span class="subtotal" id="myprice-<?= $products->product_id?>"><?= $products->quantity * $products->product->price ?></span></h4>
                                     </td>
-                                    <td class="action text-center" data-title="Remove" data-cartItemId="<?= $products->id ?>"><a href="javascript:void(0);" class="text-body"><i class="fa fa-trash remove-table remove-cart" aria-hidden="true" ></i></a></td>
+                                    <td class="action text-center" data-title="Remove" ><a href="javascript:void(0);" class="text-body"><i class="fa fa-trash remove-table remove-cart" aria-hidden="true" data-cartItemId="<?= $products->id ?>"></i></a></td>
                                 </tr>
                             <?php }  ?>
                                 <tr>
