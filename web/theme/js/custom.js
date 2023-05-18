@@ -70,6 +70,17 @@
     openedSymbol: '<i class="ion-ios-remove"></i>'
   });
 
+  if($("li.slicknav_parent li a").length > 0){
+    var ele = $("li.slicknav_parent li a");
+    for(var i=0; i < ele.length; i++){
+      var element = ele[i];
+      var atagtext = $(element).text(); 
+      if(atagtext == 'Logout'){
+        $(element).addClass('logout')
+      }
+    }
+  }
+
   // Menu Activeion Js
   var cururl = window.location.pathname;
   var curpage = cururl.substr(cururl.lastIndexOf('/') + 1);
@@ -98,7 +109,8 @@
   });
 
   //wishlist
-  $(".logout").on('click', function() {
+  //$(".logout").on('click', function() {
+  $(document).on('click','.logout',function(e) {
     $('.logoutSession').trigger('click');
   });
 
