@@ -22,17 +22,22 @@ $billingAddresses = UserAddresses::find()->where(['user_id' => $userID,'type' =>
                     </h5>
                 
             </div>
-            <div class="card-body">
+            <div class="card-body p-0">
                 <div>
                     <?php
                     if(!empty($billingAddresses)) {
                         foreach($billingAddresses as $billing) { ?>
-                            <address>
-                                <?=$billing->address?><br>
-                                <?=$billing->city.' ,'.$billing->state?><br>
-                                <?=$billing->country.' - '.$billing->zipcode?> <br>
-                                <a href="javascript:void(0)"  class="btn-small pull-right addressUpdate" data-address_type = "billing" data-address_id = "<?=$billing->id?>">Edit</a>
-                            </address>
+                            <div class="d-flex pb-10" style="border-bottom: 1px solid #ddd; align-items:center;padding: 10px;">
+                                <address class="m-0">
+                                    <?=$billing->address?><br>
+                                    <?=$billing->city.' ,'.$billing->state?><br>
+                                    <?=$billing->country.' - '.$billing->zipcode?> <br>
+                                </address>
+                                <div style="margin-left: auto;margin-right: 20px;">
+                                    <i class="fas fa-edit addressUpdate" style="cursor:pointer;" aria-hidden="true" data-address_type = "billing" data-address_id = "<?=$billing->id?>"></i>
+                                    <i class="fas fa-trash hide" aria-hidden="true"></i>
+                                </div>
+                            </div>
                         <?php 
                         } 
                     } else {
@@ -58,16 +63,21 @@ $billingAddresses = UserAddresses::find()->where(['user_id' => $userID,'type' =>
                 </h5>
 
             </div>
-            <div class="card-body">
+            <div class="card-body p-0">
                 <?php
                 if(!empty($shippingAddresses)) {
                     foreach($shippingAddresses as $shipping) { ?>
-                        <address>
-                            <?=$shipping->address?><br>
-                            <?=$shipping->city.' ,'.$shipping->state?><br>
-                            <?=$shipping->country.' - '.$shipping->zipcode?> <br>
-                            <a href="javascript:void(0)"  class="btn-small pull-right addressUpdate"  data-address_type = "shipping" data-address_id = "<?=$shipping->id?>">Edit</a>
-                        </address>
+                        <div class="d-flex pb-10" style="border-bottom: 1px solid #ddd; align-items:center;padding: 10px;">
+                            <address class="m-0">
+                                <?=$shipping->address?><br>
+                                <?=$shipping->city.' ,'.$shipping->state?><br>
+                                <?=$shipping->country.' - '.$shipping->zipcode?> <br>
+                            </address>
+                            <div style="margin-left: auto;margin-right: 20px;">
+                                <i class="fas fa-edit addressUpdate" style="cursor:pointer;" aria-hidden="true" data-address_type = "shipping" data-address_id = "<?=$shipping->id?>"></i>
+                                <i class="fas fa-trash hide" aria-hidden="true"></i>
+                            </div>
+                        </div>
                         <?php 
                     } 
                 } else {

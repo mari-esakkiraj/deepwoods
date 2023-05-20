@@ -660,6 +660,15 @@
       }
     }
     $button.parent().find('input').val(newVal);
+    if ($button.hasClass('mycartlist')) {
+      var cartquantity = newVal;
+      var productId = $(this).attr("data-productid");
+      var cartItemId = $(this).attr("data-cartItemId");
+      var price = $(this).attr("data-price");
+      $("#myprice-"+productId).html(Math.round(cartquantity * price));
+      insertCart(productId, cartItemId, cartquantity, 'cart');
+      findTotal();
+    }
   });
 
   // Fancybox Js

@@ -68,9 +68,9 @@ use yii\widgets\Pjax;
                                     </td>
                                     <td class="text-center detail-info" data-title="Stock">
                                     <div class="pro-qty">
-                                        <input type="number" id="product-quantity" title="Quantity" value="1" min="1" max="999">
-                                        <div class="inc qty-btn"><i class="fa fa-angle-up"></i></div>
-                                        <div class= "dec qty-btn"><i class="fa fa-angle-down"></i></div>
+                                        <input type="number" id="product-quantity" title="Quantity" value="<?= $products->quantity ?>" min="1" max="999">
+                                        <div class="inc qty-btn mycartlist" data-productId="<?= $products->product_id ?>" data-price="<?= $products->product->price ?>" data-cartItemId="<?= $products->id ?>"><i class="fa fa-angle-up"></i></div>
+                                        <div class= "dec qty-btn mycartlist" data-productId="<?= $products->product_id ?>" data-price="<?= $products->product->price ?>" data-cartItemId="<?= $products->id ?>"><i class="fa fa-angle-down"></i></div>
                                     </div>
                                         <!-- <input type="number" class="cartquantity" value="<?= $products->quantity ?>" style="width:70px;" min="1" id="cartquantity" data-productId="<?= $products->product_id ?>" data-price="<?= $products->product->price ?>" data-cartItemId="<?= $products->id ?>" max="999"> -->
                                     </td>
@@ -106,3 +106,57 @@ use yii\widgets\Pjax;
         <?php  Pjax::end(); ?>
     </div>
 </section>
+
+
+
+  <?php $style= <<< CSS
+
+    #add-cart-table .pro-qty {
+        position: relative;
+        width: 84px;
+    }
+
+    #add-cart-table .pro-qty input {
+        background-color: #fff;
+        border: 1px solid #ebebeb;
+        border-right: none;
+        color: #232323;
+        font-weight: 300;
+        height: 36px;
+        padding: 0.175rem 0.5rem;
+        width: 60px;
+    }
+
+    #add-cart-table .pro-qty .qty-btn {
+        border: 1px solid #ebebeb;
+        color: #000;
+        cursor: pointer;
+        display: block;
+        font-size: 16px;
+        height: 18px;
+        line-height: 25px;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        width: 24px;
+        transition: all 0.3s ease-out;
+        -webkit-transition: all 0.3s ease-out;
+        -moz-transition: all 0.3s ease-out;
+        -ms-transition: all 0.3s ease-out;
+        -o-transition: all 0.3s ease-out;
+    }
+
+    #add-cart-table .pro-qty .qty-btn:hover {
+        background-color: #f1f1f1;
+    }
+    #add-cart-table .pro-qty .inc {
+        border-bottom: none;
+        top: 0;
+    }
+    #add-cart-table .pro-qty .dec {
+        bottom: 0;
+    }
+
+ CSS;
+ $this->registerCss($style);
+?>
