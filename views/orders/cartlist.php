@@ -67,7 +67,12 @@ use yii\widgets\Pjax;
                                         <h4 class="text-body"><i class="fa fa-rupee"></i> <?= $products->product->price ?></h4>
                                     </td>
                                     <td class="text-center detail-info" data-title="Stock">
-                                        <input type="number" class="cartquantity" value="<?= $products->quantity ?>" style="width:70px;" min="1" id="cartquantity" data-productId="<?= $products->product_id ?>" data-price="<?= $products->product->price ?>" data-cartItemId="<?= $products->id ?>" max="999">
+                                    <div class="pro-qty">
+                                        <input type="number" id="product-quantity" title="Quantity" value="1" min="1" max="999">
+                                        <div class="inc qty-btn"><i class="fa fa-angle-up"></i></div>
+                                        <div class= "dec qty-btn"><i class="fa fa-angle-down"></i></div>
+                                    </div>
+                                        <!-- <input type="number" class="cartquantity" value="<?= $products->quantity ?>" style="width:70px;" min="1" id="cartquantity" data-productId="<?= $products->product_id ?>" data-price="<?= $products->product->price ?>" data-cartItemId="<?= $products->id ?>" max="999"> -->
                                     </td>
                                     <td class="price" data-title="Price">
                                         <h4 class="text-brand"><i class="fa fa-rupee"></i> <span class="subtotal" id="myprice-<?= $products->product_id?>"><?= $products->quantity * $products->product->price ?></span></h4>
