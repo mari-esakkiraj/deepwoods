@@ -148,6 +148,18 @@ class SiteController extends Controller
         $this->layout = 'mainpage';
         return $this->render('about');
     }
+
+    public function actionPrivacy()
+    {
+        $this->layout = 'mainpage';
+        return $this->render('privacy');
+    }
+
+    public function actionTerms()
+    {
+        $this->layout = 'mainpage';
+        return $this->render('terms');
+    }
     
     /**
      * Login action.
