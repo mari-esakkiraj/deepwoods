@@ -21,15 +21,19 @@ $absoluteBaseUrl = Url::base(true);
                       
                     </div>
                   </div>
-                  <p>Shop No. 2, Ground Floor, <br>No 37/16, Mirbakshi ali street,<br>royapettah, chennai - 600 014. <br>Mob: +91 6380 589 226</p>
+                  <p>Shop No. 2, Ground Floor, <br>No 37/16, Mirbakshi Ali Street,<br>Royapettah, Chennai - 600 014. <br>Mob: +91 6380 589 226</p>
                 </div>
               </div>
-              <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 hide">
+              <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 ">
                 <div class="widget-item" style="display: flex;align-items: center;padding: 20px;vertical-align: middle;justify-content: center;">
                     <ul class="nav-menu">
+                      <li><a href="<?=$absoluteBaseUrl?>">Home</a></li>
                       <li><a href="<?=$absoluteBaseUrl?>/site/aboutus">About us</a></li>
                       <li><a href="<?=$absoluteBaseUrl?>/site/contact">Contact us</a></li>
                       <li><a href="<?=$absoluteBaseUrl?>/profile">My account</a></li>
+                      <li><a href="<?=$absoluteBaseUrl?>/site/privacypolicy">Privacy Policy</a></li>
+                      <li><a href="<?=$absoluteBaseUrl?>/site/termsandconditions">Terms & Conditions</a></li>
+                    
                     </ul>
               </div>
               </div>
@@ -43,13 +47,14 @@ $absoluteBaseUrl = Url::base(true);
                     </div>
                 </div>
             </div>
+            
           </div>
           <!--== End Footer Widget Area ==-->
         </div>
       </div>
     </div>
     <!--== Start Footer Bottom Area ==-->
-    <div class="footer-bottom" style="padding: 10px;">
+    <div class="footer-bottom" style="padding: 10px;width: 102%;margin-left: -1%;">
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
