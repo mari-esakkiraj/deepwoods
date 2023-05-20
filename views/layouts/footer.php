@@ -31,8 +31,8 @@ $absoluteBaseUrl = Url::base(true);
                       <li><a href="<?=$absoluteBaseUrl?>/site/aboutus">About us</a></li>
                       <li><a href="<?=$absoluteBaseUrl?>/site/contact">Contact us</a></li>
                       <li><a href="<?=$absoluteBaseUrl?>/profile">My account</a></li>
-                      <li><a href="<?=$absoluteBaseUrl?>/site/privacypolicy">Privacy Policy</a></li>
-                      <li><a href="<?=$absoluteBaseUrl?>/site/termsandconditions">Terms & Conditions</a></li>
+                      <li><a href="<?=$absoluteBaseUrl?>/site/privacy">Privacy Policy</a></li>
+                      <li><a href="<?=$absoluteBaseUrl?>/site/terms">Terms & Conditions</a></li>
                     
                     </ul>
               </div>
