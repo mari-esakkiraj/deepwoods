@@ -152,12 +152,12 @@ use yii\widgets\Pjax;
              <form id="login-form">
               <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control loginusername" name="username" id="username">
+                <input type="text" class="form-control loginusername loginValidation" name="username" id="username">
                 <span id='loginusername_error'></span>
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control loginpassword" name="password" id="password">
+                <input type="password" class="form-control loginpassword loginValidation" name="password" id="login-password">
                 <i class="fa fa-fw fa-eye" id="togglePassword"></i>
                 <span id='loginpassword_error'></span>
               </div>
@@ -186,12 +186,12 @@ use yii\widgets\Pjax;
             <form id='register_form'>
               <div class="mb-3">
                 <label for="email" class="form-label required">Email</label>
-                <input type="email" class="form-control email" id="email" title="Please enter valid email address">
+                <input type="email" class="form-control email loginValidation" id="email" title="Please enter valid email address">
                 <span id='email_error'></span>
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label required">Password</label>
-                <input type="password" class="form-control password" id="password">
+                <input type="password" class="form-control password loginValidation" id="password">
                 <span id='password_error'></span>
               </div>
               <div class="mb-3">
@@ -201,7 +201,7 @@ use yii\widgets\Pjax;
               </div>
               <div class="mb-3">
                 <label for="username" class="form-label required">First Name</label>
-                <input type="text" class="form-control firstname" id="firstname">
+                <input type="text" class="form-control firstname loginValidation" id="firstname">
                 <span id='firstname_error'></span>
               </div>
               <div class="mb-3">
@@ -255,7 +255,7 @@ use yii\widgets\Pjax;
                 </div>
                 <div class="form-outline">
                   <label class="form-label" for="typeEmail">Email</label>
-                  <input type="email" id="typeEmail" class="form-control typeEmail" />
+                  <input type="email" id="typeEmail" class="form-control typeEmail loginValidation" />
                   <span id='forgot_email_error'></span>
                 </div>
                 <div class="text-center mt-10">
@@ -287,6 +287,11 @@ $this->registerJs("
     $('#mobile_number_error').html('');
     if(phone !== '' && !pattern.test(phone)){
       $('#mobile_number_error').html('<span style=\"color:red\">Please enter valid phone number.</span>');
+    }
+
+    if(phone == ''){
+      $(\"#mobile_number_error\").html(\"<span style='color:red'>Phone Number is requried</span>\");
+      clr =1;
     }
   }); 
   
@@ -358,7 +363,7 @@ $this->registerJs("
 
   function submitLoginForm(){
     var userName = $('#login-form #username').val();
-    var password = $('#login-form #password').val();
+    var password = $('#login-form #login-password').val();
     var clr = 0;
     if(password == ''){
       $('#loginpassword_error').html('<span style=\"color:red\">Password is requried</span>');
@@ -419,6 +424,58 @@ $this->registerJs("
 
   $(document).on('click','#checkoutURL',function() {
     location.href = '".$absoluteBaseUrl."/orders/checkout'; 
+  });
+
+  $(document).on('keyup','.loginValidation',function() {
+    var id = $(this).attr('id');
+    if(id == 'email'){
+      var email = $('.email').val();
+      $('#email_error').html('');
+      if(email == ''){
+        $(\"#email_error\").html(\"<span style='color:red'>Email is requried</span>\");        
+      }
+    }
+
+    if(id == 'password'){
+      var password = $('.password').val();
+      $('#password_error').html('');
+      if(password == ''){
+        $(\"#password_error\").html(\"<span style='color:red'>Password is requried</span>\");        
+      }
+    }
+
+    if(id == 'firstname'){
+      var firstname = $('.firstname').val();
+      $('#firstname_error').html('');
+      if(firstname == ''){
+        $(\"#firstname_error\").html(\"<span style='color:red'>First Name is requried</span>\");        
+      }
+    }
+
+    if(id == 'username'){
+      var username = $('#username').val();
+      $('#loginusername_error').html('');
+      if(username == ''){
+        $(\"#loginusername_error\").html(\"<span style='color:red'>Username is requried</span>\");        
+      }
+    }
+
+    if(id == 'login-password'){
+      var password = $('#login-password').val();
+      $('#loginpassword_error').html('');
+      if(password == ''){
+        $(\"#loginpassword_error\").html(\"<span style='color:red'>Password is requried</span>\");        
+      }
+    }
+
+    if(id == 'typeEmail'){
+      var password = $('#typeEmail').val();
+      $('#forgot_email_error').html('');
+      if(password == ''){
+        $(\"#forgot_email_error\").html(\"<span style='color:red'>Password is requried</span>\");        
+      }
+    }
+
   });
 ");
 

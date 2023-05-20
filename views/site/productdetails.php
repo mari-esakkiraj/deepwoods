@@ -2,6 +2,10 @@
 use yii\helpers\Url;
 $absoluteBaseUrl = Url::base(true);
 use yii\widgets\Pjax;
+$loginuser = '';
+if(!Yii::$app->user->isGuest) {
+    $loginuser = Yii::$app->user->identity->id;
+}
 ?>
 <?php
 // Function to create read more link of a content with link to full page
@@ -253,8 +257,9 @@ return $content;
                                 <div class="comments-area">
                                     <div class="row">
                                         
-                                        <div class="col-lg-8">
+                                        <div class="col-lg-10">
                                             <h4 class="mb-30">Customer questions &amp; answers</h4>
+                                            <input type="hidden" id="review-id" />
                                             <div class="comment-list">
                                                 <?php if(count($products->review) > 0){ foreach($products->review as $review){ ?>
                                                     <div class="single-comment justify-content-between d-flex mb-10">
@@ -265,8 +270,12 @@ return $content;
                                                             </div>
                                                             <div class="desc">
                                                                 <div class="d-flex justify-content-between mb-10">
-                                                                    <div class="d-flex align-items-center">
+                                                                    <div class="d-flex align-items-center" style="gap:10px;">
                                                                         <span class="font-xs text-muted"><?= date("d-M-Y h:i A",$review->created_at) ?></span>
+                                                                        <?php if($review->user_id == $loginuser){ ?>
+                                                                        <i class="fas fa-edit review-edit" aria-hidden="true" data-reviewid="<?= $review->id ?>" data-message="<?= $review->review ?>"></i>
+                                                                        <i class="fas fa-trash review-delete" aria-hidden="true" data-reviewid="<?= $review->id ?>"></i>
+                                                                        <?php } ?>
                                                                     </div>
                                                                     <div class="product-rate d-inline-block">
                                                                         <div class="product-rating" style="width: 100%"></div>
@@ -318,12 +327,12 @@ return $content;
                                 <div class="comment-form">
                                     <h4 class="mb-15">Add a review</h4>
                                     <div class="row">
-                                        <div class="col-lg-8 col-md-12">
+                                        <div class="col-lg-10 col-md-12">
                                             <form class="form-contact comment_form" action="#" id="commentForm">
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Type a message here"></textarea>
+                                                            <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="6" placeholder="Type a message here"></textarea>
                                                             <span style="color:red" id="commentErrorMsg"></span>
                                                         </div>
                                                     </div>

@@ -348,17 +348,28 @@ class SiteController extends Controller
 
     public function actionAddreview(){
         $productId = $_POST['productId'] ?? null;
+        $reviewId = $_POST['reviewId'];
         $comment = $_POST['comment'] ?? null;
+        $action = $_POST['action'];
+        if($action === 'delete'){
+            ProductReview::findOne(['id' => $reviewId])->delete();
+            return json_encode(['data' => true]);
+        }
         if(!Yii::$app->user->isGuest) {
             $loginUserId = Yii::$app->user->identity->id ?? null;
-            $model = new ProductReview();
-            $model->product_id = $productId;
-            $model->user_id = $loginUserId;
-            $model->review =  $comment;
-            $model->created_by = $loginUserId;
-            $model->review_type =  '2';
-            $model->status =  '1';
-            $model->created_at = time();
+            if($reviewId !== ''){
+                $model = ProductReview::findOne(['id' => $reviewId]);
+                $model->review =  $comment;
+            }else{
+                $model = new ProductReview();
+                $model->product_id = $productId;
+                $model->user_id = $loginUserId;
+                $model->review =  $comment;
+                $model->created_by = $loginUserId;
+                $model->review_type =  '2';
+                $model->status =  '1';
+                $model->created_at = time();
+            }
             if($model->save(false)){
                 return json_encode(['data' => true]);
             }

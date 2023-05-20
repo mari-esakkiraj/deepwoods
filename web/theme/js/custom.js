@@ -252,14 +252,13 @@
     if(review !== ''){
       $("#commentErrorMsg").text("");
       var productID = $(this).attr('data-cartItemId');
-      submitReview(productID);
+      submitReview(productID,'add');
     }else{
       $("#commentErrorMsg").text("Please type a message.");
     }
-   
   });
 
-  function submitReview(productID){
+  function submitReview(productID,action){
     $.ajax({
       type:'post',
       url:Baseurl+'/site/addreview',
@@ -267,16 +266,38 @@
       data:{
           productId: productID,
           comment: $("#comment").val(),
+          reviewId: $("#review-id").val(),
+          action: action,
       },
       success:function(response) {
         if(response.data){
-          toastr.success('Your review added.');
-          $.pjax.reload({container: '#my-product-review'});
-          $("#comment").val("")
+          $("#review-id").val('');
+          if(action === 'delete'){
+            toastr.success('Your review removed.');
+          }else{
+            toastr.success('Your review added.');
+          }
+          $.pjax.reload({container: '#my-product-review'}).done(function () {
+            $('.nav-tabs a[href="#Reviews"]').tab('show');
+          });
+          $("#comment").val("");
         }
       }
     });
   }
+
+  $(document).on('click','.review-edit',function(e) { 
+    var reviewid = $(this).attr('data-reviewid');
+    var message = $(this).attr('data-message');
+    $("#review-id").val(reviewid);
+    $("#comment").val(message);
+  });
+
+  $(document).on('click','.review-delete',function(e) { 
+    var reviewid = $(this).attr('data-reviewid');
+    $("#review-id").val(reviewid);
+    submitReview(reviewid,'delete');
+  });
 
   function clearClart(){
     $.ajax({
