@@ -101,13 +101,13 @@ function amountInWord($number) {
             </tr>
     
             <tr>
-                <th  style="padding: 10px;">S.No</th>
-                <th  style="padding: 10px;">Description of Goods</th>
-                <th  style="padding: 10px;">HSN/SAC</th>
-                <th  style="padding: 10px;">Qty</th>
-                <th  style="padding: 10px;">Price</th>
-                <th  style="padding: 10px;">Disc %</th>
-                <th  style="padding: 10px;">Amount</th>
+                <th  style="padding: 10px;width:10%;">S.No</th>
+                <th  style="padding: 10px;width:30%;">Description of Goods</th>
+                <th  style="padding: 10px;width:15%;">HSN/SAC</th>
+                <th  style="padding: 10px;width:8%;">Qty</th>
+                <th  style="padding: 10px;width:15%;">Price</th>
+                <th  style="padding: 10px;width:9%;">Disc%</th>
+                <th  style="padding: 10px;width:13%;text-align:center;">Amount</th>
             </tr>
             <?php $gstList= []; 
             foreach ($order->orderItems as $key => $item): 
@@ -137,7 +137,7 @@ function amountInWord($number) {
                         <?= $settings->gst ?>% 
                     </td>
                     <td style="padding: 10px;">0</td>
-                    <td style="padding: 10px;">
+                    <td style="padding: 10px;text-align:right;">
                         <?= $item->quantity * $item->unit_price; ?><br/>
                         <?= (($item->quantity * $item->unit_price) * $settings->gst) / 100?> <br/>
                         <?= (($item->quantity * $item->unit_price) * $settings->gst) / 100?> <br/>
@@ -150,9 +150,9 @@ function amountInWord($number) {
                 <td style="padding: 10px;"></td>
                 <td style="padding: 10px;"></td>
                 <td style="padding: 10px;"></td>
-                <th style="padding: 10px;" style="text-align: right">SubTotal</th>
+                <th style="padding: 10px; text-align: right">SubTotal</th>
                 <td style="padding: 10px;"></td>
-                <td style="padding: 10px;">
+                <td style="padding: 10px; text-align: right">
                     <?= $order->total_price ?>
                 </td>
             </tr>
@@ -212,18 +212,20 @@ function amountInWord($number) {
                 <td style="padding: 10px;" colspan="7"> Amount Chargeable (in words) <br/><?= amountInWord($order->total_price)?></td>
             </tr>
             <tr>
+        </table>
+        <table class="table table-hover table-bordered ">
             <tr >
                 <td style="padding: 10px;" rowspan="2">HSN/SAC</td>
-                <td style="padding: 10px;" rowspan="2">Taxable Value</td>
-                <td style="padding: 10px;" colspan="2">Central Tax</td>
-                <td style="padding: 10px;" colspan="2">State Tax</td>
-                <td style="padding: 10px;" rowspan="2">Total Tax Amount</td>
+                <td style="padding: 10px;text-align:center;" rowspan="2">Taxable Value</td>
+                <td style="padding: 10px;text-align:center;" colspan="2">Central Tax</td>
+                <td style="padding: 10px;text-align:center;" colspan="2">State Tax</td>
+                <td style="padding: 10px;text-align:center;" rowspan="2">Total Tax Amount</td>
             </tr>
             <tr>
-                <td style="padding: 10px;">Rate</td>
-                <td style="padding: 10px;">Amount</td>
-                <td style="padding: 10px;">Rate</td>
-                <td style="padding: 10px;">Amount</td>
+                <td style="padding: 10px;text-align:center;">Rate</td>
+                <td style="padding: 10px;text-align:center;">Amount</td>
+                <td style="padding: 10px;text-align:center;">Rate</td>
+                <td style="padding: 10px;text-align:center;">Amount</td>
             </tr>
             <?php $totalTax = 0;
             $totalTaxAmount = 0;
@@ -232,31 +234,32 @@ function amountInWord($number) {
                 $totalTaxAmount += $tax['amount'];?>
                 <tr>
                     <td  style="padding: 10px;"><?= $tax_key?></td>
-                    <td  style="padding: 10px;"><?= $tax['amount']?></td>
-                    <td  style="padding: 10px;"><?= $tax['rate']?></td>
-                    <td  style="padding: 10px;"><?= $tax['tax_amount']?></td>
-                    <td  style="padding: 10px;"><?= $tax['rate']?></td>
-                    <td  style="padding: 10px;"><?= $tax['tax_amount']?></td>
-                    <td  style="padding: 10px;"><?= $tax['tax_amount'] + $tax['tax_amount']?></td>
+                    <td  style="padding: 10px;text-align:center;"><?= $tax['amount']?></td>
+                    <td  style="padding: 10px;text-align:center;"><?= $tax['rate']?></td>
+                    <td  style="padding: 10px;text-align:center;"><?= $tax['tax_amount']?></td>
+                    <td  style="padding: 10px;text-align:center;"><?= $tax['rate']?></td>
+                    <td  style="padding: 10px;text-align:center;"><?= $tax['tax_amount']?></td>
+                    <td  style="padding: 10px;text-align:center;"><?= $tax['tax_amount'] + $tax['tax_amount']?></td>
                 </tr>
 
             <?php }?>
             <tr>
                 <td  style="padding: 10px;"> Total</td>
-                <td  style="padding: 10px;"> <?= $totalTaxAmount?></td>
-                <td  style="padding: 10px;"></td>
-                <td  style="padding: 10px;"> <?= $totalTax/2?></td>
-                <td  style="padding: 10px;"></td>
-                <td  style="padding: 10px;"> <?= $totalTax/2?></td>
-                <td  style="padding: 10px;"> <?= $totalTax?></td>
+                <td  style="padding: 10px;text-align:center;"> <?= $totalTaxAmount?></td>
+                <td  style="padding: 10px;text-align:center;"></td>
+                <td  style="padding: 10px;text-align:center;"> <?= $totalTax/2?></td>
+                <td  style="padding: 10px;text-align:center;"></td>
+                <td  style="padding: 10px;text-align:center;"> <?= $totalTax/2?></td>
+                <td  style="padding: 10px;text-align:center;"> <?= $totalTax?></td>
             </tr>
             <tr>
                 <td style="padding: 10px;" colspan="7"> Tax Amount (in words) <br/><?= amountInWord($totalTax)?></td>
             </tr>
             <tr>
-                <td style="padding: 10px;" colspan="7"> Company's PAN: AAUFD8314Q <br/>
-                Declaration : We declare that Invoice shows the actual price of the goods described and that all particulars are true and correct. <br/>
-                Note: This is a computer generated invoice no need of signature
+                <td style="padding: 10px;" colspan="7"> 
+                    <span>Company's PAN: AAUFD8314Q</span><br/>
+                    <span>Declaration : We declare that Invoice shows the actual price of the goods described and that all particulars are true and correct.</span><br/>
+                    <div style="padding-left: 30px;">Note: This is a computer generated invoice no need of signature</div>
             </td>
             </tr>
         </table>
