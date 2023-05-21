@@ -76,9 +76,9 @@ function amountInWord($number) {
                     FSSAI No: 22423540000056
                 </th>
                 <td style="padding: 10px;" rowspan="2" colspan="3">
-                    <u>Invoice No:</u> <?php echo $order->id ?? '-'; ?><br/><br/>
-                    <u>Date:</u> <?php echo date("Y-m-d",$order->created_at) ?? '-'; ?><br/><br/>
-                    <u>Dispatch Through:</u> Road<br/><br/>
+                    <u>Invoice No:</u> <?php echo $order->id ?? '-'; ?><br/><br/><br/>
+                    <u>Date:</u> <?php echo date("Y-m-d",$order->created_at) ?? '-'; ?><br/><br/><br/>
+                    <u>Dispatch Through:</u> Road<br/><br/><br/><br/><br/>
                     <u>Destination:</u> <?php echo $orderAddress->city ?? '-'; ?><br/><br/>
 
                 </td>
@@ -253,13 +253,23 @@ function amountInWord($number) {
                 <td  style="padding: 10px;text-align:center;"> <?= $totalTax?></td>
             </tr>
             <tr>
-                <td style="padding: 10px;" colspan="7"> Tax Amount (in words) <br/><?= amountInWord($totalTax)?></td>
+                <td style="padding: 10px;" colspan="4"> Tax Amount (in words) <br/><?= amountInWord($totalTax)?></td>
+                <td colspan="3" rowspan="2">
+                    For Deepwoods Organics
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    Authorised Signatory
+                </td>
             </tr>
             <tr>
-                <td style="padding: 10px;" colspan="7"> 
+                <td style="padding: 10px;" colspan="4"> 
                     <span>Company's PAN: AAUFD8314Q</span><br/>
                     <span>Declaration : We declare that Invoice shows the actual price of the goods described and that all particulars are true and correct.</span><br/>
-                    <div style="padding-left: 30px;">Note: This is a computer generated invoice no need of signature</div>
+                    <div style="padding-left: 30px;"><small>Note: This is a computer generated invoice no need of signature</small></div>
             </td>
             </tr>
         </table>
