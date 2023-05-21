@@ -113,34 +113,34 @@ function amountInWord($number) {
             foreach ($order->orderItems as $key => $item): 
                 $product = Products::findOne($item->product_id);
                 if(in_array($product->hsn_sac,$gstList)) {
-                    $gstList[$product->hsn_sac]['tax_amount'] += (($item->quantity * $item->unit_price) * $settings->gst) / 100;
+                    $gstList[$product->hsn_sac]['tax_amount'] += $item->product_gst_price;
                     $gstList[$product->hsn_sac]['amount'] += ($item->quantity * $item->unit_price);
                 } else {
                     $gstList[$product->hsn_sac] = [
-                        'rate' => $settings->gst,
+                        'rate' => $product->gst,
                         'amount' => ($item->quantity * $item->unit_price) ,
-                        'tax_amount' => (($item->quantity * $item->unit_price) * $settings->gst) / 100,
+                        'tax_amount' => $item->product_gst_price,
                     ];
             }?>
                 <tr>
                     <td style="padding: 10px;"><?= $key+1?></td>
                     <td style="padding: 10px;">
                         <?= $item->product_name ?><br/>
-                        Out Put CGST- <?= $settings->gst?>%<br/>
-                        Out Put SGST- <?= $settings->gst?>%
+                        Out Put CGST- <?= $product->gst/2?>%<br/>
+                        Out Put SGST- <?= $product->gst/2?>%
                     </td>
                     <td style="padding: 10px;"><?= !empty($product->hsn_sac) ? $product->hsn_sac : ''?></td>
                     <td style="padding: 10px;"><?= $item->quantity ?></td>
                     <td style="padding: 10px;">
                         <?= $item->unit_price; ?><br/>
-                        <?= $settings->gst ?>% <br/>
-                        <?= $settings->gst ?>% 
+                        <?= $product->gst/2 ?>% <br/>
+                        <?= $product->gst/2 ?>% 
                     </td>
                     <td style="padding: 10px;">0</td>
                     <td style="padding: 10px;text-align:right;">
                         <?= $item->quantity * $item->unit_price; ?><br/>
-                        <?= (($item->quantity * $item->unit_price) * $settings->gst) / 100?> <br/>
-                        <?= (($item->quantity * $item->unit_price) * $settings->gst) / 100?> <br/>
+                        <?= round($item->product_gst_price / 2)?> <br/>
+                        <?= round($item->product_gst_price / 2)?> <br/>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -230,16 +230,16 @@ function amountInWord($number) {
             <?php $totalTax = 0;
             $totalTaxAmount = 0;
             foreach($gstList as $tax_key => $tax) {
-                $totalTax += $tax['tax_amount'] + $tax['tax_amount'];
+                $totalTax += $tax['tax_amount'] ;
                 $totalTaxAmount += $tax['amount'];?>
                 <tr>
                     <td  style="padding: 10px;"><?= $tax_key?></td>
                     <td  style="padding: 10px;text-align:center;"><?= $tax['amount']?></td>
                     <td  style="padding: 10px;text-align:center;"><?= $tax['rate']?></td>
-                    <td  style="padding: 10px;text-align:center;"><?= $tax['tax_amount']?></td>
+                    <td  style="padding: 10px;text-align:center;"><?= round($tax['tax_amount']/2)?></td>
                     <td  style="padding: 10px;text-align:center;"><?= $tax['rate']?></td>
-                    <td  style="padding: 10px;text-align:center;"><?= $tax['tax_amount']?></td>
-                    <td  style="padding: 10px;text-align:center;"><?= $tax['tax_amount'] + $tax['tax_amount']?></td>
+                    <td  style="padding: 10px;text-align:center;"><?= round($tax['tax_amount']/2)?></td>
+                    <td  style="padding: 10px;text-align:center;"><?= $tax['tax_amount'] ?></td>
                 </tr>
 
             <?php }?>

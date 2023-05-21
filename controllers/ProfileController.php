@@ -3,6 +3,7 @@ namespace app\controllers;
 
 use app\models\UserAddresses;
 use app\models\Users;
+use app\models\ChangePasswordForm;
 use Yii;
 use yii\filters\AccessControl;
 use kartik\mpdf\Pdf;
@@ -54,8 +55,19 @@ class ProfileController extends Controller
             $userID = Yii::$app->user->identity->id ?? null;
         }
         $user = Users::find()->where(['id' => $userID])->one();
-       
-        return $this->render('index', ['user' => $user]);
+        $model = new ChangePasswordForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            // Get the current user
+            $users = Yii::$app->user->identity;
+            // Set the new password
+            $users->setPassword($model->newPassword);
+            if($users->save(false)){
+                Yii::$app->getSession()->setFlash('success', 'Password changed successfully.');
+                return $this->redirect(['site/cus-logout']);
+            }
+        }
+
+        return $this->render('index', ['user' => $user,'model' => $model]);
     }
 
     public function actionVieworder($id)
@@ -148,5 +160,28 @@ class ProfileController extends Controller
         }
         return false;
     }
+
+    public function actionChangePassword()
+    {
+        $model = new ChangePasswordForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            // Get the current user
+            $user = Yii::$app->user->identity;
+
+            // Set the new password
+            $user->setPassword($model->newPassword);
+            $user->save();
+
+            Yii::$app->getSession()->setFlash('success', 'Password changed successfully.');
+
+            return $this->redirect(['view']);
+        }
+
+        return $this->render('change_password', [
+            'model' => $model,
+        ]);
+    }
+
 }
 
