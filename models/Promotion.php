@@ -40,7 +40,7 @@ class Promotion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'price', 'status'], 'required'],
+            [['name', 'price', 'status', 'user_id'], 'required'],
             [['description', 'discount_type', 'promotion_type'], 'string'],
             [['price'], 'number'],
             [[ 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
@@ -80,7 +80,12 @@ class Promotion extends \yii\db\ActiveRecord
      */
     public function getCreatedBy()
     {
-        return $this->hasOne(User::class, ['id' => 'created_by']);
+        return $this->hasOne(Users::class, ['id' => 'created_by']);
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(Users::class, ['id' => 'user_id']);
     }
 
     /**
@@ -90,6 +95,6 @@ class Promotion extends \yii\db\ActiveRecord
      */
     public function getUpdatedBy()
     {
-        return $this->hasOne(User::class, ['id' => 'updated_by']);
+        return $this->hasOne(Users::class, ['id' => 'updated_by']);
     }
 }

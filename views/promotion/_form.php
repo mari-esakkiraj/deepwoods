@@ -20,10 +20,20 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'promotion_type')->dropDownList([ 'coupon' => 'Coupon', 'promotion' => 'Promotion', ], ['prompt' => '']) ?>
     </div>
     <div class="col-md-6">
-    <?= $form->field($model, 'start_date')->textInput() ?>
+    <?= $form->field($model, 'start_date')->widget(\yii\jui\DatePicker::className(), [
+    // if you are using bootstrap, the following line will set the correct style of the input field
+    'dateFormat' => 'yyyy-MM-dd',
+    'options' => ['class' => 'form-control'],
+    // ... you can configure more DatePicker properties here
+]) ?>
     </div>
     <div class="col-md-6">
-    <?= $form->field($model, 'end_date')->textInput() ?>
+    <?= $form->field($model, 'end_date')->widget(\yii\jui\DatePicker::className(), [
+    // if you are using bootstrap, the following line will set the correct style of the input field
+    'dateFormat' => 'yyyy-MM-dd',
+    'options' => ['class' => 'form-control'],
+    // ... you can configure more DatePicker properties here
+]) ?>
     </div>
     <div class="col-md-6">
     <?= $form->field($model, 'price')->textInput(['maxlength' => true]) ?>
