@@ -30,6 +30,9 @@ $absoluteBaseUrl = Url::base(true);
                             <li class="nav-item" style="display:none;">
                                 <a class="nav-link" href="page-login.html"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
                             </li>
+                            <li class="nav-item" >
+                            <a class="nav-link" id="changepassword-tab" data-bs-toggle="tab" href="#changepassword" role="tab" aria-controls="changepassword" aria-selected="true"><i class="fi-rs-marker mr-10"></i>Change Password</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -110,6 +113,21 @@ $absoluteBaseUrl = Url::base(true);
                                 </div>
                             </div>
                         </div>
+                        <div class="tab-pane fade" id="changepassword" role="tabpanel" aria-labelledby="changepassword-tab">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">Change Password</h5>
+                                </div>
+                                <div class="card-body">
+                                    <?php
+                                        echo $this->render('change_password', [
+                                            'model' => $model ?? null
+                                        ]);
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane 
                     </div>
                 </div>
             </div>

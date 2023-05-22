@@ -76,9 +76,9 @@ function amountInWord($number) {
                     FSSAI No: 22423540000056
                 </th>
                 <td style="padding: 10px;" rowspan="2" colspan="3">
-                    <u>Invoice No:</u> <?php echo $order->id ?? '-'; ?><br/><br/>
-                    <u>Date:</u> <?php echo date("Y-m-d",$order->created_at) ?? '-'; ?><br/><br/>
-                    <u>Dispatch Through:</u> Road<br/><br/>
+                    <u>Invoice No:</u> <?php echo $order->id ?? '-'; ?><br/><br/><br/>
+                    <u>Date:</u> <?php echo date("Y-m-d",$order->created_at) ?? '-'; ?><br/><br/><br/>
+                    <u>Dispatch Through:</u> Road<br/><br/><br/><br/><br/>
                     <u>Destination:</u> <?php echo $orderAddress->city ?? '-'; ?><br/><br/>
 
                 </td>
@@ -113,34 +113,34 @@ function amountInWord($number) {
             foreach ($order->orderItems as $key => $item): 
                 $product = Products::findOne($item->product_id);
                 if(in_array($product->hsn_sac,$gstList)) {
-                    $gstList[$product->hsn_sac]['tax_amount'] += (($item->quantity * $item->unit_price) * $settings->gst) / 100;
+                    $gstList[$product->hsn_sac]['tax_amount'] += $item->product_gst_price;
                     $gstList[$product->hsn_sac]['amount'] += ($item->quantity * $item->unit_price);
                 } else {
                     $gstList[$product->hsn_sac] = [
-                        'rate' => $settings->gst,
+                        'rate' => $product->gst,
                         'amount' => ($item->quantity * $item->unit_price) ,
-                        'tax_amount' => (($item->quantity * $item->unit_price) * $settings->gst) / 100,
+                        'tax_amount' => $item->product_gst_price,
                     ];
             }?>
                 <tr>
                     <td style="padding: 10px;"><?= $key+1?></td>
                     <td style="padding: 10px;">
                         <?= $item->product_name ?><br/>
-                        Out Put CGST- <?= $settings->gst?>%<br/>
-                        Out Put SGST- <?= $settings->gst?>%
+                        Out Put CGST- <?= $product->gst/2?>%<br/>
+                        Out Put SGST- <?= $product->gst/2?>%
                     </td>
                     <td style="padding: 10px;"><?= !empty($product->hsn_sac) ? $product->hsn_sac : ''?></td>
                     <td style="padding: 10px;"><?= $item->quantity ?></td>
                     <td style="padding: 10px;">
                         <?= $item->unit_price; ?><br/>
-                        <?= $settings->gst ?>% <br/>
-                        <?= $settings->gst ?>% 
+                        <?= $product->gst/2 ?>% <br/>
+                        <?= $product->gst/2 ?>% 
                     </td>
                     <td style="padding: 10px;">0</td>
                     <td style="padding: 10px;text-align:right;">
                         <?= $item->quantity * $item->unit_price; ?><br/>
-                        <?= (($item->quantity * $item->unit_price) * $settings->gst) / 100?> <br/>
-                        <?= (($item->quantity * $item->unit_price) * $settings->gst) / 100?> <br/>
+                        <?= round($item->product_gst_price / 2)?> <br/>
+                        <?= round($item->product_gst_price / 2)?> <br/>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -230,16 +230,16 @@ function amountInWord($number) {
             <?php $totalTax = 0;
             $totalTaxAmount = 0;
             foreach($gstList as $tax_key => $tax) {
-                $totalTax += $tax['tax_amount'] + $tax['tax_amount'];
+                $totalTax += $tax['tax_amount'] ;
                 $totalTaxAmount += $tax['amount'];?>
                 <tr>
                     <td  style="padding: 10px;"><?= $tax_key?></td>
                     <td  style="padding: 10px;text-align:center;"><?= $tax['amount']?></td>
                     <td  style="padding: 10px;text-align:center;"><?= $tax['rate']?></td>
-                    <td  style="padding: 10px;text-align:center;"><?= $tax['tax_amount']?></td>
+                    <td  style="padding: 10px;text-align:center;"><?= round($tax['tax_amount']/2)?></td>
                     <td  style="padding: 10px;text-align:center;"><?= $tax['rate']?></td>
-                    <td  style="padding: 10px;text-align:center;"><?= $tax['tax_amount']?></td>
-                    <td  style="padding: 10px;text-align:center;"><?= $tax['tax_amount'] + $tax['tax_amount']?></td>
+                    <td  style="padding: 10px;text-align:center;"><?= round($tax['tax_amount']/2)?></td>
+                    <td  style="padding: 10px;text-align:center;"><?= $tax['tax_amount'] ?></td>
                 </tr>
 
             <?php }?>
@@ -253,13 +253,23 @@ function amountInWord($number) {
                 <td  style="padding: 10px;text-align:center;"> <?= $totalTax?></td>
             </tr>
             <tr>
-                <td style="padding: 10px;" colspan="7"> Tax Amount (in words) <br/><?= amountInWord($totalTax)?></td>
+                <td style="padding: 10px;" colspan="4"> Tax Amount (in words) <br/><?= amountInWord($totalTax)?></td>
+                <td colspan="3" rowspan="2">
+                    For Deepwoods Organics
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    Authorised Signatory
+                </td>
             </tr>
             <tr>
-                <td style="padding: 10px;" colspan="7"> 
+                <td style="padding: 10px;" colspan="4"> 
                     <span>Company's PAN: AAUFD8314Q</span><br/>
                     <span>Declaration : We declare that Invoice shows the actual price of the goods described and that all particulars are true and correct.</span><br/>
-                    <div style="padding-left: 30px;">Note: This is a computer generated invoice no need of signature</div>
+                    <div style="padding-left: 30px;"><small>Note: This is a computer generated invoice no need of signature</small></div>
             </td>
             </tr>
         </table>
