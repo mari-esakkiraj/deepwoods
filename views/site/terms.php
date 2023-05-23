@@ -1,5 +1,19 @@
-<div style="padding:10px;">
+<?php
 
+use yii\helpers\Html;
+use yii\helpers\Url;
+$absoluteBaseUrl = Url::base(true);
+?>
+<div class="page-content pt-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-10 col-lg-12 m-auto">
+            <section class="row align-items-center mb-50">
+                    <div class="col-lg-12">
+                        <img src="<?=$absoluteBaseUrl?>/images/termsandconditions.jpg" alt="" class="border-radius-15 mb-md-3 mb-lg-0 mb-sm-4">
+                    </div>
+                </section>
+                <section class="text-center mb-50">
 <h2><strong>Terms and Conditions</strong></h2>
 
 <p>Welcome to DeepWoods Organics!</p>
@@ -117,4 +131,4 @@
 <p>The limitations and prohibitions of liability set in this Section and elsewhere in this disclaimer: (a) are subject to the preceding paragraph; and (b) govern all liabilities arising under the disclaimer, including liabilities arising in contract, in tort and for breach of statutory duty.</p>
 
 <p>As long as the website and the information and services on the website are provided free of charge, we will not be liable for any loss or damage of any nature.</p>
-</div>
+</section></div></div></div></div>

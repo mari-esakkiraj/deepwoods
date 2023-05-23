@@ -523,4 +523,10 @@ class SiteController extends Controller
        return json_encode($data);
 
     }
+
+    public function actionRefund_policy()
+    {
+        $this->layout = 'mainpage';
+        return $this->render('refund_policy');
+    }
 }

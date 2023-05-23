@@ -4,8 +4,16 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 $absoluteBaseUrl = Url::base(true);
 ?>
-<div style="padding:10px;">
-<h1>Privacy Policy for DeepWoods Organics</h1>
+<div class="page-content pt-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-10 col-lg-12 m-auto">
+            <section class="row align-items-center mb-50">
+            <h1>Privacy Policy for DeepWoods Organics</h1>
+                <div class="col-lg-6">
+                        <img src="<?=$absoluteBaseUrl?>/images/privacypolicy.jpg" alt="" class="border-radius-15 mb-md-3 mb-lg-0 mb-sm-4">
+                    </div>
+                    <div class="col-lg-6">
 
 <p>At DeepWoods Organics, accessible from http://deepwoodsorganics.com/, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by DeepWoods Organics and how we use it.</p>
 
@@ -13,6 +21,10 @@ $absoluteBaseUrl = Url::base(true);
 
 <p>This Privacy Policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in DeepWoods Organics. This policy is not applicable to any information collected offline or via channels other than this website.</p>
 
+                    </div>
+                </section>
+                <section class="text-center mb-50">
+                    
 <h2>Consent</h2>
 
 <p>By using our website, you hereby consent to our Privacy Policy and agree to its terms.</p>
@@ -90,5 +102,5 @@ $absoluteBaseUrl = Url::base(true);
 <h2>Contact Us</h2>
 
 <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us.</p>
-
-</div>
+</section>
+</div></div></div></div>
