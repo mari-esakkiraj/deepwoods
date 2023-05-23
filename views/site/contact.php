@@ -49,10 +49,17 @@ $absoluteBaseUrl = Url::base(true);
                 <?php ActiveForm::end(); ?>
 
             </div>
-            <div class="col-lg-4" style="display: flex;align-items: center;padding: 20px;">
+            <div class="col-lg-4" style="display: flex;align-items: baseline;padding: 20px;">
 
                 <img src="<?=$absoluteBaseUrl?>/theme/img/contact.jpg" alt="" class="border-radius-15 mb-md-3 mb-lg-0 mb-sm-4">
+                
             </div>
+            <div class="col-lg-6"></div>
+            <div class="col-lg-4 text-center" style="margin-top: -11%;">
+                Shop No. 2, Ground Floor,<br/>
+No 37/16, Mirbakshi Ali Street,<br/>
+Royapettah, Chennai - 600 014.<br/>
+Mob: +91 6380 589 226</div>
         </div>
         <?php endif; ?>
 
