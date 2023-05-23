@@ -79,14 +79,11 @@ if(!Yii::$app->user->isGuest) {
     </div>
 </main>
 
-<?php 
-if(!Yii::$app->user->isGuest) {
-?>
-<footer id="footer" class="mt-auto py-3 bg-light hide" style="display:none;">
+<?php if(!Yii::$app->user->isGuest) { ?>
+<footer id="footer" class="mt-auto py-3 bg-dark">
     <div class="container">
         <div class="row text-muted">
-            <div class="col-md-6 text-center text-md-start">&copy; My Company <?= date('Y') ?></div>
-            <div class="col-md-6 text-center text-md-end"><?= Yii::powered() ?></div>
+            <div>Copyright © 2023 All Rights Reserved | Design by <a target="_blank" href="https://deccaInfo.com/">DeccaInfo.com</a></div>
         </div>
     </div>
 </footer>
