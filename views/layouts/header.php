@@ -356,6 +356,7 @@ $this->registerJs("
   document.onkeydown=function(evt){
     var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
     var loginmodel = $('#loginModal').hasClass('show');
+    
     if(keyCode == 13 && loginmodel){
       submitLoginForm();
     }
@@ -477,6 +478,10 @@ $this->registerJs("
     }
 
   });
+
+  $('#loginModal').on('shown.bs.modal', function (e) {
+    $('.btn-menu-close').trigger('click');
+  })
 ");
 
 
@@ -574,6 +579,7 @@ $this->registerJs("
                     $("#register_form").trigger('reset');
                     $("#registerModal").modal('hide');
                     $("#loginModal").modal('show');
+
                 } else {
                   $.each(response.data, function(key, value) {
                     $('#'+key+'_error').html("<span style='color:red'>"+value[0]+"</span>");

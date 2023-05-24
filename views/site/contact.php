@@ -55,7 +55,8 @@ $absoluteBaseUrl = Url::base(true);
                 
             </div>
             <div class="col-lg-6"></div>
-            <div class="col-lg-4 text-center" style="margin-top: -11%;">
+            <div class="col-lg-4 " style="margin-top: -11%;font-size:20px;">
+            <h3>Our Office Addres</h3>
                 Shop No. 2, Ground Floor,<br/>
 No 37/16, Mirbakshi Ali Street,<br/>
 Royapettah, Chennai - 600 014.<br/>
