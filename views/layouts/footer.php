@@ -33,7 +33,7 @@ $absoluteBaseUrl = Url::base(true);
                       <li><a href="<?=$absoluteBaseUrl?>/profile">My account</a></li>
                       <li><a href="<?=$absoluteBaseUrl?>/site/privacy">Privacy Policy</a></li>
                       <li><a href="<?=$absoluteBaseUrl?>/site/terms">Terms & Conditions</a></li>
-                      <li><a href="<?=$absoluteBaseUrl?>/site/refund_policy">Return & Refund Policy</a></li>
+                      <li><a href="<?=$absoluteBaseUrl?>/site/refund_policy">Cancellation & Refund Policy</a></li>
                     
                     </ul>
               </div>
