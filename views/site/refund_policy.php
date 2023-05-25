@@ -14,10 +14,10 @@ $absoluteBaseUrl = Url::base(true);
                         <img src="<?=$absoluteBaseUrl?>/images/cancellationrefundpolicy.jpg" alt="" class="border-radius-15 mb-md-3 mb-lg-0 mb-sm-4">
                     </div>
                     <div class="col-lg-6">
-                    <p>Last updated: May 21, 2023</p>
+                    <p>Last updated: May 25, 2023</p>
 <p>Thank you for shopping at Deepwoods Organics.</p>
-<p>The following terms are applicable for any products that You purchased with Us.</p>
-<a href="https://merchant.razorpay.com/policy/LszAveCJPrRrk4/shipping" target="_blank">Click Here</a>
+<p>The following terms are applicable for any products that You purchased with Us.</p><p><strong>For Shipping and Delivery Policy</strong>
+<a href="https://merchant.razorpay.com/policy/LszAveCJPrRrk4/shipping" target="_blank"> please Click Here</a></p>
                     </div>
                 </section>
                 <section class="text-center mb-50">
