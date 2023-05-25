@@ -64,7 +64,7 @@ $absoluteBaseUrl = Url::base(true);
                     'pdfIcon' => function($url, $model, $key) { 
                         $absoluteBaseUrl = Url::base(true);
                         $myUrl = $absoluteBaseUrl."/orders/pdfreport?id=".$model->id."&option=pdf";
-                        return '<a href="'.$myUrl.'" style="padding-left:10px;"><i style="font-size:14px" class="fa">&#xf1c1;</i></a>';
+                        return '<a href="'.$myUrl.'" style="padding-left:10px;" target="_blank"><i style="font-size:14px" class="fa">&#xf1c1;</i></a>';
                     }
                 ]
             ],

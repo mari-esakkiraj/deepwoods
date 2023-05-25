@@ -9,16 +9,20 @@ $absoluteBaseUrl = Url::base(true);
         <div class="row">
             <div class="col-xl-10 col-lg-12 m-auto">
             <section class="row align-items-center mb-50">
-                    <div class="col-lg-12">
+            <h1>Return and Refund Policy</h1>
+                    <div class="col-lg-6">
                         <img src="<?=$absoluteBaseUrl?>/images/cancellationrefundpolicy.jpg" alt="" class="border-radius-15 mb-md-3 mb-lg-0 mb-sm-4">
+                    </div>
+                    <div class="col-lg-6">
+                    <p>Last updated: May 21, 2023</p>
+<p>Thank you for shopping at Deepwoods Organics.</p>
+<p>The following terms are applicable for any products that You purchased with Us.</p>
+<a href="https://merchant.razorpay.com/policy/LszAveCJPrRrk4/shipping" target="_blank">Click Here</a>
                     </div>
                 </section>
                 <section class="text-center mb-50">
-                    <h1>Return and Refund Policy</h1>
-<p>Last updated: May 21, 2023</p>
-<p>Thank you for shopping at Deepwoods Organics.</p>
-<p>The following terms are applicable for any products that You purchased with Us.</p>
-<h1>Interpretation and Definitions</h1>
+                    
+                <h1>Interpretation and Definitions</h1>
 <h2>Interpretation</h2>
 <p>The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
 <h2>Definitions</h2>
