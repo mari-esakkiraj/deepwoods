@@ -9,7 +9,7 @@ $absoluteBaseUrl = Url::base(true);
           <!--== Start Footer Widget Area ==-->
           <div class="footer-widget-area">
             <div class="row">
-              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                 <div class="widget-item" style="display: flex; align-items: center; gap: 60px;">
                   <div class="about-widget">
                     <div class="inner-content" style="max-width: 170px;">
@@ -21,11 +21,16 @@ $absoluteBaseUrl = Url::base(true);
                       
                     </div>
                   </div>
+                  </div>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 ">
+                <div class="widget-item" style="display: flex;align-items: center;padding: 20px;vertical-align: middle;">
+                  
                   <p>Shop No. 2, Ground Floor, <br>No 37/16, Mirbakshi Ali Street,<br>Royapettah, Chennai - 600 014. <br>Mob: +91 6380 589 226</p>
                 </div>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 ">
-                <div class="widget-item" style="display: flex;align-items: center;padding: 20px;vertical-align: middle;justify-content: center;">
+                <div class="widget-item" style="display: flex;align-items: center;padding: 20px;vertical-align: middle;">
                     <ul class="nav-menu">
                       <li><a href="<?=$absoluteBaseUrl?>">Home</a></li>
                       <li><a href="<?=$absoluteBaseUrl?>/site/aboutus">About us</a></li>
@@ -39,7 +44,7 @@ $absoluteBaseUrl = Url::base(true);
               </div>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-                <div class="widget-item" style="display: flex;align-items: center;padding: 20px;vertical-align: middle;justify-content: center;">
+                <div class="widget-item" style="display: flex;align-items: center;padding: 20px;vertical-align: middle;">
                   <div class="social-icons">
                         <a href="#/"><i class="la la-facebook"></i></a>
                         <a href="#/"><i class="la la-twitter"></i></a>

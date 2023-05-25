@@ -314,7 +314,7 @@ class SiteController extends Controller
         if(!Yii::$app->user->isGuest) {
             $cartcount = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->count();
         } 
-        return $cartcount;
+        echo $cartcount;
     }
 
     public function actionSavecheckout()
