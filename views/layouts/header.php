@@ -6,7 +6,16 @@ $absoluteBaseUrl = Url::base(true);
 use app\models\CartItems;
 use yii\widgets\Pjax;
 ?>
-
+<style>
+@media(max-width: 768px) {
+	.cart-icon-label{
+		display: block !important;
+	}
+}
+.cart-icon-label{
+  display: none;
+}
+</style>
 <header class="header-area header-default header-style4">
 
     <!--== Start Header Bottom ==-->
@@ -39,7 +48,7 @@ use yii\widgets\Pjax;
                         if(!Yii::$app->user->isGuest) {
                           $productList = CartItems::find()->where(['created_by' => Yii::$app->user->identity->id, 'status' => 'created'])->all();
                         ?>
-                        <li class="header-action-icon-2"><a href="<?=$absoluteBaseUrl?>/orders/cartlist"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart<span class='badge badge-warning' id='dwCartCount'></span></a>
+                        <li class="header-action-icon-2"><a href="<?=$absoluteBaseUrl?>/orders/cartlist"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart<span class='badge badge-warning dwCartCount' id='dwCartCount'></span></a>
                             <?php Pjax::begin(['id' => 'popup-order']); ?> 
                             <?php
                             if(count($productList) > 0){
@@ -122,6 +131,12 @@ use yii\widgets\Pjax;
           </div>
           <div class="col-4">
             <div class="header-item justify-content-end">
+            <li class="cart-icon-label" style="font-size: 20px;">
+              <a href="<?=$absoluteBaseUrl?>/orders/cartlist" style="padding: 20px;">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <span class='badge badge-warning dwCartCount' style="font-size: 12px; background-color: #c67605;color: #fff;padding: 2px 6px;vertical-align: top;margin-left: -3px;position: absolute;margin-top: -7px;"></span>
+              </a>
+            </li>
               <button class="btn-menu" type="button"><i class="icon-menu"></i></button>
             </div>
           </div>
@@ -356,6 +371,7 @@ $this->registerJs("
   document.onkeydown=function(evt){
     var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
     var loginmodel = $('#loginModal').hasClass('show');
+    
     if(keyCode == 13 && loginmodel){
       submitLoginForm();
     }
@@ -477,6 +493,10 @@ $this->registerJs("
     }
 
   });
+
+  $('#loginModal').on('shown.bs.modal', function (e) {
+    $('.btn-menu-close').trigger('click');
+  })
 ");
 
 
@@ -574,6 +594,7 @@ $this->registerJs("
                     $("#register_form").trigger('reset');
                     $("#registerModal").modal('hide');
                     $("#loginModal").modal('show');
+
                 } else {
                   $.each(response.data, function(key, value) {
                     $('#'+key+'_error').html("<span style='color:red'>"+value[0]+"</span>");

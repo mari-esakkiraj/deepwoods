@@ -325,10 +325,10 @@
       url:Baseurl+'/site/usercartcount',
       success:function(response) {
         if(response > 0){
-          $("#dwCartCount").removeClass('hide');
-          $("#dwCartCount").html(response);
+          $(".dwCartCount").removeClass('hide');
+          $(".dwCartCount").html(response);
         }else{
-          $("#dwCartCount").addClass('hide');
+          $(".dwCartCount").addClass('hide');
         }
                 
       }
