@@ -355,6 +355,9 @@ class OrdersController extends Controller
         
         $transaction = Yii::$app->db->beginTransaction();
         if (empty($notavilableproduct)) {
+            $order_count = Orders::find()->where(['customer_id' => Yii::$app->user->identity->id])->count();
+            $order->order_code = "DW-".date('Y')."-".sprintf('%03d', ($order_count+1));
+            $order_count = $order->order_code;
             if ($order->load(Yii::$app->request->post())
                 && $order->save()
                 && $order->saveOrderItems()) {
@@ -371,7 +374,7 @@ class OrdersController extends Controller
                         ]
                     )->one();
                 $transaction->commit();
-                CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
+                //CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
 
                 /*if ($cashondelivery==1) {
                     $order->status = 1;
@@ -444,7 +447,7 @@ class OrdersController extends Controller
                 
                 $json = json_encode($data);
 
-                $order_count = Orders::find()->where(['customer_id' => Yii::$app->user->identity->id])->count();
+                
 
                 return $this->render('payment',["json" => $json, 'order' => $order, 'orderAddress' => $orderAddress,
                     'productQuantity' => $productQuantity,
@@ -564,7 +567,7 @@ class OrdersController extends Controller
         $coupon_code=$_POST['coupon_code'];
         $product_price=$_POST['product_price'];
         if ($coupon_code!= '') {
-            $promotion = Promotion::find()->where(['name' => $coupon_code])->andWhere(['promotion_type' => 'coupon'])->one();
+            $promotion = Promotion::find()->where(['name' => $coupon_code])->andWhere(['promotion_type' => 'coupon'])->andWhere(['user_id' => Yii::$app->user->identity->id])->one();
             if (!empty($promotion)) {
                 $returnData['success'] = true;
                 $returnData['promotion_id'] = $promotion->id;
@@ -620,7 +623,7 @@ class OrdersController extends Controller
         else {
             $order = Orders::find()->where(['transaction_id' => $_SESSION['razorpay_order_id']])->one();
         }
-        if ($order->status == '1') {
+        if ($order->status != '0') {
             $this->layout = 'mainpage';
             return $this->render('vieworder',["success" => "", 'message' => "", 'order' => $order]);
         }
@@ -635,6 +638,8 @@ class OrdersController extends Controller
                 $item->product->quantity = $item->product->quantity - $item->quantity;
                 $item->product->save();
             }
+
+            CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
             //echo $html;
     
             $this->layout = 'mainpage';
@@ -650,7 +655,7 @@ class OrdersController extends Controller
             $html = "<p>Your payment failed</p>
                     <p>{$error}</p>";
 
-            $items = OrderItems::find()->where(['order_id' => $order->id])->all();
+            /*$items = OrderItems::find()->where(['order_id' => $order->id])->all();
             foreach ($items as $item) {
                 $cartItems = new cartItems();
                 $cartItems->quantity = $item->quantity;
@@ -659,7 +664,7 @@ class OrdersController extends Controller
                 $cartItems->created_by = Yii::$app->user->identity->id;
                 $cartItems->created_date = date('Y-m-d H:i:s');
                 $cartItems->save();
-            }
+            }*/
         }
         $order->save();
 
