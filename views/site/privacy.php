@@ -4,6 +4,11 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 $absoluteBaseUrl = Url::base(true);
 ?>
+<style>
+    .text-center {
+    text-align: left!important;
+}
+</style>
 <div class="page-content pt-50">
     <div class="container">
         <div class="row">

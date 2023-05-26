@@ -7,14 +7,14 @@ use app\models\CartItems;
 use yii\widgets\Pjax;
 ?>
 <style>
-  @media(max-width: 768px) {
+@media(max-width: 768px) {
 	.cart-icon-label{
 		display: block !important;
 	}
 }
 .cart-icon-label{
-		display: none;
-	}
+  display: none;
+}
 </style>
 <header class="header-area header-default header-style4">
 
