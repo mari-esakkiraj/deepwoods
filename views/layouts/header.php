@@ -131,12 +131,16 @@ use yii\widgets\Pjax;
           </div>
           <div class="col-4">
             <div class="header-item justify-content-end">
-            <li class="cart-icon-label" style="font-size: 20px;">
-              <a href="<?=$absoluteBaseUrl?>/orders/cartlist" style="padding: 20px;">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                <span class='badge badge-warning dwCartCount' style="font-size: 12px; background-color: #c67605;color: #fff;padding: 2px 6px;vertical-align: top;margin-left: -3px;position: absolute;margin-top: -7px;"></span>
-              </a>
-            </li>
+              <?php 
+              if(!Yii::$app->user->isGuest) {
+              ?>
+              <li class="cart-icon-label" style="font-size: 20px;">
+                <a href="<?=$absoluteBaseUrl?>/orders/cartlist" style="padding: 20px;">
+                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                  <span class='badge badge-warning dwCartCount' style="font-size: 12px; background-color: #c67605;color: #fff;padding: 2px 6px;vertical-align: top;margin-left: -3px;position: absolute;margin-top: -7px;"></span>
+                </a>
+              </li>
+              <?php } ?>
               <button class="btn-menu" type="button"><i class="icon-menu"></i></button>
             </div>
           </div>
