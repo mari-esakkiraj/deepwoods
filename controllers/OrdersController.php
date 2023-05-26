@@ -371,7 +371,7 @@ class OrdersController extends Controller
                         ]
                     )->one();
                 $transaction->commit();
-                CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
+                //CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
 
                 /*if ($cashondelivery==1) {
                     $order->status = 1;
@@ -635,6 +635,8 @@ class OrdersController extends Controller
                 $item->product->quantity = $item->product->quantity - $item->quantity;
                 $item->product->save();
             }
+
+            CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
             //echo $html;
     
             $this->layout = 'mainpage';
@@ -650,7 +652,7 @@ class OrdersController extends Controller
             $html = "<p>Your payment failed</p>
                     <p>{$error}</p>";
 
-            $items = OrderItems::find()->where(['order_id' => $order->id])->all();
+            /*$items = OrderItems::find()->where(['order_id' => $order->id])->all();
             foreach ($items as $item) {
                 $cartItems = new cartItems();
                 $cartItems->quantity = $item->quantity;
@@ -659,7 +661,7 @@ class OrdersController extends Controller
                 $cartItems->created_by = Yii::$app->user->identity->id;
                 $cartItems->created_date = date('Y-m-d H:i:s');
                 $cartItems->save();
-            }
+            }*/
         }
         $order->save();
 
