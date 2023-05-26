@@ -620,7 +620,7 @@ class OrdersController extends Controller
         else {
             $order = Orders::find()->where(['transaction_id' => $_SESSION['razorpay_order_id']])->one();
         }
-        if ($order->status == '1') {
+        if ($order->status != '0') {
             $this->layout = 'mainpage';
             return $this->render('vieworder',["success" => "", 'message' => "", 'order' => $order]);
         }
