@@ -4,6 +4,12 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 $absoluteBaseUrl = Url::base(true);
 ?>
+<style>
+    .text-center {
+    text-align: left!important;
+}
+    
+</style>
 <div class="page-content pt-50">
     <div class="container">
         <div class="row">
@@ -14,18 +20,15 @@ $absoluteBaseUrl = Url::base(true);
                         <img src="<?=$absoluteBaseUrl?>/images/termsandconditions.jpg" alt="" class="border-radius-15 mb-md-3 mb-lg-0 mb-sm-4">
                     </div>
                     <div class="col-lg-6">
-                        
-                        <p>Welcome to DeepWoods Organics!</p>
-
                         <p>These terms and conditions outline the rules and regulations for the use of DeepWoods Organics's Website, located at http://deepwoodsorganics.com/.</p>
 
                         <p>By accessing this website we assume you accept these terms and conditions. Do not continue to use DeepWoods Organics if you do not agree to take all of the terms and conditions stated on this page.</p>
-
-                        <p>The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements: "Client", "You" and "Your" refers to you, the person log on this website and compliant to the Company's terms and conditions. "The Company", "Ourselves", "We", "Our" and "Us", refers to our Company. "Party", "Parties", or "Us", refers to both the Client and ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner for the express purpose of meeting the Client's needs in respect of provision of the Company's stated services, in accordance with and subject to, prevailing law of in. Any use of the above terminology or other words in the singular, plural, capitalization and/or he/she or they, are taken as interchangeable and therefore as referring to same.</p>
-
+<p>The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements: "Client", "You" and "Your" refers to you, the person log on this website and compliant to the Company's terms and conditions. "The Company", "Ourselves", "We", "Our" and "Us", refers to our Company. "Party", "Parties", or "Us", refers to both the Client and ourselves.</p>
+                        
                     </div>
                 </section>
                 <section class="text-center mb-50">
+<p> All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner for the express purpose of meeting the Client's needs in respect of provision of the Company's stated services, in accordance with and subject to, prevailing law of in. Any use of the above terminology or other words in the singular, plural, capitalization and/or he/she or they, are taken as interchangeable and therefore as referring to same.</p>
 
 
 <h3><strong>Cookies</strong></h3>

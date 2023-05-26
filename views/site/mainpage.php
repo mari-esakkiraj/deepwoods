@@ -141,12 +141,12 @@ $absoluteBaseUrl = Url::base(true);
                         <img src="<?=$absoluteBaseUrl?>/theme/img/testimonial/02.png" alt="Image-HasTech" class="img">
                       </div>
                       <div class="testi-info">
-                        <span class="name">Lavanya</span>
-                        <span class="email">lavanya@yahoomail.com</span>
+                        <span class="name">Shanthi</span>
+                        <span class="email">Shanthi@gmail.com</span>
                       </div>
                     </div>
                     <div class="testi-content">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vehicula in orci eget interdum. Mauris facilisis lorem sit amet nisl tincidunt, nec fermentum urna hendrerit. Thank you !</p>
+                      <p>We have tried this Kalabath rice for the first time, it was really wonderful our Biriyani came out, and we have recommended to our neighbours as well, we really felt the aroma of the Biriyani, Thank you !</p>
                       <div class="testi-info">
                         <span class="name">orando BLoom</span>
                         <span class="email">demo@example.com</span>
@@ -165,12 +165,12 @@ $absoluteBaseUrl = Url::base(true);
                         <img src="<?=$absoluteBaseUrl?>/theme/img/testimonial/01.png" alt="Image-HasTech" class="img">
                       </div>
                       <div class="testi-info">
-                        <span class="name">Kumar</span>
-                        <span class="email">Kumar@gmail.com</span>
+                        <span class="name">Mohideen Jabbar</span>
+                        <span class="email">mohideenjabbar@gmail.com</span>
                       </div>
                     </div>
                     <div class="testi-content">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vehicula in orci eget interdum. Mauris facilisis lorem sit amet nisl tincidunt, nec fermentum urna hendrerit.  Thank you !</p>
+                      <p>As we are a Biriyani Lovers, we are very much happy to taste Biriyani in Prince of Rice, when we are trying for the first time we didnt expect this much good taste it will be but really it is, Thank you for bringing back the old Prince of Rice.</p>
                       <div class="testi-info">
                         <span class="name">Kumar</span>
                         <span class="email">Kumar@gmail.com</span>
