@@ -414,6 +414,5 @@ button.btn:hover{
             <a class="btn  mr-10 mb-sm-15" href="<?=$absoluteBaseUrl?>/orders/checkout"><i class="fi-rs-refresh mr-10"></i>Checkout</a>
             <?php } ?>
         </div>
-        <?php  Pjax::end(); ?>
-
-                </section>
+    <?php  Pjax::end(); ?>
+</section>
