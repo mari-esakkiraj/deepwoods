@@ -127,7 +127,6 @@ $absoluteBaseUrl = Url::base(true);
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane 
                     </div>
                 </div>
             </div>

@@ -14,13 +14,22 @@ $absoluteBaseUrl = Url::base(true);
                     </div>
                     <div class="col-lg-6">
                         <div class="pl-25">
-                            <h2 class="mb-30">Welcome to Deepwoods</h2>
-                            <p class="mb-25">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate id est laborum.</p>
-                            <p class="mb-50">Ius ferri velit sanctus cu, sed at soleat accusata. Dictas prompta et Ut placerat legendos interpre.Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante Etiam sit amet orci eget. Quis commodo odio aenean sed adipiscing. Turpis massa tincidunt dui ut ornare lectus. Auctor elit sed vulputate mi sit amet. Commodo consequat. Duis aute irure dolor in reprehenderit in voluptate id est laborum.</p>
+                            <h2 class="mb-30">Why Deep woods?</h2>
+                            <h3>Kalabath Aromatic Rice</h3>
+                            <ol>
+                                <li>100 % natural</li>
+                                <li>Organic Product</li>
+                                <li>Traditionally Processed</li>
+                                <li>Preservative free</li>
+                                <li>Directly sourced from Farmers</li>
+                            </ol>
+                            <p class="mb-25">Kalabath is known as the “ Prince of Rice”. This low land scented rice variety originated from Orissa. Till the eighties Kalabath was grown in Dindigul region, popular among the Biryani lovers , before it faded from the region.</p>
+                            <p class="mb-50">Rasool Mohideen a progressive farmer with post graduation from Madras Christian College (Deepwoods) out of pure passion, brought it back to flourish in the region. He first grew Kalabath in his organic farm in Sithyankottai, then distributed the seeds free to fellow farmers in the region and thus revived this aromatic variety from extinction in TamilNadu. As this bag enters your home , your family is sure to experience the aroma of the Biryani !!!</p>
                             
                         </div>
                     </div>
                 </section>
+                <!--
                 <section class="text-center mb-50">
                     <h2 class="title style-3 mb-40">What We Provide?</h2>
                     <div class="row">
@@ -74,6 +83,7 @@ $absoluteBaseUrl = Url::base(true);
                         </div>
                     </div>
                 </section>
+                -->
                 
             </div>
         </div>
