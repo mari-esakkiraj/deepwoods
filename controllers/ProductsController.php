@@ -6,6 +6,7 @@ use Yii;
 use yii\filters\AccessControl;
 use app\models\Products;
 use app\models\ProductImages;
+use app\models\CartItems;
 use app\models\ProductsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -419,6 +420,7 @@ class ProductsController extends Controller
         try {                    
             $this->findModel($id)->delete();
             ProductImages::deleteAll(['product_id' => $id]);
+            CartItems::deleteAll(['product_id' => $id]);
             $transaction->commit();
         }catch (Exception $ex) {                      
             $transaction->rollback();
