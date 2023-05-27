@@ -11,7 +11,7 @@ $absoluteBaseUrl = Url::base(true);
     <table class="table">
         <thead>
             <tr>
-                <th>Order</th>
+                <th>Order ID</th>
                 <th>Date</th>
                 <th>Total</th>
                 <th width="15%">Status</th>
@@ -26,7 +26,7 @@ $absoluteBaseUrl = Url::base(true);
             } else {
                 foreach($orders as $order) { ?>
                     <tr>
-                        <td><?=$order->id ?? ''?></td>
+                        <td><?=$order->order_code ?? ''?></td>
                         <td><?=date("d-M-Y",$order->created_at) ?? ''?></td>
                         <td>₹<?=$order->total_price ?? ''?></td>
                         <td><?= (($order->status==2) ? 'Failed' : (($order->status==1) ? 'Success'  : 'Pending')) ?></td>
