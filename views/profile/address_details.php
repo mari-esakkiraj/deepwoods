@@ -41,7 +41,7 @@ $billingAddresses = UserAddresses::find()->where(['user_id' => $userID,'type' =>
                         <?php 
                         } 
                     } else {
-                        echo "<div>No Address found.</div>";
+                        echo "<div style='padding:10px'>No Address found.</div>";
                     }?>
                 </div>
             </div>
@@ -81,7 +81,7 @@ $billingAddresses = UserAddresses::find()->where(['user_id' => $userID,'type' =>
                         <?php 
                     } 
                 } else {
-                    echo "<div>No Address found.</div>";
+                    echo "<div style='padding:10px'>No Address found.</div>";
                 }?>
             </div>
         </div>
