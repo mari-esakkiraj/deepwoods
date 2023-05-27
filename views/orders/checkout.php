@@ -62,47 +62,11 @@ use app\models\UserAddresses;
             </div>
             <div class="card-body" style="border-top: 2px solid #ddd;">
                 <?= $form->field($order, 'firstname')->textInput(['autofocus' => true]) ?>
-                <?= $form->field($orderAddress, 'address') ?>
-                <?= $form->field($orderAddress, 'city') ?>
-                <?= $form->field($orderAddress, 'state')->dropDownList([
-'Arunachal Pradesh' => 'Arunachal Pradesh',
-'Arunachal Pradesh' => 'Arunachal Pradesh',
-'Assam' => 'Assam',
-'Bihar' => 'Bihar',
-'Chhattisgarh' => 'Chhattisgarh',
-'Goa' => 'Goa',
-'Gujarat' => 'Gujarat',
-'Haryana' => 'Haryana',
-'Himachal Pradesh' => 'Himachal Pradesh',
-'Jammu and Kashmir' => 'Jammu and Kashmir',
-'Jharkhand' => 'Jharkhand',
-'Karnataka' => 'Karnataka',
-'Kerala' => 'Kerala',
-'Madhya Pradesh' => 'Madhya Pradesh',
-'Maharashtra' => 'Maharashtra',
-'Manipur' => 'Manipur',
-'Meghalaya' => 'Meghalaya',
-'Mizoram' => 'Mizoram',
-'Nagaland' => 'Nagaland',
-'Odisha' => 'Odisha',
-'Punjab' => 'Punjab',
-'Rajasthan' => 'Rajasthan',
-'Sikkim' => 'Sikkim',
-'Tamil Nadu' => 'Tamil Nadu',
-'Telangana' => 'Telangana',
-'Tripura' => 'Tripura',
-'Uttar Pradesh' => 'Uttar Pradesh',
-'Uttarakhand' => 'Uttarakhand',
-'West Bengal' => 'West Bengal',
-'Andaman and Nicobar Islands' => 'Andaman and Nicobar Islands',
-'Chandigarh' => 'Chandigarh',
-'Dadra and Nagar Haveli' => 'Dadra and Nagar Haveli',
-'Daman and Diu' => 'Daman and Diu',
-'Lakshadweep' => 'Lakshadweep',
-'National Capital Territory of Delhi' => 'National Capital Territory of Delhi',
-'Puducherry' => 'Puducherry'],['prompt'=>'Select State']);?>
-                <?= $form->field($orderAddress, 'country')->dropDownList(['India'=>'India']);?>
-                <?= $form->field($orderAddress, 'zipcode') ?>
+                <?= $form->field($orderAddress, 'address')->textInput(['disabled' => true]) ?>
+                <?= $form->field($orderAddress, 'city')->textInput(['disabled' => true]) ?>
+                <?= $form->field($orderAddress, 'state')->textInput(['disabled' => true]) ?>
+                <?= $form->field($orderAddress, 'country')->textInput(['disabled' => true]) ?>
+                <?= $form->field($orderAddress, 'zipcode')->textInput(['disabled' => true]) ?>
             </div>
         </div>
     </div>

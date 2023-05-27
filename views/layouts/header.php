@@ -232,6 +232,12 @@ use yii\widgets\Pjax;
                 <label for="address" class="form-label">Address</label>
                 <textarea class="form-control user-address" id="user-address" rows="3"></textarea>
               </div>
+
+              <div class="mb-3">
+                <label for="zipcode" class="form-label">ZipCode</label>
+                <input type="text" class="form-control zipcode" id="zipcode">
+                <span id='zipcode_error'></span>
+              </div>
               
               <div class="mb-3">
                 <label for="email" class="form-label required">Phone Number</label>
@@ -588,6 +594,7 @@ $this->registerJs("
                     "phoneNumber": phoneNumber,"password": password,
                     "confirmPassword": confirmPassword,"gstNumber": gstNumber,
                     "company": $('.company').val(),
+                    "zipcode":$('.zipcode').val();
                     "address": $("#user-address").val(),
                 },
             dataType: 'json',

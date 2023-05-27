@@ -417,6 +417,7 @@ class SiteController extends Controller
         $gstNumber = $_POST['gstNumber'] ?? null;
         $address = $_POST['address'] ?? null;
         $company = $_POST['company'] ?? null;
+        $zipcode = $_POST['zipcode'] ?? null;
         
         $user = new Users();
         $user->firstname = $firstname;
@@ -437,6 +438,7 @@ class SiteController extends Controller
                 $addresses->city = "Chennai";
                 $addresses->state = "Tamilnadu";
                 $addresses->country = "India";
+                $addresses->zipcode = $zipcode;
                 $addresses->save(false);
                 $data = ['success' => true, 'data'=> true];
                 $this->sendRegisterMail($user, $password);
