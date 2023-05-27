@@ -96,15 +96,14 @@ class SiteController extends Controller
     public function actionMainpage()
     {
         $this->layout = 'mainpage';
-        $productsList = Products::find()->limit(5)->orderBy(['id' => SORT_DESC])->all();
+        $productsList = Products::find()->where(['!=',  'status', '0'])->limit(5)->orderBy(['id' => SORT_DESC])->all();
         return $this->render('mainpage',["productsList" => $productsList]);
     }
 
     public function actionProductlist()
     {
         $this->layout = 'mainpage';
-        $productsList = Products::find()->all();
-        $query = Products::find();
+        $query = Products::find()->where(['!=',  'status', '0']);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
