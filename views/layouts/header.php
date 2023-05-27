@@ -594,7 +594,7 @@ $this->registerJs("
                     "phoneNumber": phoneNumber,"password": password,
                     "confirmPassword": confirmPassword,"gstNumber": gstNumber,
                     "company": $('.company').val(),
-                    "zipcode":$('.zipcode').val();
+                    "zipcode":$('.zipcode').val(),
                     "address": $("#user-address").val(),
                 },
             dataType: 'json',
