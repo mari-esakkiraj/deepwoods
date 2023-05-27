@@ -27,7 +27,7 @@ $absoluteBaseUrl = Url::base(true);
         'filterModel' => $searchModel,
         'columns' => [
             [
-                'attribute' => 'id'
+                'attribute' => 'order_code'
             ],
             [
                 'attribute' => 'created_at',

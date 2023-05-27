@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'company_email')->textInput(['maxlength' => true]) ?>
         </div>
     <div class="col-md-6">
-        <?= $form->field($model, 'address_line_1')->textarea(['maxlength' => true]) ?>
+        <?= $form->field($model, 'address_line_1')->textarea(['maxlength' => true, 'rows' => '4']) ?>
     </div>
     <div class="col-md-6">
         <?= $form->field($model, 'city')->textInput(['maxlength' => true]) ?>

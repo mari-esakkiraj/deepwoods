@@ -5,11 +5,16 @@ use app\models\UserAddresses;
 use app\models\Users;
 use app\models\Products;
 use app\models\Settings;
+use yii\helpers\Html;
 
 $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_id])->one();
 $customer = Users::find()->where(['id' => $order->customer_id])->one();
 $settings = Settings::findOne(1);
 $absoluteBaseUrl = Url::base(true);
+$logoURL = $absoluteBaseUrl."/theme/img/deepwoods.png";
+if(isset($settings->company_logo)){
+    $logoURL = $settings->company_logo;
+}
 function amountInWord($number) {
    $no = floor($number);
    $point = round($number - $no, 2) * 100;
@@ -60,23 +65,24 @@ function amountInWord($number) {
     echo '';
 ?>
 
-<h3><img class="logo-main" src="<?=$absoluteBaseUrl?>/theme/img/deepwoods.png" alt="Logo" width="200px" /> </h3>
+<h3><img class="logo-main" src="<?= $logoURL ?>" alt="Logo" width="200px" /> </h3>
 <div class="row">
     <div class="col">
         <table class="table table-hover table-bordered ">
             <tr>
                 <th style="padding: 10px;" colspan="4">
-                    Deepwoods Organic, <br/>
-                    Shop No. 2, Ground Floor, <br/>
+                <?= $settings->company_name ?>, <br/>
+                <?php echo nl2br(stripslashes(($settings->address_line_1))) ?><br/>
+                    <!-- Shop No. 2, Ground Floor, <br/>
                     No 37/16, Mirbakshi Ali Street, <br/>
-                    Royapettah, Chennai - 600 014. <br/>
-                    Mob: +91 6380 589 226. <br/>
-                    Email: enquiry@deepwoodsorganics.com<br/>
-                    GST No: 33AAUFD8314QIZQ<br/>
-                    FSSAI No: 22423540000056
+                    Royapettah, Chennai - 600 014. <br/> -->
+                    Mob: +91 <?= $settings->phone_no ?> <br/>
+                    Email: <?= $settings->company_email ?><br/>
+                    GST No: <?= $settings->gst_number ?><br/>
+                    FSSAI No: <?= $settings->fssai_number ?>
                 </th>
                 <td style="padding: 10px;" rowspan="2" colspan="3">
-                    <u>Invoice No:</u> <?php echo $order->id ?? '-'; ?><br/><br/><br/>
+                    <u>Invoice No:</u> <?php echo $order->order_code ?? '-'; ?><br/><br/><br/>
                     <u>Date:</u> <?php echo date("Y-m-d",$order->created_at) ?? '-'; ?><br/><br/><br/>
                     <u>Dispatch Through:</u> Road<br/><br/><br/><br/><br/>
                     <u>Destination:</u> <?php echo $orderAddress->city ?? '-'; ?><br/><br/>
@@ -139,8 +145,8 @@ function amountInWord($number) {
                     <td style="padding: 10px;">0</td>
                     <td style="padding: 10px;text-align:right;">
                         <?= $item->quantity * $item->unit_price; ?><br/>
-                        <?= round($item->product_gst_price / 2)?> <br/>
-                        <?= round($item->product_gst_price / 2)?> <br/>
+                        <?= ($item->product_gst_price / 2)?> <br/>
+                        <?= ($item->product_gst_price / 2)?> <br/>
                     </td>
                 </tr>
             <?php endforeach; ?>
