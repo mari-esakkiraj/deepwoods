@@ -63,7 +63,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'gst_number')->textInput(['maxlength' => true]) ?>
     </div>
     <div class="col-md-6">
-        <?php // $form->field($model, 'sales_prefix')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'fssai_number')->textInput(['maxlength' => true]) ?>
     </div>
     <div class="col-md-6">
         

@@ -35,7 +35,7 @@ $absoluteBaseUrl = Url::base(true);
 
                     <?= $form->field($model, 'email') ?>
 
-                    <?php // $form->field($model, 'subject') ?>
+                    <?= $form->field($model, 'phone_number') ?>
 
                     <?= $form->field($model, 'message')->textarea(['rows' => 6]) ?>
 
