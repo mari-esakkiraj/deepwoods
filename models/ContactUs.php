@@ -35,7 +35,7 @@ class ContactUs extends \yii\db\ActiveRecord
         return [
             [['name','email','message'], 'required'],
             [['status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['name', 'email'], 'string', 'max' => 255],
+            [['name', 'email','phone_number'], 'string', 'max' => 255],
             [['message'], 'string', 'max' => 2000],
         ];
     }
@@ -50,6 +50,7 @@ class ContactUs extends \yii\db\ActiveRecord
             'name' => 'Name',
             'email' => 'Email',
             'message' => 'Message',
+            'phone_number' => 'Mobile',
             'status' => 'Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',

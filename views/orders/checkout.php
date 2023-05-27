@@ -100,7 +100,7 @@ use app\models\UserAddresses;
 'Daman and Diu' => 'Daman and Diu',
 'Lakshadweep' => 'Lakshadweep',
 'National Capital Territory of Delhi' => 'National Capital Territory of Delhi',
-'Puducherry' => 'Puducherry']);?>
+'Puducherry' => 'Puducherry'],['prompt'=>'Select State']);?>
                 <?= $form->field($orderAddress, 'country')->dropDownList(['India'=>'India']);?>
                 <?= $form->field($orderAddress, 'zipcode') ?>
             </div>

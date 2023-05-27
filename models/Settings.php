@@ -44,7 +44,7 @@ class Settings extends \yii\db\ActiveRecord
             [['freight_charges', 'qty_alert'], 'integer'],
             [['company_logo'], 'string'],
             [['company_name'], 'string', 'max' => 100],
-            [['address_line_1', 'address_line_2', 'city', 'postal_code', 'gst_number', 'company_email'], 'string', 'max' => 255],
+            [['address_line_1', 'address_line_2', 'city', 'postal_code', 'gst_number', 'company_email','fssai_number'], 'string', 'max' => 255],
             [['state', 'country', 'country_code', 'phone_no', 'gst', 'sales_prefix'], 'string', 'max' => 55],
         ];
     }
@@ -72,6 +72,7 @@ class Settings extends \yii\db\ActiveRecord
             'gst_number' => 'GST/Tax Number',
             'sales_prefix' => 'Sales Prefix',
             'company_email' => 'Company Email',
+            'fssai_number' => 'FSSAI Number'
         ];
     }
 }
