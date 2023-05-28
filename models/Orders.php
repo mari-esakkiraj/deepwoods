@@ -123,4 +123,28 @@ class Orders extends \yii\db\ActiveRecord
 
         return true;
     }
+
+    public static function sentOrderConfirm($order) {
+        $msg = "<p>Hi {$order->firstname}  {$order->lastname}</p>
+        <p>Your payment was successful and Your Payment ID: <b> {$order->paypal_order_id}</b></p>";
+        $message = "<html>
+            <head>
+                <title>Order Confirmation</title>
+            </head>
+            <body>
+                {$msg}
+                This is a system generated email. Please do not reply to this email.
+            </body>
+        </html>";
+        
+        $subject = 'Order Confirmation #' . $order->order_code;
+        $email = \Yii::$app->mailer->compose();
+        $email->setFrom([Yii::$app->params['adminEmail'] => 'Deepwoods - Admin']);
+        $email->setTo($order->email);
+        $email->setCharset('UTF-8');
+        $email->setSubject($subject);
+        $email->setHtmlBody($message);
+        $email->send();
+        return $email;
+    }
 }
