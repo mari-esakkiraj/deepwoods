@@ -13,7 +13,7 @@
     <div class="mb-3">
         <label for="state" class="form-label required">State</label>
         <select class="form-control state" id="state">
-            <option value="">Select State</option>
+            <option value="">--Please Select--</option>
             <option value='Arunachal Pradesh'>Arunachal Pradesh</option>
             <option value='Assam'>Assam</option>
             <option value='Bihar'>Bihar</option>

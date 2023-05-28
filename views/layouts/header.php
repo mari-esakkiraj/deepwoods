@@ -68,7 +68,7 @@ use yii\widgets\Pjax;
                                             <a href="<?= $absoluteBaseUrl.'/site/productdetails?id='.$products->product_id ?>" data-pjax="0"><img src="<?=$imgPath?>"></a>
                                         </div>
                                         <div class="shopping-cart-title">
-                                            <h4 class="cartItemName"><?= $products->product->name ?></h4>
+                                        <a href="<?= $absoluteBaseUrl.'/site/productdetails?id='.$products->product_id ?>" data-pjax="0"><h4 class="cartItemName"><?= $products->product->name ?></h4></a>
                                             <h4><?= $products->quantity ?> * <i class="fa fa-rupee"></i><?= $products->product->price ?></h4>
                                         </div>
                                     </li>
@@ -276,7 +276,7 @@ use yii\widgets\Pjax;
               <div class="card-body">
                 
                 <div class="alert alert-info" role="alert">
-                    Enter your email address and we'll send you an email with instructions to reset your password.
+                  Enter your registered email address and we'll send you an email with reset password.
                 </div>
                 <div class="form-outline">
                   <label class="form-label" for="typeEmail">Email</label>
