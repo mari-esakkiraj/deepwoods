@@ -49,7 +49,7 @@ if(!Yii::$app->user->isGuest) {
                 : '<li class="nav-item flex-container-last">'
                     . Html::beginForm(['/site/logout'])
                     . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username . ')',
+                        'Logout',
                         ['class' => 'nav-link btn btn-link logout']
                     )
                     . Html::endForm()

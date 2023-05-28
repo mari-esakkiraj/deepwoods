@@ -276,7 +276,7 @@ use yii\widgets\Pjax;
               <div class="card-body">
                 
                 <div class="alert alert-info" role="alert">
-                    Enter your email address and we'll send you an email with instructions to reset your password.
+                  Enter your registered email address and we'll send you an email with reset password.
                 </div>
                 <div class="form-outline">
                   <label class="form-label" for="typeEmail">Email</label>
