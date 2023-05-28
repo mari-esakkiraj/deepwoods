@@ -111,7 +111,7 @@ class SiteController extends Controller
             ],
             'sort' => [
                 'defaultOrder' => [
-                    'created_at' => SORT_DESC,
+                    'id' => SORT_DESC,
                 ]
             ],
         ]);

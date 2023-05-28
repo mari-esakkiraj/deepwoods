@@ -68,7 +68,7 @@ use yii\widgets\Pjax;
                                             <a href="<?= $absoluteBaseUrl.'/site/productdetails?id='.$products->product_id ?>" data-pjax="0"><img src="<?=$imgPath?>"></a>
                                         </div>
                                         <div class="shopping-cart-title">
-                                            <h4 class="cartItemName"><?= $products->product->name ?></h4>
+                                        <a href="<?= $absoluteBaseUrl.'/site/productdetails?id='.$products->product_id ?>" data-pjax="0"><h4 class="cartItemName"><?= $products->product->name ?></h4></a>
                                             <h4><?= $products->quantity ?> * <i class="fa fa-rupee"></i><?= $products->product->price ?></h4>
                                         </div>
                                     </li>
