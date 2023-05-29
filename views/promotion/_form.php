@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
     </div>
     <div class="col-md-6">
-    <?= $form->field($model, 'promotion_type')->dropDownList([ 'coupon' => 'Coupon', 'promotion' => 'Promotion', ], ['prompt' => '']) ?>
+    <?= $form->field($model, 'promotion_type')->dropDownList([ 'coupon' => 'Coupon'/*, 'promotion' => 'Promotion',*/ ], ['prompt' => '']) ?>
     </div>
     <div class="col-md-6">
     <?= $form->field($model, 'start_date')->widget(\yii\jui\DatePicker::className(), [
@@ -48,7 +48,7 @@ use yii\widgets\ActiveForm;
    
     
     <div class="col-md-6">
-    <?= $form->field($model, 'status')->dropDownList([ 'active' => 'Active', 'inactive' => 'Inactive', ], ['prompt' => '']) ?>
+    <?php //= $form->field($model, 'status')->dropDownList([ 'active' => 'Active', 'inactive' => 'Inactive', ], ['prompt' => '']) ?>
     </div>
     </div>
 <div class="row justify-content-center" style="margin:10px">

@@ -247,6 +247,7 @@ $this->registerJs("
               toastr.warning('Invalid Coupon.'); 
             }
             else {
+                toastr.success('Coupon Applied.'); 
                 $("#promotion_id").val(resultData.promotion_id);
                 $("#promotion_price").val(resultData.promotion_price);
                 var totalprice = <?php echo $totalPrice;?> - resultData.promotion_price;

@@ -98,6 +98,15 @@ class Customer extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[Orders]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCoupons()
+    {
+        return $this->hasMany(Promotion::class, ['user_id' => 'id'])->where(['status'=>'active']);
+    }
+    /**
      * Gets query for [[Products]].
      *
      * @return \yii\db\ActiveQuery

@@ -567,7 +567,7 @@ class OrdersController extends Controller
         $coupon_code=$_POST['coupon_code'];
         $product_price=$_POST['product_price'];
         if ($coupon_code!= '') {
-            $promotion = Promotion::find()->where(['name' => $coupon_code])->andWhere(['promotion_type' => 'coupon'])->andWhere(['user_id' => Yii::$app->user->identity->id])->one();
+            $promotion = Promotion::find()->where(['name' => $coupon_code])->andWhere(['promotion_type' => 'coupon'])->andWhere(['user_id' => Yii::$app->user->identity->id])->andFilterWhere(['<=', 'start_date',date('Y-m-d')])->andFilterWhere(['>=', 'end_date',date('Y-m-d')])->andWhere(['status' => 'active'])->one();
             if (!empty($promotion)) {
                 $returnData['success'] = true;
                 $returnData['promotion_id'] = $promotion->id;

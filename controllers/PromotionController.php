@@ -69,6 +69,7 @@ class PromotionController extends Controller
     {
         $model = new Promotion();
         $model->user_id = $_GET['user_id'] ?? '';
+        $model->status = 'active';
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
