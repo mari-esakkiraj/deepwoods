@@ -58,7 +58,7 @@ class Promotion extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Promotion Code',
             'description' => 'Description',
             'price' => 'Price',
             'discount_type' => 'Discount Type',
@@ -96,5 +96,11 @@ class Promotion extends \yii\db\ActiveRecord
     public function getUpdatedBy()
     {
         return $this->hasOne(Users::class, ['id' => 'updated_by']);
+    }
+
+    public function delete()
+    {
+        $this->status = 'inactive';
+        $this->save(false);
     }
 }
