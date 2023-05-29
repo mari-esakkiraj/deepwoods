@@ -72,7 +72,7 @@ class PromotionController extends Controller
         $model->status = 'active';
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['customer/view', 'id' => $model->user_id]);
             }
         } else {
             $model->loadDefaultValues();
