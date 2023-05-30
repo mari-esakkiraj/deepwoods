@@ -130,6 +130,12 @@ use app\models\Orders;
                     <?php endforeach; ?>
                     </tbody>
                 </table>
+                <div class="alert alert-success hide" style="border: 1px dashed rgb(123 124 126);display:none;display: flex;align-items: center;" id="show-offer-success">
+                    <div>
+                        <b id="offer-code"></b> - Coupon code applied.
+                    </div>
+                    <i class="fa fa-trash removecoupon" aria-hidden="true" style="margin-left: auto;cursor:pointer;"></i>
+                </div>
                 <div class="form-group" id="promotion_div"> 
                     <label>Have coupon?</label>
                     <div class="input-group1" style="display: flex;gap: 20px;align-items: center;"> <input type="text" class="form-control coupon" name="coupon_code" placeholder="Coupon code" id="coupon_code" style="width: 250px;"> <span class="input-group-append"> <button class="btn btn-primary btn-apply coupon" onclick="return applycoupon();">Apply</button> </span> </div>
@@ -229,6 +235,18 @@ $this->registerJs("
         $('form#checkout-form').submit();
     });
 
+    $(document).on('click','.removecoupon',function() {
+        $('#promotion_id').val('');
+        $('#promotion_price').val('');
+        $('#promotion_amount').html('');
+        $('#promotion_tr').hide();
+        $('#coupon_code').val('');
+        $('#total_price_td').html('".$totalPrice."');
+        $('#show-offer-success').addClass('hide');
+        $('#promotion_div').show();
+        $('#offer-code').text('');
+    });
+
 ");
 
 
@@ -256,6 +274,9 @@ $this->registerJs("
             }
             else {
                 toastr.success('Coupon Applied.'); 
+                $("#offer-code").text($('#coupon_code').val());
+                $("#show-offer-success").removeClass('hide');
+                $("#promotion_div").hide();
                 $("#promotion_id").val(resultData.promotion_id);
                 $("#promotion_price").val(resultData.promotion_price);
                 var totalprice = <?php echo $totalPrice;?> - resultData.promotion_price;
