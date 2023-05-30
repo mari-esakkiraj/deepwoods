@@ -58,7 +58,7 @@ class SiteController extends Controller
 
     public function beforeAction($action) 
     {
-        $withoutCSRF = ['cus-login','register','forgotpassword','savecheckout','clearcartlist','removecart', 'addreview','contact'];
+        $withoutCSRF = ['cus-login','register','forgotpassword','savecheckout','clearcartlist','removecart', 'addreview','contact','changepassword'];
         if(in_array($action->id, $withoutCSRF)) {
             $this->enableCsrfValidation = false; 
         }
@@ -244,6 +244,29 @@ class SiteController extends Controller
         $data['success']=true;
         return json_encode($data,true);
         // return ['access_token' => $user->access_token];
+    }
+
+    public function actionChangepassword(){
+        $username = Yii::$app->user->identity->username;
+        $password = Yii::$app->request->post('oldpass');
+        $newpassword = Yii::$app->request->post('newpass');
+
+        $user = Users::findByUsername($username);
+        $data = [];
+        if (!$user->validatePassword($password)) {
+            $data['success']=false;
+            $data['error']['password']="Invalid password";
+            $data['message']="Invalid password";
+            return json_encode($data,true);
+        }else{
+            $users = Yii::$app->user->identity;
+            // Set the new password
+            $users->setPassword($newpassword);
+            if($users->save(false)){
+                $data['success']=true;
+                return json_encode($data,true);
+            }
+        }
     }
 
     public function actionCusLogout()
