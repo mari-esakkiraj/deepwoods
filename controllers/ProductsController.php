@@ -444,4 +444,21 @@ class ProductsController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionUpdatequantity($id)
+    {
+        $model = $this->findModel($id);
+        if (Yii::$app->request->isPost && Yii::$app->request->post('Products')) {
+            $postValue = Yii::$app->request->post('Products');
+           
+            $qtyIncrease = $model->quantity + $postValue['quantity'];
+        
+            // Adjust the product quantity
+            $model->quantity = $qtyIncrease;
+            $model->save();
+        } 
+
+        return $this->redirect(['view', 'id' => $model->id]);
+
+    }
 }
