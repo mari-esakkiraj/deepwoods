@@ -1,5 +1,5 @@
 <?php
-
+use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\helpers\Url;
@@ -47,6 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'template' => "<tr><th style='width: 15%;'>{label}</th><td>{value}</td></tr>"
     ]) ?>
+    <?php if(!empty($modelImages)) {?>
     <h1 class="mt-20">Product Images</h1>
     <table class="table table-striped table-bordered">
         <thead>
@@ -68,4 +69,42 @@ $this->params['breadcrumbs'][] = $this->title;
             }?>
         </tbody>
     </table>
+    <?php } ?>
+    <h1 class="mt-20">Product Quantity Adjustment</h1>
+    <?php $form = ActiveForm::begin(['action' => ['products/updatequantity', 'id' => $model->id]]); 
+    $model->quantity = '';
+    ?>
+    <div class="row">
+    <div class="col-md-6">
+    <?= $form->field($model, 'quantity')->textInput(['type' => 'number','min' => '0']) ?>
+        </div>
+        </div>
+        <div class="row " style="margin:10px">
+    <div class="col-md-2">
+    <?= Html::submitButton('Update Quantity', ['class' => 'btn btn-primary']) ?>
+    </div>
+        </div>
+    <?php ActiveForm::end(); ?>
+
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var quantityInput = document.getElementById('products-quantity');
+
+        quantityInput.addEventListener('input', function (event) {
+            var inputValue = event.target.value;
+            var sanitizedValue = inputValue.replace(/[^\d]/g, ''); // Allow only digits
+
+            if (sanitizedValue !== inputValue) {
+                event.target.value = sanitizedValue;
+            }
+        });
+        quantityInput.addEventListener('keydown', function (event) {
+            // Prevent the minus sign key (-) from being entered
+            if (event.key === '-' || event.key === 'e') {
+                event.preventDefault();
+            }
+        });
+    });
+</script>
+
