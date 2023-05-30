@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
 use app\base\Model;
 use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
+use app\models\Settings;
 
 /**
  * ProductsController implements the CRUD actions for Products model.
@@ -461,4 +462,47 @@ class ProductsController extends Controller
         return $this->redirect(['view', 'id' => $model->id]);
 
     }
+
+    public function actionSendlowqtyalert($id= null){
+        var_dump($id);
+        if(!empty($id)) {
+            $model = $this->findModel($id);
+            if(!empty($model)) {
+                $setting = Settings::findOne(1);
+
+                $to = $setting->company_email; 
+                $from = $setting->company_email; 
+                $fromName = $setting->company_name; 
+                
+                $subject = $model->name." is low stock"; 
+                $htmlContent = ' 
+        <html> 
+        <head> 
+            <title>Low Stock</title> 
+        </head> 
+        <body> 
+                <h1>'.$model->name.' product is low '.$model->quantity.' quantity</h1> 
+                </body> 
+                </html>'; 
+                 // Set content-type header for sending HTML email 
+            $headers = "MIME-Version: 1.0" . "\r\n"; 
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n"; 
+            
+            // Additional headers 
+            $headers .= 'From: '.$fromName.'<'.$from.'>' . "\r\n"; 
+            $headers .= 'Cc: welcome@example.com' . "\r\n"; 
+            $headers .= 'Bcc: welcome2@example.com' . "\r\n"; 
+            
+            // Send email 
+            if(mail($to, $subject, $htmlContent, $headers)){ 
+                echo 'Email has sent successfully.'; 
+            }else{ 
+                echo 'Email sending failed.'; 
+            }
+        }
+        
+        }
+           
+    }
+
 }
