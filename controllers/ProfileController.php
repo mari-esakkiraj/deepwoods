@@ -8,6 +8,7 @@ use Yii;
 use yii\filters\AccessControl;
 use kartik\mpdf\Pdf;
 use yii\web\Controller;
+use app\models\OrdersSearch;
 
 class ProfileController extends Controller
 {
@@ -56,6 +57,8 @@ class ProfileController extends Controller
         }
         $user = Users::find()->where(['id' => $userID])->one();
         $model = new ChangePasswordForm();
+        $searchModel = new OrdersSearch();
+        $dataProvider = $searchModel->customerorder($this->request->queryParams);
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             // Get the current user
             $users = Yii::$app->user->identity;
@@ -67,7 +70,7 @@ class ProfileController extends Controller
             }
         }
 
-        return $this->render('index', ['user' => $user,'model' => $model]);
+        return $this->render('index', ['user' => $user,'model' => $model, 'searchModel' => $searchModel, 'dataProvider' => $dataProvider]);
     }
 
     public function actionVieworder($id)

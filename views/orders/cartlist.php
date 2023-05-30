@@ -42,6 +42,10 @@ use yii\widgets\Pjax;
 .mobile-table-heading{
     display: none;
 }
+
+input[type=number] {
+  -moz-appearance:textfield;
+}
 </style>
 <section class="checkout-cart-area">
     <div>
@@ -104,7 +108,7 @@ use yii\widgets\Pjax;
                                     <td class="text-center detail-info" data-title="Stock" style="padding:10px;">
                                         <h6 class="text-body mobile-table-heading"><i class="fa fa-rupee"></i> <?= $products->product->price ?></h6>
                                         <div class="pro-qty">
-                                            <input type="number" id="product-quantity" title="Quantity" value="<?= $products->quantity ?>" min="1" max="999">
+                                            <input type="number" id="product-quantity" title="Quantity" value="<?= $products->quantity ?>" min="1" max="999" readonly>
                                             <div class="inc qty-btn mycartlist" data-productId="<?= $products->product_id ?>" data-price="<?= $products->product->price ?>" data-cartItemId="<?= $products->id ?>"><i class="fa fa-angle-up"></i></div>
                                             <div class= "dec qty-btn mycartlist" data-productId="<?= $products->product_id ?>" data-price="<?= $products->product->price ?>" data-cartItemId="<?= $products->id ?>"><i class="fa fa-angle-down"></i></div>
                                         </div>

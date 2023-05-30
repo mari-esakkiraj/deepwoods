@@ -356,7 +356,8 @@ class OrdersController extends Controller
         $transaction = Yii::$app->db->beginTransaction();
         if (empty($notavilableproduct)) {
             $order_count = Orders::find()->where(['customer_id' => Yii::$app->user->identity->id])->count();
-            $order->order_code = "DW-".date('Y')."-".sprintf('%03d', ($order_count+1));
+            //$order->order_code = "DW-".date('Y')."-".sprintf('%03d', ($order_count+1));
+            $order->order_code = "DW/".sprintf('%03d', ($order_count+1))."/".date('y', strtotime('-1 year'))."-".date('y');
             $order_count = $order->order_code;
             if ($order->load(Yii::$app->request->post())
                 && $order->save()
@@ -376,16 +377,16 @@ class OrdersController extends Controller
                 $transaction->commit();
                 //CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
 
-                /*if ($cashondelivery==1) {
+                if ($cashondelivery==1) {
                     $order->status = 1;
                     $order->paypal_order_id = 'DW00'.$order->id;
-                    $html = "<p>Your payment was successful</p>
-                            <p>Payment ID: {$order->paypal_order_id}</p>";
+                    $html = "<div class='alert alert-success'>Your payment was successful and Your Payment Mode: <b>Cash on delivery.</b></div>";
                     $order->save();
                     $this->layout = 'mainpage';
-            
-                    return $this->render('verify',["success" => $success, 'message' => $html]);
-                }*/
+                    CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
+                    //return $this->render('verify',["success" => 'success', 'message' => $html]);
+                    return $this->render('vieworder',["success" => true, 'message' => $html, 'order' => $order]);
+                }
 
                 $keyId = 'rzp_test_837Iw9MVhmAj9z';
                 $keySecret = 'PcntHmmtBWoM2te93AIt2Uh7';

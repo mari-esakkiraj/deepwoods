@@ -6,6 +6,7 @@ use yii\widgets\Pjax;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\UserAddresses;
+use app\models\Orders;
 
 ?>
 <section class="checkout-cart-area">
@@ -192,12 +193,16 @@ use app\models\UserAddresses;
                 </table>
                 <?php 
                     if (empty($notavilableproduct)) {
+                        $order_count = Orders::find()->where(['customer_id' => Yii::$app->user->identity->id])->count();
 
                 ?>
                 <p class="text-right mt-3">
                     <input type="hidden" name="cashondelivery" id="cashondelivery"/>
                     <button class="btn btn-secondary">Continue Payment</button>
-                    <button class="btn btn-secondary" onclick="return cashondelivery();" style="display:none">Cash on Delivery</button>
+                    <?php if($order_count < 1){ ?>
+                    <button type="button" class="btn btn-secondary cashondelivery">Cash on Delivery</button>
+                    <?php } ?>
+                    
                 </p>
                 <?php 
                     }
@@ -219,8 +224,11 @@ $this->registerJs("
         $('#orders-shipping_address_id').val($(this).attr('data-shipping_address_id'));
     });
 
-    
-    
+    $(document).on('click','.cashondelivery',function() {
+        $('#cashondelivery').val(1);
+        $('form#checkout-form').submit();
+    });
+
 ");
 
 
@@ -257,12 +265,6 @@ $this->registerJs("
             }
           }
         })
-        return false;
-      }
-
-      function cashondelivery(){
-        //alert("aa");
-        $("#cashondelivery").val(1);
         return false;
       }
     </script>
