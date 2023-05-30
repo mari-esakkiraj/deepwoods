@@ -11,14 +11,14 @@
   var varWindow = $(window);
   var AppConfig = new AppConfigs();
   var Baseurl = AppConfig.getBaseUrl();
-  varWindow.on('scroll', function(event) {
-    var scroll = varWindow.scrollTop();
-    if (scroll < 350) {
-      $(".sticky-header").removeClass("sticky");
-    } else{
-      $(".sticky-header").addClass("sticky");
-    }
-  });
+  // varWindow.on('scroll', function(event) {
+  //   var scroll = varWindow.scrollTop();
+  //   if (scroll < 350) {
+  //     $(".sticky-header").removeClass("sticky");
+  //   } else{
+  //     $(".sticky-header").addClass("sticky");
+  //   }
+  // });
 
   // Background Image
   const bgSelector = $("[data-bg-img]");

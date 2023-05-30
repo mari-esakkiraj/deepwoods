@@ -59,7 +59,7 @@ $absoluteBaseUrl = Url::base(true);
                                 <div class="card-body">
                                     <?php
                                         echo $this->render('order_details', [
-                                            'userID' => $user->id ?? null
+                                            'userID' => $user->id ?? null, 'searchModel' => $searchModel, 'dataProvider' => $dataProvider
                                         ]);
                                     ?>
                                 </div>

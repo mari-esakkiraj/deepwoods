@@ -463,6 +463,7 @@ class SiteController extends Controller
                             A login has been created for you to access Deepwoods. Below are your credentials to access the Deepwoods system.
                             <br> UserName : " . $data['username'] . "<br>Password : " . $password .
                             " <br> <br>
+                            To login to the system click <a href='" . Yii::$app->urlManager->createAbsoluteUrl('') . "'>here</a> <br><br>
                             If you have any questions, please contact us info@deepwoodsorganics.com
                             <br>
                         </body>
@@ -490,6 +491,7 @@ class SiteController extends Controller
                             Your password has been reset to access Deepwoods. Below are your credentials to access the Deepwoods system.
                             <br> UserName : " . $data['email'] . "<br>Password : " . $password .
                             " <br> <br>
+                            To login to the system click <a href='" . Yii::$app->urlManager->createAbsoluteUrl('') . "'>here</a> <br><br>
                             If you have any questions, please contact us info@deepwoodsorganics.com.
                             
                         </body>
