@@ -381,9 +381,14 @@ class OrdersController extends Controller
                     $order->status = 1;
                     $order->paypal_order_id = 'DW00'.$order->id;
                     $html = "<div class='alert alert-success'>Your payment was successful and Your Payment Mode: <b>Cash on delivery.</b></div>";
-                    $order->save();
+                    $order->save(false);
+                    foreach ($order->orderItems as $item) {
+                        $item->product->quantity = $item->product->quantity - $item->quantity;
+                        $item->product->save();
+                    }
                     $this->layout = 'mainpage';
                     CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
+                    Orders::sentOrderConfirm($order);
                     //return $this->render('verify',["success" => 'success', 'message' => $html]);
                     return $this->render('vieworder',["success" => true, 'message' => $html, 'order' => $order]);
                 }
