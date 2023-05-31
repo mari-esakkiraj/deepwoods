@@ -63,7 +63,6 @@ class Orders extends \yii\db\ActiveRecord
             'paypal_order_id' => 'Paypal Order ID',
             'created_at' => 'Date',
             'created_by' => 'Created By',
-            'paypal_order_id' => 'Paypal Order ID',
             'billing_address_id' => 'Billing Address',
             'shipping_address_id' => 'Shipping Address',
             'phone' => 'Phone',
