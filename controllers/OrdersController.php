@@ -24,6 +24,7 @@ use app\models\Settings;
 use Razorpay\Api\Errors\SignatureVerificationError;
 use app\models\Promotion;
 use kartik\mpdf\Pdf;
+use app\models\Products;
 
 /**
  * OrdersController implements the CRUD actions for Orders model.
@@ -393,8 +394,8 @@ class OrdersController extends Controller
                     return $this->render('vieworder',["success" => true, 'message' => $html, 'order' => $order]);
                 }
 
-                $keyId = 'rzp_test_837Iw9MVhmAj9z';
-                $keySecret = 'PcntHmmtBWoM2te93AIt2Uh7';
+                $keyId = 'rzp_test_QmggzCBIb7U4MM';
+                $keySecret = 'E6yDLXEKdFAgroHGh9UamcYJ';
                 $displayCurrency = 'INR';
                 
                 $api = new Api($keyId, $keySecret);
@@ -491,8 +492,8 @@ class OrdersController extends Controller
 
     public function actionPayment()
     {   
-        $keyId = 'rzp_test_837Iw9MVhmAj9z';
-        $keySecret = 'PcntHmmtBWoM2te93AIt2Uh7';
+        $keyId = 'rzp_test_QmggzCBIb7U4MM';
+        $keySecret = 'E6yDLXEKdFAgroHGh9UamcYJ';
         $displayCurrency = 'INR';
 
         //$this->layout = false;
@@ -594,8 +595,8 @@ class OrdersController extends Controller
     {
         $this->enableCsrfValidation = false;
         $success = true;
-        $keyId = 'rzp_test_837Iw9MVhmAj9z';
-        $keySecret = 'PcntHmmtBWoM2te93AIt2Uh7';
+        $keyId = 'rzp_test_QmggzCBIb7U4MM';
+        $keySecret = 'E6yDLXEKdFAgroHGh9UamcYJ';
         $displayCurrency = 'INR';
         $error = "Payment Failed";
 
@@ -643,6 +644,7 @@ class OrdersController extends Controller
             foreach ($order->orderItems as $item) {
                 $item->product->quantity = $item->product->quantity - $item->quantity;
                 $item->product->save();
+                Products::sendlowqtyalert($item->product);
             }
 
             CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
