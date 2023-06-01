@@ -135,4 +135,33 @@ class Products extends \yii\db\ActiveRecord
         $this->status = 0;
         $this->save(false);
     }
+
+    
+
+    public static function sendlowqtyalert($model){
+        if ($model->quantity > 100) {
+            return false;
+        }
+        $setting = Settings::findOne(1);
+        $to = $setting->company_email ?? Yii::$app->params['adminEmail']; 
+        $subject = $model->name." is low stock"; 
+        $message = ' 
+        <html> 
+        <head> 
+            <title>Low Stock</title> 
+        </head> 
+        <body> 
+                <h1>'.$model->name.' product is low '.$model->quantity.' quantity</h1> 
+                </body> 
+                </html>';
+        $email = \Yii::$app->mailer->compose();
+        $email->setFrom([Yii::$app->params['adminEmail'] => 'Deepwoods - Admin']);
+        $email->setTo($to);
+        $email->setCharset('UTF-8');
+        $email->setSubject($subject);
+        $email->setHtmlBody($message);
+        $email->send();
+        return $email;
+
+    }
 }
