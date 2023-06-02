@@ -6,7 +6,7 @@ $shippingAddresses = UserAddresses::find()->where(['user_id' => $userID,'type' =
 $billingAddresses = UserAddresses::find()->where(['user_id' => $userID,'type' => 'billing'])->all();
 ?>
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-6" style="display:none;">
         <div class="card mb-3 mb-lg-0">
             <div class="card-header">
                 <h5 class="mb-0">
@@ -47,7 +47,7 @@ $billingAddresses = UserAddresses::find()->where(['user_id' => $userID,'type' =>
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
                 <h5 class="mb-0">
