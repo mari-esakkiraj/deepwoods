@@ -27,7 +27,7 @@ $absoluteBaseUrl = Url::base(true);
                 
                         <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
                 
-                        <div class="form-group mt-20">
+                        <div class="form-group mt-20" style="margin-top:5%">
                             <?= Html::submitButton('Send', ['class' => 'btn btn-primary', 'name' => 'reset-button']) ?>
                         </div>
                     <?php ActiveForm::end(); ?>

@@ -35,6 +35,7 @@ $absoluteBaseUrl = Url::base(true);
                                 <?= $form->field($model, 'rememberMe')->checkbox([
                                     'template' => "<div class=\"mt-2 custom-control custom-checkbox\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
                                 ]) ?>
+                                <a href="<?= $absoluteBaseUrl."/site/forgot_password"?>" class="mt-2 blue-text forgotPassword">Forgot Password?</a>
                         </div>
                     <?php ActiveForm::end(); ?>
                 </div>               

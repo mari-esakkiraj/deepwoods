@@ -547,6 +547,42 @@ class SiteController extends Controller
 
     }
 
+    public function actionForgot_password()
+    {
+        $model = new ForgotPassword();
+
+    
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            // Generate a new password reset token
+            $user = User::findByEmail($model->email);
+            if ($user) {
+                $password = Yii::$app->getSecurity()->generateRandomString(8);
+                $user->password = $password;
+                $user->save();
+                $data = ['email' => $user->email,'name' => $user->firstname];
+                $this->resetmail($data, $password);
+                // $user->generatePasswordResetToken();
+                // $user->save();
+
+                // // Send password reset email
+                // Yii::$app->mailer->compose('passwordResetToken', ['user' => $user])
+                //     ->setFrom(Yii::$app->params['adminEmail'])
+                //     ->setTo($user->email)
+                //     ->setSubject('Password Reset')
+                //     ->send();
+
+                Yii::$app->session->setFlash('success', 'Please check your email for instructions on how to reset your password.');
+                return $this->redirect(['site/login']);
+            } else {
+                Yii::$app->session->setFlash('error', 'Email address not found.');
+            }
+        }
+
+        return $this->render('forgotpassword', [
+            'model' => $model,
+        ]);
+    }
+
     public function actionRefund_policy()
     {
         $this->layout = 'mainpage';
