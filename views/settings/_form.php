@@ -49,24 +49,23 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'gst')->textInput(['maxlength' => true]) ?>
     </div>
     <div class="col-md-6">
-        <?= $form->field($model, 'freight_charges')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'gst_number')->textInput(['maxlength' => true]) ?>
+        
     </div>
     <div class="col-md-6">
-        <?= $form->field($model, 'qty_alert')->textInput(['maxlength' => true]) ?>
-    </div>
-    <div class="col-md-6">
-        <?= $form->field($model, 'company_logo')->fileInput() ?>
-        <?= Html::img('@web/'.$model->company_logo, ['alt' => 'My logo', 'style' => 'width:100px;height:75px; border: 1px solid lightgray;padding: 3px;']) ?>
-
-    </div>
-    <div class="col-md-6">
-        <?= $form->field($model, 'gst_number')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'freight_charges')->textInput(['maxlength' => true]) ?>        
     </div>
     <div class="col-md-6">
         <?= $form->field($model, 'fssai_number')->textInput(['maxlength' => true]) ?>
     </div>
     <div class="col-md-6">
-        
+        <?= $form->field($model, 'qty_alert')->textInput(['maxlength' => true]) ?>
+    </div>
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-6">
+    <?= $form->field($model, 'company_logo')->fileInput() ?>
+        <?= Html::img('@web/'.$model->company_logo, ['alt' => 'My logo', 'style' => 'width:100px;height:75px; border: 1px solid lightgray;padding: 3px;']) ?>
     </div>
 </div>
 <div class="row justify-content-center" style="margin:10px">
