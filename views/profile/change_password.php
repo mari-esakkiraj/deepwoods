@@ -19,6 +19,9 @@ $absoluteBaseUrl = Url::base(true);
 <h1><?= Html::encode($this->title) ?></h1>
 
 <div class="user-change-password">
+    <div class="alert alert-success hide" id="changepasssccess">
+    Your password is changed successfully, please login here or please wait while we redirect you to our Home page
+    </div>
     <div class="mb-3">
         <label for="password" class="form-label">Current Password</label>
         <input type="password" class="form-control" name="password" id="change-password">
@@ -108,12 +111,14 @@ $this->registerJs("
             success:function(response) {
                 var resultData = response.success
                 if(resultData){
+                    $('#changepasssccess').removeClass('hide');
                     $('#change-password').val();
                     $('#change-new-password').val('');
                     $('#change-new-password').val('');
-                    toastr.success('Your password has been changed successfully.');
-                }else{
-                    $('#change-pass-error').text(response.message);
+                    setTimeout(function() {
+                        $('.logoutSession').trigger('click');
+                    }, 3000);
+                    
                 }
             }
         }); 
