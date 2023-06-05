@@ -526,6 +526,7 @@ class SiteController extends Controller
         $email->setSubject($subject);
         $email->setHtmlBody($message);
         $email->send();
+        
         return null;
     }
 
@@ -554,7 +555,7 @@ class SiteController extends Controller
     
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             // Generate a new password reset token
-            $user = User::findByEmail($model->email);
+            $user = Users::find()->where(['email' => $model->email])->one();
             if ($user) {
                 $password = Yii::$app->getSecurity()->generateRandomString(8);
                 $user->password = $password;
