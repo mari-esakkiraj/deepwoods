@@ -390,6 +390,8 @@ class OrdersController extends Controller
                     $this->layout = 'mainpage';
                     CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
                     Orders::sentOrderConfirm($order);
+                    Orders::sentOrder($order);
+
                     //return $this->render('verify',["success" => 'success', 'message' => $html]);
                     return $this->render('vieworder',["success" => true, 'message' => $html, 'order' => $order]);
                 }
@@ -650,6 +652,7 @@ class OrdersController extends Controller
             CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
             //echo $html;
             Orders::sentOrderConfirm($order);
+            Orders::sentOrder($order);
             $this->layout = 'mainpage';
             
             return $this->render('vieworder',["success" => $success, 'message' => $html, 'order' => $order]);
@@ -705,53 +708,61 @@ class OrdersController extends Controller
 
     public function actionSendordermail($order_id){
         if(!empty($order_id)) {
-            $model = $this->findModel($order_id);
-            if(!empty($model)) {
+            $order = $this->findModel($order_id);
+            if(!empty($order)) {
                 $setting = Settings::findOne(1);
-                $items = OrderItems::find()->where(['order_id' => $id])->all();
+                $items = OrderItems::find()->where(['order_id' => $order_id])->all();
 
-                $to = $model->email; 
+                $to = $order->email; 
                 $from = $setting->company_email; 
                 $fromName = $setting->company_name; 
                 
-                $subject = "Your order total amount is Rs.".$model->total_price; 
-                $htmlContent = ' 
+                $subject = "Your Order:".$order->order_code." Has Been Received"; 
+                $message = ' 
         <html> 
         <head> 
             <title>Your order</title> 
         </head> 
         <body> 
-                <h1>Thanks you for ordering '.$fromName.'</h1> 
+                <h1>Dear Full Name Here,</h1>
+
+                <p>We have received your recent order, '.$order->order_code.' in Our Deepwoods Organics webstore. Thank you for choosing us for your shopping needs.Here are all the details: </p> 
+                <h5>Your Order Summary:</h5><br>
             <table cellspacing="0" style="border: 2px dashed #FB4314; width: 100%;"> 
                 <tr> 
                     <th>Product Name:</th><th>Quantity</th> <th>Unit Price</th> 
                 </tr> ';
                 if(!empty($items)) {
                     foreach($items as $item){
-                        $htmlContent = '     
+                        $message = '     
                         <tr style="background-color: #e0e0e0;"> 
                             <td>'.$item->product_name.'</td><td>'.$item->quantity.'</td> <td>'.$item->unit_price.'</td> 
                         </tr> ';
                     }
                 }
-                $htmlContent = '     
+                $message = '     
                         <tr style="background-color: #e0e0e0;"> 
-                            <th colspan="2">Total:</th><td>'.$model->total_price.'</td> 
+                            <th colspan="2">Total:</th><td>'.$order->total_price.'</td> 
                         </tr> 
                         </table> 
+                        <p>We are currently processing your order and will keep you updated on the status of your shipment. You can expect to receive your products in minimum 2 business working days, Maximum 4 business working days, If you still didnt receive your products after 4 business working days, please call back us with your Order number @+91 6380589226.</p><br>
+                        <p>If you have any questions or concerns about your order, please don’t hesitate to contact us. Our customer service team is always happy to assist you.</p><br>
+                        <p>Thank you for your support. We look forward to serving you again in the future.</p><br>
+                        <p>Best regards,<br>
+                        Deepwoods Organics<br>
+                        Processing Team<br></p>
                 </body> 
                 </html>'; 
-                 // Set content-type header for sending HTML email 
-            $headers = "MIME-Version: 1.0" . "\r\n"; 
-            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n"; 
+             
             
-            // Additional headers 
-            $headers .= 'From: '.$fromName.'<'.$from.'>' . "\r\n"; 
-            $headers .= 'Cc: welcome@example.com' . "\r\n"; 
-            $headers .= 'Bcc: welcome2@example.com' . "\r\n"; 
-            
+            $email = \Yii::$app->mailer->compose();
+            $email->setFrom([Yii::$app->params['adminEmail'] => 'Deepwoods - Admin']);
+            $email->setTo($order->email);
+            $email->setCharset('UTF-8');
+            $email->setSubject($subject);
+            $email->setHtmlBody($message);
             // Send email 
-            if(mail($to, $subject, $htmlContent, $headers)){ 
+            if($email->send()){ 
                 echo 'Email has sent successfully.'; 
             }else{ 
                 echo 'Email sending failed.'; 

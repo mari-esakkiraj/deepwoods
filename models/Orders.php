@@ -146,4 +146,54 @@ class Orders extends \yii\db\ActiveRecord
         $email->send();
         return $email;
     }
+    public static function sentOrder($order) {
+        $items = OrderItems::find()->where(['order_id' => $order->id])->all();
+
+        $msg = "<p>Dear  {$order->firstname}  {$order->lastname},</p>
+        We have received your recent order, {$order->order_code} in Our Deepwoods Organics webstore. Thank you for choosing us for your shopping needs.Here are all the details: </p> 
+        <h5>Your Order Summary:</h5><br>
+            <table cellspacing='0' style='border: 2px dashed #FB4314; width: 100%;'> 
+                <tr> 
+                    <th>Product Name:</th><th>Quantity</th> <th>Unit Price</th> 
+                </tr> ";
+                if(!empty($items)) {
+                    foreach($items as $item){
+                        $msg .= '     
+                        <tr style="background-color: #e0e0e0;"> 
+                            <td>'.$item->product_name.'</td><td>'.$item->quantity.'</td> <td>'.$item->unit_price.'</td> 
+                        </tr> ';
+                    }
+                }
+                $msg .= '     
+                        <tr style="background-color: #e0e0e0;"> 
+                            <th colspan="2">Total:</th><td>'.$order->total_price.'</td> 
+                        </tr> 
+                        </table> 
+                        <p>We are currently processing your order and will keep you updated on the status of your shipment. You can expect to receive your products in minimum 2 business working days, Maximum 4 business working days, If you still didnt receive your products after 4 business working days, please call back us with your Order number @+91 6380589226.</p><br>
+                        <p>If you have any questions or concerns about your order, please don’t hesitate to contact us. Our customer service team is always happy to assist you.</p><br>
+                        <p>Thank you for your support. We look forward to serving you again in the future.</p><br>
+                        <p>Best regards,<br>
+                        Deepwoods Organics<br>
+                        Processing Team<br></p>';
+        $message = "<html>
+            <head>
+                <title>Order Confirmation</title>
+            </head>
+            <body>
+                {$msg}
+                <br>
+                <small>This is a system generated email. Please do not reply to this email.</small>
+            </body>
+        </html>";
+        
+        $subject = "Your Order:".$order->order_code." Has Been Received"; 
+        $email = \Yii::$app->mailer->compose();
+        $email->setFrom([Yii::$app->params['adminEmail'] => 'Deepwoods - Admin']);
+        $email->setTo($order->email);
+        $email->setCharset('UTF-8');
+        $email->setSubject($subject);
+        $email->setHtmlBody($message);
+        $email->send();
+        return $email;
+    }
 }
