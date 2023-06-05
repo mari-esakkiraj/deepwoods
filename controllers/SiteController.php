@@ -526,6 +526,7 @@ class SiteController extends Controller
         $email->setSubject($subject);
         $email->setHtmlBody($message);
         $email->send();
+        
         return null;
     }
 
