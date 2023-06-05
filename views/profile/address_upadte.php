@@ -14,41 +14,41 @@
         <label for="state" class="form-label required">State</label>
         <select class="form-control state" id="state">
             <option value="">--Please Select--</option>
-            <option value='Arunachal Pradesh'>Arunachal Pradesh</option>
-            <option value='Assam'>Assam</option>
-            <option value='Bihar'>Bihar</option>
-            <option value='Chhattisgarh'>Chhattisgarh</option>
-            <option value='Goa'>Goa</option>
-            <option value='Gujarat'>Gujarat</option>
-            <option value='Haryana'>Haryana</option>
-            <option value='Himachal Pradesh'>Himachal Pradesh</option>
-            <option value='Jammu and Kashmir'>Jammu and Kashmir</option>
-            <option value='Jharkhand'>Jharkhand</option>
-            <option value='Karnataka'>Karnataka</option>
-            <option value='Kerala'>Kerala</option>
-            <option value='Madhya Pradesh'>Madhya Pradesh</option>
-            <option value='Maharashtra'>Maharashtra</option>
-            <option value='Manipur'>Manipur</option>
-            <option value='Meghalaya'>Meghalaya</option>
-            <option value='Mizoram'>Mizoram</option>
-            <option value='Nagaland'>Nagaland</option>
-            <option value='Odisha'>Odisha</option>
-            <option value='Punjab'>Punjab</option>
-            <option value='Rajasthan'>Rajasthan</option>
-            <option value='Sikkim'>Sikkim</option>
-            <option value='Tamil Nadu'>Tamil Nadu</option>
-            <option value='Telangana'>Telangana</option>
-            <option value='Tripura'>Tripura</option>
-            <option value='Uttar Pradesh'>Uttar Pradesh</option>
-            <option value='Uttarakhand'>Uttarakhand</option>
-            <option value='West Bengal'>West Bengal</option>
-            <option value='Andaman and Nicobar Islands'>Andaman and Nicobar Islands</option>
-            <option value='Chandigarh'>Chandigarh</option>
-            <option value='Dadra and Nagar Haveli'>Dadra and Nagar Haveli</option>
-            <option value='Daman and Diu'>Daman and Diu</option>
-            <option value='Lakshadweep'>Lakshadweep</option>
-            <option value='National Capital Territory of Delhi'>National Capital Territory of Delhi</option>
-            <option value='Puducherry'>Puducherr</option>
+            <option value='Arunachal Pradesh' <?= $addresses->state == 'Arunachal Pradesh' ? ' selected="selected"' : '';?>>Arunachal Pradesh</option>
+            <option value='Assam' <?= $addresses->state == 'Assam' ? ' selected="selected"' : '';?>>Assam</option>
+            <option value='Bihar' <?= $addresses->state == 'Bihar' ? ' selected="selected"' : '';?>>Bihar</option>
+            <option value='Chhattisgarh' <?= $addresses->state == 'Chhattisgarh' ? ' selected="selected"' : '';?>>Chhattisgarh</option>
+            <option value='Goa' <?= $addresses->state == 'Goa' ? ' selected="selected"' : '';?>>Goa</option>
+            <option value='Gujarat' <?= $addresses->state == 'Gujarat' ? ' selected="selected"' : '';?>>Gujarat</option>
+            <option value='Haryana' <?= $addresses->state == 'Haryana' ? ' selected="selected"' : '';?>>Haryana</option>
+            <option value='Himachal Pradesh' <?= $addresses->state == 'Himachal Pradesh' ? ' selected="selected"' : '';?>>Himachal Pradesh</option>
+            <option value='Jammu and Kashmir' <?= $addresses->state == 'Jammu and Kashmir' ? ' selected="selected"' : '';?>>Jammu and Kashmir</option>
+            <option value='Jharkhand' <?= $addresses->state == 'Jharkhand' ? ' selected="selected"' : '';?>>Jharkhand</option>
+            <option value='Karnataka' <?= $addresses->state == 'Karnataka' ? ' selected="selected"' : '';?>>Karnataka</option>
+            <option value='Kerala' <?= $addresses->state == 'Kerala' ? ' selected="selected"' : '';?>>Kerala</option>
+            <option value='Madhya Pradesh' <?= $addresses->state == 'Madhya Pradesh' ? ' selected="selected"' : '';?>>Madhya Pradesh</option>
+            <option value='Maharashtra' <?= $addresses->state == 'Maharashtra' ? ' selected="selected"' : '';?>>Maharashtra</option>
+            <option value='Manipur' <?= $addresses->state == 'Manipur' ? ' selected="selected"' : '';?>>Manipur</option>
+            <option value='Meghalaya' <?= $addresses->state == 'Meghalaya' ? ' selected="selected"' : '';?>>Meghalaya</option>
+            <option value='Mizoram' <?= $addresses->state == 'Mizoram' ? ' selected="selected"' : '';?>>Mizoram</option>
+            <option value='Nagaland' <?= $addresses->state == 'Nagaland' ? ' selected="selected"' : '';?>>Nagaland</option>
+            <option value='Odisha' <?= $addresses->state == 'Odisha' ? ' selected="selected"' : '';?>>Odisha</option>
+            <option value='Punjab' <?= $addresses->state == 'Punjab' ? ' selected="selected"' : '';?>>Punjab</option>
+            <option value='Rajasthan' <?= $addresses->state == 'Rajasthan' ? ' selected="selected"' : '';?>>Rajasthan</option>
+            <option value='Sikkim' <?= $addresses->state == 'Sikkim' ? ' selected="selected"' : '';?>>Sikkim</option>
+            <option value='Tamil Nadu' <?= $addresses->state == 'Tamil Nadu' ? ' selected="selected"' : '';?>>Tamil Nadu</option>
+            <option value='Telangana' <?= $addresses->state == 'Telangana' ? ' selected="selected"' : '';?>>Telangana</option>
+            <option value='Tripura' <?= $addresses->state == 'Tripura' ? ' selected="selected"' : '';?>>Tripura</option>
+            <option value='Uttar Pradesh' <?= $addresses->state == 'Uttar Pradesh' ? ' selected="selected"' : '';?>>Uttar Pradesh</option>
+            <option value='Uttarakhand' <?= $addresses->state == 'Uttarakhand' ? ' selected="selected"' : '';?>>Uttarakhand</option>
+            <option value='West Bengal' <?= $addresses->state == 'West Bengal' ? ' selected="selected"' : '';?>>West Bengal</option>
+            <option value='Andaman and Nicobar Islands' <?= $addresses->state == 'Andaman and Nicobar Islands' ? ' selected="selected"' : '';?>>Andaman and Nicobar Islands</option>
+            <option value='Chandigarh' <?= $addresses->state == 'Chandigarh' ? ' selected="selected"' : '';?>>Chandigarh</option>
+            <option value='Dadra and Nagar Haveli' <?= $addresses->state == 'Dadra and Nagar Haveli' ? ' selected="selected"' : '';?>>Dadra and Nagar Haveli</option>
+            <option value='Daman and Diu' <?= $addresses->state == 'Daman and Diu' ? ' selected="selected"' : '';?>>Daman and Diu</option>
+            <option value='Lakshadweep' <?= $addresses->state == 'Lakshadweep' ? ' selected="selected"' : '';?>>Lakshadweep</option>
+            <option value='National Capital Territory of Delhi' <?= $addresses->state == 'National Capital Territory of Delhi' ? ' selected="selected"' : '';?>>National Capital Territory of Delhi</option>
+            <option value='Puducherry' <?= $addresses->state == 'Puducherry' ? ' selected="selected"' : '';?>>Puducherr</option>
         </select>
         <span id='state_error'></span>
     </div>

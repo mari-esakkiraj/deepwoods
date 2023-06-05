@@ -8,7 +8,7 @@ use yii\widgets\Pjax;
 <hr>
 <div class="row">
     <div class="col">
-        <h5>Delivery Address or Shipping Address</h5>
+        <h5>Shipping Address</h5>
         <table class="table">
             <tr>
                 <th>Firstname</th>
