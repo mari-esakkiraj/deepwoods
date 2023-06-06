@@ -68,12 +68,13 @@ class ContactUs extends \yii\db\ActiveRecord
     {
 
         //if ($this->validate()) {
+            $content = "Name : ".$this->name."<br>Email : ".$this->email."<br>Mobile number: ".$this->phone_number."<br>Message: ".$this->message;
             Yii::$app->mailer->compose()
                 ->setTo($email)
                 ->setFrom([Yii::$app->params['adminEmail'] => 'Deepwoods - Admin'])
                 ->setReplyTo([$this->email => $this->name])
                 ->setSubject("Deepwoodsorganics Contact Us Form")
-                ->setTextBody($this->message)
+                ->setHtmlBody($content)
                 ->send();
 
             return true;
