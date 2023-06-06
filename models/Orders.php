@@ -154,28 +154,40 @@ class Orders extends \yii\db\ActiveRecord
         <h5>Your Order Summary:</h5><br>
             <table cellspacing='0' style='border: 2px dashed #FB4314; width: 100%;'> 
                 <tr> 
-                    <th>Product Name:</th><th>Quantity</th> <th>Unit Price</th> 
+                    <th style='text-align:left'>Product Name:</th><th>Quantity</th> <th>Unit Price</th> 
                 </tr> ";
                 if(!empty($items)) {
                     foreach($items as $item){
                         $msg .= '     
-                        <tr style="background-color: #e0e0e0;"> 
-                            <td>'.$item->product_name.'</td><td>'.$item->quantity.'</td> <td>'.$item->unit_price.'</td> 
+                        <tr > 
+                            <td>'.$item->product_name.'</td><td style="text-align:center">'.$item->quantity.'</td> <td style="text-align:center">'.$item->unit_price.'</td> 
                         </tr> ';
                     }
                 }
                 $msg .= '     
-                        <tr style="background-color: #e0e0e0;"> 
-                            <th colspan="2">Total:</th><td>'.$order->total_price.'</td> 
-                        </tr> 
-                        </table> 
+                <tr > 
+                    <th colspan="2" style="text-align:right">SubTotal:</th><td>'.number_format(($order->total_price-($order->gst+$order->freight_charges)),2).'</td> 
+                </tr> 
+                <tr > 
+                    <th colspan="2" style="text-align:right">GST:</th><td>'.$order->products_gst_price.'</td> 
+                </tr> 
+                <tr > 
+                    <th colspan="2" style="text-align:right">GST:</th><td>'.$order->gst.'</td> 
+                </tr> 
+                </tr> <tr > 
+                    <th colspan="2" style="text-align:right">Freight Charges:</th><td>'.$order->freight_charges.'</td> 
+                </tr> 
+                <tr > 
+                    <th colspan="2" style="text-align:right">Total:</th><td>'.$order->total_price.'</td> 
+                </tr> 
+                    </table> 
                         <p>We are currently processing your order and will keep you updated on the status of your shipment. You can expect to receive your products in minimum 2 business working days, Maximum 4 business working days, If you still didnt receive your products after 4 business working days, please call back us with your Order number @+91 6380589226.</p><br>
                         <p>If you have any questions or concerns about your order, please don’t hesitate to contact us. Our customer service team is always happy to assist you.</p><br>
                         <p>Thank you for your support. We look forward to serving you again in the future.</p><br>
                         <p>Best regards,<br>
                         Deepwoods Organics<br>
                         Processing Team<br></p>';
-        $message = "<html>
+        echo $message = "<html>
             <head>
                 <title>Order Confirmation</title>
             </head>
@@ -184,7 +196,7 @@ class Orders extends \yii\db\ActiveRecord
                 <br>
                 <small>This is a system generated email. Please do not reply to this email.</small>
             </body>
-        </html>";
+        </html>"; 
         
         $subject = "Your Order:".$order->order_code." Has Been Received"; 
         $email = \Yii::$app->mailer->compose();
