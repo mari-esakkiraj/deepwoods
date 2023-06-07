@@ -657,7 +657,7 @@ class OrdersController extends Controller
 
             CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
             //echo $html;
-            Orders::sentOrderConfirm($order);
+            //Orders::sentOrderConfirm($order);
             Orders::sentOrder($order);
             $this->layout = 'mainpage';
             

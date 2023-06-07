@@ -155,7 +155,7 @@ class Orders extends \yii\db\ActiveRecord
             <table cellspacing='0' style='border: 2px dashed #FB4314; width: 100%;'> 
                 <tr> 
                     <th style='text-align:left'>Product Name:</th><th>Quantity</th> <th>Unit Price</th> 
-                </tr> ";
+            </tr> ";
                 if(!empty($items)) {
                     foreach($items as $item){
                         $msg .= '     
@@ -187,7 +187,7 @@ class Orders extends \yii\db\ActiveRecord
                         <p>Best regards,<br>
                         Deepwoods Organics<br>
                         Processing Team<br></p>';
-        echo $message = "<html>
+        $message = "<html>
             <head>
                 <title>Order Confirmation</title>
             </head>
