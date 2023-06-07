@@ -266,10 +266,10 @@ class OrdersController extends Controller
         $productQuantity = count($cartItems);
         $product_gst = [];
         foreach ($cartItems as $productList) {
-            $totalPrice+=($productList->product->price * $productList->quantity);
+            $totalPrice+=number_format((float)($productList->product->price * $productList->quantity), 2, '.', '');
             $product_gst[$productList->product->id] = 0;
             if($productList->product->gst !=0 && $productList->product->gst != null){
-                $product_gst[$productList->product->id] = ($productList->product->price * $productList->quantity) * ($productList->product->gst / 100);
+                $product_gst[$productList->product->id] = number_format((float)(($productList->product->price * $productList->quantity) * ($productList->product->gst / 100)), 2, '.', '');
             }
             if ($productList->quantity > $productList->product->quantity) {
                 $notavilableproduct[$productList->product->id] = ['available' => $productList->product->quantity];
@@ -277,7 +277,7 @@ class OrdersController extends Controller
             //$productQuantity+=$productList->quantity;
         }
 
-        $product_price = $totalPrice;
+        $product_price = number_format((float)($totalPrice), 2, '.', '');
         $setting = Settings::findOne(1);
         $gst = 0;
         $gstenable = false;
@@ -287,12 +287,12 @@ class OrdersController extends Controller
         }
         if ($gst>0) {
             $gstenable = true;
-            $gst_amount = $product_price * ($gst / 100);
-            $totalPrice+=$gst_amount;
+            $gst_amount = number_format((float)($product_price * ($gst / 100)), 2, '.', '');
+            $totalPrice+=number_format((float)($gst_amount), 2, '.', '');
         }
         
         if (array_sum($product_gst)>0) {
-            $totalPrice+=array_sum($product_gst);
+            $totalPrice+=number_format((float)(array_sum($product_gst)), 2, '.', '');
         }
 
         $freight_charges = 0;
@@ -303,8 +303,8 @@ class OrdersController extends Controller
         }
         if ($freight_charges>0) {
             $freight_chargesenable = true;
-            $freight_amount = $product_price * ($freight_charges / 100);
-            $totalPrice+=$freight_amount;
+            $freight_amount = number_format((float)($product_price * ($freight_charges / 100)), 2, '.', '');
+            $totalPrice+=number_format((float)($freight_amount), 2, '.', '');
         }
 
         
@@ -322,26 +322,29 @@ class OrdersController extends Controller
         $order->firstname = Yii::$app->user->identity->firstname;
         $order->lastname = Yii::$app->user->identity->lastname;
         $order->email = Yii::$app->user->identity->email;
-        $order->total_price = $totalPrice;
-        $order->products_gst_price = array_sum($product_gst);
+        $order->total_price = number_format((float)($totalPrice), 2, '.', '');
+        $order->products_gst_price = number_format((float)(array_sum($product_gst)), 2, '.', '');
         if (isset($_POST['promotion_id']) && $_POST['promotion_id']!='') {
             $promotion = Promotion::findOne($_POST['promotion_id']);
             if(!empty($promotion)) {
+                $order->promotion_id = $_POST['promotion_id'];
                 $order->promotion_price = 0;
                 if($promotion->discount_type == 'Flat') {
                     $order->promotion_price = $promotion->price;
                 }
                 if($promotion->discount_type == 'Percentage') {
-                    $order->promotion_price = round(($product_price*$promotion->price)/100, 2);
+                    $order->promotion_price = number_format((float)(($product_price*$promotion->price)/100), 2, '.', '');
                 }
 
-                $order->total_price = $totalPrice - $order->promotion_price;
+                $order->total_price = number_format((float)($totalPrice - $order->promotion_price), 2, '.', '');
             }
             
         }
-        $order->gst = $gst_amount;
-        $order->freight_charges = $freight_amount;
-        $order->product_price = $product_price;
+        $sgst = number_format((float)($gst_amount/2), 2, '.', '');
+        $order->sgst = number_format((float)($sgst), 2, '.', '');
+        $order->gst = number_format((float)($sgst*2), 2, '.', '');
+        $order->freight_charges = number_format((float)($freight_amount), 2, '.', '');
+        $order->product_price = number_format((float)($product_price), 2, '.', '');
         $order->status = 0;
         $order->created_at = time();
         $order->created_by = Yii::$app->user->identity->id;
@@ -404,7 +407,7 @@ class OrdersController extends Controller
                 
                 $orderData = [
                     'receipt'         => 'DW00'.$order->id,
-                    'amount'          => $totalPrice*100, // 2000 rupees in paise
+                    'amount'          => $order->total_price*100, // 2000 rupees in paise
                     'currency'        => 'INR',
                     'payment_capture' => 1 // auto capture
                 ];
@@ -578,14 +581,17 @@ class OrdersController extends Controller
         if ($coupon_code!= '') {
             $promotion = Promotion::find()->where(['name' => $coupon_code])->andWhere(['promotion_type' => 'coupon'])->andWhere(['user_id' => Yii::$app->user->identity->id])->andFilterWhere(['<=', 'start_date',date('Y-m-d')])->andFilterWhere(['>=', 'end_date',date('Y-m-d')])->andWhere(['status' => 'active'])->one();
             if (!empty($promotion)) {
-                $returnData['success'] = true;
-                $returnData['promotion_id'] = $promotion->id;
-                $returnData['promotion_code'] = $coupon_code;
-                if($promotion->discount_type == 'Flat') {
-                    $returnData['promotion_price'] = $promotion->price;
-                }
-                if($promotion->discount_type == 'Percentage') {
-                    $returnData['promotion_price'] = round(($product_price*$promotion->price)/100, 2);
+                $order = Orders::find()->where(['promotion_id'=>$promotion->id, 'customer_id'=>Yii::$app->user->identity->id])/*->andFilterWhere(['!=', 'status','0'])*/->one();
+                if (empty($order)) {
+                    $returnData['success'] = true;
+                    $returnData['promotion_id'] = $promotion->id;
+                    $returnData['promotion_code'] = $coupon_code;
+                    if($promotion->discount_type == 'Flat') {
+                        $returnData['promotion_price'] = $promotion->price;
+                    }
+                    if($promotion->discount_type == 'Percentage') {
+                        $returnData['promotion_price'] = round(($product_price*$promotion->price)/100, 2);
+                    }
                 }
             }
         }

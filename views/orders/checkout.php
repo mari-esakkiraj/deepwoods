@@ -117,14 +117,14 @@ use app\models\Orders;
                                     }
                                 ?>
                             </td>
-                            <td>
+                            <td class="text-right">
                                 <?php echo $item['quantity'] ?>
                             </td>
-                            <td>
-                                <?= $item->quantity * $item->product->price ?>
+                            <td class="text-right">
+                                <?= number_format((float)($item->quantity * $item->product->price), 2, '.', '') ?>
                             </td>
-                            <td>
-                                <?= $product_gst[$item->product->id] ?>
+                            <td class="text-right">
+                                <?= number_format((float)($product_gst[$item->product->id]), 2, '.', '') ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -157,7 +157,7 @@ use app\models\Orders;
                     <tr>
                         <td>GST</td>
                         <td class="text-right">
-                            <?php echo array_sum($product_gst); ?>
+                            <?php echo number_format((float)((array_sum($product_gst))), 2, '.', ''); ?>
                         </td>
                     </tr>
                     <?php 
@@ -251,6 +251,11 @@ $this->registerJs("
 
 
 ?>  
+<style>
+.text-right{
+    text-align: right;
+}
+</style>
 <script>
     function applycoupon(){
         $("#promotion_id").val('');
