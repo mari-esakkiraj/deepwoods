@@ -38,7 +38,7 @@ use yii\grid\ActionColumn;
             'total_price',
             [
                 'label' => 'Transaction No',
-                'attribute' => 'paypal_order_id'
+                'attribute' => 'paypal_order_id',
             ],
             [
                 'header' => 'Actions',
