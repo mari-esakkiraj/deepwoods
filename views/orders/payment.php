@@ -62,9 +62,9 @@ use yii\widgets\Pjax;
                             style="width: 50px;">
                     </td>
                     <td><?php echo $item->product_name ?></td>
-                    <td><?php echo $item->quantity ?></td>
-                    <td><?php echo $item->quantity * $item->unit_price; ?></td>
-                    <td><?php echo $item->product_gst_price ?></td>
+                    <td class="text-right"><?php echo $item->quantity ?></td>
+                    <td class="text-right"><?php echo $item->quantity * $item->unit_price; ?></td>
+                    <td class="text-right"><?php echo $item->product_gst_price ?></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
@@ -73,15 +73,15 @@ use yii\widgets\Pjax;
         <table class="table">
             <tr>
                 <th>Total Items</th>
-                <td><?php echo $productQuantity ?></td>
+                <td class="text-right"><?php echo $productQuantity ?></td>
             </tr>
             <tr>
                 <th>Total Price</th>
-                <td><?php echo $order->product_price ?></td>
+                <td class="text-right"><?php echo $order->product_price ?></td>
             </tr>
             <tr>
                 <th>GST</th>
-                <td><?php echo $order->products_gst_price ?></td>
+                <td class="text-right"><?php echo $order->products_gst_price ?></td>
             </tr>
             <?php 
             if($gstenable) {
@@ -136,7 +136,12 @@ use yii\widgets\Pjax;
         </form>
     </div>
 </div>
-    
+<style>
+.text-right{
+    text-align: right;
+}
+</style>
+ 
     <script>
         // Checkout details as a json
         var options = <?php echo $json?>;
