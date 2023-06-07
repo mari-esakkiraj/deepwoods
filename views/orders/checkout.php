@@ -40,7 +40,8 @@ use app\models\Orders;
             <div class="card-header">
                 <h5>Shipping Address</h5>
             </div>
-            
+            <?php
+                            Pjax::begin(['id' => 'address-gridview','timeout'=>5000]);  ?>
             <div class="card-body">
                 <?php
                 $shippingAddresses = UserAddresses::find()->where(['user_id' => Yii::$app->user->identity->id,'type' => 'shipping'])->all();
@@ -51,6 +52,7 @@ use app\models\Orders;
                             <?=$shipping->city.' ,'.$shipping->state?><br>
                             <?=$shipping->country.' - '.$shipping->zipcode?> <br>
                             <a href="javascript:void(0)" class="btn-small pull-right addressChoose"  data-shipping_address_id = "<?=$shipping->id?>" data-address_type = "shipping" data-address_id = "<?=$shipping->id?>" data-address = "<?=$shipping->address?>" data-city = "<?=$shipping->city?>" data-country = "<?=$shipping->country?>" data-state = "<?=$shipping->state?>" data-zipcode = "<?=$shipping->zipcode?>">Select Address</a>
+                            <i class="fas fa-edit addressUpdate pull-right" style="cursor:pointer;padding-right: 10px;padding-top: 4px;" aria-hidden="true" data-address_type="shipping" data-address_id="<?=$shipping->id?>"></i>
                         </address></div>
                         <?php 
                         $order->shipping_address_id = $shipping->id;
@@ -60,6 +62,7 @@ use app\models\Orders;
                     echo "<div>No Address found.</div>";
                 }?>
                 <?= $form->field($order, 'shipping_address_id')->hiddenInput(['autofocus' => true])->label(false) ?>
+                <?php Pjax::end(); ?>
             </div>
             <div class="card-body" style="border-top: 2px solid #ddd;">
                 <?= $form->field($order, 'firstname')->textInput(['autofocus' => true]) ?>
@@ -218,9 +221,24 @@ use app\models\Orders;
     </div>
 </div>
 <?php ActiveForm::end(); ?>
+<div class="modal fade" id="addressModal" tabindex="-1" aria-labelledby="addressModal" aria-hidden="true" data-keyboard="false">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addressModal">Address</Address></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body addressUpdateModal">
+            
+          </div>
+        </div>
+      </div>
+    </div>
 </section>
 <?php 
 $this->registerJs("
+    var AppConfig = new AppConfigs();
+    var baseurl = AppConfig.getBaseUrl();
     $(document).on('click','.addressChoose',function(e) {
         $('#useraddresses-address').val($(this).attr('data-address'));
         $('#useraddresses-city').val($(this).attr('data-city'));
@@ -245,6 +263,82 @@ $this->registerJs("
         $('#show-offer-success').addClass('hide');
         $('#promotion_div').show();
         $('#offer-code').text('');
+    });
+
+    $(document).on('click','.addressUpdate',function() { 
+        var addressId = $(this).data('address_id');
+        var addressType = $(this).data('address_type');
+        $.ajax({
+            type:'post',
+            url:baseurl+'/profile/address-update',
+            data:{addressId:addressId,addressType:addressType},
+            success:function(response) {
+                $('.addressUpdateModal').html(response);
+                $('#addressModal').modal('show');
+            }
+        });
+    });
+
+    $(document).on('click','.address_update_submit',function() {
+        var address = $('#address_update_form .address').val();
+        var city = $('#address_update_form .city').val();
+        var state = $('#address_update_form .state').val();
+        var country = $('#address_update_form .country').val();
+        var pinCode = $('#address_update_form .pinCode').val();
+        var addressid = $('#address_update_form .addressid').val();
+        var addresstype = $('#address_update_form .addresstype').val();
+        var clr = 0;
+        if(address == ''){
+            $('#address_error').html('<span style=\"color:red\">Address is Requried</span>');
+            clr =1;
+        } else {
+            $('#address_error').html('');
+        }
+
+        if(city == ''){
+            $('#city_error').html('<span style=\"color:red\">City is Requried</span>');
+            clr =1;
+        } else {
+            $('#city_error').html('');
+        }
+
+        if(state == ''){
+            $('#state_error').html('<span style=\"color:red\">State is Requried</span>');
+            clr =1;
+        } else {
+            $('#state_error').html('');
+        }
+
+        if(country == ''){
+            $('#country_error').html('<span style=\"color:red\">Country is Requried</span>');
+            clr =1;
+        } else {
+            $('#country_error').html('');
+        }
+
+        if(pinCode == ''){
+            $('#pinCode_error').html('<span style=\"color:red\">Pincode is Requried</span>');
+            clr =1;
+        } else {
+            $('#pinCode_error').html('');
+        }
+
+        if(clr==0) {
+            $.ajax({
+                type:'post',
+                url:baseurl+'/profile/address-save',
+                data:{address:address,city:city,state:state,country:country,pinCode:pinCode,addressid:addressid,addresstype:addresstype},
+                success:function(response) {
+                    if(response) {
+                        toastr.success('Address saved suceesfully');
+                    } else {
+                        toastr.error('something went wrong !')
+                    }
+                    $.pjax.reload({container:'#address-gridview',timeout:'5000'}); 
+                    $('#addressModal').modal('hide');
+                }
+            });
+        }
     });
 
 ");
