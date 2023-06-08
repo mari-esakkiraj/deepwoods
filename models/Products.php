@@ -139,9 +139,9 @@ class Products extends \yii\db\ActiveRecord
     
 
     public static function sendlowqtyalert($model){
-        /*if ($model->quantity > 100) {
+        if ($model->quantity > 100) {
             return false;
-        }*/
+        }
         //$setting = Settings::findOne(1);
         $to = Yii::$app->params['adminEmail']; 
         $subject = $model->name." is low stock"; 
