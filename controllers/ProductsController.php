@@ -81,6 +81,7 @@ class ProductsController extends Controller
     public function actionView($id)
     {
         $modelImages = ProductImages::find()->where(['product_id' => $id])->all();
+        Products::sendlowqtyalert($this->findModel($id));
         return $this->render('view', [
             'model' => $this->findModel($id),
             'modelImages' => $modelImages
