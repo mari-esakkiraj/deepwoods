@@ -151,11 +151,56 @@ class Orders extends \yii\db\ActiveRecord
 
         $msg = "<p>Dear  {$order->firstname}  {$order->lastname},</p>
         We have received your recent order, {$order->order_code} in Our Deepwoods Organics webstore. Thank you for choosing us for your shopping needs.Here are all the details: </p> 
-        <h5>Your Order Summary:</h5><br>
+        <h5>Your Order Summary:</h5>
+            <table style='--bs-table-color: var(--bs-body-color);--bs-table-bg: transparent;--bs-table-border-color: var(--bs-border-color);--bs-table-accent-bg: transparent;--bs-table-striped-color: var(--bs-body-color);--bs-table-striped-bg: rgba(0, 0, 0, 0.05);--bs-table-active-color: var(--bs-body-color);--bs-table-active-bg: rgba(0, 0, 0, 0.1);--bs-table-hover-color: var(--bs-body-color);--bs-table-hover-bg: rgba(0, 0, 0, 0.075);width: 100%;margin-bottom: 1rem;color: var(--bs-table-color);vertical-align: top;border-color: var(--bs-table-border-color);'>
+                <thead>
+                <tr>
+                    <th style='background-color: #00000000;border-bottom-width: 0;text-align: -webkit-match-parent;padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;'>Name</th>
+                    <th style='background-color: #00000000;border-bottom-width: 0;text-align: -webkit-match-parent;padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;'>Qty</th>
+                    <th style='background-color: #00000000;border-bottom-width: 0;text-align: -webkit-match-parent;padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;'>Price</th>
+                    <th style='background-color: #00000000;border-bottom-width: 0;text-align: -webkit-match-parent;padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;'>GST</th>
+                </tr>
+                </thead>
+                <tbody>";
+                    foreach($items as $item){
+                        $msg .= "
+                        <tr> 
+                            <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none;'>New sample product </td> 
+                            <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none;'>2</td> 
+                            <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none;'>240.00</td> 
+                            <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-top: none;'>120.00</td>
+                        </tr>";
+                    }
+
+                 $msg .= "        
+                </tbody>
+            </table>
+            <table style='--bs-table-color: var(--bs-body-color);--bs-table-bg: transparent;--bs-table-border-color: var(--bs-border-color);--bs-table-accent-bg: transparent;--bs-table-striped-color: var(--bs-body-color);--bs-table-striped-bg: rgba(0, 0, 0, 0.05);--bs-table-active-color: var(--bs-body-color);--bs-table-active-bg: rgba(0, 0, 0, 0.1);--bs-table-hover-color: var(--bs-body-color);--bs-table-hover-bg: rgba(0, 0, 0, 0.075);width: 100%;margin-bottom: 1rem;color: var(--bs-table-color);vertical-align: top;border-color: var(--bs-table-border-color);'>
+                <tr>
+                    <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;'><b>Total Items</b></td>
+                    <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;text-align: right;'>".count($items)."</td>
+                </tr>
+                <tr>
+                    <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none;'><b>Total Price</b></td>
+                    <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-top: none;text-align: right;'>".$order->products_gst_price."</td>
+                </tr>
+                <tr>
+                    <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none;'><b>GST</b></td>
+                    <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-top: none;text-align: right;'>".$order->gst."</td>
+                </tr>
+                <tr>
+                    <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none;'><b>Freight Charges</b></td>
+                    <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-top: none;text-align: right;'>27.00</td>
+                </tr>
+                <tr>
+                    <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none;'><b>Total</b></td>
+                    <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-top: none;text-align: right;'>27.00</td>
+                </tr>
+            </table>
             <table cellspacing='0' style='border: 2px dashed #FB4314; width: 100%;'> 
                 <tr> 
                     <th style='text-align:left'>Product Name:</th><th>Quantity</th> <th>Unit Price</th> 
-            </tr> ";
+                </tr> ";
                 if(!empty($items)) {
                     foreach($items as $item){
                         $msg .= '     
@@ -164,6 +209,7 @@ class Orders extends \yii\db\ActiveRecord
                         </tr> ';
                     }
                 }
+
                 $msg .= '     
                 <tr > 
                     <th colspan="2" style="text-align:right">SubTotal:</th><td>'.number_format(($order->total_price-($order->gst+$order->freight_charges)),2).'</td> 
