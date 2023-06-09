@@ -11,12 +11,21 @@ use yii\widgets\Pjax;
 use yii\grid\ActionColumn;
 ?>
 
+<style>
+@media(max-width: 768px) {
+	.mobileclass{
+        display:none;
+    }
+}
+</style>
+
 <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'filterModel' => false,
         'columns' => [
             [
                 'attribute' => 'order_code'
@@ -39,6 +48,8 @@ use yii\grid\ActionColumn;
             [
                 'label' => 'Transaction No',
                 'attribute' => 'paypal_order_id',
+                'contentOptions' => ['class' => 'mobileclass'],
+                'headerOptions' => ['class' => 'mobileclass']
             ],
             [
                 'header' => 'Actions',
