@@ -111,7 +111,7 @@ use yii\widgets\Pjax;
             if($order->promotion_price>0) {
                 ?>
                 <tr>
-                    <th>Promotion</th>
+                    <th>Discount</th>
                     <td class="text-right">
                         <?php echo $order->promotion_price; ?>
                     </td>

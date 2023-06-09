@@ -188,7 +188,7 @@ use app\models\Orders;
                     }
                     ?>
                     <tr id="promotion_tr" style="display:none;">
-                        <th id="promotion_desc">Promotion</th>
+                        <th id="promotion_desc">Discount</th>
                         <td class="text-right" id="promotion_amount">
                            
                         </td>
