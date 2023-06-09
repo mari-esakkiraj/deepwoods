@@ -165,13 +165,20 @@ class Orders extends \yii\db\ActiveRecord
                     foreach($items as $item){
                         $msg .= "
                         <tr> 
-                            <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none;'>New sample product </td> 
-                            <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none;'>2</td> 
-                            <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none;'>240.00</td> 
-                            <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-top: none;'>120.00</td>
+                            <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none;'>{$item->product_name}</td> 
+                            <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none; text-align: right;'>{$item->quantity}</td> 
+                            <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none; text-align: right;'>{$item->unit_price}</td> 
+                            <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-top: none; text-align: right;'>{$item->product_gst_price}</td>
                         </tr>";
                     }
-
+                
+                    $promotionmsg = "";
+                    if($order->promotion_price>0) {
+                        $promotionmsg = "<tr>
+                        <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none;'><b>Promotion</b></td>
+                        <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-top: none;text-align: right;'>".$order->promotion_price."</td>
+                    </tr>";
+                    }
                  $msg .= "        
                 </tbody>
             </table>
@@ -190,27 +197,28 @@ class Orders extends \yii\db\ActiveRecord
                 </tr>
                 <tr>
                     <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none;'><b>Freight Charges</b></td>
-                    <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-top: none;text-align: right;'>27.00</td>
+                    <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-top: none;text-align: right;'>".$order->freight_charges."</td>
                 </tr>
+                {$promotionmsg}
                 <tr>
                     <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none;'><b>Total</b></td>
-                    <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-top: none;text-align: right;'>27.00</td>
+                    <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-top: none;text-align: right;'>".$order->total_price."</td>
                 </tr>
-            </table>
-            <table cellspacing='0' style='border: 2px dashed #FB4314; width: 100%;'> 
+            </table>";
+            $msgold = "<table cellspacing='0' style='border: 2px dashed #FB4314; width: 100%;'> 
                 <tr> 
                     <th style='text-align:left'>Product Name:</th><th>Quantity</th> <th>Unit Price</th> 
                 </tr> ";
                 if(!empty($items)) {
                     foreach($items as $item){
-                        $msg .= '     
+                        $msgold .= '     
                         <tr > 
                             <td>'.$item->product_name.'</td><td style="text-align:center">'.$item->quantity.'</td> <td style="text-align:center">'.$item->unit_price.'</td> 
                         </tr> ';
                     }
                 }
 
-                $msg .= '     
+                $msgold .= '     
                 <tr > 
                     <th colspan="2" style="text-align:right">SubTotal:</th><td>'.number_format(($order->total_price-($order->gst+$order->freight_charges)),2).'</td> 
                 </tr> 
@@ -226,8 +234,8 @@ class Orders extends \yii\db\ActiveRecord
                 <tr > 
                     <th colspan="2" style="text-align:right">Total:</th><td>'.$order->total_price.'</td> 
                 </tr> 
-                    </table> 
-                        <p>We are currently processing your order and will keep you updated on the status of your shipment. You can expect to receive your products in minimum 2 business working days, Maximum 4 business working days, If you still didnt receive your products after 4 business working days, please call back us with your Order number @+91 6380589226.</p><br>
+                    </table>'; 
+                $msg .= '<p>We are currently processing your order and will keep you updated on the status of your shipment. You can expect to receive your products in minimum 2 business working days, Maximum 4 business working days, If you still didnt receive your products after 4 business working days, please call back us with your Order number @+91 6380589226.</p><br>
                         <p>If you have any questions or concerns about your order, please don’t hesitate to contact us. Our customer service team is always happy to assist you.</p><br>
                         <p>Thank you for your support. We look forward to serving you again in the future.</p><br>
                         <p>Best regards,<br>
