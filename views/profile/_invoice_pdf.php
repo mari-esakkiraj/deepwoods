@@ -98,7 +98,7 @@ if ($freight_charges>0) {
     }
     ?>
     <tr id="promotion_tr" style="display:none;">
-        <td id="promotion_desc" style="text-align: right">Promotion</td>
+        <td id="promotion_desc" style="text-align: right">Discount</td>
         <td class="text-right" id="promotion_amount">
         
         </td>

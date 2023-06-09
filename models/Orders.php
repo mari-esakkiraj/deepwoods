@@ -175,7 +175,7 @@ class Orders extends \yii\db\ActiveRecord
                     $promotionmsg = "";
                     if($order->promotion_price>0) {
                         $promotionmsg = "<tr>
-                        <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none;'><b>Promotion</b></td>
+                        <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none;'><b>Discount</b></td>
                         <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-top: none;text-align: right;'>".$order->promotion_price."</td>
                     </tr>";
                     }

@@ -190,7 +190,7 @@ function amountInWord($number) {
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td style="padding: 10px;" style="text-align: right">Promotion</td>
+                    <td style="padding: 10px;" style="text-align: right">Discount</td>
                     <td></td>
                     <td style="padding: 10px;" class="text-right">
                         <?= $order->promotion_price; ?>
@@ -239,9 +239,9 @@ function amountInWord($number) {
                 <tr>
                     <td  style="padding: 10px;"><?= $tax_key?></td>
                     <td  style="padding: 10px;text-align:center;font-size:10px;"><?= number_format($tax['amount'],2)?></td>
-                    <td  style="padding: 10px;text-align:center;font-size:10px;"><?= $tax['rate']?></td>
+                    <td  style="padding: 10px;text-align:center;font-size:10px;"><?= number_format(($tax['rate']/2),2)?></td>
                     <td  style="padding: 10px;text-align:center;font-size:10px;"><?= number_format(($tax['tax_amount']/2),2)?></td>
-                    <td  style="padding: 10px;text-align:center;font-size:10px;"><?= $tax['rate']?></td>
+                    <td  style="padding: 10px;text-align:center;font-size:10px;"><?= number_format(($tax['rate']/2),2)?></td>
                     <td  style="padding: 10px;text-align:center;font-size:10px;"><?= number_format(($tax['tax_amount']/2),2)?></td>
                     <td  style="padding: 10px;text-align:center;font-size:10px;"><?= number_format($tax['tax_amount'],2) ?></td>
                 </tr>
