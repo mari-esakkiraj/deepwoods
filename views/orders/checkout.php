@@ -196,7 +196,7 @@ use app\models\Orders;
                     <tr>
                         <th>Total </th>
                         <td class="text-right" id="total_price_td">
-                            <?php echo $totalPrice; ?>
+                            <?php echo number_format((float)($totalPrice), 2, '.', ''); ?>
                         </td>
                     </tr>
                 </table>
