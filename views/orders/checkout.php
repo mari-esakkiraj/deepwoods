@@ -148,17 +148,17 @@ use app\models\Orders;
                 <hr>
                 <table class="table">
                     <tr>
-                        <td>Total Items</td>
+                        <th>Total Items</th>
                         <td class="text-right"><?php echo $productQuantity ?></td>
                     </tr>
                     <tr>
-                        <td>Total Price</td>
+                        <th>Total Price</th>
                         <td class="text-right">
                             <?php echo $product_price; ?>
                         </td>
                     </tr>
                     <tr>
-                        <td>GST</td>
+                        <th>GST</th>
                         <td class="text-right">
                             <?php echo number_format((float)((array_sum($product_gst))), 2, '.', ''); ?>
                         </td>
@@ -167,7 +167,7 @@ use app\models\Orders;
                     if($gstenable) {
                         ?>
                         <tr>
-                            <td>GST <?php echo $gst;?>%</td>
+                            <th>GST <?php echo $gst;?>%</th>
                             <td class="text-right">
                                 <?php echo $gst_amount; ?>
                             </td>
@@ -179,7 +179,7 @@ use app\models\Orders;
                     if($freight_chargesenable) {
                         ?>
                         <tr>
-                            <td>Freight Charges <?php echo $freight_charges;?>%</td>
+                            <th>Freight Charges <?php echo $freight_charges;?>%</th>
                             <td class="text-right">
                                 <?php echo $freight_amount; ?>
                             </td>
@@ -188,13 +188,13 @@ use app\models\Orders;
                     }
                     ?>
                     <tr id="promotion_tr" style="display:none;">
-                        <td id="promotion_desc">Promotion</td>
+                        <th id="promotion_desc">Promotion</th>
                         <td class="text-right" id="promotion_amount">
                            
                         </td>
                     </tr>
                     <tr>
-                        <td>Total </td>
+                        <th>Total </th>
                         <td class="text-right" id="total_price_td">
                             <?php echo $totalPrice; ?>
                         </td>

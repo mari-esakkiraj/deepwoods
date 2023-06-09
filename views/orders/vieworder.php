@@ -107,7 +107,7 @@ $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_i
             {
                 ?>
                 <tr>
-                    <td>GST <?php //echo $gst;%?></td>
+                    <th>GST <?php //echo $gst;%?></th>
                     <td class="text-right">
                         <?php echo $order->gst; ?>
                     </td>
@@ -119,7 +119,7 @@ $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_i
             if($order->freight_charges != 0)  {
                 ?>
                 <tr>
-                    <td>Freight Charges <?php //echo $freight_charges;%?></td>
+                    <th>Freight Charges <?php //echo $freight_charges;%?></th>
                     <td class="text-right">
                         <?php echo $order->freight_charges; ?>
                     </td>
@@ -131,7 +131,7 @@ $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_i
             if($order->promotion_price>0) {
                 ?>
                 <tr>
-                    <td>Promotion</td>
+                    <th>Promotion</th>
                     <td class="text-right">
                         <?php echo $order->promotion_price; ?>
                     </td>
@@ -140,7 +140,7 @@ $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_i
             }
             ?>
             <tr>
-                <td>Total </td>
+                <th>Total </th>
                 <td class="text-right">
                     <?php echo $order->total_price; ?>
                 </td>

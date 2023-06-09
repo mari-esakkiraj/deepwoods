@@ -87,7 +87,7 @@ use yii\widgets\Pjax;
             if($gstenable) {
                 ?>
                 <tr>
-                    <td>GST <?php echo $gst;?>%</td>
+                    <th>GST <?php echo $gst;?>%</th>
                     <td class="text-right">
                         <?php echo $order->gst; ?>
                     </td>
@@ -99,7 +99,7 @@ use yii\widgets\Pjax;
             if($freight_chargesenable) {
                 ?>
                 <tr>
-                    <td>Freight Charges <?php echo $freight_charges;?>%</td>
+                    <th>Freight Charges <?php echo $freight_charges;?>%</th>
                     <td class="text-right">
                         <?php echo $order->freight_charges; ?>
                     </td>
@@ -111,7 +111,7 @@ use yii\widgets\Pjax;
             if($order->promotion_price>0) {
                 ?>
                 <tr>
-                    <td>Promotion</td>
+                    <th>Promotion</th>
                     <td class="text-right">
                         <?php echo $order->promotion_price; ?>
                     </td>
@@ -120,7 +120,7 @@ use yii\widgets\Pjax;
             }
             ?>
             <tr>
-                <td>Total </td>
+                <th>Total </th>
                 <td class="text-right">
                     <?php echo $order->total_price; ?>
                 </td>
