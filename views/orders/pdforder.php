@@ -58,12 +58,6 @@ function amountInWord($number) {
 }  
 
 ?>
-
-<style>
-    .taxTable , .taxTable th, .taxTable td{
-        font-size:10px !important;
-    }
-</style>
 <section class="checkout-cart-area">
 <?php 
     echo '';
@@ -154,18 +148,6 @@ function amountInWord($number) {
                     </td>
                 </tr>
             <?php endforeach; ?>
-       
-            <tr>
-                <td style="padding: 10px;"></td>
-                <td style="padding: 10px;"></td>
-                <td style="padding: 10px;"></td>
-                <td style="padding: 10px;"></td>
-                <th style="padding: 10px; text-align: right">SubTotal</th>
-                <td style="padding: 10px;"></td>
-                <td style="padding: 10px; text-align: right">
-                    <?= $order->total_price ?>
-                </td>
-            </tr>
            
             <?php 
             if($order->gst != 0) 
@@ -217,25 +199,37 @@ function amountInWord($number) {
                 <?php 
             }
             ?>
+
+            <tr>
+                <td style="padding: 10px;"></td>
+                <td style="padding: 10px;"></td>
+                <td style="padding: 10px;"></td>
+                <td style="padding: 10px;"></td>
+                <th style="padding: 10px; text-align: right">SubTotal</th>
+                <td style="padding: 10px;"></td>
+                <td style="padding: 10px; text-align: right">
+                    <?= $order->total_price ?>
+                </td>
+            </tr>
             
             <tr>
                 <td style="padding: 10px;" colspan="7"> Amount Chargeable (in words) <br/><?= amountInWord($order->total_price)?></td>
             </tr>
             <tr>
         </table>
-        <table class="table table-hover table-bordered taxTable" style="width:80%;text-align:right">
+        <table class="table table-hover table-bordered taxTable" style="text-align:right;font-size:10px;">
             <tr >
-                <td style="padding: 10px;" rowspan="2">HSN/SAC</td>
-                <td style="padding: 10px;text-align:center;" rowspan="2">Taxable Value</td>
-                <td style="padding: 10px;text-align:center;" colspan="2">Central Tax</td>
-                <td style="padding: 10px;text-align:center;" colspan="2">State Tax</td>
-                <td style="padding: 10px;text-align:center;" rowspan="2">Total Tax Amount</td>
+                <td style="padding: 10px;font-size:10px;font-size:10px;" rowspan="2">HSN/SAC</td>
+                <td style="padding: 10px;text-align:center;font-size:10px;" rowspan="2">Taxable Value</td>
+                <td style="padding: 10px;text-align:center;font-size:10px;" colspan="2">Central Tax</td>
+                <td style="padding: 10px;text-align:center;font-size:10px;" colspan="2">State Tax</td>
+                <td style="padding: 10px;text-align:center;font-size:10px;" rowspan="2">Total Tax Amount</td>
             </tr>
             <tr>
-                <td style="padding: 10px;text-align:center;">Rate</td>
-                <td style="padding: 10px;text-align:center;">Amount</td>
-                <td style="padding: 10px;text-align:center;">Rate</td>
-                <td style="padding: 10px;text-align:center;">Amount</td>
+                <td style="padding: 10px;text-align:center;font-size:10px;">Rate</td>
+                <td style="padding: 10px;text-align:center;font-size:10px;">Amount</td>
+                <td style="padding: 10px;text-align:center;font-size:10px;">Rate</td>
+                <td style="padding: 10px;text-align:center;font-size:10px;">Amount</td>
             </tr>
             <?php $totalTax = 0;
             $totalTaxAmount = 0;
@@ -244,23 +238,23 @@ function amountInWord($number) {
                 $totalTaxAmount += $tax['amount'];?>
                 <tr>
                     <td  style="padding: 10px;"><?= $tax_key?></td>
-                    <td  style="padding: 10px;text-align:center;"><?= number_format($tax['amount'],2)?></td>
-                    <td  style="padding: 10px;text-align:center;"><?= $tax['rate']?></td>
-                    <td  style="padding: 10px;text-align:center;"><?= number_format(($tax['tax_amount']/2),2)?></td>
-                    <td  style="padding: 10px;text-align:center;"><?= $tax['rate']?></td>
-                    <td  style="padding: 10px;text-align:center;"><?= number_format(($tax['tax_amount']/2),2)?></td>
-                    <td  style="padding: 10px;text-align:center;"><?= number_format($tax['tax_amount'],2) ?></td>
+                    <td  style="padding: 10px;text-align:center;font-size:10px;"><?= number_format($tax['amount'],2)?></td>
+                    <td  style="padding: 10px;text-align:center;font-size:10px;"><?= $tax['rate']?></td>
+                    <td  style="padding: 10px;text-align:center;font-size:10px;"><?= number_format(($tax['tax_amount']/2),2)?></td>
+                    <td  style="padding: 10px;text-align:center;font-size:10px;"><?= $tax['rate']?></td>
+                    <td  style="padding: 10px;text-align:center;font-size:10px;"><?= number_format(($tax['tax_amount']/2),2)?></td>
+                    <td  style="padding: 10px;text-align:center;font-size:10px;"><?= number_format($tax['tax_amount'],2) ?></td>
                 </tr>
 
             <?php }?>
             <tr>
                 <td  style="padding: 10px;"> Total</td>
-                <td  style="padding: 10px;text-align:center;"> <?= number_format($totalTaxAmount,2)?></td>
-                <td  style="padding: 10px;text-align:center;"></td>
-                <td  style="padding: 10px;text-align:center;"> <?= number_format(($totalTax/2),2)?></td>
-                <td  style="padding: 10px;text-align:center;"></td>
-                <td  style="padding: 10px;text-align:center;"> <?= number_format(($totalTax/2),2)?></td>
-                <td  style="padding: 10px;text-align:center;"> <?= number_format($totalTax,2)?></td>
+                <td  style="padding: 10px;text-align:center;font-size:10px;"> <?= number_format($totalTaxAmount,2)?></td>
+                <td  style="padding: 10px;text-align:center;font-size:10px;"></td>
+                <td  style="padding: 10px;text-align:center;font-size:10px;"> <?= number_format(($totalTax/2),2)?></td>
+                <td  style="padding: 10px;text-align:center;font-size:10px;"></td>
+                <td  style="padding: 10px;text-align:center;font-size:10px;"> <?= number_format(($totalTax/2),2)?></td>
+                <td  style="padding: 10px;text-align:center;font-size:10px;"> <?= number_format($totalTax,2)?></td>
             </tr>
             <tr>
                 <td style="padding: 10px;" colspan="4"> Tax Amount (in words) <br/><?= amountInWord($totalTax)?></td>
