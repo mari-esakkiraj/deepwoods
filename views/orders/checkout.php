@@ -207,12 +207,17 @@ use app\models\Orders;
                 ?>
                 <p class="text-right mt-3">
                     <input type="hidden" name="cashondelivery" id="cashondelivery"/>
-                    <button class="btn btn-secondary">Continue Payment</button>
+                    <button class="btn btn-secondary" style="display:none">Continue Payment</button>
                     <?php if($order_count < 1){ ?>
                     <button type="button" class="btn btn-secondary cashondelivery">Cash on Delivery</button>
                     <?php } ?>
-                    
+                    <input type="hidden" name="qrcode" id="qrcode"/>
+                    <button type="button" class="btn btn-secondary qrcodebutton">Scan QRCode</button>
                 </p>
+                <div class="qrcodediv" style="display:none">
+                    <img style="width: 250px;" src="<?=$absoluteBaseUrl?>/images/QRCode.jpeg" alt="Logo" />
+                    <div class="input-group1" style="display: flex;gap: 20px;align-items: center;"> <input type="text" class="form-control coupon" name="qr_code" placeholder="Enter Transaction Number" id="qr_code" style="width: 250px;"> <span class="input-group-append"> <button class="btn btn-primary qr_code" onclick="return qrcodesumbit();">Submit</button> </span> </div>
+                </div>
                 <?php 
                     }
                 ?>
@@ -250,7 +255,16 @@ $this->registerJs("
 
     $(document).on('click','.cashondelivery',function() {
         $('#cashondelivery').val(1);
+        $('#qrcode').val(0);
         $('form#checkout-form').submit();
+    });
+
+    $(document).on('click','.qrcodebutton',function() {
+        $('#cashondelivery').val(0);
+        $('#qrcode').val(1);
+        $('.cashondelivery').hide();
+        $('.qrcodediv').show();
+        $('.qrcodebutton').hide();
     });
 
     $(document).on('click','.removecoupon',function() {
@@ -351,6 +365,13 @@ $this->registerJs("
 }
 </style>
 <script>
+    function qrcodesumbit(){
+        if($("#qr_code").val()==''){
+            toastr.warning('Invalid Transaction Number.'); 
+            return false;
+        }
+        return true;
+    }
     function applycoupon(){
         $("#promotion_id").val('');
         $("#promotion_price").val('');

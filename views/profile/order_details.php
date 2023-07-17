@@ -41,7 +41,7 @@ use yii\grid\ActionColumn;
                 'label' => 'Status',
                 'filter'=>array("1"=>"Success","2"=>"Failed","0"=>"Pending"),
                 'value' => function ($model){
-                    return (($model->status==2) ? 'Failed' : (($model->status==1) ? 'Success'  : 'Pending'));
+                    return (($model->status==2) ? 'Failed' : (($model->status==1) ? 'Success'  : (($model->qrcode==0) ? 'Pending'  : 'Verify Pending')));
                 },
             ],
             'total_price',

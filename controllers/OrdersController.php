@@ -357,8 +357,20 @@ class OrdersController extends Controller
             $order->cashondelivery = 1;
         }
         
-        $transaction = Yii::$app->db->beginTransaction();
-        if (empty($notavilableproduct)) {
+        $qrcode = 0;
+        $qrvalid = true;
+        if (isset($_POST['qrcode']) && $_POST['qrcode']=='1') {
+            $qrcode = 1;
+            $order->qrcode = 1;
+            $order->transaction_id = $_POST['qr_code'] ?? "";
+            $order->paypal_order_id = $_POST['qr_code'] ?? "";
+            if ($order->transaction_id==''){
+                $qrvalid = false;
+            }
+        }
+        
+        if (empty($notavilableproduct) && $qrvalid) {
+            //$transaction = Yii::$app->db->beginTransaction();
             $order_count = Orders::find()->where(['customer_id' => Yii::$app->user->identity->id])->count();
             //$order->order_code = "DW-".date('Y')."-".sprintf('%03d', ($order_count+1));
             $order->order_code = "DW/".sprintf('%03d', ($order_count+1))."/".date('y', strtotime('-1 year'))."-".date('y');
@@ -378,13 +390,17 @@ class OrdersController extends Controller
                             'id' => $order->shipping_address_id
                         ]
                     )->one();
-                $transaction->commit();
+                //$transaction->commit();
                 //CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
 
-                if ($cashondelivery==1) {
-                    $order->status = 1;
+                if ($cashondelivery==1 || $qrcode==1) {
+                    $html = "<div class='alert alert-success'>Your payment was successful and Your Payment Mode: <b>QRCode.</b></div>";
+                    
+                    if($cashondelivery==1) {
+                        $order->status = 1;
+                        $html = "<div class='alert alert-success'>Your payment was successful and Your Payment Mode: <b>Cash on delivery.</b></div>";
+                    }
                     $order->paypal_order_id = 'DW00'.$order->id;
-                    $html = "<div class='alert alert-success'>Your payment was successful and Your Payment Mode: <b>Cash on delivery.</b></div>";
                     $order->save(false);
                     foreach ($order->orderItems as $item) {
                         $item->product->quantity = $item->product->quantity - $item->quantity;
@@ -491,7 +507,8 @@ class OrdersController extends Controller
             'gst_amount' => $gst_amount,
             'freight_amount' => $freight_amount,
             'notavilableproduct' => $notavilableproduct,
-            'product_gst' => $product_gst
+            'product_gst' => $product_gst,
+            'qrvalid' => $qrvalid
         ]);
     }
 
