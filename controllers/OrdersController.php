@@ -722,7 +722,16 @@ class OrdersController extends Controller
     public function actionVieworderv1($id){
         $html = "";
         $order = Orders::findOne($id);
-
+        if(isset($_POST['approve'])) {
+            $order->status = 1;
+            $order->save();
+            Orders::sentOrder($order);
+        }
+        if(isset($_POST['reject'])) {
+            $order->status = 2;
+            $order->save();
+            //Orders::sentOrder($order);
+        }
         //$this->layout = 'mainpage';
         
         return $this->render('vieworder',["success" => "", 'message' => $html, 'order' => $order]);

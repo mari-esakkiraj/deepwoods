@@ -1,5 +1,6 @@
 <?php 
 use yii\helpers\Url;
+use yii\helpers\Html;
 $absoluteBaseUrl = Url::base(true);
 use yii\widgets\Pjax;
 use app\models\UserAddresses;
@@ -14,7 +15,23 @@ $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_i
 ?>
 <h3>Order ID: <?php echo $order->order_code ?></h3>
 <h5>Order Placed: <?= date("d-M-Y",$order->created_at) ?></h5>
-<h5>Transaction No: <?= $order->paypal_order_id ?></h5>
+<h5>
+    Transaction No: <?= $order->paypal_order_id ?>
+    <?php 
+        if(Yii::$app->user->identity->admin==1) {
+            if($order->qrcode==1 && $order->status==0) {
+                ?>
+                
+                <?php
+                echo Html::beginForm()
+                . Html::submitButton(
+                    'Approve',['class' => 'btn btn-secondary', "name"=>"approve"])
+                //. Html::submitButton(  'Reject',['class' => 'btn btn-secondary', "name"=>"reject"])
+                . Html::endForm();
+            }
+        }
+    ?>
+</h5>
 <h3 class="pull-right" style = "margin-top: -3%;float: right;">
     <a class="text-right" href="<?= Yii::$app->urlManager->createUrl('orders/pdfreport?id='.$order->id.'&option=print')?>" target='_blank'>
         <i class="fa fa-print" style="font-size:18px"></i>
