@@ -260,6 +260,31 @@ class Orders extends \yii\db\ActiveRecord
         $email->setSubject($subject);
         $email->setHtmlBody($message);
         $email->send();
+        
+        if ($order->qrcode == 1) {
+            $setting = Settings::findOne(1);
+
+            $to = $setting->company_email ?? Yii::$app->params['adminEmail'];
+            //$to = Yii::$app->params['adminEmail']; 
+            $subject = "QR Code Order : ".$order->transaction_id; 
+            $message = ' 
+            <html> 
+            <head> 
+                <title>QR Code Order</title> 
+            </head> 
+            <body> 
+                    <h1>Transaction number : '.$order->transaction_id.'</h1> 
+                    <h1>Order Code : '.$order->order_code.'</h1> 
+                    </body> 
+                    </html>';
+            $email = \Yii::$app->mailer->compose();
+            $email->setFrom([Yii::$app->params['adminEmail'] => 'Deepwoods - Admin']);
+            $email->setTo($to);
+            $email->setCharset('UTF-8');
+            $email->setSubject($subject);
+            $email->setHtmlBody($message);
+            $email->send();
+        }
         return $email;
     }
 }
