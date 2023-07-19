@@ -398,9 +398,10 @@ class OrdersController extends Controller
                     
                     if($cashondelivery==1) {
                         $order->status = 1;
+                        $order->paypal_order_id = 'DW00'.$order->id;
                         $html = "<div class='alert alert-success'>Your payment was successful and Your Payment Mode: <b>Cash on delivery.</b></div>";
                     }
-                    $order->paypal_order_id = 'DW00'.$order->id;
+                    
                     $order->save(false);
                     foreach ($order->orderItems as $item) {
                         $item->product->quantity = $item->product->quantity - $item->quantity;
@@ -724,7 +725,7 @@ class OrdersController extends Controller
         $order = Orders::findOne($id);
         if(isset($_POST['approve'])) {
             $order->status = 1;
-            $order->save();
+            $order->save(false);
             Orders::sentOrder($order);
         }
         if(isset($_POST['reject'])) {
