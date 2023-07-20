@@ -68,12 +68,16 @@ return $content;
                         </div>
                         <div class="clearfix product-price-cover">
                             <div class="product-price primary-color float-left">
-                                <span class="current-price text-brand"><i class="fa fa-rupee"></i> <?= $products->price ?></span>
+                                <span class="current-price text-brand"><i class="fa fa-rupee"></i> <?= $products->price ?>*</span>
                                 <span class="hide">
                                     <span class="save-price font-md color3 ml-15">20% Off</span>
                                     <span class="old-price font-md ml-15"><i class="fa fa-rupee"></i> 150.00</span>
                                 </span>
                             </div>
+                            
+                        </div>
+                        <div style="margin-top:-15px; margin-bottom:15px;">
+                            * Price Excludes GST
                         </div>
                         <div class="product-description hide">
                             <ul class="product-desc-list">

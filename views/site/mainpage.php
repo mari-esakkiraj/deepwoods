@@ -13,10 +13,10 @@ $absoluteBaseUrl = Url::base(true);
                 <div class="row">
                   <div class="col-10 col-sm-7 col-md-6">
                     <div class="slider-content animate-pulse">
-                      <!-- <h5 class="sub-title transition-slide-0">Kalabath</h5>-->
+                      <!-- <h5 class="sub-title transition-slide-0">Kalabath</h5>
                       <h2 class="title transition-slide-1 mb-0"  style="color: #ff3300;"><span class="font-weight-400">Kalabath</span></h2>
                       <h2 class="title transition-slide-2" style="color: #ff3300;">Black Rice</h2>
-                      <a class="btn-slide transition-slide-3" href="<?=$absoluteBaseUrl?>/site/productlist">Buy Now</a>
+                      <a class="btn-slide transition-slide-3" href="<?=$absoluteBaseUrl?>/site/productlist">Buy Now</a>-->
                     </div>
                   </div>
                 </div>
@@ -29,10 +29,10 @@ $absoluteBaseUrl = Url::base(true);
                 <div class="row">
                   <div class="col-10 col-sm-7 col-md-6">
                     <div class="slider-content animate-flipInX">
-                      <!--<h5 class="sub-title transition-slide-0">Our Tea Farm</h5>--> 
+                      <!--<h5 class="sub-title transition-slide-0">Our Tea Farm</h5> 
                       <h2 class="title transition-slide-1 mb-0"><span class="font-weight-400">Coconut Oil</span></h2>
                       <h2 class="title transition-slide-2">Cold Pressed</h2>
-                      <a class="btn-slide transition-slide-3" href="<?=$absoluteBaseUrl?>/site/productlist">Buy Now</a>
+                      <a class="btn-slide transition-slide-3" href="<?=$absoluteBaseUrl?>/site/productlist">Buy Now</a>-->
                     </div>
                   </div>
                 </div>
@@ -45,10 +45,10 @@ $absoluteBaseUrl = Url::base(true);
                 <div class="row">
                   <div class="col-10 col-sm-7 col-md-6">
                     <div class="slider-content animate-flipInX">
-                      <!--<h5 class="sub-title transition-slide-0">Our Tea Farm</h5>--> 
+                      <!--<h5 class="sub-title transition-slide-0">Our Tea Farm</h5>
                       <h2 class="title transition-slide-1 mb-0"><span class="font-weight-400" style="color: #fbe59c;">Farming Organically</span></h2>
                       <h2 class="title transition-slide-2" style="color: #fbe59c;">for a healthy lifestyle</h2>
-                      <a class="btn-slide transition-slide-3" href="<?=$absoluteBaseUrl?>/site/productlist">Buy Now</a>
+                      <a class="btn-slide transition-slide-3" href="<?=$absoluteBaseUrl?>/site/productlist">Buy Now</a>--> 
                     </div>
                   </div>
                 </div>
@@ -61,10 +61,10 @@ $absoluteBaseUrl = Url::base(true);
                 <div class="row">
                   <div class="col-10 col-sm-7 col-md-6">
                     <div class="slider-content animate-flipInX">
-                      <!--<h5 class="sub-title transition-slide-0">Our Tea Farm</h5>--> 
+                      <!--<h5 class="sub-title transition-slide-0">Our Tea Farm</h5>
                       <h2 class="title transition-slide-1 mb-0"><span class="font-weight-400" style="color: #121212;">Healthy Living</span></h2>
                       <h2 class="title transition-slide-2" style="color: #121212;">starts here</h2>
-                      <a class="btn-slide transition-slide-3" href="<?=$absoluteBaseUrl?>/site/productlist">Buy Now</a>
+                      <a class="btn-slide transition-slide-3" href="<?=$absoluteBaseUrl?>/site/productlist">Buy Now</a>--> 
                     </div>
                   </div>
                 </div>

@@ -60,7 +60,8 @@ $absoluteBaseUrl = Url::base(true);
                 Shop No. 2, Ground Floor,<br/>
 No 37/16, Mirbakshi Ali Street,<br/>
 Royapettah, Chennai - 600 014.<br/>
-Mob: +91 6380 589 226</div>
+Mob: +91 6380 589 226<br/>
+<a href="mailto:enquiry@deepwoodsorganics.com">enquiry@deepwoodsorganics.com</a></div>
         </div>
         <?php endif; ?>
 

@@ -90,16 +90,16 @@ function amountInWord($number) {
             <tr>
                 <td style="padding: 10px;" colspan="4">
                 <u>Customer</u><br/>
-                <?php echo $orderAddress->firstname ?? ''; ?> 
-                <?php echo $orderAddress->lastname ?? ' '; ?>
+                <?php echo $customer->firstname ?? ''; ?> 
+                <?php echo $customer->lastname ?? ' '; ?>
                 <?php echo $orderAddress->address ?? ''; ?><br/>
                 <?php echo $orderAddress->city ?? ''; ?><br/>
                 <?php echo $orderAddress->state ?? ''; ?><br/>
                 <?php echo $orderAddress->country ?? ' '; ?> -
                 <?php echo $orderAddress->zipcode ?? ''; ?><br/>
-                <?= !empty($order->phone) ? "Mob:".$order->phone : ''; ?><br/>
-                <?= !empty($order->email) ? "Email:".$order->email : ''; ?><br/>
-                <?= !empty($customer->gst_number) ? "GST No:".$customer->gst_number : ''; ?><br/>
+                <?= !empty($order->phone) ? "Mob: ".$order->phone : ''; ?><br/>
+                <?= !empty($order->email) ? "Email: ".$order->email : ''; ?><br/>
+                <?= !empty($customer->gst_number) ? "GST No: ".$customer->gst_number : ''; ?><br/>
                 
             </td>
             </tr>
