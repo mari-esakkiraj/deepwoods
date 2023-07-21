@@ -51,11 +51,9 @@ function amountInWord($number) {
   }
   $str = array_reverse($str);
   $result = implode('', $str);
+
   $points = ($point) ?
-    "." . $words[$point / 10] . " " . 
-          $words[$point = $point % 10] : '';
-  $points = ($point) ?
-          " And " . convertstr($point) . " Paise" : '';
+          " And " . $words[$point] . " Paise" : '';
   return $result . "Rupees  " . $points;
 }  
 
@@ -76,6 +74,7 @@ function convertstr($no){
     $digits = array('', 'Hundred', 'Thousand', 'Lakh', 'Crore');
     while ($i < $digits_1) {
         $divider = ($i == 2) ? 10 : 100;
+        var_dump($divider);exit;
         $number = floor($no % $divider);
         $no = floor($no / $divider);
         $i += ($divider == 10) ? 1 : 2;

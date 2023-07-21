@@ -214,10 +214,22 @@ use app\models\Orders;
                     <input type="hidden" name="qrcode" id="qrcode"/>
                     <button type="button" class="btn btn-secondary qrcodebutton">Scan QRCode</button>
                 </p>
-                <div class="qrcodediv" style="display:none">
-                    <img style="width: 250px;" src="<?=$absoluteBaseUrl?>/images/QRCode.jpeg" alt="Logo" />
-                    <div class="input-group1" style="display: flex;gap: 20px;align-items: center;"> <input type="text" class="form-control coupon" name="qr_code" placeholder="Enter Transaction Number" id="qr_code" style="width: 250px;"> <span class="input-group-append"> <button class="btn btn-primary qr_code" onclick="return qrcodesumbit();">Submit</button> </span> </div>
+                <div class="col-xl-12 qrcodediv" style="display:none">
+                <div class="qrcodediv col-xl-4" >
                 </div>
+                <div class="qrcodediv col-xl-4"  style="display:none">
+
+                </div>
+                <div class="row">
+
+    <div class="col-xl-4">
+    <img style="width: 250px;" src="<?=$absoluteBaseUrl?>/images/QRCode.jpeg" alt="Logo" />
+ </div>
+    <div class="col-xl-8">
+        <p>Once payment is done,please provide us the transaction number  below for payment confirmation and processing your order, or send the screenshot to our whatsapp number +91 6380589226, along with your Order ID.</p>
+    <div class="input-group1" style="display: flex;gap: 20px;align-items: center;"> <input type="text" class="form-control coupon" name="qr_code" placeholder="Enter Transaction Number" id="qr_code" style="width: 250px;"> <span class="input-group-append"> <button class="btn btn-primary qr_code" onclick="return qrcodesumbit();">Submit</button> </span> </div>
+</div>
+  </div>
                 <?php 
                     }
                 ?>
