@@ -45,8 +45,8 @@ $absoluteBaseUrl = Url::base(true);
                                 </div>
                                 <div class="card-body">
                                     <p>
-                                        From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>,<br>
-                                        manage your <a href="#">shipping and billing addresses</a> and <a href="#">edit your password and account details.</a>
+                                        From your account dashboard. you can easily check &amp; view your <a href="#" onclick="$('a#orders-tab.nav-link')[0].click();">recent orders</a>,<br>
+                                        manage your <a href="#" onclick="$('a#address-tab.nav-link')[0].click();">shipping and billing addresses</a> and <a href="#" onclick="$('a#changepassword-tab.nav-link')[0].click();">edit your password</a> and <a href="#" onclick="$('a#account-detail-tab.nav-link')[0].click();">account details.</a>
                                     </p>
                                 </div>
                             </div>
