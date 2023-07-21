@@ -362,6 +362,7 @@ $this->registerJs("
 <style>
 .text-right{
     text-align: right;
+    letter-spacing: 1px;
 }
 </style>
 <script>
