@@ -54,7 +54,7 @@ function amountInWord($number) {
   $points = ($point) ?
     "." . $words[$point / 10] . " " . 
           $words[$point = $point % 10] : '';
-  return $result . "Rupees  " ;//. $points . " Paise";
+  return $result . "Rupees  " . $points . " Paise";
 }  
 
 ?>
@@ -91,7 +91,7 @@ function amountInWord($number) {
                 <td style="padding: 10px;" colspan="4">
                 <u>Customer</u><br/>
                 <?php echo $customer->firstname ?? ''; ?> 
-                <?php echo $customer->lastname ?? ' '; ?>
+                <?php echo $customer->lastname ?? ' '; ?><br/>
                 <?php echo $orderAddress->address ?? ''; ?><br/>
                 <?php echo $orderAddress->city ?? ''; ?><br/>
                 <?php echo $orderAddress->state ?? ''; ?><br/>
