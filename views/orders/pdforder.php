@@ -54,7 +54,7 @@ function amountInWord($number) {
 
   $points = ($point) ?
           " And " . $words[floor($point / 10) * 10]
-          . " " . ($words[$point % 10] > 0 ?$words[$point % 10] : '')  . " Paise" : '';
+          . " " . (($point % 10) > 0 ?$words[$point % 10] : '')  . " Paise" : '';
   return $result . "Rupees  " . $points;
 }  
 
