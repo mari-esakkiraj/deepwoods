@@ -806,6 +806,12 @@ class OrdersController extends Controller
            
     }
 
+    public function actionPdfreporttest($id, $destination='print') {
+        $order = Orders::findOne($id);
+        return $content = $this->renderPartial('pdforder',['order' => $order]);
+    }
+
+
     public function actionPdfreport($id, $destination='print') {
         $order = Orders::findOne($id);
         $content = $this->renderPartial('pdforder',['order' => $order]);
