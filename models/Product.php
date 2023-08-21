@@ -193,4 +193,7 @@ class Product extends \yii\db\ActiveRecord
             FileHelper::removeDirectory($dir);
         }
     }
+    public function getImageslist(){
+        return $this->hasMany(ProductImages::class, ['product_id' => 'id']);
+    }
 }
