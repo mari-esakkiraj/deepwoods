@@ -372,9 +372,11 @@ class OrdersController extends Controller
         if (empty($notavilableproduct) && $qrvalid) {
             //$transaction = Yii::$app->db->beginTransaction();
             $order_count = Orders::find()->where(['customer_id' => Yii::$app->user->identity->id])->count();
+            $invoice_code = Orders::find()->count();
             //$order->order_code = "DW-".date('Y')."-".sprintf('%03d', ($order_count+1));
             //$order->order_code = "DW/".sprintf('%03d', ($order_count+1))."/".date('y', strtotime('-1 year'))."-".date('y');
-            $order->order_code = "DW/".sprintf('%03d', ($order_count+1))."/".date('y')."-".date('y', strtotime('+1 year'));
+            $order->order_code = "DW/".sprintf('%03d', ($order_count+1));//."/".date('y')."-".date('y', strtotime('+1 year'));
+            $order->invoice_code = "DW/".sprintf('%03d', ($invoice_code+1));
             $order_count = $order->order_code;
             if ($order->load(Yii::$app->request->post())
                 && $order->save()

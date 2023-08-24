@@ -31,7 +31,7 @@ $absoluteBaseUrl = Url::base(true);
             ],
             [
                 'attribute' => 'created_at',
-                'format' => ['datetime', 'php:d-M-Y'],
+                'format' => ['datetime', 'php:d-m-Y'],
             ],
             //'status',
             [

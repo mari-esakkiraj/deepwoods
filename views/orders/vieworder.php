@@ -14,7 +14,7 @@ $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_i
     echo $message;
 ?>
 <h3>Order ID: <?php echo $order->order_code ?></h3>
-<h5>Order Placed: <?= date("d-M-Y",$order->created_at) ?></h5>
+<h5>Order Placed: <?= date("d-m-Y",$order->created_at) ?></h5>
 <h5>
     Transaction No: <?= $order->paypal_order_id ?>
     <?php 

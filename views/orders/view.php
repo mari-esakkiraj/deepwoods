@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $model->firstname;
         <br/>
         Email : <?= $model->email?>
         <br/>
-        Date : <?= (!empty($model->created_at) ? date("d-M-Y", $model->created_at) : " - ")?>
+        Date : <?= (!empty($model->created_at) ? date("d-m-Y", $model->created_at) : " - ")?>
         <br/>
         Created By : <?php  if(!empty($model->created_by)) {
             $user = Users::findOne($model->created_by);
