@@ -119,7 +119,7 @@ function convertstr($no){
                 </th>
                 <td style="padding: 10px;" rowspan="2" colspan="3">
                     <u>Invoice No:</u> <?php echo $order->order_code ?? '-'; ?><br/><br/><br/>
-                    <u>Date:</u> <?php echo date("Y-m-d",$order->created_at) ?? '-'; ?><br/><br/><br/>
+                    <u>Date:</u> <?php echo date("d-m-Y",$order->created_at) ?? '-'; ?><br/><br/><br/>
                     <u>Dispatch Through:</u> Road<br/><br/><br/><br/><br/>
                     <u>Destination:</u> <?php echo $orderAddress->city ?? '-'; ?><br/><br/>
 
