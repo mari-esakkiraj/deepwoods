@@ -132,8 +132,7 @@ function convertstr($no){
                 <?php echo $customer->lastname ?? ' '; ?><br/>
                 <?php echo $orderAddress->address ?? ''; ?><br/>
                 <?php echo $orderAddress->city ?? ''; ?><br/>
-                <?php echo $orderAddress->state ?? ''; ?><br/>
-                <?php echo $orderAddress->country ?? ' '; ?> -
+                <?php echo $orderAddress->state ?? ''; ?> -
                 <?php echo $orderAddress->zipcode ?? ''; ?><br/>
                 <?= !empty($order->phone) ? "Mob: ".$order->phone : ''; ?><br/>
                 <?= !empty($order->email) ? "Email: ".$order->email : ''; ?><br/>
