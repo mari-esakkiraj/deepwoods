@@ -150,8 +150,8 @@ class Orders extends \yii\db\ActiveRecord
         $items = OrderItems::find()->where(['order_id' => $order->id])->all();
 
         $msg = "<p>Dear  {$order->firstname}  {$order->lastname},</p>
-        We have received your recent order, {$order->order_code} in Our Deepwoods Organics webstore. Thank you for choosing us for your shopping needs.Here are all the details: </p> 
-        <h5>Your Order Summary:</h5>
+        We have received your recent order, {$order->order_code} in Our Deepwoods Organics webstore. Thank you for choosing us for your shopping needs.Here are all the details: </p> ";
+        $ordersummary="<h5>Your Order Summary:</h5>
             <table style='--bs-table-color: var(--bs-body-color);--bs-table-bg: transparent;--bs-table-border-color: var(--bs-border-color);--bs-table-accent-bg: transparent;--bs-table-striped-color: var(--bs-body-color);--bs-table-striped-bg: rgba(0, 0, 0, 0.05);--bs-table-active-color: var(--bs-body-color);--bs-table-active-bg: rgba(0, 0, 0, 0.1);--bs-table-hover-color: var(--bs-body-color);--bs-table-hover-bg: rgba(0, 0, 0, 0.075);width: 100%;margin-bottom: 1rem;color: var(--bs-table-color);vertical-align: top;border-color: var(--bs-table-border-color);'>
                 <thead>
                 <tr>
@@ -205,6 +205,7 @@ class Orders extends \yii\db\ActiveRecord
                     <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-top: none;text-align: right;'>".$order->total_price."</td>
                 </tr>
             </table>";
+            $msg=$msg.$ordersummary;
             $msgold = "<table cellspacing='0' style='border: 2px dashed #FB4314; width: 100%;'> 
                 <tr> 
                     <th style='text-align:left'>Product Name:</th><th>Quantity</th> <th>Unit Price</th> 
@@ -273,8 +274,11 @@ class Orders extends \yii\db\ActiveRecord
                 <title>QR Code Order</title> 
             </head> 
             <body> 
+                    <h1>Invoice Number : '.$order->invoice_code.'</h1> 
                     <h1>Transaction number : '.$order->transaction_id.'</h1> 
-                    <h1>Order Code : '.$order->order_code.'</h1> 
+                    <h1>Customer Name : '."{$order->firstname}  {$order->lastname}".'</h1> 
+                    <h1>Customer Mobile Number : '.$order->phone.'</h1> 
+                    '.$ordersummary.'
                     </body> 
                     </html>';
             $email = \Yii::$app->mailer->compose();
