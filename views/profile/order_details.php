@@ -32,7 +32,7 @@ use yii\grid\ActionColumn;
             ],
             [
                 'attribute' => 'created_at',
-                'format' => ['datetime', 'php:d-M-Y'],
+                'format' => ['datetime', 'php:d-m-Y'],
             ],
             //'status',
             

@@ -275,7 +275,7 @@ return $content;
                                                             <div class="desc">
                                                                 <div class="d-flex justify-content-between mb-10">
                                                                     <div class="d-flex align-items-center" style="gap:10px;">
-                                                                        <span class="font-xs text-muted"><?= date("d-M-Y h:i A",$review->created_at) ?></span>
+                                                                        <span class="font-xs text-muted"><?= date("d-m-Y h:i A",$review->created_at) ?></span>
                                                                         <?php if($review->user_id == $loginuser){ ?>
                                                                         <i class="fas fa-edit review-edit" aria-hidden="true" data-reviewid="<?= $review->id ?>" data-message="<?= $review->review ?>"></i>
                                                                         <i class="fas fa-trash review-delete" aria-hidden="true" data-reviewid="<?= $review->id ?>"></i>
