@@ -29,9 +29,9 @@ $absoluteBaseUrl = Url::base(true);
             [
                 'attribute' => 'invoice_code'
             ],
-            [
+            /*[
                 'attribute' => 'order_code'
-            ],
+            ],*/
             [
                 'attribute' => 'created_at',
                 'format' => ['datetime', 'php:d-m-Y'],
@@ -41,7 +41,14 @@ $absoluteBaseUrl = Url::base(true);
                 'attribute' => 'customer_id',
                 'label' => 'Customer',
                 'value' => function( $data ) {
-                    return $data->createdBy->firstname;  
+                    return $data->firstname.' '.$data->lastname;  
+                },
+            ],
+            [
+                'attribute' => 'phone',
+                'label' => 'Contact No',
+                'value' => function( $data ) {
+                    return $data->phone;  
                 },
             ],
             [
