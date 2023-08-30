@@ -163,7 +163,7 @@ class Orders extends \yii\db\ActiveRecord
                 </thead>
                 <tbody>";
                     foreach($items as $item){
-                        $msg .= "
+                        $ordersummary .= "
                         <tr> 
                             <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none;'>{$item->product_name}</td> 
                             <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-right: none;border-top: none; text-align: right;'>{$item->quantity}</td> 
@@ -179,7 +179,7 @@ class Orders extends \yii\db\ActiveRecord
                         <td style='padding: 0.25rem 0.25rem;border: 1px solid #ececec;vertical-align: middle;border-top: none;text-align: right;'>".$order->promotion_price."</td>
                     </tr>";
                     }
-                 $msg .= "        
+                 $ordersummary .= "        
                 </tbody>
             </table>
             <table style='--bs-table-color: var(--bs-body-color);--bs-table-bg: transparent;--bs-table-border-color: var(--bs-border-color);--bs-table-accent-bg: transparent;--bs-table-striped-color: var(--bs-body-color);--bs-table-striped-bg: rgba(0, 0, 0, 0.05);--bs-table-active-color: var(--bs-body-color);--bs-table-active-bg: rgba(0, 0, 0, 0.1);--bs-table-hover-color: var(--bs-body-color);--bs-table-hover-bg: rgba(0, 0, 0, 0.075);width: 100%;margin-bottom: 1rem;color: var(--bs-table-color);vertical-align: top;border-color: var(--bs-table-border-color);'>
