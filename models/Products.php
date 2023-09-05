@@ -139,7 +139,12 @@ class Products extends \yii\db\ActiveRecord
     
 
     public static function sendlowqtyalert($model){
-        if ($model->quantity > 100) {
+        $setting = Settings::findOne(1);
+        $qty_alert = 15;
+        if (!empty($setting)) {
+            $qty_alert = $setting->qty_alert ?? 15;
+        }
+        if ($model->quantity > $qty_alert) {
             return false;
         }
         //$setting = Settings::findOne(1);
