@@ -409,6 +409,7 @@ class OrdersController extends Controller
                     foreach ($order->orderItems as $item) {
                         $item->product->quantity = $item->product->quantity - $item->quantity;
                         $item->product->save();
+                        Products::sendlowqtyalert($item->product);
                     }
                     $this->layout = 'mainpage';
                     CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
