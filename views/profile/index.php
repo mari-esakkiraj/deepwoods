@@ -200,6 +200,26 @@ $this->registerJs("
             }
         });
     });
+
+    $(document).on('click','.addressDelete',function() { 
+        var addressId = $(this).data('address_id');
+        var addressType = $(this).data('address_type');
+        $.ajax({
+            type:'post',
+            url:baseurl+'/site/addressdelete',
+            data:{
+                addressId:addressId,
+                action:'delete'
+            },
+            success:function(response) {
+                var res = JSON.parse(response);                ;
+                if(res.data){
+                    toastr.success('Address deleted suceesfully');
+                    $.pjax.reload({container:'#address-gridview',timeout:'5000'}); 
+                }
+            }
+        });
+    });
     $(document).on('click','.address_update_submit',function() {
         var address = $('#address_update_form .address').val();
         var city = $('#address_update_form .city').val();

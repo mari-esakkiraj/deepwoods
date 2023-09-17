@@ -245,7 +245,7 @@ use app\models\Orders;
             <h5 class="modal-title" id="addressModal">Address</Address></h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body addressUpdateModal">
+          <div class="modal-body addressUpdateModal" id='address_update_form'>
             
           </div>
         </div>
