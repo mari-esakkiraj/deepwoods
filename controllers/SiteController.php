@@ -58,7 +58,7 @@ class SiteController extends Controller
 
     public function beforeAction($action) 
     {
-        $withoutCSRF = ['cus-login','register','forgotpassword','savecheckout','clearcartlist','removecart', 'addreview','contact','changepassword'];
+        $withoutCSRF = ['cus-login','register','forgotpassword','savecheckout','clearcartlist','removecart', 'addreview','contact','changepassword','addressdelete'];
         if(in_array($action->id, $withoutCSRF)) {
             $this->enableCsrfValidation = false; 
         }
@@ -588,5 +588,16 @@ class SiteController extends Controller
     {
         $this->layout = 'mainpage';
         return $this->render('refund_policy');
+    }
+
+    public function actionAddressdelete()
+    {
+        $returnData = false;
+        $addressId = $_POST['addressId'] ?? null;
+        if($addressId !== null){
+            $returnData = true;
+            UserAddresses::findOne(['id' => $addressId])->delete();
+        }
+        return json_encode(['data' => $returnData]);
     }
 }

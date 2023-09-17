@@ -75,7 +75,7 @@ $billingAddresses = UserAddresses::find()->where(['user_id' => $userID,'type' =>
                             </address>
                             <div style="margin-left: auto;margin-right: 20px;">
                                 <i class="fas fa-edit addressUpdate" style="cursor:pointer;" aria-hidden="true" data-address_type = "shipping" data-address_id = "<?=$shipping->id?>"></i>
-                                <i class="fas fa-trash hide" aria-hidden="true"></i>
+                                <i class="fas fa-trash addressDelete" style="cursor:pointer;" aria-hidden="true" data-address_id = "<?=$shipping->id?>"></i>
                             </div>
                         </div>
                         <?php 
