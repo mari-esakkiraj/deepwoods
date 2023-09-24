@@ -128,8 +128,8 @@ function convertstr($no){
             <tr>
                 <td style="padding: 10px;" colspan="4">
                 <u>Customer</u><br/>
-                <?php echo $customer->firstname ?? ''; ?> 
-                <?php echo $customer->lastname ?? ' '; ?><br/>
+                <?php echo $order->firstname ?? ''; ?> 
+                <?php //echo $customer->lastname ?? ' '; ?><br/>
                 <?php echo $orderAddress->address ?? ''; ?><br/>
                 <?php echo $orderAddress->city ?? ''; ?><br/>
                 <?php echo $orderAddress->state ?? ''; ?> -
