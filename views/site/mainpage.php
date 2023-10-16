@@ -141,15 +141,15 @@ $absoluteBaseUrl = Url::base(true);
                         <img src="<?=$absoluteBaseUrl?>/theme/img/testimonial/02.png" alt="Image-HasTech" class="img">
                       </div>
                       <div class="testi-info">
-                        <span class="name">Shanthi</span>
-                        <span class="email">Shanthi@gmail.com</span>
+                        <span class="name">Fathima Sumaira</span>
+                        <span class="email">fathimsum10989@gmail.com</span>
                       </div>
                     </div>
                     <div class="testi-content">
                       <p>We have tried this Kalabath rice for the first time, it was really wonderful our Biriyani came out, and we have recommended to our neighbours as well, we really felt the aroma of the Biriyani, Thank you !</p>
                       <div class="testi-info">
-                        <span class="name">orando BLoom</span>
-                        <span class="email">demo@example.com</span>
+                        <span class="name">Fathima Sumaira</span>
+                        <span class="email">fathimsum10989@gmail.com</span>
                       </div>
                     </div>
                   </div>
@@ -165,15 +165,15 @@ $absoluteBaseUrl = Url::base(true);
                         <img src="<?=$absoluteBaseUrl?>/theme/img/testimonial/01.png" alt="Image-HasTech" class="img">
                       </div>
                       <div class="testi-info">
-                        <span class="name">Mohideen Jabbar</span>
-                        <span class="email">mohideenjabbar@gmail.com</span>
+                        <span class="name">Khader</span>
+                        <span class="email">Khader1980@gmail.com</span>
                       </div>
                     </div>
                     <div class="testi-content">
                       <p>As we are a Biriyani Lovers, we are very much happy to taste Biriyani in Prince of Rice, when we are trying for the first time we didnt expect this much good taste it will be but really it is, Thank you for bringing back the old Prince of Rice.</p>
                       <div class="testi-info">
-                        <span class="name">Kumar</span>
-                        <span class="email">Kumar@gmail.com</span>
+                        <span class="name">Khader</span>
+                        <span class="email">Khader1980@gmail.com</span>
                       </div>
                     </div>
                   </div>
@@ -194,10 +194,10 @@ $absoluteBaseUrl = Url::base(true);
                       </div>
                     </div>
                     <div class="testi-content">
-                      <p>All Perfect !! I have three sites with magento , this theme is the best !! Excellent support , advice theme installation package , sorry for English, are Italian but I had no problem !! Thank you !</p>
+                      <p>We have tried this Kalabath rice for the first time, it was really wonderful our Biriyani came out, and we have recommended to our neighbours as well, we really felt the aroma of the Biriyani, Thank you !</p>
                       <div class="testi-info">
-                        <span class="name">orando BLoom</span>
-                        <span class="email">demo@example.com</span>
+                        <span class="name">Kumar</span>
+                        <span class="email">kumar@gmail.com</span>
                       </div>
                     </div>
                   </div>

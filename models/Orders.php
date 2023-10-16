@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use kartik\mpdf\Pdf;
 
 /**
  * This is the model class for table "orders".
@@ -146,8 +147,42 @@ class Orders extends \yii\db\ActiveRecord
         $email->send();
         return $email;
     }
-    public static function sentOrder($order) {
+    public static function savePDF($order) {
+        $content = Yii::$app->controller->renderPartial('pdforder',['order' => $order]);
+        $destination = 'F';
+        $filename = 'Invoice ' . time() . '.pdf';
+        // setup kartik\mpdf\Pdf component
+        $pdf = new Pdf([
+            // set to use core fonts only
+            'mode' => Pdf::MODE_CORE, 
+            // A4 paper format
+            'format' => Pdf::FORMAT_A4, 
+            // portrait orientation
+            'orientation' => Pdf::ORIENT_PORTRAIT, 
+            // stream to browser inline
+            'destination' => $destination, 
+            // your html content input
+            'content' => $content,//$content,  
+            'filename' => $filename,
+            'cssInline' => '.kv-heading-1{font-size:18px}', 
+             // set mPDF properties on the fly
+            'options' => ['title' => 'Invoice Pdf'],
+             // call mPDF methods on the fly
+            'methods' => [ 
+                //'SetHeader'=>['Krajee Report Header'], 
+                'SetFooter'=>['{PAGENO}'],
+            ]
+        ]);
+        
+        // return the pdf output as per the destination setting
+        $pdf->render(); 
+        return $filename;
+    }
+    public static function sentOrder($order,$approve=false) {
         $items = OrderItems::find()->where(['order_id' => $order->id])->all();
+        if($approve==true) {
+            $attachment = self::savePDF($order);
+        }
 
         $msg = "<p>Dear  {$order->firstname}  {$order->lastname},</p>
         We have received your recent order, {$order->order_code} in Our Deepwoods Organics webstore. Thank you for choosing us for your shopping needs.Here are all the details: </p> ";
@@ -260,6 +295,9 @@ class Orders extends \yii\db\ActiveRecord
         $email->setCharset('UTF-8');
         $email->setSubject($subject);
         $email->setHtmlBody($message);
+        if($approve==true) {
+            $email->attach($attachment);
+        }
         $email->send();
         
         if ($order->qrcode == 1) {
@@ -287,6 +325,9 @@ class Orders extends \yii\db\ActiveRecord
             $email->setCharset('UTF-8');
             $email->setSubject($subject);
             $email->setHtmlBody($message);
+            if($approve==true) {
+                $email->attach($attachment);
+            }
             $email->send();
         }
         return $email;

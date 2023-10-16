@@ -18,13 +18,12 @@ $absoluteBaseUrl = Url::base(true);
                             <h3>Kalabath Aromatic Rice</h3>
                             <ol>
                                 <li>100 % natural</li>
-                                <li>Organic Product</li>
                                 <li>Traditionally Processed</li>
                                 <li>Preservative free</li>
-                                <li>Directly sourced from Farmers</li>
+                                <li>Directly sourced from Dindugal Farmers</li>
                             </ol>
                             <p class="mb-25">Kalabath is known as the “ Prince of Rice”. This low land scented rice variety originated from Orissa. Till the eighties Kalabath was grown in Dindigul region, popular among the Biryani lovers , before it faded from the region.</p>
-                            <p class="mb-50">Rasool Mohideen a progressive farmer with post graduation from Madras Christian College (Deepwoods) out of pure passion, brought it back to flourish in the region. He first grew Kalabath in his organic farm in Sithyankottai, then distributed the seeds free to fellow farmers in the region and thus revived this aromatic variety from extinction in TamilNadu. As this bag enters your home , your family is sure to experience the aroma of the Biryani !!!</p>
+                            <p class="mb-50">Rasool Mohideen, a progressive farmer with post graduation from Madras Christian College (Deepwoods), out of pure passion, brought it back to flourish in the region. He first grew Kalabath in his organic farm in Sithyankottai, then distributed the seeds free to fellow farmers in the region and thus revived this aromatic variety from extinction in TamilNadu. As this bag enters your home , your family is sure to experience the aroma of the Biryani !!!</p>
                             
                         </div>
                     </div>
