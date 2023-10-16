@@ -77,7 +77,7 @@ return $content;
                             
                         </div>
                         <div style="margin-top:-15px; margin-bottom:15px;">
-                            * Price Excludes GST
+                            * Price Excludes GST<br>* Free Shipping within TamilNadu<br>* Bulk Enquiries Solicited
                         </div>
                         <div class="product-description hide">
                             <ul class="product-desc-list">
@@ -121,13 +121,18 @@ return $content;
                         </ul>
                         <div class="tab-content shop_info_tab entry-main-content">
                             <div class="tab-pane fade  active show" id="Description">
+                                <?= $products->description; ?>
+                                
+                                
+                                <!--
                                 <label class="small-desc">
-                                    <?= readMore($products->description,400); ?></p>
+                                    < readMore($products->description,400); ?></p>
                                 </label>
                                 <label class="big-desc" style="display: none;">
-                                    <?= $products->description; ?>
+                                    < $products->description; ?>
                                     <a href='javascript:void(0);' class='lessmore'>Less More...</a>
                                 </label>
+                                -->
                             </div>
                             <div class="tab-pane fade" id="Additional-info">
                                 <table class="font-md">

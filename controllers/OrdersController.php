@@ -730,7 +730,7 @@ class OrdersController extends Controller
         if(isset($_POST['approve'])) {
             $order->status = 1;
             $order->save(false);
-            Orders::sentOrder($order);
+            Orders::sentOrder($order,true);
         }
         if(isset($_POST['reject'])) {
             $order->status = 2;
