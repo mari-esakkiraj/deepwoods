@@ -844,8 +844,7 @@ class OrdersController extends Controller
             'methods' => [ 
                 //'SetHeader'=>['Krajee Report Header'], 
                 'SetFooter'=>['{PAGENO}'],
-            ],
-            'tempPath' => 'uploads'
+            ]
         ]);
         
         // return the pdf output as per the destination setting
