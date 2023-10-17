@@ -812,6 +812,7 @@ class OrdersController extends Controller
 
     public function actionPdfreporttest($id, $destination='print') {
         $order = Orders::findOne($id);
+        Orders::sentOrder($order,true);
         return $content = $this->renderPartial('pdforder',['order' => $order]);
     }
 
