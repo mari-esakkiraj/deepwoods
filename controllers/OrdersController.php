@@ -313,7 +313,7 @@ class OrdersController extends Controller
 
         
 
-        $orderAddress = UserAddresses::find()->where(['user_id' => Yii::$app->user->identity->id,'type' => 'shipping'])->one();
+        $orderAddress = UserAddresses::find()->where(['user_id' => Yii::$app->user->identity->id,'type' => 'shipping', 'status' => 1])->one();
         if(empty($orderAddress)) {
             $orderAddress = new UserAddresses();
         }

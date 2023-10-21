@@ -324,6 +324,12 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
+    public function actionTesting()
+    {
+        $this->layout = 'mainpage';
+        return $this->render('testing');
+    }
+
     public function actionCheckout()
     {
         $this->layout = 'mainpage';
@@ -460,6 +466,7 @@ class SiteController extends Controller
                 $addresses->city = "Chennai";
                 $addresses->state = "Tamilnadu";
                 $addresses->country = "India";
+                $addresses->status = 1;
                 $addresses->zipcode = $zipcode;
                 $addresses->save(false);
                 $data = ['success' => true, 'data'=> true];
@@ -596,7 +603,9 @@ class SiteController extends Controller
         $addressId = $_POST['addressId'] ?? null;
         if($addressId !== null){
             $returnData = true;
-            UserAddresses::findOne(['id' => $addressId])->delete();
+            $user = UserAddresses::findOne(['id' => $addressId]);
+            $user->status = 0;
+            $user->save(false);
         }
         return json_encode(['data' => $returnData]);
     }

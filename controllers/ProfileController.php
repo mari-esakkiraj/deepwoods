@@ -156,6 +156,7 @@ class ProfileController extends Controller
         $addresses->state = $state;
         $addresses->country = $country;
         $addresses->zipcode = $zipcode;
+        $addresses->status = 1;
         $addresses->user_id = Yii::$app->user->identity->id ?? null;
         $addresses->type = $addresstype;
         if($addresses->save(false)){
