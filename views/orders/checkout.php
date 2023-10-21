@@ -44,7 +44,7 @@ use app\models\Orders;
                             Pjax::begin(['id' => 'address-gridview','timeout'=>5000]);  ?>
             <div class="card-body">
                 <?php
-                $shippingAddresses = UserAddresses::find()->where(['user_id' => Yii::$app->user->identity->id,'type' => 'shipping'])->all();
+                $shippingAddresses = UserAddresses::find()->where(['user_id' => Yii::$app->user->identity->id,'type' => 'shipping', 'status' => 1])->all();
                 if(!empty($shippingAddresses)) {
                     foreach($shippingAddresses as $shipping) { ?>
                         <div><address style="border-top: 2px solid #ddd;">

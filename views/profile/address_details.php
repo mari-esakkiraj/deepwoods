@@ -2,8 +2,8 @@
 
 use app\models\UserAddresses;
 
-$shippingAddresses = UserAddresses::find()->where(['user_id' => $userID,'type' => 'shipping'])->all();
-$billingAddresses = UserAddresses::find()->where(['user_id' => $userID,'type' => 'billing'])->all();
+$shippingAddresses = UserAddresses::find()->where(['user_id' => $userID,'type' => 'shipping', 'status' => 1])->all();
+$billingAddresses = UserAddresses::find()->where(['user_id' => $userID,'type' => 'billing', 'status' => 1])->all();
 ?>
 <div class="row">
     <div class="col-lg-6" style="display:none;">
