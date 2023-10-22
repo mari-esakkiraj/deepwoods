@@ -51,7 +51,7 @@ use app\models\Orders;
                             <?=$shipping->address?><br>
                             <?=$shipping->city.' ,'.$shipping->state?><br>
                             <?=$shipping->country.' - '.$shipping->zipcode?> <br>
-                            <a href="javascript:void(0)" class="btn-small pull-right addressChoose"  data-shipping_address_id = "<?=$shipping->id?>" data-address_type = "shipping" data-address_id = "<?=$shipping->id?>" data-address = "<?=$shipping->address?>" data-city = "<?=$shipping->city?>" data-country = "<?=$shipping->country?>" data-state = "<?=$shipping->state?>" data-zipcode = "<?=$shipping->zipcode?>">Select Address</a>
+                            <a href="javascript:void(0)" class="btn-small pull-right addressChoose"  data-shipping_address_id = "<?=$shipping->id?>" data-address_type = "shipping" data-address_id = "<?=$shipping->id?>" data-address = "<?=$shipping->address?>" data-city = "<?=$shipping->city?>" data-country = "<?=$shipping->country?>" data-state = "<?=$shipping->state?>" data-zipcode = "<?=$shipping->zipcode?>" data-mobile = "<?=$shipping->mobile_number?>">Select Address</a>
                             <i class="fas fa-edit addressUpdate pull-right" style="cursor:pointer;padding-right: 10px;padding-top: 4px;" aria-hidden="true" data-address_type="shipping" data-address_id="<?=$shipping->id?>"></i>
                         </address></div>
                         <?php 
@@ -67,6 +67,7 @@ use app\models\Orders;
             <div class="card-body" style="border-top: 2px solid #ddd;">
                 <?= $form->field($order, 'firstname')->textInput(['autofocus' => true]) ?>
                 <?= $form->field($orderAddress, 'address')->textInput(['disabled' => true]) ?>
+                <?= $form->field($orderAddress, 'mobile_number')->textInput(['disabled' => true]) ?>
                 <?= $form->field($orderAddress, 'city')->textInput(['disabled' => true]) ?>
                 <?= $form->field($orderAddress, 'state')->textInput(['disabled' => true]) ?>
                 <?= $form->field($orderAddress, 'country')->textInput(['disabled' => true]) ?>
@@ -259,6 +260,7 @@ $this->registerJs("
     $(document).on('click','.addressChoose',function(e) {
         $('#useraddresses-address').val($(this).attr('data-address'));
         $('#useraddresses-city').val($(this).attr('data-city'));
+        $('#useraddresses-mobile_number').val($(this).attr('data-mobile'));
         $('#useraddresses-state').val($(this).attr('data-state'));
         $('#useraddresses-country').val($(this).attr('data-country'));
         $('#useraddresses-zipcode').val($(this).attr('data-zipcode'));
@@ -313,12 +315,20 @@ $this->registerJs("
         var pinCode = $('#address_update_form .pinCode').val();
         var addressid = $('#address_update_form .addressid').val();
         var addresstype = $('#address_update_form .addresstype').val();
+        var mobile = $('#address_update_form .mobile').val();
         var clr = 0;
         if(address == ''){
             $('#address_error').html('<span style=\"color:red\">Address is Requried</span>');
             clr =1;
         } else {
             $('#address_error').html('');
+        }
+
+        if(mobile == ''){
+            $('#mobile_error').html('<span style=\"color:red\">Phone Number is Requried</span>');
+            clr =1;
+        } else {
+            $('#mobile_error').html('');
         }
 
         if(city == ''){
@@ -353,7 +363,7 @@ $this->registerJs("
             $.ajax({
                 type:'post',
                 url:baseurl+'/profile/address-save',
-                data:{address:address,city:city,state:state,country:country,pinCode:pinCode,addressid:addressid,addresstype:addresstype},
+                data:{address:address,city:city,state:state,country:country,pinCode:pinCode,addressid:addressid,addresstype:addresstype,mobile:mobile},
                 success:function(response) {
                     if(response) {
                         toastr.success('Address saved suceesfully');

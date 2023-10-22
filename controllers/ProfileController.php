@@ -147,6 +147,7 @@ class ProfileController extends Controller
         $zipcode = Yii::$app->request->post('pinCode') ?? null;
         $addressId = Yii::$app->request->post('addressid') ?? 'new';
         $addresstype = Yii::$app->request->post('addresstype') ?? null;
+        $mobile = Yii::$app->request->post('mobile') ?? null;
         $addresses = UserAddresses::find()->where(['id' => $addressId])->one();
         if(empty($addresses)) {
             $addresses = new UserAddresses();
@@ -157,6 +158,7 @@ class ProfileController extends Controller
         $addresses->country = $country;
         $addresses->zipcode = $zipcode;
         $addresses->status = 1;
+        $addresses->mobile_number = $mobile;
         $addresses->user_id = Yii::$app->user->identity->id ?? null;
         $addresses->type = $addresstype;
         if($addresses->save(false)){

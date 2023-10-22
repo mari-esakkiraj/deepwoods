@@ -37,7 +37,7 @@ class UserAddresses extends \yii\db\ActiveRecord
             [['user_id'], 'integer'],
             [['address', 'city', 'state', 'country', 'zipcode'], 'string', 'max' => 255],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
-            [['status'], 'safe'],
+            [['status', 'mobile_number'], 'safe'],
         ];
     }
 

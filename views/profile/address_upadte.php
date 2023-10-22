@@ -6,6 +6,11 @@
         <span id='address_error'></span>
     </div>
     <div class="mb-3">
+        <label for="mobile" class="form-label required">Phone Number</label>
+        <input type="text" class="form-control mobile" id="mobile" value="<?=$addresses->mobile_number ?? null?>">
+        <span id='mobile_error'></span>
+    </div>
+    <div class="mb-3">
         <label for="city" class="form-label required">City</label>
         <input type="text" class="form-control city" id="city" value="<?=$addresses->city ?? null?>">
         <span id='city_error'></span>
