@@ -223,6 +223,7 @@ $this->registerJs("
     $(document).on('click','.address_update_submit',function() {
         var address = $('#address_update_form .address').val();
         var city = $('#address_update_form .city').val();
+        var mobile = $('#address_update_form .mobile').val();
         var state = $('#address_update_form .state').val();
         var country = $('#address_update_form .country').val();
         var pinCode = $('#address_update_form .pinCode').val();
@@ -241,6 +242,13 @@ $this->registerJs("
             clr =1;
         } else {
             $('#city_error').html('');
+        }
+
+        if(mobile == ''){
+            $('#mobile_error').html('<span style=\"color:red\">Phone Number is Requried</span>');
+            clr =1;
+        } else {
+            $('#mobile_error').html('');
         }
 
         if(state == ''){
@@ -268,7 +276,7 @@ $this->registerJs("
             $.ajax({
                 type:'post',
                 url:baseurl+'/profile/address-save',
-                data:{address:address,city:city,state:state,country:country,pinCode:pinCode,addressid:addressid,addresstype:addresstype},
+                data:{address:address,city:city,state:state,country:country,pinCode:pinCode,addressid:addressid,addresstype:addresstype,mobile:mobile},
                 success:function(response) {
                     if(response) {
                         toastr.success('Address saved suceesfully');

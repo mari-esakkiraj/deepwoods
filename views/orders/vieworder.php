@@ -54,6 +54,10 @@ $orderAddress = UserAddresses::find()->where(['id' => $order->shipping_address_i
                 <td><?php echo $orderAddress->address ?></td>
             </tr>
             <tr>
+                <th>Mobile Number</th>
+                <td><?php echo $orderAddress->mobile_number ?></td>
+            </tr>
+            <tr>
                 <th>City</th>
                 <td><?php echo $orderAddress->city ?></td>
             </tr>
