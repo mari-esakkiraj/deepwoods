@@ -128,7 +128,7 @@ function convertstr($no){
             <tr>
                 <td style="padding: 10px;" colspan="4">
                 <u>Customer</u><br/>
-                <?php echo $order->firstname ?? ''; ?> 
+                <?php echo ($order->name_title ?? '').($order->firstname ?? ''); ?> 
                 <?php //echo $customer->lastname ?? ' '; ?><br/>
                 <?php echo $orderAddress->address ?? ''; ?><br/>
                 <?php echo $orderAddress->city ?? ''; ?><br/>

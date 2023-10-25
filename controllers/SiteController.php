@@ -446,6 +446,7 @@ class SiteController extends Controller
         $address = $_POST['address'] ?? null;
         $company = $_POST['company'] ?? null;
         $zipcode = $_POST['zipcode'] ?? null;
+        $name_title = $_POST['name_title'] ?? '';
         
         $user = new Users();
         $user->firstname = $firstname;
@@ -457,6 +458,7 @@ class SiteController extends Controller
         $user->gst_number = $gstNumber;
         $user->company = $company;
         $user->status = 10;
+        $user->name_title = $name_title;
 
         if($user->validate()){
             if($user->save()){
@@ -468,6 +470,7 @@ class SiteController extends Controller
                 $addresses->country = "India";
                 $addresses->status = 1;
                 $addresses->zipcode = $zipcode;
+                $addresses->mobile_number = $phoneNumber;
                 $addresses->save(false);
                 $data = ['success' => true, 'data'=> true];
                 $this->sendRegisterMail($user, $password);

@@ -39,10 +39,10 @@ class Orders extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['total_price', 'status', 'firstname',], 'required'],
+            [['total_price', 'status', 'firstname'], 'required'],
             [['total_price'], 'number'],
             [['status', 'created_at', 'created_by','cashondelivery'], 'integer'],
-            [['firstname', 'lastname'], 'string', 'max' => 45],
+            [['firstname', 'lastname', 'name_title'], 'string', 'max' => 45],
             [['email', 'transaction_id', 'paypal_order_id', 'shipping_address_id'], 'string', 'max' => 255],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => Users::class, 'targetAttribute' => ['created_by' => 'id']],
         ];
