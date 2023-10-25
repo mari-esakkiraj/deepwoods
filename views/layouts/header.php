@@ -219,6 +219,17 @@ use yii\widgets\Pjax;
                 <span id='confirm_password_error'></span>
               </div>
               <div class="mb-3">
+                <label for="name_title" class="form-label required">Title</label>
+                <select name="name_title" id="name_title"  class="form-control name_title">
+                  <option value="Mr."> Mr.</option>
+                  <option value="Mrs."> Mrs.</option>
+                  <option value="Miss"> Miss</option>
+                  <option value="Ms."> Ms.</option>
+                  <option value="Dr."> Dr.</option>
+                </select>
+                <span id='name_title_error'></span>
+              </div>
+              <div class="mb-3">
                 <label for="username" class="form-label required">First Name</label>
                 <input type="text" class="form-control firstname loginValidation" id="firstname">
                 <span id='firstname_error'></span>
@@ -583,6 +594,7 @@ $this->registerJs("
         $('#mobile_number_error').html("<span style='color:red'>Invalid phone number.</span>");
         clr =1;
     }
+    var name_title = $("#name_title").val();
 
     if(clr==0) {
         $.ajax({
@@ -596,6 +608,7 @@ $this->registerJs("
                     "company": $('.company').val(),
                     "zipcode":$('.zipcode').val(),
                     "address": $("#user-address").val(),
+                    "name_title":name_title
                 },
             dataType: 'json',
             success: function(response) {

@@ -65,6 +65,11 @@ use app\models\Orders;
                 <?php Pjax::end(); ?>
             </div>
             <div class="card-body" style="border-top: 2px solid #ddd;">
+                <?= $form->field($order, 'name_title')->dropDownList(
+                        [
+                            "Mr." => "Mr.", "Mrs." => "Mrs.", "Miss" => "Miss", "Ms." => "Ms.", "Dr." => "Dr."
+                        ]   // options
+                     )->label('Title'); ?>
                 <?= $form->field($order, 'firstname')->textInput(['autofocus' => true]) ?>
                 <?= $form->field($orderAddress, 'address')->textInput(['disabled' => true]) ?>
                 <?= $form->field($orderAddress, 'mobile_number')->textInput(['disabled' => true]) ?>

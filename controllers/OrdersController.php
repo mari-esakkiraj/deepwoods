@@ -318,7 +318,7 @@ class OrdersController extends Controller
             $orderAddress = new UserAddresses();
         }
 
-        
+        $order->name_title = Yii::$app->user->identity->name_title;
         $order->firstname = Yii::$app->user->identity->firstname;
         $order->lastname = Yii::$app->user->identity->lastname;
         $order->email = Yii::$app->user->identity->email;
@@ -381,18 +381,20 @@ class OrdersController extends Controller
             if ($order->load(Yii::$app->request->post())
                 && $order->save()
                 && $order->saveOrderItems()) {
-                    
+                   
                 if(!isset($orderAddress->id)){
                     $orderAddress->load(Yii::$app->request->post());
                     $orderAddress->user_id = Yii::$app->user->identity->id;
                     $orderAddress->save(false);
                     $order->shipping_address_id = $orderAddress->id;
                 }
+                
                 $orderAddress = UserAddresses::find()->where(
                         [
                             'id' => $order->shipping_address_id
                         ]
                     )->one();
+                $order->phone = $orderAddress->mobile_number ?? Yii::$app->user->identity->mobile_number;
                 //$transaction->commit();
                 //CartItems::deleteAll(['created_by' => Yii::$app->user->identity->id]);
 
