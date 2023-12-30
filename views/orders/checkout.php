@@ -213,7 +213,7 @@ use app\models\Orders;
                 ?>
                 <p class="text-right mt-3">
                     <input type="hidden" name="cashondelivery" id="cashondelivery"/>
-                    <button class="btn btn-secondary" style="display:none">Continue Payment</button>
+                    <button class="btn btn-secondary">Continue Payment</button>
                     <?php /*if($order_count < 1){ ?>
                     <button type="button" class="btn btn-secondary cashondelivery">Cash on Delivery</button>
                     <?php } */ ?>
