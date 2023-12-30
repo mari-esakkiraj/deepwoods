@@ -422,15 +422,15 @@ class OrdersController extends Controller
                     return $this->render('vieworder',["success" => true, 'message' => $html, 'order' => $order]);
                 }
 
-                $keyId = 'rzp_test_QmggzCBIb7U4MM';
-                $keySecret = 'E6yDLXEKdFAgroHGh9UamcYJ';
+                $keyId = Yii::$app->params['razor_keyId'];
+                $keySecret = Yii::$app->params['razor_keySecret'];
                 $displayCurrency = 'INR';
                 
                 $api = new Api($keyId, $keySecret);
                 
                 $orderData = [
                     'receipt'         => 'DW00'.$order->id,
-                    'amount'          => $order->total_price*100, // 2000 rupees in paise
+                    'amount'          => intval(strval($order->total_price*100)), // 2000 rupees in paise
                     'currency'        => 'INR',
                     'payment_capture' => 1 // auto capture
                 ];
@@ -521,8 +521,8 @@ class OrdersController extends Controller
 
     public function actionPayment()
     {   
-        $keyId = 'rzp_test_QmggzCBIb7U4MM';
-        $keySecret = 'E6yDLXEKdFAgroHGh9UamcYJ';
+        $keyId = Yii::$app->params['razor_keyId'];
+        $keySecret = Yii::$app->params['razor_keySecret'];
         $displayCurrency = 'INR';
 
         //$this->layout = false;
@@ -627,8 +627,8 @@ class OrdersController extends Controller
     {
         $this->enableCsrfValidation = false;
         $success = true;
-        $keyId = 'rzp_test_QmggzCBIb7U4MM';
-        $keySecret = 'E6yDLXEKdFAgroHGh9UamcYJ';
+        $keyId = Yii::$app->params['razor_keyId'];
+        $keySecret = Yii::$app->params['razor_keySecret'];
         $displayCurrency = 'INR';
         $error = "Payment Failed";
 
